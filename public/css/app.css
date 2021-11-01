@@ -11458,6 +11458,35 @@ textarea.form-control-lg {
   text-align: center;
 }
 
+.page-wrapper {
+  background-color: #e3f2fd;
+}
+
+.list-idea-wrapper {
+  background: rgba(144, 202, 249, 0.85);
+  padding: 10px;
+  border-radius: 10px;
+}
+.list-idea-wrapper .load-idea-item {
+  margin-bottom: 10px;
+}
+.list-idea-wrapper .load-idea-item span {
+  border-radius: 10px;
+}
+.list-idea-wrapper .item-idea-wrapper {
+  background-color: white;
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+.list-idea-wrapper .potential-profit {
+  font-size: 12px;
+  text-align: right;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -11674,13 +11703,12 @@ img {
 }
 
 .page-wrapper {
-  background-color: #e5fde3;
   min-height: calc(100vh - 88px);
   flex-grow: 1;
   padding: 20px;
   border-radius: 12px;
   width: 95%;
-  margin: 68px auto 0;
+  margin: 88px auto 0;
 }
 .page-wrapper .portal-section-wrapper {
   display: flex;

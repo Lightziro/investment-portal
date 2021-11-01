@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect } from "react";
 import { NewsSliderList } from "../../components/news-list/NewsSliderList";
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { PortalNavBar } from "../../components/nav-bars/portal-nav-bar/PortalNavBar";
 import { PortalStatsIdea } from "../../components/simple/portal-stats-idea/PortalStatsIdea";
 import { fetchInvestmentData } from "../../redux/actions/mainActions";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../ts/types/redux/store.types";
+import { ListIdea } from "../../components/simple/list-ideas/ListIdea";
 
 export const Portal: React.FC = () => {
     const portalData = useSelector(
@@ -36,6 +37,14 @@ export const Portal: React.FC = () => {
                         />
                     </div>
                 </div>
+                <Grid container spacing={2}>
+                    <Grid item xs={8}>
+                        <div>Testick</div>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <ListIdea ideas={portalData.actualIdeas} />
+                    </Grid>
+                </Grid>
             </div>
         </Fragment>
     );

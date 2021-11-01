@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Page } from "../../../components/simple/Page";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import {
-    AppWeeklySales,
-    AppItemOrders,
-    AppBugReports,
-    AppNewUsers,
-} from "../../../dashboard/components/_dashboard/app";
 import { AdminCardInfo } from "../../../components/simple/AdminCardInfo/AdminCardInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
@@ -67,12 +61,8 @@ export const CreateInvestmentIdea: React.FC = () => {
                             color="rgb(0, 82, 73)"
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        <AppItemOrders />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        <AppBugReports />
-                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}></Grid>
+                    <Grid item xs={12} sm={6} md={3}></Grid>
                 </Grid>
             </Container>
         </Page>

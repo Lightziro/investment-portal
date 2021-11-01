@@ -41,6 +41,7 @@ class InvestmentController extends BaseController
         }
         return response()->json($ar_data);
     }
+
     public function getPortalData(): JsonResponse
     {
         $max_profit = InvestmentIdea::query()->max('profit');
@@ -49,10 +50,22 @@ class InvestmentController extends BaseController
         $market = new StockMarket();
         $news = $market->getMarketNews();
 
+        $investment_ideas = InvestmentIdea::query()->whereNotIn('status', ['Fail', 'End'])->limit(5)->get();
+        $ar_ideas = [];
+        /** @var InvestmentIdea $idea_model */
+        foreach ($investment_ideas as $idea_model) {
+            $ar_ideas[] = [
+                'id' => $idea_model->idea_id,
+                'possibleProfit' => round($idea_model->calculatePossibleProfit(), 2),
+                'stock' => $idea_model->stock_name,
+            ];
+        }
+
         return response()->json([
             'bestProfit' => $max_profit,
             'worseProfit' => $min_profit,
-            'news' => $news
+            'news' => $news,
+            'investmentIdeas' => $ar_ideas,
         ]);
     }
 }

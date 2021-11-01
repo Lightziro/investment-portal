@@ -6,6 +6,7 @@ export const initMainStore: MainStore = {
     investmentData: {
         bestProfit: null,
         worseProfit: null,
+        actualIdeas: null,
     },
 };
 export const initialAdminStore: AdminStore = {

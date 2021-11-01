@@ -18,6 +18,7 @@ const mainReducer = (
                     ...state.investmentData,
                     bestProfit: action.data.bestProfit,
                     worseProfit: action.data.worseProfit,
+                    actualIdeas: action.data.investmentIdeas,
                 },
             };
         case "SET_NOTICE_VIEW":

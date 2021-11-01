@@ -1,0 +1,33 @@
+.page-wrapper{
+    background-color: rgb(227, 242, 253);
+}
+
+.list-idea-wrapper {
+    background: rgba(144, 202, 249, 0.85);
+    padding: 10px;
+    border-radius: 10px;
+
+    .load-idea-item{
+        margin-bottom: 10px;
+        span {
+            border-radius: 10px
+        }
+    }
+
+    .item-idea-wrapper {
+        background-color: white;
+        display: flex;
+        padding: 5px 10px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+    .base-info{
+
+    }
+    .potential-profit{
+        font-size: 12px;
+        text-align: right;
+    }
+}

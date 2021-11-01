@@ -8,6 +8,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import "admin/admin";
 @import "portal/nav-bar";
+@import "portal/portal-page";
 
 img {
     max-width: 100%;
@@ -242,13 +243,12 @@ img {
 }
 
 .page-wrapper {
-    background-color: #e5fde3;
     min-height: calc(100vh - 88px);
     flex-grow: 1;
     padding: 20px;
     border-radius: 12px;
     width: 95%;
-    margin: 68px auto 0;
+    margin: 88px auto 0;
 
     .portal-section-wrapper {
         display: flex;

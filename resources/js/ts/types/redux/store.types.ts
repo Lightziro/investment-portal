@@ -9,6 +9,12 @@ export interface MainStore {
 export interface InvestmentData {
     bestProfit: number | null;
     worseProfit: number | null;
+    actualIdeas: InvestmentIdea[];
+}
+export interface InvestmentIdea {
+    id: number;
+    possibleProfit: number;
+    stock: string;
 }
 
 export interface AdminStore {
