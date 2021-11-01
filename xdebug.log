@@ -1,0 +1,454 @@
+[8] Log opened at 2021-10-22 23:04:00.689110
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] Log closed at 2021-10-22 23:04:01.115502
+
+[9] Log opened at 2021-10-22 23:04:21.001539
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] Log closed at 2021-10-22 23:04:21.002759
+
+[8] Log opened at 2021-10-22 23:04:43.914896
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] Log closed at 2021-10-22 23:04:44.039506
+
+[9] Log opened at 2021-10-22 23:04:45.002637
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] Log closed at 2021-10-22 23:04:45.169694
+
+[8] Log opened at 2021-10-22 23:04:45.836624
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] Log closed at 2021-10-22 23:04:46.021387
+
+[9] Log opened at 2021-10-22 23:05:13.549657
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] Log closed at 2021-10-22 23:05:13.551027
+
+[8] Log opened at 2021-10-22 23:05:32.227003
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] Log closed at 2021-10-22 23:05:32.364204
+
+[9] Log opened at 2021-10-22 23:05:33.328881
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] Log closed at 2021-10-22 23:05:33.533915
+
+[8] Log opened at 2021-10-22 23:05:44.198881
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] Log closed at 2021-10-22 23:05:44.298158
+
+[9] Log opened at 2021-10-22 23:05:52.030266
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] Log closed at 2021-10-22 23:05:52.141595
+
+[8] Log opened at 2021-10-22 23:09:54.150761
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] Log closed at 2021-10-22 23:09:54.266477
+
+[9] Log opened at 2021-10-22 23:09:55.371706
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[9] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[9] Log closed at 2021-10-22 23:09:55.489718
+
+[8] Log opened at 2021-10-22 23:10:01.160243
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[8] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[8] Log closed at 2021-10-22 23:10:01.297084
+
+[8] Log opened at 2021-10-22 23:10:50.732146
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:10:51.685258
+
+[9] Log opened at 2021-10-22 23:11:14.519466
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:11:15.297335
+
+[8] Log opened at 2021-10-22 23:11:28.292092
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:11:28.494963
+
+[9] Log opened at 2021-10-22 23:13:46.492714
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:13:47.208507
+
+[8] Log opened at 2021-10-22 23:14:57.847338
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:14:58.645362
+
+[9] Log opened at 2021-10-22 23:15:05.950546
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:15:06.655576
+
+[8] Log opened at 2021-10-22 23:15:58.610086
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:15:59.342795
+
+[9] Log opened at 2021-10-22 23:18:30.750681
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:18:30.953289
+
+[8] Log opened at 2021-10-22 23:19:24.700314
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:19:25.462619
+
+[9] Log opened at 2021-10-22 23:20:58.351018
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:20:59.092567
+
+[8] Log opened at 2021-10-22 23:21:08.564471
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:21:09.269178
+
+[9] Log opened at 2021-10-22 23:21:09.618131
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[9] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:21:10.316130
+
+[7] Log opened at 2021-10-22 23:22:20.036597
+[7] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[7] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[7] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[7] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[7] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[7] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[7] Log closed at 2021-10-22 23:22:21.272555
+
+[8] Log opened at 2021-10-22 23:22:48.847090
+[8] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[8] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:22:49.049548
+
+[7] Log opened at 2021-10-22 23:26:02.426168
+[7] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[7] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[7] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[7] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[7] [Step Debug] INFO: Connecting to configured address/port: 192.168.227.1:9003.
+[7] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 192.168.227.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[7] Log closed at 2021-10-22 23:26:03.213644
+
+[8] Log opened at 2021-10-22 23:27:03.763373
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:03.903865
+
+[9] Log opened at 2021-10-22 23:27:04.687012
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:04.815677
+
+[8] Log opened at 2021-10-22 23:27:05.242405
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:05.355861
+
+[9] Log opened at 2021-10-22 23:27:05.668302
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:05.775141
+
+[8] Log opened at 2021-10-22 23:27:05.931060
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:06.044343
+
+[9] Log opened at 2021-10-22 23:27:06.098185
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:06.235269
+
+[8] Log opened at 2021-10-22 23:27:06.262182
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:06.404000
+
+[9] Log opened at 2021-10-22 23:27:06.451313
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:06.600932
+
+[8] Log opened at 2021-10-22 23:27:06.656639
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:06.831855
+
+[9] Log opened at 2021-10-22 23:27:06.835314
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:06.940673
+
+[8] Log opened at 2021-10-22 23:27:18.460595
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:18.463149
+
+[9] Log opened at 2021-10-22 23:27:40.795085
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:40.913206
+
+[8] Log opened at 2021-10-22 23:27:41.585926
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:41.691042
+
+[9] Log opened at 2021-10-22 23:27:49.018406
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:49.122004
+
+[8] Log opened at 2021-10-22 23:27:49.671256
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:49.780951
+
+[9] Log opened at 2021-10-22 23:27:49.949295
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:50.056842
+
+[8] Log opened at 2021-10-22 23:27:50.231998
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log opened at 2021-10-22 23:27:50.316919
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:50.375781
+
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:50.446858
+
+[8] Log opened at 2021-10-22 23:27:50.491964
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[8] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[8] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[8] Log closed at 2021-10-22 23:27:50.613671
+
+[9] Log opened at 2021-10-22 23:27:50.659326
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9003.
+[9] [Step Debug] WARN: Creating socket for '127.0.0.1:9003', poll success, but error: Operation now in progress (29).
+[9] [Step Debug] ERR: Could not connect to debugging client. Tried: 127.0.0.1:9003 (through xdebug.client_host/xdebug.client_port) :-(
+[9] Log closed at 2021-10-22 23:27:50.791813
+
