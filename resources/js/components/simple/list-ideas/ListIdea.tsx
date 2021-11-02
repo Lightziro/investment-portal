@@ -6,9 +6,10 @@ interface ListIdea {
 }
 
 export const ListIdea: React.FC<ListIdea> = ({ ideas }) => {
+    console.log(ideas);
     return (
         <Grid
-            className="list-idea-wrapper"
+            className="list-idea-wrapper shadow-wrapper"
             justifyContent="flex-start"
             direction="column"
         >
@@ -29,7 +30,7 @@ export const ListIdea: React.FC<ListIdea> = ({ ideas }) => {
                 : Array(5)
                       .fill(1)
                       .map((item) => (
-                          <div key={item} className="load-idea-item">
+                          <div className="load-idea-item">
                               <Skeleton
                                   variant="rectangular"
                                   width="100%"

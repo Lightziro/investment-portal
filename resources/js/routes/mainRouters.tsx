@@ -3,6 +3,8 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { Portal } from "../modules/portal/Portal";
 import { Admin } from "../modules/admin/Admin";
 import { CreateInvestmentIdea } from "../modules/admin/create-investment-idea/CreateInvestmentIdea";
+import { InvestmentIdeaPage } from "../modules/portal/investment-idea-page/InvestmentIdeaPage";
+import { PortalLayout } from "../layouts/PortalLayout";
 
 // ----------------------------------------------------------------------
 
@@ -17,12 +19,16 @@ export const MainRouter: React.FC = () => {
         },
         {
             path: "/",
-            element: <Portal />,
+            element: <PortalLayout />,
             children: [
-                // { path: "login", element: <Login /> },
-                // { path: "register", element: <Register /> },
-                // { path: "404", element: <NotFound /> },
-                // { path: "/", element: <Navigate to="/dashboard" /> },
+                {
+                    path: "/investment-idea/:id",
+                    element: <InvestmentIdeaPage />,
+                },
+                {
+                    path: "/",
+                    element: <Portal />,
+                },
                 // { path: "*", element: <Navigate to="/404" /> },
             ],
         },

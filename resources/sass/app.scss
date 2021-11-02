@@ -40,23 +40,6 @@ img {
     min-height: 176px;
     position: relative;
 
-    .news-title {
-        line-height: 16px;
-        word-wrap: break-word;
-        text-decoration: none;
-        color: #1256a0;
-        outline: none;
-        font-size: 14px;
-        font-weight: 700;
-        text-overflow: ellipsis;
-        text-align: left;
-
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
     .link-image-news {
         display: block;
         position: relative;
@@ -68,11 +51,6 @@ img {
             width: 150px;
             height: 100px;
         }
-    }
-
-    .link-title-news {
-        width: 150px;
-        margin-top: 10px;
     }
 }
 
@@ -249,23 +227,7 @@ img {
     border-radius: 12px;
     width: 95%;
     margin: 88px auto 0;
-
-    .portal-section-wrapper {
-        display: flex;
-        flex-flow: row wrap;
-        padding: 24px;
-
-        .upper-area {
-            width: 65%;
-        }
-    }
 }
-
-.stats-invest-ideas-wrapper {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-
 
     .invest-idea-wrapper {
         padding: 16px;
@@ -328,4 +290,3 @@ img {
         font-weight: 400;
         line-height: 1.57;
     }
-}

@@ -1,17 +1,12 @@
 .portal-nav-bar {
-    box-shadow: none;
-    background-image: none;
+    padding: 0 30px;
     display: flex;
     flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
-    flex-shrink: 0;
     position: fixed;
     z-index: 1100;
     top: 0;
-    left: auto;
-    color: inherit;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     transition: none 0s ease 0s;
 
     .nav-bar-wrapper {
@@ -23,13 +18,13 @@
 
         .icon-wrapper {
             border-radius: 8px;
-            background-color: #b4f77d;
+            background-color: #e3f2fd;
             padding: 5px;
             color: #1a5413;
             transition: all 0.2s ease-in-out 0s;
 
             &:hover {
-                background-color: #5f8c38;
+                background-color: rgba(144, 202, 249, 0.85);
                 color: white;
             }
         }
@@ -44,11 +39,20 @@
             padding: 5px;
             color: #e3f2fd;
             border-radius: 12px;
+            background: #e3f2fd;
             transition: all 0.2s ease-in-out 0s;
-            background: #b4f77d;
+            cursor: pointer;
+
+            .MuiAvatar-root {
+                transition: inherit;
+            }
 
             &:hover {
-                background-color: #5f8c38;
+                background-color: rgba(144, 202, 249, 0.85);
+
+                .MuiAvatar-root {
+                    transform: scale(0.85);
+                }
             }
         }
     }
