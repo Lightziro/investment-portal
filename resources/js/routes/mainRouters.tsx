@@ -22,7 +22,7 @@ export const MainRouter: React.FC = () => {
             element: <PortalLayout />,
             children: [
                 {
-                    path: "/investment-idea/:id",
+                    path: "/investment-idea/:ideaId",
                     element: <InvestmentIdeaPage />,
                 },
                 {

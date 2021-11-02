@@ -6,6 +6,8 @@ use DateTime;
 use Finnhub\Api\DefaultApi;
 use Finnhub\ApiException;
 use Finnhub\Configuration;
+use Finnhub\Model\BasicFinancials;
+use Finnhub\Model\CompanyExecutive;
 use Finnhub\Model\CompanyProfile2;
 use Finnhub\Model\IPOCalendar;
 use GuzzleHttp\Client;
@@ -25,6 +27,32 @@ class StockMarket
         );
     }
 
+    public function getCompanyExecutives(string $ticker): CompanyExecutive|array
+    {
+        /** Not working, because no premium account */
+        try {
+            return $this->client->companyExecutive($ticker);
+        } catch (ApiException $e) {
+            return [];
+        }
+    }
+    public function getFinancialsStats(string $tiker): ?BasicFinancials
+    {
+        try {
+            return $this->client->companyBasicFinancials($tiker, 'all');
+        } catch (ApiException $e) {
+            return null;
+        }
+    }
+    public function getRecommendationAnalytics(string $ticker): ?array
+    {
+        try {
+            return $this->client->recommendationTrends($ticker);
+        } catch (ApiException $e) {
+            return null;
+        }
+    }
+
     public function getMarketNews(string $market = 'general', int|bool $limit = false): array
     {
         try {
@@ -33,6 +61,7 @@ class StockMarket
             return [];
         }
     }
+
     public function getIPOCalendar(DateTime $from, DateTime $to): ?IPOCalendar
     {
         try {

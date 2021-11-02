@@ -22,9 +22,6 @@ function* fetchInvestmentData(action: AnyAction): Generator {
     });
 }
 function* viewNotice(action: AnyAction): Generator {
-    // const result = yield api
-    //     .post("/api/user/notice/view", { id: action.id })
-    //     .then((response) => response);
     try {
         const result = yield axios
             .post("/api/user/notice/view", { id: action.id })
@@ -40,8 +37,20 @@ function* viewNotice(action: AnyAction): Generator {
         });
     }
 }
+function* fetchInvestmentIdea(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`/api/investment-data/idea/${action.ideaId}`)
+            .then((response) => response.data);
+        yield put({
+            type: "SET_IDEA_VIEW_DATA",
+            data,
+        });
+    } catch (error) {}
+}
 export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("USER_LOGIN", authorizationUser);
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("VIEW_NOTICE", viewNotice);
+    yield takeLatest("FETCH_INVESTMENT_IDEA", fetchInvestmentIdea);
 }

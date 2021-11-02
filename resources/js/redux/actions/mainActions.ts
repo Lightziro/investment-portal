@@ -10,3 +10,7 @@ export const viewNotice = (id: number) => ({
     type: "VIEW_NOTICE",
     id,
 });
+export const fetchInvestmentIdea = (ideaId: number) => ({
+    type: "FETCH_INVESTMENT_IDEA",
+    ideaId,
+});

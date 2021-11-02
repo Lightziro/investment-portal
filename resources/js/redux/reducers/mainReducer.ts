@@ -23,6 +23,8 @@ const mainReducer = (
             };
         case "SET_NOTICE_VIEW":
             return setNoticeView(state, action.noticeId);
+        case "SET_IDEA_VIEW_DATA":
+            return { ...state, ideaView: action.data };
         default:
             return state;
     }

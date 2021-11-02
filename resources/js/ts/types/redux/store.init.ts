@@ -8,6 +8,12 @@ export const initMainStore: MainStore = {
         worseProfit: null,
         actualIdeas: null,
     },
+    ideaView: {
+        epsStats: null,
+        ideaInfo: null,
+        analyticsStats: null,
+        companyInfo: null,
+    },
 };
 export const initialAdminStore: AdminStore = {
     investmentIdeas: {

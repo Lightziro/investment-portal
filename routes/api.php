@@ -36,5 +36,6 @@ Route::group(['prefix' => 'news'], function () {
 Route::group(['prefix' => 'investment-data'], function () {
     Route::get('/get', [InvestmentController::class, 'getData']);
     Route::get('/portal', [InvestmentController::class, 'getPortalData']);
+    Route::get('/idea/{id}', [InvestmentController::class, 'getInvestmentIdeaData']);
 });
 

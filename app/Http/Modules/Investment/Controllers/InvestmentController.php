@@ -7,6 +7,8 @@ use App\Models\Investment\InvestmentIdeaViewing;
 use App\Models\InvestmentIdea;
 use App\Models\User;
 use Carbon\Carbon;
+use Finnhub\Model\BasicFinancials;
+use Finnhub\Model\RecommendationTrend;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -57,7 +59,7 @@ class InvestmentController extends BaseController
             $ar_ideas[] = [
                 'id' => $idea_model->idea_id,
                 'possibleProfit' => round($idea_model->calculatePossibleProfit(), 2),
-                'stock' => $idea_model->stock_name,
+                'stock' => $idea_model->company->name,
             ];
         }
 
@@ -66,6 +68,50 @@ class InvestmentController extends BaseController
             'worseProfit' => $min_profit,
             'news' => $news,
             'investmentIdeas' => $ar_ideas,
+        ]);
+    }
+
+    public function getInvestmentIdeaData(int $id): JsonResponse
+    {
+        /** @var InvestmentIdea $idea_model */
+        $idea_model = InvestmentIdea::query()->find($id);
+        $market = new StockMarket();
+
+        $idea_company_model = $idea_model->company;
+        $company_stats = $market->getFinancialsStats($idea_company_model->ticker);
+        if ($company_stats instanceof BasicFinancials) {
+            foreach ($company_stats->getSeries()['annual']->eps as $eps_year_stats) {
+                $ar_eps[] = [
+                    'date' => $eps_year_stats->period,
+                    'value' => round($eps_year_stats->v, 2),
+                ];
+            }
+            if (!empty($ar_eps)) {
+                $ar_eps = array_reverse($ar_eps);
+            }
+        }
+        $analytics_stats = $market->getRecommendationAnalytics($idea_company_model->ticker);
+        if ($analytics_stats instanceof RecommendationTrend) {
+            foreach ($analytics_stats as $stats) {
+                $ar_stats[] = [
+                    'buy' => $stats['buy'],
+                    'sell' => $stats['sell'],
+                    'hold' => $stats['hold']
+                ];
+            }
+        }
+        return response()->json([
+            'epsStats' => $ar_eps ?? [],
+            'analyticsStats' => $ar_stats ?? [],
+            'companyInfo' => [
+                'companyName' => $idea_company_model->name,
+                'ticker' => $idea_company_model->ticker,
+            ],
+            'ideaInfo' => [
+                'isShort' => $idea_model->is_short,
+                'priceBuy' => $idea_model->price_buy,
+                'priceSell' => $idea_model->price_sell
+            ],
         ]);
     }
 }

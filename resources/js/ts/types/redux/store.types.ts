@@ -1,9 +1,25 @@
-import { News } from "../state/stock-market.types";
+import {
+    CompanyIdeaInfo,
+    EpsCompanyStats,
+    News,
+} from "../state/stock-market.types";
 
 export interface MainStore {
     user: User;
     news: News[];
     investmentData: InvestmentData;
+    ideaView: InvestmentIdeaView;
+}
+
+export interface InvestmentIdeaView {
+    epsStats: EpsCompanyStats[] | null;
+    analyticsStats: { buy: number; sell: number; hold: number }[];
+    companyInfo: CompanyIdeaInfo;
+    ideaInfo: {
+        isShort: boolean;
+        priceBuy: number;
+        priceSell: number;
+    };
 }
 
 export interface InvestmentData {
@@ -11,6 +27,7 @@ export interface InvestmentData {
     worseProfit: number | null;
     actualIdeas: InvestmentIdea[];
 }
+
 export interface InvestmentIdea {
     id: number;
     possibleProfit: number;
