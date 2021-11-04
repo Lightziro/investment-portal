@@ -77,7 +77,12 @@ class InvestmentController extends BaseController
         $idea_model = InvestmentIdea::query()->find($id);
         $market = new StockMarket();
 
+//        $result = $market->getCompanyProfile('AAPL');
+
         $idea_company_model = $idea_model->company;
+        $quote_info = $market->getLastQuote($idea_company_model->ticker);
+
+        $author_model = $idea_model->author;
         $company_stats = $market->getFinancialsStats($idea_company_model->ticker);
         if ($company_stats instanceof BasicFinancials) {
             foreach ($company_stats->getSeries()['annual']->eps as $eps_year_stats) {
@@ -91,10 +96,11 @@ class InvestmentController extends BaseController
             }
         }
         $analytics_stats = $market->getRecommendationAnalytics($idea_company_model->ticker);
-        if ($analytics_stats instanceof RecommendationTrend) {
+        if (is_array($analytics_stats)) {
             foreach ($analytics_stats as $stats) {
                 $ar_stats[] = [
                     'buy' => $stats['buy'],
+                    'period' => $stats['period'],
                     'sell' => $stats['sell'],
                     'hold' => $stats['hold']
                 ];
@@ -106,6 +112,18 @@ class InvestmentController extends BaseController
             'companyInfo' => [
                 'companyName' => $idea_company_model->name,
                 'ticker' => $idea_company_model->ticker,
+                'logoPath' => $idea_company_model->logo,
+                'dateIPO' => $idea_company_model->date_ipo,
+                'industry' => $idea_company_model->industry_work,
+                'lastQuote' => $quote_info->getC() ?? null,
+                'percentChangeToday' => $quote_info->getDp() ?? null,
+                'changeToday' => $quote_info->getD(),
+            ],
+            'authorInfo' => [
+                'totalIdeas' => $author_model->investment_ideas->count(),
+                'amountSuccessfulIdeas' => $author_model->investment_ideas->where('status', InvestmentIdea::STATUS_SUCCESS)->count(),
+                'amountFailIdeas' => $author_model->investment_ideas->where('status', InvestmentIdea::STATUS_FAIL)->count(),
+                'fullName' => $author_model->getFullName(),
             ],
             'ideaInfo' => [
                 'isShort' => $idea_model->is_short,

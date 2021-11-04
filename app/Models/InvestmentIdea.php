@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class InvestmentIdea extends Model
 {
+    public const STATUS_FAIL = 'fail';
+    public const STATUS_SUCCESS = 'success';
     protected $table = 'investment_ideas';
     protected $primaryKey = 'idea_id';
 
@@ -49,6 +51,6 @@ class InvestmentIdea extends Model
 
     public function company(): HasOne
     {
-        return $this->hasOne(Company::class, 'company_id');
+        return $this->hasOne(Company::class, 'company_id', 'company_id');
     }
 }

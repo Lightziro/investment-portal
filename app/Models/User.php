@@ -73,4 +73,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserNotices::class, 'user_id');
     }
+
+    public function getFullName(): string
+    {
+        $first_name = ucfirst($this->first_name);
+        $second_name = ucfirst($this->second_name);
+        return "$second_name $first_name";
+    }
 }

@@ -13,6 +13,7 @@ export const initMainStore: MainStore = {
         ideaInfo: null,
         analyticsStats: null,
         companyInfo: null,
+        authorInfo: null,
     },
 };
 export const initialAdminStore: AdminStore = {

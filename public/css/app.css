@@ -11511,7 +11511,7 @@ textarea.form-control-lg {
 }
 
 .shadow-wrapper {
-  box-shadow: rgba(145, 158, 171, 0.24) 0 0 2px 0, rgba(145, 158, 171, 0.24) 0 16px 32px -4px;
+  box-shadow: rgba(145, 158, 171, 0.24) 0 0 2px 0, rgba(145, 158, 171, 0.24) 0 16px 32px -4px !important;
 }
 
 img {
@@ -11779,4 +11779,24 @@ img {
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.57;
+}
+
+.author-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 6px 0;
+  align-items: center;
+}
+.author-info .author-name {
+  margin: 3px;
+  font-size: 20px;
+}
+
+.stats-author-text {
+  padding: 0 5px;
+}
+
+.hr-separator {
+  height: auto !important;
 }

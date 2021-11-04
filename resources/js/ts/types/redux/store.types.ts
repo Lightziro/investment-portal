@@ -1,8 +1,10 @@
 import {
+    AnalyticsStats,
     CompanyIdeaInfo,
     EpsCompanyStats,
     News,
 } from "../state/stock-market.types";
+import { AuthorInfo } from "../state/user.types";
 
 export interface MainStore {
     user: User;
@@ -13,8 +15,9 @@ export interface MainStore {
 
 export interface InvestmentIdeaView {
     epsStats: EpsCompanyStats[] | null;
-    analyticsStats: { buy: number; sell: number; hold: number }[];
+    analyticsStats: AnalyticsStats[];
     companyInfo: CompanyIdeaInfo;
+    authorInfo: AuthorInfo;
     ideaInfo: {
         isShort: boolean;
         priceBuy: number;
