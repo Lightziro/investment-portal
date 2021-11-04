@@ -9,7 +9,9 @@ use Finnhub\Configuration;
 use Finnhub\Model\BasicFinancials;
 use Finnhub\Model\CompanyExecutive;
 use Finnhub\Model\CompanyProfile2;
+use Finnhub\Model\FinancialsAsReported;
 use Finnhub\Model\IPOCalendar;
+use Finnhub\Model\Quote;
 use GuzzleHttp\Client;
 
 class StockMarket
@@ -36,6 +38,7 @@ class StockMarket
             return [];
         }
     }
+
     public function getFinancialsStats(string $tiker): ?BasicFinancials
     {
         try {
@@ -44,6 +47,7 @@ class StockMarket
             return null;
         }
     }
+
     public function getRecommendationAnalytics(string $ticker): ?array
     {
         try {
@@ -75,6 +79,24 @@ class StockMarket
     {
         try {
             return $this->client->companyProfile2($company_name);
+        } catch (ApiException $e) {
+            return null;
+        }
+    }
+
+    public function getReportedCompany(string $ticker, string $type_report = 'annual'): ?FinancialsAsReported
+    {
+        try {
+            return $this->client->financialsReported($ticker, $type_report);
+        } catch (ApiException $e) {
+            return null;
+        }
+    }
+
+    public function getLastQuote(string $ticker): ?Quote
+    {
+        try {
+            return $this->client->quote($ticker);
         } catch (ApiException $e) {
             return null;
         }
