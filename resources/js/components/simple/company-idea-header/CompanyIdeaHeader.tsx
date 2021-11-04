@@ -19,7 +19,7 @@ export const CompanyIdeaHeader: React.FC<CompanyIdeaHeader> = ({
         return <Skeleton variant="rectangular" height={56} />;
     }
     const getSymbolQuote = (changeToday: number) => {
-        return changeToday > 0 ? "+" : "-";
+        return changeToday > 0 ? "+" : "";
     };
     const getColorQuote = (changeToday: number) => {
         return changeToday > 0 ? "green" : "red";

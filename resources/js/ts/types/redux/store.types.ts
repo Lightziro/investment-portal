@@ -2,6 +2,7 @@ import {
     AnalyticsStats,
     CompanyIdeaInfo,
     EpsCompanyStats,
+    IdeaInfo,
     News,
 } from "../state/stock-market.types";
 import { AuthorInfo } from "../state/user.types";
@@ -18,11 +19,7 @@ export interface InvestmentIdeaView {
     analyticsStats: AnalyticsStats[];
     companyInfo: CompanyIdeaInfo;
     authorInfo: AuthorInfo;
-    ideaInfo: {
-        isShort: boolean;
-        priceBuy: number;
-        priceSell: number;
-    };
+    ideaInfo: IdeaInfo;
 }
 
 export interface InvestmentData {

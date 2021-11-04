@@ -23,6 +23,13 @@ export interface CompanyIdeaInfo {
     percentChangeToday: number;
     changeToday: number;
 }
+export interface IdeaInfo {
+    isShort: boolean;
+    priceBuy: number;
+    priceSell: number;
+    dateStart: string;
+    dateEnd: string;
+}
 export interface AnalyticsStats {
     period: string;
     buy: number;

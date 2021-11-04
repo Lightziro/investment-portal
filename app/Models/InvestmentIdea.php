@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property bool is_short
  * @property string stock_name
  * @property Company company
+ * @property string date_create
+ * @property string date_end
  */
 class InvestmentIdea extends Model
 {

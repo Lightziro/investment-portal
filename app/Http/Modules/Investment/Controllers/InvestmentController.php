@@ -128,7 +128,9 @@ class InvestmentController extends BaseController
             'ideaInfo' => [
                 'isShort' => $idea_model->is_short,
                 'priceBuy' => $idea_model->price_buy,
-                'priceSell' => $idea_model->price_sell
+                'priceSell' => $idea_model->price_sell,
+                'dateStart' => $idea_model->date_create,
+                'dateEnd' => $idea_model->date_end,
             ],
         ]);
     }

@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInvestmentIdea } from "../../../redux/actions/mainActions";
 import { StoreData } from "../../../ts/types/redux/store.types";
-import { Divider, Grid, Typography } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import { ChartStatsEPS } from "./charts-company-data/ChartStatsEPS";
 import { ChartStatsAnalytics } from "./charts-company-data/ChartStatsAnalytics";
 import { IdeaAuthor } from "./idea-author/IdeaAuthor";
 import { CompanyIdeaHeader } from "../../../components/simple/company-idea-header/CompanyIdeaHeader";
 import { CompanyDescription } from "./company-description/CompanyDescription";
+import { IdeaInformation } from "./company-description/IdeaInformation";
 
 export const InvestmentIdeaPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export const InvestmentIdeaPage: React.FC = () => {
     }, []);
 
     return (
-        <div>
+        <Fragment>
             <Grid container spacing={2}>
                 <Grid item xs={8} container spacing={3}>
                     <Grid item xs={8}>
@@ -53,12 +54,14 @@ export const InvestmentIdeaPage: React.FC = () => {
             <Grid container spacing={2}>
                 <Grid item xs={8} container spacing={3}>
                     <Grid item xs={7}></Grid>
-                    <Grid item xs={5}></Grid>
+                    <Grid item xs={5}>
+                        <IdeaInformation ideaInfo={ideaData.ideaInfo} />
+                    </Grid>
                 </Grid>
                 <Grid item xs={4}>
                     <ChartStatsAnalytics stats={ideaData.analyticsStats} />
                 </Grid>
             </Grid>
-        </div>
+        </Fragment>
     );
 };
