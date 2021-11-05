@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Investment\InvestmentIdeaDescriptions;
 use App\Models\Investment\InvestmentIdeaReaction;
 use App\Models\Investment\InvestmentIdeaViewing;
 use App\Models\Other\Company;
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Company company
  * @property string date_create
  * @property string date_end
+ * @property string description
  */
 class InvestmentIdea extends Model
 {
@@ -36,6 +38,11 @@ class InvestmentIdea extends Model
     public function reaction(): HasMany
     {
         return $this->hasMany(InvestmentIdeaReaction::class, 'idea_id', 'idea_id');
+    }
+
+    public function descriptions(): HasMany
+    {
+        return $this->hasMany(InvestmentIdeaDescriptions::class, 'idea_id', 'idea_id');
     }
 
     public function author(): HasOne

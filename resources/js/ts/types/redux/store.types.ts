@@ -12,6 +12,7 @@ export interface MainStore {
     news: News[];
     investmentData: InvestmentData;
     ideaView: InvestmentIdeaView;
+    language: string
 }
 
 export interface InvestmentIdeaView {
@@ -20,6 +21,7 @@ export interface InvestmentIdeaView {
     companyInfo: CompanyIdeaInfo;
     authorInfo: AuthorInfo;
     ideaInfo: IdeaInfo;
+    description: string
 }
 
 export interface InvestmentData {

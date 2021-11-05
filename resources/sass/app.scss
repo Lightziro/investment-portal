@@ -10,6 +10,10 @@
 @import "portal/nav-bar";
 @import "portal/portal-page";
 
+a {
+    text-decoration: none !important;
+}
+
 img {
     max-width: 100%;
     display: block;
@@ -291,21 +295,19 @@ img {
     line-height: 1.57;
 }
 
-.author-info{
+.author-info {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 6px 0;
     align-items: center;
 
-    .author-name{
+    .author-name {
         margin: 3px;
         font-size: 20px;
     }
 }
-.stats-author-text{
-    padding: 0 5px;
-}
-.hr-separator{
+
+.hr-separator {
     height: auto !important;
 }

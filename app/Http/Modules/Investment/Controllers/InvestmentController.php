@@ -3,17 +3,16 @@
 namespace App\Http\Modules\Investment\Controllers;
 
 use App\Http\Classes\StockMarket;
-use App\Models\Investment\InvestmentIdeaViewing;
 use App\Models\InvestmentIdea;
 use App\Models\User;
 use Carbon\Carbon;
 use Finnhub\Model\BasicFinancials;
-use Finnhub\Model\RecommendationTrend;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 
 class InvestmentController extends BaseController
@@ -23,7 +22,7 @@ class InvestmentController extends BaseController
 
     }
 
-    public function getData(): mixed
+    public function getData(): RedirectResponse|Application|JsonResponse|Redirector
     {
         $cookie = Cookie::get();
         if (empty($cookie['token'])) {
@@ -71,19 +70,25 @@ class InvestmentController extends BaseController
         ]);
     }
 
+    public function getCacheIdeaData(int $idea_id, string $ticker)
+    {
+        return Cache::get("$idea_id-$ticker");
+    }
+
     public function getInvestmentIdeaData(int $id): JsonResponse
     {
         /** @var InvestmentIdea $idea_model */
         $idea_model = InvestmentIdea::query()->find($id);
         $market = new StockMarket();
-
-//        $result = $market->getCompanyProfile('AAPL');
-
         $idea_company_model = $idea_model->company;
-        $quote_info = $market->getLastQuote($idea_company_model->ticker);
+        if ($ar_data = $this->getCacheIdeaData($idea_model->idea_id, $idea_company_model->ticker)) {
+            return response()->json($ar_data);
+        }
 
+        $quote_info = $market->getLastQuote($idea_company_model->ticker);
         $author_model = $idea_model->author;
         $company_stats = $market->getFinancialsStats($idea_company_model->ticker);
+
         if ($company_stats instanceof BasicFinancials) {
             foreach ($company_stats->getSeries()['annual']->eps as $eps_year_stats) {
                 $ar_eps[] = [
@@ -106,7 +111,7 @@ class InvestmentController extends BaseController
                 ];
             }
         }
-        return response()->json([
+        $ar_data = [
             'epsStats' => $ar_eps ?? [],
             'analyticsStats' => $ar_stats ?? [],
             'companyInfo' => [
@@ -132,6 +137,9 @@ class InvestmentController extends BaseController
                 'dateStart' => $idea_model->date_create,
                 'dateEnd' => $idea_model->date_end,
             ],
-        ]);
+            'description' => $idea_model->description
+        ];
+        Cache::put("$idea_model->idea_id-$idea_company_model->ticker", $ar_data, now()->addMinutes(3));
+        return response()->json($ar_data);
     }
 }

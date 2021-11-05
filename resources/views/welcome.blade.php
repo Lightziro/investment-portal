@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}"/>
 </head>
 <body class="antialiased">
+{{--{{phpinfo()}}--}}
 <div id="example"></div>
 </body>
 <script src="{{ asset('js/app.js') }}"></script>

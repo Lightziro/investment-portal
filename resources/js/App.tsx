@@ -6,6 +6,7 @@ import { mainStore } from "./redux/store/mainStore";
 import { Base } from "./Base";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MainRouter } from "./routes/mainRouters";
+import "./config/i18next";
 
 render(
     <Provider store={mainStore as any}>

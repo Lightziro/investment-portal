@@ -7,13 +7,16 @@ import { fetchInvestmentData } from "../../redux/actions/mainActions";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../ts/types/redux/store.types";
 import { ListIdea } from "../../components/simple/list-ideas/ListIdea";
+import { useTranslation } from "react-i18next";
 
 export const Portal: React.FC = () => {
+    const { t, i18n } = useTranslation();
     const portalData = useSelector(
         (state: StoreData) => state.main.investmentData
     );
     const dispatch = useDispatch();
     useEffect(() => {
+        // i18n.changeLanguage("ru");
         dispatch(fetchInvestmentData());
     }, []);
     return (
@@ -37,7 +40,7 @@ export const Portal: React.FC = () => {
             </Grid>
             <Grid container spacing={2}>
                 <Grid item xs={8}>
-                    <div>Testick</div>
+                    <div>{t("testick")}</div>
                 </Grid>
                 <Grid item xs={4}>
                     <ListIdea ideas={portalData.actualIdeas} />

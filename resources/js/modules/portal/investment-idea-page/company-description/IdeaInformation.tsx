@@ -5,13 +5,14 @@ interface IdeaInformation {
     ideaInfo: IdeaInfo;
 }
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 export const IdeaInformation: React.FC<IdeaInformation> = ({ ideaInfo }) => {
-    console.log(ideaInfo);
+    const { t } = useTranslation();
     if (!ideaInfo) {
-        return <Skeleton variant="rectangular" height="180" />;
+        return <Skeleton variant="rectangular" height="480" />;
     }
-    const getTypeTextPosition = (isShort: boolean): string => {
-        return isShort ? "Short" : "Long";
+    const getTypePosition = (): string => {
+        return ideaInfo.isShort ? "Short" : "Long";
     };
     const getTermIdea = (): number => {
         const start = moment(ideaInfo.dateStart);
@@ -19,21 +20,24 @@ export const IdeaInformation: React.FC<IdeaInformation> = ({ ideaInfo }) => {
         return end.diff(start, "month");
     };
     return (
-        <Card className="shadow-wrapper" sx={{ bgcolor: "#9d8ffd", p: 1 }}>
-            <Typography align="center" variant="h6" color="white">
-                Information about the idea
+        <Card
+            className="shadow-wrapper"
+            sx={{ bgcolor: "#29a0fb", p: 1, color: "white" }}
+        >
+            <Typography align="center" variant="h6">
+                {t("Information about idea")}
             </Typography>
             <Typography align="center" variant="subtitle2" sx={{ my: 1 }}>
-                Type position: {getTypeTextPosition(ideaInfo.isShort)}
+                {t("Type position", { type: t(getTypePosition()) })}
             </Typography>
             <Stack>
-                <Typography variant="body2">
-                    Purchase price: {ideaInfo.priceBuy}$
+                <Typography gutterBottom variant="body2">
+                    {t("Purchase price", { amount: ideaInfo.priceBuy })}
                 </Typography>
-                <Typography variant="body2">
-                    Sale price: {ideaInfo.priceSell}$
+                <Typography gutterBottom variant="body2">
+                    {t("Sale price", { amount: ideaInfo.priceSell })}
                 </Typography>
-                <Typography variant="body2">
+                <Typography gutterBottom variant="body2">
                     {`Date start: ${moment(ideaInfo.dateStart).format(
                         "Do MMMM YYYY"
                     )}`}
@@ -41,7 +45,7 @@ export const IdeaInformation: React.FC<IdeaInformation> = ({ ideaInfo }) => {
             </Stack>
             <Divider />
             <Typography align="center" variant="h6">
-                {`Investment term ${getTermIdea()} months`}
+                {t("Investment term", { term: getTermIdea() })}
             </Typography>
         </Card>
     );

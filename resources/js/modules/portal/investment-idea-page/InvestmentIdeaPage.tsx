@@ -8,8 +8,9 @@ import { ChartStatsEPS } from "./charts-company-data/ChartStatsEPS";
 import { ChartStatsAnalytics } from "./charts-company-data/ChartStatsAnalytics";
 import { IdeaAuthor } from "./idea-author/IdeaAuthor";
 import { CompanyIdeaHeader } from "../../../components/simple/company-idea-header/CompanyIdeaHeader";
-import { CompanyDescription } from "./company-description/CompanyDescription";
-import { IdeaInformation } from "./company-description/IdeaInformation";
+import { CompanyDescription } from "./IdeaInformation/CompanyDescription";
+import {IdeaDescription} from "./idea-description/IdeaDescription";
+import {IdeaInformation} from "./company-description/IdeaInformation";
 
 export const InvestmentIdeaPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -53,7 +54,9 @@ export const InvestmentIdeaPage: React.FC = () => {
             <Divider sx={{ my: 2 }} />
             <Grid container spacing={2}>
                 <Grid item xs={8} container spacing={3}>
-                    <Grid item xs={7}></Grid>
+                    <Grid item xs={7}>
+                        <IdeaDescription description={ideaData.description}/>
+                    </Grid>
                     <Grid item xs={5}>
                         <IdeaInformation ideaInfo={ideaData.ideaInfo} />
                     </Grid>

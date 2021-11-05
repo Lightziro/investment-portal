@@ -14,3 +14,6 @@ export const fetchInvestmentIdea = (ideaId: number) => ({
     type: "FETCH_INVESTMENT_IDEA",
     ideaId,
 });
+// export const clearViewIdea = () => ({
+//     type: 'CLEAR_VIEW_IDEA'
+// })

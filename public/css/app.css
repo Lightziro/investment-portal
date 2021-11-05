@@ -11514,6 +11514,10 @@ textarea.form-control-lg {
   box-shadow: rgba(145, 158, 171, 0.24) 0 0 2px 0, rgba(145, 158, 171, 0.24) 0 16px 32px -4px !important;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -11791,10 +11795,6 @@ img {
 .author-info .author-name {
   margin: 3px;
   font-size: 20px;
-}
-
-.stats-author-text {
-  padding: 0 5px;
 }
 
 .hr-separator {

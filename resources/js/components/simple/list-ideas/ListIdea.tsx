@@ -2,12 +2,13 @@ import React from "react";
 import { Avatar, Grid, Skeleton, Stack } from "@mui/material";
 import { InvestmentIdea } from "../../../ts/types/redux/store.types";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 interface ListIdea {
     ideas: InvestmentIdea[];
 }
 
 export const ListIdea: React.FC<ListIdea> = ({ ideas }) => {
-    console.log(ideas);
+    const { t } = useTranslation();
     return (
         <Grid
             className="list-idea-wrapper shadow-wrapper"
@@ -25,7 +26,9 @@ export const ListIdea: React.FC<ListIdea> = ({ ideas }) => {
                                   <span>{idea.stock}</span>
                               </Stack>
                               <div className="potential-profit">
-                                  {`Потенциальная доходность: ${idea.possibleProfit}%`}
+                                  {t(`Potential profit`, {
+                                      amount: idea.possibleProfit,
+                                  })}
                               </div>
                           </div>
                       </Link>
