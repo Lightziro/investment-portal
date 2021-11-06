@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 export const IdeaInformation: React.FC<IdeaInformation> = ({ ideaInfo }) => {
     const { t } = useTranslation();
     if (!ideaInfo) {
-        return <Skeleton variant="rectangular" height="480" />;
+        return <Skeleton variant="rectangular" height={192} />;
     }
     const getTypePosition = (): string => {
         return ideaInfo.isShort ? "Short" : "Long";

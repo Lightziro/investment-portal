@@ -28,7 +28,9 @@ export const CompanyIdeaHeader: React.FC<CompanyIdeaHeader> = ({
         <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
             <Grid direction="column">
                 <Stack alignItems="center" direction="row" spacing={2}>
-                    <Avatar src="/image/picture/company-logo/apple.png" />
+                    <Avatar
+                        src={`/image/picture/company-logo/${companyInfo.logoPath}`}
+                    />
                     <span>{`${companyInfo.companyName}(${companyInfo.ticker})`}</span>
                     <Divider
                         className="hr-separator"

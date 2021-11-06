@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth-register:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -28,6 +28,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/authentication', [AuthController::class, 'authentication']);
     Route::post('/notice/view', [UserController::class, 'viewNotice']);
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
 Route::group(['prefix' => 'news'], function () {

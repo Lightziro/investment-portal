@@ -1,6 +1,5 @@
 import React, { Fragment, useRef } from "react";
 import { MenuPopover } from "../menu-popover/MenuPopover";
-import { LIST_LANGUAGE } from "../../../../ts/consts/settings/settings.consts";
 import {
     IconButton,
     ListItemIcon,
@@ -10,6 +9,7 @@ import {
 import { useSelector } from "react-redux";
 import { StoreData } from "../../../../ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
+import { MENU_LANGUAGE } from "../../../../config/menu-items";
 interface LanguageMenu {
     open: boolean;
     onClose: () => void;
@@ -34,14 +34,16 @@ export const LanguageMenu: React.FC<LanguageMenu> = ({
                 sx={{ p: 0, width: 44, height: 44 }}
                 onClick={onOpen}
             >
-                <img src="/image/picture/language-icons/ic_flag_en.svg" />
+                <img
+                    src={`/image/picture/language-icons/${i18n.language}-flag.svg`}
+                />
             </IconButton>
             <MenuPopover
                 open={open}
                 onClose={onClose}
                 anchorEl={anchorRef.current}
             >
-                {LIST_LANGUAGE.map((language) => (
+                {MENU_LANGUAGE.map((language) => (
                     <MenuItem
                         id={language.value}
                         onClick={() => handleChangeLanguage(language.value)}

@@ -10,12 +10,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @property string userName
+ * @property string email
  * @property string password
  * @property string first_name
- * @property string second_name
+ * @property string last_name
  * @property string remember_token
  * @property UsersRole|null role
+ * @property null|int role_id
  * @property InvestmentIdea|null investment_ideas
  * @property UserNotices[] notices
  */
@@ -29,7 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'second_name', 'userName', 'password', 'role_id',
+        'first_name', 'last_name', 'email', 'password', 'role_id',
     ];
     protected $primaryKey = 'user_id';
 
@@ -51,10 +52,9 @@ class User extends Authenticatable
             ];
         }
         return [
-            'userName' => ucfirst($this->userName),
             'firstName' => ucfirst($this->first_name),
-            'secondName' => $this->second_name,
-            'role' => $this->role->code,
+            'lastName' => $this->last_name,
+            'role' => $this->role->name,
             'notices' => $ar_notice,
         ];
     }
@@ -77,7 +77,7 @@ class User extends Authenticatable
     public function getFullName(): string
     {
         $first_name = ucfirst($this->first_name);
-        $second_name = ucfirst($this->second_name);
+        $second_name = ucfirst($this->last_name);
         return "$second_name $first_name";
     }
 }

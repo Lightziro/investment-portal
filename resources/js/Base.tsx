@@ -5,13 +5,13 @@ import { StoreData } from "./ts/types/redux/store.types";
 import axios from "axios";
 import { setUserData } from "./redux/actions/mainActions";
 import { MainRouter } from "./routes/mainRouters";
+import { SnackbarAlert } from "./components/snackbar-alert/SnackbarAlert";
 
 export const Base: React.FC = () => {
     const dispatch = useDispatch();
     const user = useSelector((store: StoreData) => store.main.user);
     useEffect(() => {
         if (!user) {
-            console.log("TOP4ik");
             axios
                 .get("/api/user/authentication")
                 .then((res) => dispatch(setUserData(res.data)));
@@ -20,6 +20,7 @@ export const Base: React.FC = () => {
     return (
         <Router>
             <MainRouter />
+            <SnackbarAlert />
         </Router>
     );
 };

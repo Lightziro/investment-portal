@@ -14,9 +14,9 @@ export const initMainStore: MainStore = {
         analyticsStats: null,
         companyInfo: null,
         authorInfo: null,
-        description: null
+        description: null,
     },
-    language: 'en'
+    alert: null,
 };
 export const initialAdminStore: AdminStore = {
     investmentIdeas: {

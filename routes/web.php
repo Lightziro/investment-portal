@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'index']);
 Route::get('/investment-idea/{id}', [Controller::class, 'index']);
 Route::get('/auth', [Controller::class, 'index']);
+Route::get('/register', [Controller::class, 'index']);
 Route::group(['prefix' => 'admin', 'middleware' => ['checkRoot']], function () {
     Route::get('investment-ideas', [Controller::class, 'index']);
 });

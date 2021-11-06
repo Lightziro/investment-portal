@@ -48,9 +48,21 @@ function* fetchInvestmentIdea(action: AnyAction): Generator {
         });
     } catch (error) {}
 }
+function* registerUser(action: AnyAction): Generator {
+    try {
+        const userData = yield axios
+            .post("/api/user/register", action.form)
+            .then((response) => response.data);
+        yield put({
+            type: "SET_USER_DATA",
+            userData,
+        });
+    } catch (e) {}
+}
 export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("USER_LOGIN", authorizationUser);
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("VIEW_NOTICE", viewNotice);
     yield takeLatest("FETCH_INVESTMENT_IDEA", fetchInvestmentIdea);
+    yield takeLatest("REGISTER_USER", registerUser);
 }

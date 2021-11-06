@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UsersRole;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cookie;
@@ -52,5 +54,39 @@ class AuthController extends BaseController
             return response()->json(['error' => 'Не удалось аутентифицировать пользователя'], 400);
         }
         return response()->json($user->getFrontendData());
+    }
+
+    public function register(Request $request): RedirectResponse|JsonResponse
+    {
+        try {
+            $fields = $request->all();
+            $validator = Validator::make($fields, [
+                'firstName' => 'required|min:4|max:20',
+                'lastName' => 'required|min:8|max:40',
+                'password' => 'required|min:8|max:40',
+                'email' => 'required|email',
+                'consent' => 'boolean|accepted',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->to('/', 400);
+            }
+            $user_search = User::query()->where(['email' => $fields['email']])->first();
+            if ($user_search->count() > 0) {
+                return response()->json(['error' => ['User with such an email address exists']], 400);
+            }
+            $role_user = UsersRole::query()->where(['name' => 'user'])->first();
+            $user = new User();
+            $user->first_name = $fields['firstName'];
+            $user->last_name = $fields['lastName'];
+            $user->password = Hash::make($fields['password']);
+            $user->email = $fields['email'];
+            $user->role_id = $role_user->role_id;
+            if($user->save()) {
+                return response()->json($user->getFrontendData());
+            }
+        } catch (\Throwable $exception) {
+            return response()->json([], 400);
+        }
+        return redirect()->to('/', 400);
     }
 }

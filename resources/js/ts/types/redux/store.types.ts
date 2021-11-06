@@ -6,13 +6,18 @@ import {
     News,
 } from "../state/stock-market.types";
 import { AuthorInfo } from "../state/user.types";
+import { AlertColor } from "@mui/material";
 
 export interface MainStore {
     user: User;
     news: News[];
     investmentData: InvestmentData;
     ideaView: InvestmentIdeaView;
-    language: string
+    alert: {
+        message: string;
+        status: AlertColor;
+        state: boolean;
+    };
 }
 
 export interface InvestmentIdeaView {
@@ -21,7 +26,7 @@ export interface InvestmentIdeaView {
     companyInfo: CompanyIdeaInfo;
     authorInfo: AuthorInfo;
     ideaInfo: IdeaInfo;
-    description: string
+    description: string;
 }
 
 export interface InvestmentData {

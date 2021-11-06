@@ -25,8 +25,20 @@ const mainReducer = (
             return setNoticeView(state, action.noticeId);
         case "SET_IDEA_VIEW_DATA":
             return { ...state, ideaView: action.data };
-        case 'FETCH_INVESTMENT_IDEA':
-            return {...state, ideaView: {...state.ideaView, ideaInfo: null, companyInfo: null, analyticsStats: null, authorInfo: null, epsStats: null}}
+        case "FETCH_INVESTMENT_IDEA":
+            return {
+                ...state,
+                ideaView: {
+                    ...state.ideaView,
+                    ideaInfo: null,
+                    companyInfo: null,
+                    analyticsStats: null,
+                    authorInfo: null,
+                    epsStats: null,
+                },
+            };
+        case "CLEAR_ALERT":
+            return { ...state, alert: null };
         default:
             return state;
     }

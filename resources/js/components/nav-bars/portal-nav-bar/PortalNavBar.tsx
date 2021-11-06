@@ -1,21 +1,22 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, Box, Grid } from "@mui/material";
+import { Avatar, Box, Grid, IconButton } from "@mui/material";
 import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { Icon } from "@iconify/react";
 import { NoticeDialog } from "./notice-dialog/NoticeDialog";
 import { LanguageMenu } from "./language-menu/LanguageMenu";
+import { ProfileMenu } from "./profile-menu/ProfileMenu";
 
 export const PortalNavBar: React.FC = () => {
     const [open, setOpen] = useState({
         language: false,
         notice: false,
+        profile: false,
     });
     const handleOpen = (state: boolean, name: string) => {
         setOpen({ ...open, [name]: state });
     };
-    const user = useSelector((state: StoreData) => state.main.user);
 
     return (
         <header className="portal-nav-bar">
@@ -51,18 +52,11 @@ export const PortalNavBar: React.FC = () => {
                     {/*        <NoticeDialog state={open} />*/}
                     {/*    </Fragment>*/}
                     {/*)}*/}
-                    <Grid
-                        justifyContent="center"
-                        direction="row"
-                        container
-                        alignItems="center"
-                        className="nav-bar-user-avatar"
-                    >
-                        <Avatar
-                            alt="Remy Sharp"
-                            src="/image/picture/avatar_default.jpg"
-                        />
-                    </Grid>
+                    <ProfileMenu
+                        open={open.profile}
+                        onOpen={() => handleOpen(true, "profile")}
+                        onClose={() => handleOpen(false, "profile")}
+                    />
                 </div>
             </div>
         </header>

@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 import { News } from "../ts/types/state/stock-market.types";
-import { Auth } from "../modules/auth/Auth";
+import { Auth } from "../modules/login-user/auth/Auth";
 
 export const Base: React.FC = () => {
     // const [news, setNews] = useState<News[]>([]);

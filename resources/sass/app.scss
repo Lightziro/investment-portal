@@ -9,9 +9,11 @@
 @import "admin/admin";
 @import "portal/nav-bar";
 @import "portal/portal-page";
+@import "auth-register/auth";
 
 a {
     text-decoration: none !important;
+    color: black !important;
 }
 
 img {
@@ -310,4 +312,21 @@ img {
 
 .hr-separator {
     height: auto !important;
+}
+
+.picture-login {
+    @media (min-width: 600px) {
+        max-width: 53.3% !important;
+        flex-basis: 53.3% !important;
+    }
+}
+
+.wrapper-login {
+    @media(min-width: 600px) {
+        max-width: 46.6% !important;
+        flex-basis: 46.6% !important;
+    }
+}
+.back-icon{
+
 }
