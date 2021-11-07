@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Custom\CustomModel;
 use App\Models\Investment\InvestmentIdeaDescriptions;
 use App\Models\Investment\InvestmentIdeaReaction;
 use App\Models\Investment\InvestmentIdeaViewing;
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string date_end
  * @property string description
  */
-class InvestmentIdea extends Model
+class InvestmentIdea extends CustomModel
 {
     public const STATUS_FAIL = 'fail';
     public const STATUS_SUCCESS = 'success';

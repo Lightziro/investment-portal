@@ -6,7 +6,8 @@ export const initMainStore: MainStore = {
     investmentData: {
         bestProfit: null,
         worseProfit: null,
-        actualIdeas: null,
+        // actualIdeas: null,
+        ideaStatistics: null,
     },
     ideaView: {
         epsStats: null,

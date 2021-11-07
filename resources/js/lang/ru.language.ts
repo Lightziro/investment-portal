@@ -29,9 +29,14 @@ export const ruLanguage = {
         "У вас есть учетная запись? Авторизоваться",
     "Is required field": "Заполните обязательное поле",
     "You successfully registered": "Вы успешно зарегистрировались",
+    "All Notification": "Все уведомления",
+    News: "Новости",
     "Welcome, user": "Добро пожаловать, %fullName%",
     "User with such an email address exists":
         "Пользователь с таким email адресом существует",
+    "Earn on the fall and on the growth stocks":
+        "Зарабатывай на росте и падении акций",
+    "We offer best ideas": "Мы предлагаем лучшие идеи",
     "Must contain max %amount% symbol":
         "Поле должно содержать %amount% символов",
     "Company description":

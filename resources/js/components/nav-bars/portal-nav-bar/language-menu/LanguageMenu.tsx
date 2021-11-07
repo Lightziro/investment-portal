@@ -21,7 +21,9 @@ export const LanguageMenu: React.FC<LanguageMenu> = ({
     const anchorRef = useRef(null);
     const { i18n } = useTranslation();
     const handleChangeLanguage = (language: string) => {
-        i18n.changeLanguage(language);
+        if (language !== i18n.language) {
+            i18n.changeLanguage(language);
+        }
         onClose();
     };
     return (

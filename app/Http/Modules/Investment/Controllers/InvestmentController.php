@@ -17,10 +17,6 @@ use Illuminate\Support\Facades\Cookie;
 
 class InvestmentController extends BaseController
 {
-    public function createInvestmentIdea()
-    {
-
-    }
 
     public function getData(): RedirectResponse|Application|JsonResponse|Redirector
     {
@@ -45,14 +41,20 @@ class InvestmentController extends BaseController
 
     public function getPortalData(): JsonResponse
     {
+        $popular_ideas = InvestmentIdea::query()->getRelatedWithOrderByCount('views', 'user_view_id');
         $max_profit = InvestmentIdea::query()->max('profit');
         $min_profit = InvestmentIdea::query()->min('profit');
-
-        $market = new StockMarket();
-        $news = $market->getMarketNews();
+        if (!$news = Cache::get("last-news")) {
+            $market = new StockMarket();
+            $news = $market->getMarketNews();
+            Cache::put("last-news", $news, now()->addHour(10));
+        }
+        $count_success_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_SUCCESS])->count();
+        $count_fail_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_FAIL])->count();
 
         $investment_ideas = InvestmentIdea::query()->whereNotIn('status', ['Fail', 'End'])->limit(5)->get();
         $ar_ideas = [];
+
         /** @var InvestmentIdea $idea_model */
         foreach ($investment_ideas as $idea_model) {
             $ar_ideas[] = [
@@ -63,10 +65,18 @@ class InvestmentController extends BaseController
         }
 
         return response()->json([
-            'bestProfit' => $max_profit,
-            'worseProfit' => $min_profit,
+
             'news' => $news,
-            'investmentIdeas' => $ar_ideas,
+            'investmentData' => [
+                'bestProfit' => $max_profit,
+                'worseProfit' => $min_profit,
+//                'investmentIdeas' => $ar_ideas,
+                'ideaStatistics' => [
+                    'success' => $count_success_ideas,
+                    'fail' => $count_fail_ideas,
+                ]
+            ]
+
         ]);
     }
 

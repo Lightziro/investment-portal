@@ -74,13 +74,6 @@
     inset: 0 0 auto auto;
     transform: translate(-92px, 79px);
 
-    .header-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 15px 5px;
-    }
-
     .notice-header {
         display: flex;
         justify-content: space-between;
@@ -107,13 +100,16 @@
         color: rgb(158, 158, 158);
     }
 
-    .count-notices {
-        margin-left: 15px;
-        color: #1a5413;
-        font-weight: 600;
-        background-color: #98fd72;
-        border-radius: 16px;
-        width: 24px;
-        text-align: center;
-    }
+}
+.count-notices {
+    margin-left: 15px;
+    color: white !important;
+    background-color: #008cff;
+    border-radius: 16px;
+    width: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
 }

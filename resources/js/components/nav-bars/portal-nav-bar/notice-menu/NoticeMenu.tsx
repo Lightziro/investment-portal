@@ -1,17 +1,17 @@
 import React, { Fragment, useRef } from "react";
 import { useSelector } from "react-redux";
 import { StoreData } from "../../../../ts/types/redux/store.types";
-import { Avatar, IconButton } from "@mui/material";
+import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
-import { LoginMenu } from "../profile-menu/LoginMenu";
-import { NoLoginMenu } from "../profile-menu/NoLoginMenu";
 import { Icon } from "@iconify/react";
+import { useTranslation } from "react-i18next";
 interface NoticeMenu {
     onOpen: () => void;
     open: boolean;
     onClose: () => void;
 }
 export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
+    const { t } = useTranslation();
     const anchorRef = useRef(null);
     const user = useSelector((state: StoreData) => state.main.user);
     return (
@@ -28,14 +28,33 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                             width={24}
                             height={24}
                         />
-                        {/*<Avatar src="/image/picture/avatar_default.jpg" />*/}
                     </IconButton>
                     <MenuPopover
                         open={open}
                         onClose={onClose}
                         anchorEl={anchorRef.current}
                         sx={{ width: 220 }}
-                    />
+                    >
+                        <Box padding={1}>
+                            <Stack
+                                alignItems="center"
+                                direction="row"
+                                spacing={2}
+                                justifyContent="space-between"
+                            >
+                                <Typography variant="body2">
+                                    {t("All Notification")}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    className="count-notices"
+                                >
+                                    {user.notices.length}
+                                </Typography>
+                            </Stack>
+                        </Box>
+                        <Divider />
+                    </MenuPopover>
                 </Fragment>
             )}
         </Fragment>

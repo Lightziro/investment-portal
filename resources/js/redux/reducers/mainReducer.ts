@@ -18,15 +18,11 @@ const mainReducer = (
                 alert: setAlert("You successfully registered"),
             };
         case "SET_PORTAL_DATA":
+            console.log(action.data);
             return {
                 ...state,
                 news: action.data.news,
-                investmentData: {
-                    ...state.investmentData,
-                    bestProfit: action.data.bestProfit,
-                    worseProfit: action.data.worseProfit,
-                    actualIdeas: action.data.investmentIdeas,
-                },
+                investmentData: action.data.investmentData,
             };
         case "SET_NOTICE_VIEW":
             return setNoticeView(state, action.noticeId);

@@ -22,14 +22,6 @@ export const NoticeDialog: React.FC<NoticeDialog> = ({ state }) => {
             {state && (
                 <div className="notice-window">
                     <Paper elevation={3}>
-                        <Box padding={1}>
-                            <div className="header-wrapper">
-                                <span>All Notification</span>
-                                <div className="count-notices">
-                                    <span>{notices.length}</span>
-                                </div>
-                            </div>
-                        </Box>
                         <Grid
                             justifyContent="flex-start"
                             direction="column"
