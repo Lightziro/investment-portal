@@ -11,7 +11,7 @@ export const IdeaStatistics: React.FC = () => {
     console.log(stats);
     const { t } = useTranslation();
     return (
-        <Fragment>
+        <div className="portal-component-wrapper">
             {stats ? (
                 <Paper elevation={2}>
                     <Typography align="center" variant="h6" sx={{ p: 1 }}>
@@ -44,6 +44,6 @@ export const IdeaStatistics: React.FC = () => {
             ) : (
                 <Skeleton height={163} variant="rectangular" />
             )}
-        </Fragment>
+        </div>
     );
 };

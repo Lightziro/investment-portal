@@ -33,7 +33,7 @@ export interface InvestmentIdeaView {
 export interface InvestmentData {
     bestProfit: number | null;
     worseProfit: number | null;
-    // actualIdeas: InvestmentIdea[];
+    investmentIdeas: InvestmentIdea[];
     ideaStatistics: IdeaStatistics;
 }
 export interface IdeaStatistics {
@@ -45,6 +45,7 @@ export interface InvestmentIdea {
     id: number;
     possibleProfit: number;
     stock: string;
+    logo: string;
 }
 
 export interface AdminStore {

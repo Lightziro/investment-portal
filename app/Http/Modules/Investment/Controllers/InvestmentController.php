@@ -41,7 +41,7 @@ class InvestmentController extends BaseController
 
     public function getPortalData(): JsonResponse
     {
-        $popular_ideas = InvestmentIdea::query()->getRelatedWithOrderByCount('views', 'user_view_id');
+//        $popular_ideas = InvestmentIdea::query()->getRelatedWithOrderByCount('views', 'user_view_id');
         $max_profit = InvestmentIdea::query()->max('profit');
         $min_profit = InvestmentIdea::query()->min('profit');
         if (!$news = Cache::get("last-news")) {
@@ -52,15 +52,18 @@ class InvestmentController extends BaseController
         $count_success_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_SUCCESS])->count();
         $count_fail_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_FAIL])->count();
 
-        $investment_ideas = InvestmentIdea::query()->whereNotIn('status', ['Fail', 'End'])->limit(5)->get();
-        $ar_ideas = [];
+        $investment_ideas = InvestmentIdea::query()->whereNotIn('status', [InvestmentIdea::STATUS_FAIL])
+            ->orderBy('possible_profit')->limit(5)->get();
+
 
         /** @var InvestmentIdea $idea_model */
         foreach ($investment_ideas as $idea_model) {
+            $company_info = $idea_model->company;
             $ar_ideas[] = [
                 'id' => $idea_model->idea_id,
-                'possibleProfit' => round($idea_model->calculatePossibleProfit(), 2),
-                'stock' => $idea_model->company->name,
+                'possibleProfit' => $idea_model->possible_profit,
+                'stock' => $company_info->name,
+                'logo' => $company_info->logo,
             ];
         }
 
@@ -70,7 +73,7 @@ class InvestmentController extends BaseController
             'investmentData' => [
                 'bestProfit' => $max_profit,
                 'worseProfit' => $min_profit,
-//                'investmentIdeas' => $ar_ideas,
+                'investmentIdeas' => $ar_ideas ?? null,
                 'ideaStatistics' => [
                     'success' => $count_success_ideas,
                     'fail' => $count_fail_ideas,

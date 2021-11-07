@@ -327,41 +327,53 @@ img {
         flex-basis: 46.6% !important;
     }
 }
-.back-icon{
+
+.back-icon {
 
 }
+
 .news-title {
     &:hover {
         color: #6b6b6b;
     }
 }
-.main-picture-portal{
+
+.main-picture-portal {
     padding: 20px;
 }
+
 hr {
     height: auto !important;
 }
+
 .label-stats-ideas {
     font-size: 16px;
     color: #9e9e9e;
 }
+
 .value-stats-ideas {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 4px;
     letter-spacing: 1px;
 }
-.best-ideas-title{
+
+.best-ideas-title {
     font-size: 18px;
     padding: 8px;
     text-align: center;
     letter-spacing: 0.5px;
     font-weight: bold;
 }
-.wrapper-stats-idea{
+
+.wrapper-stats-idea {
     padding: 8px;
     display: flex;
     flex-direction: column;
     text-align: center;
     flex: auto;
+}
+
+.portal-component-wrapper {
+    margin-bottom: 16px;
 }

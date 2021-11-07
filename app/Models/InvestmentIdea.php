@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string date_create
  * @property string date_end
  * @property string description
+ * @property float possible_profit
  */
 class InvestmentIdea extends CustomModel
 {

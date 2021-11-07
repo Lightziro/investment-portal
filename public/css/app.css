@@ -11838,3 +11838,7 @@ hr {
   text-align: center;
   flex: auto;
 }
+
+.portal-component-wrapper {
+  margin-bottom: 16px;
+}

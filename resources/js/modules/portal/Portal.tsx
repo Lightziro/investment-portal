@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import { NewsPortalList } from "../../components/news-list/NewsPortalList";
 import { PortalAd } from "../../components/portal-ad/PortalAd";
 import { IdeaStatistics } from "./idea-statistics/IdeaStatistics";
+import { IdeaList } from "./idea-list/IdeaList";
 
 export const Portal: React.FC = () => {
     // const { t, i18n } = useTranslation();
@@ -49,6 +50,7 @@ export const Portal: React.FC = () => {
                         <Grid item xs={3}>
                             <PortalAd />
                             <IdeaStatistics />
+                            <IdeaList />
                         </Grid>
                     </Grid>
                 </Grid>
