@@ -6,8 +6,6 @@ import {
     ListItemText,
     MenuItem,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { StoreData } from "../../../../ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
 import { MENU_LANGUAGE } from "../../../../config/menu-items";
 interface LanguageMenu {
@@ -20,7 +18,6 @@ export const LanguageMenu: React.FC<LanguageMenu> = ({
     onClose,
     onOpen,
 }) => {
-    const language = useSelector((state: StoreData) => state.main.language);
     const anchorRef = useRef(null);
     const { i18n } = useTranslation();
     const handleChangeLanguage = (language: string) => {

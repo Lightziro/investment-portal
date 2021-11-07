@@ -54,10 +54,15 @@ function* registerUser(action: AnyAction): Generator {
             .post("/api/user/register", action.form)
             .then((response) => response.data);
         yield put({
-            type: "SET_USER_DATA",
+            type: "SET_SUCCESS_REGISTER",
             userData,
         });
-    } catch (e) {}
+    } catch (error) {
+        yield put({
+            type: "SET_ALERT_ERROR",
+            message: error.response.data.error,
+        });
+    }
 }
 export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("USER_LOGIN", authorizationUser);

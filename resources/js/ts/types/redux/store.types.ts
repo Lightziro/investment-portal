@@ -13,11 +13,12 @@ export interface MainStore {
     news: News[];
     investmentData: InvestmentData;
     ideaView: InvestmentIdeaView;
-    alert: {
-        message: string;
-        status: AlertColor;
-        state: boolean;
-    };
+    alert: Alert;
+}
+export interface Alert {
+    message: string;
+    status: AlertColor;
+    state: boolean;
 }
 
 export interface InvestmentIdeaView {
@@ -49,9 +50,7 @@ export interface AdminStore {
 }
 
 export interface User {
-    userName: string;
-    firstName: string;
-    secondName: string;
+    fullName: string;
     role: string;
     notices: Notice[];
 }

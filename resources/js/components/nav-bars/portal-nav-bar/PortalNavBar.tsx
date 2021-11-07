@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 import { NoticeDialog } from "./notice-dialog/NoticeDialog";
 import { LanguageMenu } from "./language-menu/LanguageMenu";
 import { ProfileMenu } from "./profile-menu/ProfileMenu";
+import { NoticeMenu } from "./notice-menu/NoticeMenu";
 
 export const PortalNavBar: React.FC = () => {
     const [open, setOpen] = useState({
@@ -34,30 +35,16 @@ export const PortalNavBar: React.FC = () => {
                     onClose={() => handleOpen(false, "language")}
                     onOpen={() => handleOpen(true, "language")}
                 />
-                <div className="nav-bar-portal-user">
-                    {/*{user && (*/}
-                    {/*    <Fragment>*/}
-                    {/*        <Box marginRight={3}>*/}
-                    {/*            <div*/}
-                    {/*                onClick={() => setOpen(!open)}*/}
-                    {/*                className="icon-wrapper"*/}
-                    {/*            >*/}
-                    {/*                <Icon*/}
-                    {/*                    icon="ant-design:bell-outlined"*/}
-                    {/*                    width={24}*/}
-                    {/*                    height={24}*/}
-                    {/*                />*/}
-                    {/*            </div>*/}
-                    {/*        </Box>*/}
-                    {/*        <NoticeDialog state={open} />*/}
-                    {/*    </Fragment>*/}
-                    {/*)}*/}
-                    <ProfileMenu
-                        open={open.profile}
-                        onOpen={() => handleOpen(true, "profile")}
-                        onClose={() => handleOpen(false, "profile")}
-                    />
-                </div>
+                <NoticeMenu
+                    onClose={() => handleOpen(false, "notice")}
+                    onOpen={() => handleOpen(true, "notice")}
+                    open={open.notice}
+                />
+                <ProfileMenu
+                    open={open.profile}
+                    onOpen={() => handleOpen(true, "profile")}
+                    onClose={() => handleOpen(false, "profile")}
+                />
             </div>
         </header>
     );

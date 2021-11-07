@@ -30,32 +30,32 @@
         }
     }
 
-    .nav-bar-portal-user {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .nav-bar-user-avatar {
-            padding: 5px;
-            color: #e3f2fd;
-            border-radius: 12px;
-            background: #e3f2fd;
-            transition: all 0.2s ease-in-out 0s;
-            cursor: pointer;
-
-            .MuiAvatar-root {
-                transition: inherit;
-            }
-
-            &:hover {
-                background-color: rgba(144, 202, 249, 0.85);
-
-                .MuiAvatar-root {
-                    transform: scale(0.85);
-                }
-            }
-        }
-    }
+    //.nav-bar-portal-user {
+    //    display: flex;
+    //    justify-content: center;
+    //    align-items: center;
+    //
+    //    .nav-bar-user-avatar {
+    //        padding: 5px;
+    //        color: #e3f2fd;
+    //        border-radius: 12px;
+    //        background: #e3f2fd;
+    //        transition: all 0.2s ease-in-out 0s;
+    //        cursor: pointer;
+    //
+    //        .MuiAvatar-root {
+    //            transition: inherit;
+    //        }
+    //
+    //        &:hover {
+    //            background-color: rgba(144, 202, 249, 0.85);
+    //
+    //            .MuiAvatar-root {
+    //                transform: scale(0.85);
+    //            }
+    //        }
+    //    }
+    //}
 }
 
 .nav-bar-portal-logo {

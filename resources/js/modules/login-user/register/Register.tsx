@@ -8,16 +8,23 @@ import {
     Typography,
 } from "@mui/material";
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Formik, FormikProps } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SignUpSchema } from "./registerValidation";
 import { initRegisterForm } from "../../../ts/consts/forms/init-form";
 import { FormRegister } from "../../../ts/types/forms/form.types";
 import { registerUser } from "../../../redux/actions/mainActions";
+import { StoreData } from "../../../ts/types/redux/store.types";
 
 export const Register: React.FC = () => {
+    const user = useSelector((state: StoreData) => state.main.user);
+    const navigate = useNavigate();
+    if (user) {
+        console.log("Авторизовался чувак");
+        navigate("/");
+    }
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const handleSubmit = (formData) => {

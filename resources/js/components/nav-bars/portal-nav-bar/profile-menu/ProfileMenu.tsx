@@ -4,6 +4,7 @@ import { MenuPopover } from "../menu-popover/MenuPopover";
 import { StoreData } from "../../../../ts/types/redux/store.types";
 import { useSelector } from "react-redux";
 import { NoLoginMenu } from "./NoLoginMenu";
+import { LoginMenu } from "./LoginMenu";
 
 interface ProfileMenu {
     open: boolean;
@@ -32,7 +33,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 anchorEl={anchorRef.current}
                 sx={{ width: 220 }}
             >
-                {user ? <div>Testick</div> : <NoLoginMenu />}
+                {user ? <LoginMenu user={user} /> : <NoLoginMenu />}
             </MenuPopover>
         </Fragment>
     );

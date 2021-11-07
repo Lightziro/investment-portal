@@ -28,6 +28,10 @@ export const ruLanguage = {
     "Already have an account? Log in":
         "У вас есть учетная запись? Авторизоваться",
     "Is required field": "Заполните обязательное поле",
+    "You successfully registered": "Вы успешно зарегистрировались",
+    "Welcome, user": "Добро пожаловать, %fullName%",
+    "User with such an email address exists":
+        "Пользователь с таким email адресом существует",
     "Must contain max %amount% symbol":
         "Поле должно содержать %amount% символов",
     "Company description":

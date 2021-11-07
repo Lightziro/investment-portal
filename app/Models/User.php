@@ -52,8 +52,7 @@ class User extends Authenticatable
             ];
         }
         return [
-            'firstName' => ucfirst($this->first_name),
-            'lastName' => $this->last_name,
+            'fullName' => $this->getFullName(),
             'role' => $this->role->name,
             'notices' => $ar_notice,
         ];

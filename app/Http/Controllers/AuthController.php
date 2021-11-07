@@ -11,6 +11,9 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
+use Throwable;
 
 class AuthController extends BaseController
 {
@@ -50,7 +53,7 @@ class AuthController extends BaseController
             return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
         }
         $user = User::query()->where('remember_token', $cookie['token'])->first();
-        if ($user->count() !== 1) {
+        if (!$user) {
             return response()->json(['error' => 'Не удалось аутентифицировать пользователя'], 400);
         }
         return response()->json($user->getFrontendData());
@@ -61,8 +64,8 @@ class AuthController extends BaseController
         try {
             $fields = $request->all();
             $validator = Validator::make($fields, [
-                'firstName' => 'required|min:4|max:20',
-                'lastName' => 'required|min:8|max:40',
+                'firstName' => 'required|min:2|max:25',
+                'lastName' => 'required|min:2|max:25',
                 'password' => 'required|min:8|max:40',
                 'email' => 'required|email',
                 'consent' => 'boolean|accepted',
@@ -71,9 +74,10 @@ class AuthController extends BaseController
                 return redirect()->to('/', 400);
             }
             $user_search = User::query()->where(['email' => $fields['email']])->first();
-            if ($user_search->count() > 0) {
-                return response()->json(['error' => ['User with such an email address exists']], 400);
+            if ($user_search) {
+                return response()->json(['error' => 'User with such an email address exists'], 400);
             }
+            $token = hash('sha256', Str::random(80));
             $role_user = UsersRole::query()->where(['name' => 'user'])->first();
             $user = new User();
             $user->first_name = $fields['firstName'];
@@ -81,12 +85,24 @@ class AuthController extends BaseController
             $user->password = Hash::make($fields['password']);
             $user->email = $fields['email'];
             $user->role_id = $role_user->role_id;
-            if($user->save()) {
-                return response()->json($user->getFrontendData());
+            $user->remember_token = $token;
+            if ($user->save()) {
+                $cookie = \cookie('token', $token, 1234);
+                return response()->json($user->getFrontendData())->cookie($cookie);
             }
-        } catch (\Throwable $exception) {
-            return response()->json([], 400);
+        } catch (Throwable $exception) {
+            return response()->json(['error' => 'Server error'], 400);
         }
         return redirect()->to('/', 400);
+    }
+
+    public function authGitHub()
+    {
+        $user = Socialite::driver('github')->stateless()->user();
+    }
+
+    public function redirectToGithub(): \Symfony\Component\HttpFoundation\RedirectResponse
+    {
+        return Socialite::driver('github')->stateless()->redirect();
     }
 }
