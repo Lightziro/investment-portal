@@ -377,3 +377,32 @@ hr {
 .portal-component-wrapper {
     margin-bottom: 16px;
 }
+
+.idea-item-wrapper {
+    display: flex;
+    padding: 20px;
+
+    .idea-item-info {
+        display: flex;
+        padding: calc(8px);
+        flex-grow: 1;
+        flex-wrap: wrap;
+        min-width: 0;
+
+        .potential-profit {
+            color: #122740;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .company-name {
+            font-size: 0.875rem;
+            color: #758392;
+        }
+    }
+
+    .btn-watch {
+        padding: calc(2px);
+        align-self: center;
+    }
+}
