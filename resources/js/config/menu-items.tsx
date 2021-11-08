@@ -43,3 +43,19 @@ export const AUTH_BY = [
         icon: <Icon icon="flat-color-icons:google" color="#1877f2" />,
     },
 ];
+export const MENU_ADMIN = [
+    {
+        logo: {
+            name: "bi:bar-chart-fill",
+        },
+        text: "Investment ideas",
+        url: "/admin-panel/investment-ideas",
+    },
+    {
+        logo: {
+            name: "bi:person-circle",
+        },
+        text: "Users",
+        url: "/admin-panel/users",
+    },
+];

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "@mui/material";
+import { Card, Skeleton } from "@mui/material";
 import Chart from "react-apexcharts";
 import { AnalyticsStats } from "../../../../ts/types/state/stock-market.types";
 
@@ -10,7 +10,7 @@ export const ChartStatsAnalytics: React.FC<ChartStatsAnalytics> = ({
     stats,
 }) => {
     if (!stats) {
-        return <div>Load</div>;
+        return <Skeleton height={180} variant="rectangular" />;
     }
     return (
         <Card

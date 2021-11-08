@@ -3,6 +3,7 @@
 namespace App\Http\Modules\Investment\Controllers;
 
 use App\Http\Classes\StockMarket;
+use App\Models\Investment\InvestmentIdeaViewing;
 use App\Models\InvestmentIdea;
 use App\Models\User;
 use Carbon\Carbon;
@@ -17,28 +18,6 @@ use Illuminate\Support\Facades\Cookie;
 
 class InvestmentController extends BaseController
 {
-
-    public function getData(): RedirectResponse|Application|JsonResponse|Redirector
-    {
-        $cookie = Cookie::get();
-        if (empty($cookie['token'])) {
-            return redirect('/');
-        }
-        /** @var User $user */
-        $user = User::query()->where('remember_token', $cookie['token'])->first();
-        $ar_data = [
-            'viewToday' => 0,
-            'likedToday' => 0,
-        ];
-        $investment_ideas = $user->investment_ideas;
-        foreach ($investment_ideas as $idea_model) {
-            $ar_data['viewToday'] += $idea_model->views()->whereDate('date_view', Carbon::today())->count();
-            $ar_data['likedToday'] += $idea_model->reaction()->where('reaction', '=', 'Liked')->count();
-
-        }
-        return response()->json($ar_data);
-    }
-
     public function getPortalData(): JsonResponse
     {
 //        $popular_ideas = InvestmentIdea::query()->getRelatedWithOrderByCount('views', 'user_view_id');
@@ -53,7 +32,7 @@ class InvestmentController extends BaseController
         $count_fail_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_FAIL])->count();
 
         $investment_ideas = InvestmentIdea::query()->whereNotIn('status', [InvestmentIdea::STATUS_FAIL])
-            ->orderBy('possible_profit')->limit(5)->get();
+            ->orderBy('possible_profit', 'DESC')->limit(5)->get();
 
 
         /** @var InvestmentIdea $idea_model */

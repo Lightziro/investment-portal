@@ -64,10 +64,27 @@ function* registerUser(action: AnyAction): Generator {
         });
     }
 }
+function* authUser(action: AnyAction): Generator {
+    try {
+        const userData = yield axios
+            .post("/api/user/login", action.userData)
+            .then((response) => response.data);
+        yield put({
+            type: "SET_USER_DATA",
+            userData,
+        });
+    } catch (error) {
+        yield put({
+            type: "SET_ALERT_ERROR",
+            message: error.response.data.error,
+        });
+    }
+}
 export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("USER_LOGIN", authorizationUser);
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("VIEW_NOTICE", viewNotice);
     yield takeLatest("FETCH_INVESTMENT_IDEA", fetchInvestmentIdea);
     yield takeLatest("REGISTER_USER", registerUser);
+    yield takeLatest("AUTH_USER", authUser);
 }

@@ -1,3 +1,3 @@
 export const fetchInvestmentData = () => ({
-    type: "FETCH_INVESTMENT_DATA",
+    type: "FETCH_ADMIN_INVESTMENT_DATA",
 });

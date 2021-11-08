@@ -10,7 +10,8 @@ const adminReducer = (
     action: AnyAction
 ): AdminStore => {
     switch (action.type) {
-        case "SET_INVESTMENT_DATA":
+        case "SET_ADMIN_INVESTMENT_DATA":
+            console.log({ ...state, investmentIdeas: action.data });
             return { ...state, investmentIdeas: action.data };
         default:
             return state;

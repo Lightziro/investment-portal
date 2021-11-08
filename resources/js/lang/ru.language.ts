@@ -30,6 +30,10 @@ export const ruLanguage = {
     "Is required field": "Заполните обязательное поле",
     "You successfully registered": "Вы успешно зарегистрировались",
     "All Notification": "Все уведомления",
+    "Failed ideas": "Неудачных идей",
+    "Investment ideas": "Инвестиционные идеи",
+    "Views today": "Просмотров сегодня",
+    Users: "Пользователи",
     News: "Новости",
     "Welcome, user": "Добро пожаловать, %fullName%",
     "User with such an email address exists":

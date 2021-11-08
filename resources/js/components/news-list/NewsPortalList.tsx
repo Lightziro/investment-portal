@@ -21,7 +21,7 @@ export const NewsPortalList: React.FC = () => {
             >
                 {news
                     ? news.map((item) => (
-                          <a href={item.url}>
+                          <a href={item.url} target="_blank">
                               <Typography
                                   className="news-title"
                                   variant="body2"

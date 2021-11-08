@@ -9,11 +9,12 @@ import { Formik } from "formik";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
-import { setUserData } from "../../../redux/actions/mainActions";
+import { authUser, setUserData } from "../../../redux/actions/mainActions";
 import { useTranslation } from "react-i18next";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SignInSchema } from "./authValidation";
+import { FormAuth } from "../../../ts/types/forms/form.types";
 
 function Copyright(props: any) {
     return (
@@ -35,13 +36,14 @@ function Copyright(props: any) {
 
 export const Auth: React.FC = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const user = useSelector((store: StoreData) => store.main.user);
+    if (user) {
+        navigate("/");
+    }
     const dispatch = useDispatch();
-    const handleSubmit = (formData) => {
-        axios
-            .post("/api/user/login", formData)
-            .then((res) => dispatch(setUserData(res.data)))
-            .catch((errorList) => {});
+    const handleSubmit = (formData: FormAuth) => {
+        dispatch(authUser(formData));
     };
 
     return (
@@ -50,7 +52,7 @@ export const Auth: React.FC = () => {
                 Sign in
             </Typography>
             <Formik
-                initialValues={{ userName: "", password: "" }}
+                initialValues={{ email: "", password: "", remember: false }}
                 onSubmit={handleSubmit}
                 validationSchema={SignInSchema}
             >
@@ -65,16 +67,17 @@ export const Auth: React.FC = () => {
                 }) => (
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            error={touched.userName && !!errors.userName}
+                            error={touched.email && !!errors.email}
                             margin="normal"
                             required
                             fullWidth
-                            label={t("Username")}
-                            name="userName"
-                            value={values.userName}
+                            label={t("Email")}
+                            name="email"
+                            value={values.email}
                             onChange={handleChange}
                             autoFocus
-                            helperText={touched.userName && errors.userName}
+                            autoComplete="off"
+                            helperText={touched.email && errors.email}
                         />
                         <TextField
                             margin="normal"
@@ -91,7 +94,12 @@ export const Auth: React.FC = () => {
                         />
                         <FormControlLabel
                             control={
-                                <Checkbox value="remember" color="primary" />
+                                <Checkbox
+                                    value="remember"
+                                    name="remember"
+                                    onChange={handleChange}
+                                    color="primary"
+                                />
                             }
                             label={t("Remember me")}
                         />
@@ -99,7 +107,7 @@ export const Auth: React.FC = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ my: 2 }}
                         >
                             {t("Log in")}
                         </Button>

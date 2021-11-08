@@ -19,29 +19,28 @@ class AuthController extends BaseController
 {
     public function login(Request $request): JsonResponse
     {
+        $remember = $request->get('remember');
         $messages = [
             'min' => ':attribute поле должно содержать минимум :min символов',
             'max' => ':attribute поле должно содержать минимум :max символов',
         ];
 
         $validator = Validator::make($request->all(), [
-            'userName' => 'required|min:4|max:20',
+            'email' => 'required|email',
             'password' => 'required|min:8|max:40',
         ], $messages);
         if ($validator->fails()) {
             return response()->json($validator->errors()->all(), 400);
         }
-        $user = User::query()->where('userName', $request->get('userName'))->first();
-        if ($user->count() !== 1) {
-            return response()->json(['Не удалось найти пользователя']);
+        $user = User::query()->where('email', $request->get('email'))->first();
+        if (!$user) {
+            return response()->json(['error' => 'The user does not exist'], 400);
         }
         if (!Hash::check($request->get('password'), $user->password)) {
-            return response()->json(['Пароль указан не верно'], 400);
-        }
-        if (!$user->authentication($request->all())) {
+            return response()->json(['error' => 'Password is incorrect'], 400);
         }
         $token = $user->remember_token;
-        $cookie = \cookie('token', $token, 1234);
+        $cookie = \cookie('token', $token, $remember ? 24 * 60 : 60);
         return response()->json($user->getFrontendData())->cookie($cookie);
     }
 

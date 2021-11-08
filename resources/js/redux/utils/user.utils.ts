@@ -10,7 +10,6 @@ export const setNoticeView = (
             ...state.user,
             notices: state.user.notices.map((notice) => {
                 if (notice.id === updateId && !notice.viewed) {
-                    console.log("Изменил");
                     notice.viewed = true;
                 }
                 return notice;

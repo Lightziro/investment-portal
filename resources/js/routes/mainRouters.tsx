@@ -1,23 +1,26 @@
 import React from "react";
-import { Navigate, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { Portal } from "../modules/portal/Portal";
-import { Admin } from "../modules/admin/Admin";
 import { CreateInvestmentIdea } from "../modules/admin/create-investment-idea/CreateInvestmentIdea";
 import { InvestmentIdeaPage } from "../modules/portal/investment-idea-page/InvestmentIdeaPage";
 import { PortalLayout } from "../layouts/PortalLayout";
 import { Auth } from "../modules/login-user/auth/Auth";
 import { UserLoginLayout } from "../layouts/UserLoginLayout";
 import { Register } from "../modules/login-user/register/Register";
+import { AdminPanelLayout } from "../layouts/AdminPanelLayout";
+import { UsersSection } from "../modules/admin/users-section/UsersSection";
 
 // ----------------------------------------------------------------------
 
 export const MainRouter: React.FC = () => {
     return useRoutes([
         {
-            path: "/admin",
-            element: <Admin />,
+            path: "/admin-panel",
+            element: <AdminPanelLayout />,
             children: [
+                // { path: "/", element: <div>Base</div> },
                 { path: "investment-ideas", element: <CreateInvestmentIdea /> },
+                { path: "users", element: <UsersSection /> },
             ],
         },
         {

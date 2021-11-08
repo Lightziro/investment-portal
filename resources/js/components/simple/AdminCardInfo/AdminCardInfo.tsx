@@ -1,7 +1,8 @@
 import React from "react";
 import { Icon } from "@iconify/react";
-import { Skeleton, Typography } from "@mui/material";
+import { Card, Skeleton, Typography } from "@mui/material";
 import { IconCardWrapper } from "./IconCardWrapper";
+import { useTranslation } from "react-i18next";
 interface AdminCardInfo {
     iconName: string;
     countStats: number;
@@ -16,11 +17,12 @@ export const AdminCardInfo: React.FC<AdminCardInfo> = ({
     backgroundColor,
     color,
 }) => {
+    const { t } = useTranslation();
     if (!countStats) {
         return (
             <Skeleton
                 variant="rectangular"
-                style={{ borderRadius: 16 }}
+                // style={{ borderRadius: 16 }}
                 width={226}
                 height={245}
             />
@@ -42,7 +44,7 @@ export const AdminCardInfo: React.FC<AdminCardInfo> = ({
                 variant="subtitle2"
                 sx={{ opacity: 0.72 }}
             >
-                {title}
+                {t(title)}
             </Typography>
         </div>
     );

@@ -28,7 +28,6 @@ export const Register: React.FC = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const handleSubmit = (formData) => {
-        console.log(formData);
         dispatch(registerUser(formData));
     };
     return (

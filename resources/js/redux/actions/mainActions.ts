@@ -1,5 +1,8 @@
-import { FormRegister } from "../../ts/types/forms/form.types";
-
+import { FormAuth, FormRegister } from "../../ts/types/forms/form.types";
+export const authUser = (userData: FormAuth): any => ({
+    type: "AUTH_USER",
+    userData,
+});
 export const setUserData = (userData): any => ({
     type: "SET_USER_DATA",
     userData,

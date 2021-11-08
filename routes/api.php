@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
+use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Investment\Controllers\InvestmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,9 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::group(['prefix' => 'news'], function () {
     Route::get('/all', [NewsController::class, 'getAllNews']);
+});
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/investment-data', [InvestmentDataController::class, 'getInvestmentData']);
 });
 Route::group(['prefix' => 'investment-data'], function () {
     Route::get('/get', [InvestmentController::class, 'getData']);

@@ -5,3 +5,8 @@ export interface FormRegister {
     password: string;
     consent: boolean;
 }
+export interface FormAuth {
+    email: string;
+    password: string;
+    remember: boolean;
+}

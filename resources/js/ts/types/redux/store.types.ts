@@ -50,8 +50,7 @@ export interface InvestmentIdea {
 
 export interface AdminStore {
     investmentIdeas: {
-        viewToday: null | number;
-        likedToday: null | number;
+        viewToday: number;
     };
 }
 

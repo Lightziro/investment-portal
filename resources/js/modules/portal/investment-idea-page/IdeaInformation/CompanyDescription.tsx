@@ -13,7 +13,6 @@ export const CompanyDescription: React.FC<CompanyDescription> = ({
     if (!company) {
         return null;
     }
-    // const date = new Date(company.dateIPO);
     return (
         <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
             <Typography variant="body2" gutterBottom>

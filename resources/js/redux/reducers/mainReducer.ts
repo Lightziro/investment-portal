@@ -18,7 +18,7 @@ const mainReducer = (
                 alert: setAlert("You successfully registered"),
             };
         case "SET_PORTAL_DATA":
-            console.log(action.data);
+            console.log("PORTAL", action.data);
             return {
                 ...state,
                 news: action.data.news,
