@@ -51,6 +51,13 @@ export interface InvestmentIdea {
 export interface AdminStore {
     investmentIdeas: {
         viewToday: number;
+        commentsToday: number;
+    };
+    createIdea: {
+        companies: string[];
+        loadInput: boolean;
+        selectedCompany: null;
+        stage: number;
     };
 }
 

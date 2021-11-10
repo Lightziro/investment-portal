@@ -22,7 +22,13 @@ export const initMainStore: MainStore = {
 export const initialAdminStore: AdminStore = {
     investmentIdeas: {
         viewToday: null,
-        likedToday: null,
+        commentsToday: null,
+    },
+    createIdea: {
+        companies: [],
+        loadInput: false,
+        selectedCompany: null,
+        stage: 1,
     },
 };
 

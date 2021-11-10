@@ -12,6 +12,7 @@ use Finnhub\Model\CompanyProfile2;
 use Finnhub\Model\FinancialsAsReported;
 use Finnhub\Model\IPOCalendar;
 use Finnhub\Model\Quote;
+use Finnhub\Model\SymbolLookup;
 use GuzzleHttp\Client;
 
 class StockMarket
@@ -99,6 +100,14 @@ class StockMarket
             return $this->client->quote($ticker);
         } catch (ApiException $e) {
             return null;
+        }
+    }
+    public function getStockByName(string $name): array|SymbolLookup
+    {
+        try {
+            return $this->client->symbolSearch($name);
+        }catch (ApiException $e) {
+            return [];
         }
     }
 

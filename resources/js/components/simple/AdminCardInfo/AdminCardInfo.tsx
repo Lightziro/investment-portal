@@ -18,7 +18,7 @@ export const AdminCardInfo: React.FC<AdminCardInfo> = ({
     color,
 }) => {
     const { t } = useTranslation();
-    if (!countStats) {
+    if (countStats === null) {
         return (
             <Skeleton
                 variant="rectangular"

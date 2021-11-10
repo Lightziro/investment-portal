@@ -5,7 +5,6 @@ import { ApiService } from "../../utils/api";
 import axios from "axios";
 function* fetchInvestmentData(action: AnyAction): Generator {
     try {
-        console.log("try");
         const data = yield axios
             .get("/api/admin/investment-data")
             .then((response) => response.data);
@@ -15,6 +14,18 @@ function* fetchInvestmentData(action: AnyAction): Generator {
         });
     } catch (error) {}
 }
+function* fetchCompanies(action: AnyAction): Generator {
+    try {
+        const companies = yield axios
+            .post("/api/admin/companies", { name: action.name })
+            .then((response) => response.data);
+        yield put({
+            type: "SET_LIST_COMPANIES",
+            companies,
+        });
+    } catch (e) {}
+}
 export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_ADMIN_INVESTMENT_DATA", fetchInvestmentData);
+    yield takeLatest("FETCH_COMPANIES", fetchCompanies);
 }

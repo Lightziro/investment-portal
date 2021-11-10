@@ -37,6 +37,7 @@ Route::group(['prefix' => 'news'], function () {
 });
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/investment-data', [InvestmentDataController::class, 'getInvestmentData']);
+    Route::post('/companies', [InvestmentDataController::class, 'getCompanies']);
 });
 Route::group(['prefix' => 'investment-data'], function () {
     Route::get('/get', [InvestmentController::class, 'getData']);

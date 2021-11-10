@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Page } from "../../../components/simple/Page";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { AdminCardInfo } from "../../../components/simple/AdminCardInfo/AdminCardInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { fetchInvestmentData } from "../../../redux/actions/adminActions";
-import { Link as RouterLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import plusFill from "@iconify/icons-eva/plus-fill";
+import { useNavigate } from "react-router-dom";
+import { CreateIdeaDialog } from "../create-idea-section/CreateIdeaDialog";
 
 export const CreateInvestmentIdea: React.FC = () => {
     const [dialog, setDialog] = useState(false);
@@ -18,9 +18,7 @@ export const CreateInvestmentIdea: React.FC = () => {
     useEffect(() => {
         dispatch(fetchInvestmentData());
     }, []);
-    const handleDialog = () => {
-        setDialog(!dialog);
-    };
+
     return (
         <Page title="Admin | Investment Ideas">
             <Container maxWidth="xl">
@@ -37,34 +35,35 @@ export const CreateInvestmentIdea: React.FC = () => {
                         variant="contained"
                         color="success"
                         startIcon={<Icon icon="ant-design:plus-outlined" />}
-                        onClick={handleDialog}
+                        onClick={() => setDialog(true)}
                     >
                         Create idea
                     </Button>
                 </Stack>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6} md={3}>
+                    <Grid item xs={12} sm={6} md={2}>
                         <AdminCardInfo
-                            iconName="ant-design:eye-filled"
+                            iconName="ant-design:eye-outlined"
                             countStats={investmentData.viewToday}
                             title="Views today"
-                            backgroundColor="rgb(208, 242, 255)"
-                            color="rgb(0, 82, 73)"
+                            backgroundColor="rgb(153 186 253)"
+                            color="rgb(77 71 171)"
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
+                    <Grid item xs={12} sm={6} md={2}>
                         <AdminCardInfo
-                            iconName="ant-design:like-filled"
-                            countStats={investmentData.likedToday}
-                            title="Liked today"
-                            backgroundColor="rgb(208, 242, 255)"
-                            color="rgb(0, 82, 73)"
+                            iconName="ant-design:comment-outlined"
+                            countStats={investmentData.commentsToday}
+                            title="Comments today"
+                            backgroundColor="rgb(153 186 253)"
+                            color="rgb(77 71 171)"
                         />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}></Grid>
                     <Grid item xs={12} sm={6} md={3}></Grid>
                 </Grid>
             </Container>
+            <CreateIdeaDialog open={dialog} setOpen={() => setDialog(false)} />
         </Page>
     );
 };

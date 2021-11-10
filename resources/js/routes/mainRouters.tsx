@@ -9,6 +9,7 @@ import { UserLoginLayout } from "../layouts/UserLoginLayout";
 import { Register } from "../modules/login-user/register/Register";
 import { AdminPanelLayout } from "../layouts/AdminPanelLayout";
 import { UsersSection } from "../modules/admin/users-section/UsersSection";
+import { CreateIdeaDialog } from "../modules/admin/create-idea-section/CreateIdeaDialog";
 
 // ----------------------------------------------------------------------
 
@@ -19,8 +20,15 @@ export const MainRouter: React.FC = () => {
             element: <AdminPanelLayout />,
             children: [
                 // { path: "/", element: <div>Base</div> },
-                { path: "investment-ideas", element: <CreateInvestmentIdea /> },
+                {
+                    path: "investment-ideas",
+                    element: <CreateInvestmentIdea />,
+                },
                 { path: "users", element: <UsersSection /> },
+                {
+                    path: "investment-ideas/create-idea",
+                    element: <CreateIdeaDialog />,
+                },
             ],
         },
         {

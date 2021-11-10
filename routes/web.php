@@ -30,6 +30,7 @@ Route::get('/register', [Controller::class, 'index']);
 Route::group(['prefix' => 'admin-panel', 'middleware' => ['checkRoot']], function () {
     Route::get('/', [Controller::class, 'index']);
     Route::get('/investment-ideas', [Controller::class, 'index']);
+    Route::get('/investment-ideas/create-idea', [Controller::class, 'index']);
 });
 
 
