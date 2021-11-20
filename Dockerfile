@@ -1,10 +1,10 @@
 FROM php:8.1-rc-fpm
 
-# Arguments defined in docker-compose.yml
+## Arguments defined in docker-compose.yml
 ARG user=sammy
 ARG uid=1000
-
-# Install system dependencies
+RUN apt-get clean
+## Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -12,17 +12,19 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    libfann-dev\
+    nodejs \
+    npm
 
-RUN apt-get install -y nodejs npm
-
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+## Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli pdo
 
 # Get latest Composer

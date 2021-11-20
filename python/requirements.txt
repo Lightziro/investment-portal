@@ -1,0 +1,11 @@
+flask
+datetime
+numpy
+pandas
+yfinance
+tensorflow
+matplotlib
+keras
+sklearn
+yahoofinancials
+redis
