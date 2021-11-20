@@ -61,14 +61,14 @@ services:
         container_name: python
         working_dir: /var/www/
         volumes:
-            -   ./python:/var/www
+            - .:/var/www/
+        environment:
+            FLASK_ENV: development
         build:
             context: .
             dockerfile: Dockerfile-python
         ports:
             - "5000:5000"
-    redis:
-        image: "redis:alpine"
 
 networks:
     travellist:
