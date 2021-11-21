@@ -1,0 +1,46 @@
+[
+    {
+        "title": "A strong drop in stocks",
+        "score": "negative"
+    },
+    {
+        "title": "Tesla has released an excellent report with profit growth",
+        "score": "positive"
+    },
+    {
+        "title": "Stock market is growing",
+        "score": "positive"
+    },
+    {
+        "title": "Sanctions have a strong impact on inflation",
+        "score": "negative"
+    },
+    {
+        "title": "Stock market exposes to global crisis",
+        "score": "negative"
+    },
+    {
+        "title": "Due to the crisis, a decline in the number of jobs is possible",
+        "score": "negative"
+    },
+    {
+        "title": "Tesla shares fall in morning trading",
+        "score": "negative"
+    },
+    {
+        "title": "Tesla shares rise at market",
+        "score": "positive"
+    },
+    {
+        "title": "Due to the increase in the number of COVID cases, the SP500 index is falling",
+        "score": "negative"
+    },
+    {
+        "title": "Is it worth going to the polls?",
+        "score": "neutral"
+    },
+    {
+        "title": "Basketball coach bought a house",
+        "score": "neutral"
+    }
+]
