@@ -35,6 +35,14 @@ const adminReducer = (
                     stage: 2,
                 },
             };
+        case "SET_SMART_ANALYTIC_DATA":
+            return {
+                ...state,
+                smartAnalytic: {
+                    ...state.smartAnalytic,
+                    score: action.data.score,
+                },
+            };
         default:
             return state;
     }

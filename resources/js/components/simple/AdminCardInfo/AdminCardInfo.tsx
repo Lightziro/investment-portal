@@ -9,6 +9,7 @@ interface AdminCardInfo {
     title: string;
     backgroundColor: string;
     color: string;
+    afterCountText?: string;
 }
 export const AdminCardInfo: React.FC<AdminCardInfo> = ({
     iconName,
@@ -16,17 +17,11 @@ export const AdminCardInfo: React.FC<AdminCardInfo> = ({
     title,
     backgroundColor,
     color,
+    afterCountText = "",
 }) => {
     const { t } = useTranslation();
     if (countStats === null) {
-        return (
-            <Skeleton
-                variant="rectangular"
-                // style={{ borderRadius: 16 }}
-                width={226}
-                height={245}
-            />
-        );
+        return <Skeleton variant="rectangular" width={226} height={245} />;
     }
     return (
         <div
@@ -37,7 +32,7 @@ export const AdminCardInfo: React.FC<AdminCardInfo> = ({
                 <Icon width={26} height={26} icon={iconName} />
             </IconCardWrapper>
             <Typography color={color} variant="h3">
-                {countStats}
+                {`${countStats} ${afterCountText}`}
             </Typography>
             <Typography
                 color={color}

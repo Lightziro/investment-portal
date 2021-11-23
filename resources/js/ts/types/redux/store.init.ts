@@ -30,6 +30,11 @@ export const initialAdminStore: AdminStore = {
         selectedCompany: null,
         stage: 1,
     },
+    smartAnalytic: {
+        score: {
+            classificationNews: null,
+        },
+    },
 };
 
 export const initStore: StoreData = {

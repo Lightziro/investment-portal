@@ -59,6 +59,11 @@ export interface AdminStore {
         selectedCompany: null;
         stage: number;
     };
+    smartAnalytic: {
+        score: {
+            classificationNews: number;
+        };
+    };
 }
 
 export interface User {
