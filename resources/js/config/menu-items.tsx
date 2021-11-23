@@ -58,4 +58,11 @@ export const MENU_ADMIN = [
         text: "Users",
         url: "/admin-panel/users",
     },
+    {
+        logo: {
+            name: "bi:clipboard-data",
+        },
+        text: "Smart Analytics",
+        url: "/admin-panel/smart-analytic",
+    },
 ];

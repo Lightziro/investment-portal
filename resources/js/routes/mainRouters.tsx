@@ -10,6 +10,7 @@ import { Register } from "../modules/login-user/register/Register";
 import { AdminPanelLayout } from "../layouts/AdminPanelLayout";
 import { UsersSection } from "../modules/admin/users-section/UsersSection";
 import { CreateIdeaDialog } from "../modules/admin/create-idea-section/CreateIdeaDialog";
+import { SmartAnalytic } from "../modules/admin/smart-analytic/SmartAnalytic";
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,7 @@ export const MainRouter: React.FC = () => {
                     element: <CreateInvestmentIdea />,
                 },
                 { path: "users", element: <UsersSection /> },
+                { path: "smart-analytic", element: <SmartAnalytic /> },
                 {
                     path: "investment-ideas/create-idea",
                     element: <CreateIdeaDialog />,

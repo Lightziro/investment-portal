@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
+use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
 use App\Http\Modules\Investment\Controllers\InvestmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,9 @@ Route::group(['prefix' => 'news'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/investment-data', [InvestmentDataController::class, 'getInvestmentData']);
     Route::post('/companies', [InvestmentDataController::class, 'getCompanies']);
+    Route::group(['prefix' => 'smart-analytic'], function () {
+        Route::get('/data', [SmartAnalyticController::class, 'getAnalyticData']);
+    });
 });
 Route::group(['prefix' => 'investment-data'], function () {
     Route::get('/get', [InvestmentController::class, 'getData']);

@@ -25,7 +25,16 @@ function* fetchCompanies(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* fetchAnalyticData(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get("/api/admin/smart-analytic/data")
+            .then((response) => response.data);
+        yield put({ type: "SET_SMART_ANALYTIC_DATA", data });
+    } catch (e) {}
+}
 export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_ADMIN_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("FETCH_COMPANIES", fetchCompanies);
+    yield takeLatest("FETCH_ANALYTIC_DATA", fetchAnalyticData);
 }
