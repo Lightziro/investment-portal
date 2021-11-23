@@ -11,6 +11,10 @@ from flask import request
 
 app = Flask(__name__)
 
+@app.route('/classification/train', methods=['POST'])
+def trainClassificationNews():
+#     return jsonify(score='Test')
+    return jsonify(score=str(request.data))
 
 @app.route('/classification/test-score')
 def classificationModelTest():

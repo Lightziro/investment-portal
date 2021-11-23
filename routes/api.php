@@ -41,6 +41,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/companies', [InvestmentDataController::class, 'getCompanies']);
     Route::group(['prefix' => 'smart-analytic'], function () {
         Route::get('/data', [SmartAnalyticController::class, 'getAnalyticData']);
+        Route::get('/last-news', [SmartAnalyticController::class, 'getNewsForAnalyze']);
+        Route::post('/train-news-classifier', [SmartAnalyticController::class, 'trainNewsClassifier']);
     });
 });
 Route::group(['prefix' => 'investment-data'], function () {

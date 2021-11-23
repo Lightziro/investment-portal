@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from "react";
 import { Button, Grid } from "@mui/material";
 import { TrainNewsClassifier } from "../train-news-classifier/TrainNewsClassifier";
+import { useSelector } from "react-redux";
+import { StoreData } from "../../../../ts/types/redux/store.types";
 
 export const ActionSmartAnalytic = () => {
     const [dialogTrainNews, setDialogTrainNews] = useState(false);
@@ -19,7 +21,12 @@ export const ActionSmartAnalytic = () => {
                     <Button variant="contained">Analyze classifier</Button>
                 </Grid>
             </Grid>
-            <TrainNewsClassifier open={dialogTrainNews} />
+            {dialogTrainNews && (
+                <TrainNewsClassifier
+                    open={dialogTrainNews}
+                    onClose={() => setDialogTrainNews(false)}
+                />
+            )}
         </Fragment>
     );
 };

@@ -63,7 +63,13 @@ export interface AdminStore {
         score: {
             classificationNews: number;
         };
+        newsForAnalyze: NewsPrediction[];
     };
+}
+export interface NewsPrediction {
+    id: number;
+    title: string;
+    prediction: string;
 }
 
 export interface User {

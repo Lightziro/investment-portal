@@ -33,6 +33,7 @@ function* fetchAnalyticData(action: AnyAction): Generator {
         yield put({ type: "SET_SMART_ANALYTIC_DATA", data });
     } catch (e) {}
 }
+
 export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_ADMIN_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("FETCH_COMPANIES", fetchCompanies);

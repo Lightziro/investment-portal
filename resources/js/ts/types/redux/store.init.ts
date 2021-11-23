@@ -34,6 +34,7 @@ export const initialAdminStore: AdminStore = {
         score: {
             classificationNews: null,
         },
+        newsForAnalyze: null,
     },
 };
 
