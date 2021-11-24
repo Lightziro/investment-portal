@@ -2,7 +2,6 @@ import { AnyAction } from "redux";
 import { MainStore } from "../../ts/types/redux/store.types";
 import { initMainStore } from "../../ts/types/redux/store.init";
 import { setNoticeView } from "../utils/user.utils";
-import { setAlert } from "../utils/alert.utils";
 
 const mainReducer = (
     state: MainStore = initMainStore,
@@ -15,7 +14,6 @@ const mainReducer = (
             return {
                 ...state,
                 user: action.userData,
-                alert: setAlert("You successfully registered"),
             };
         case "SET_PORTAL_DATA":
             console.log("PORTAL", action.data);
@@ -40,10 +38,6 @@ const mainReducer = (
                     epsStats: null,
                 },
             };
-        case "CLEAR_ALERT":
-            return { ...state, alert: null };
-        case "SET_ALERT_ERROR":
-            return { ...state, alert: setAlert(action.message, "error") };
         default:
             return state;
     }

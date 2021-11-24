@@ -9,41 +9,63 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 
+from python.models.classification_news import classifier
+
 app = Flask(__name__)
+
 
 @app.route('/classification/train', methods=['POST'])
 def trainClassificationNews():
-    data = json.loads(request.data)
-#     with open('python/models/classification-news/model.pkl', 'rb') as f:
-#         model, cv = pickle.load(f)
+    news_classifier = classifier.ClassificationNews()
 
-    return jsonify(score=str(123321))
+    news_classifier.collectTestData()
+    before_train_score = news_classifier.getScoreByTestData()
 
-#     data_train = []
-#     data_train_target = []
-#     for i in range(0, len(data))
-#         data_train.append(data[i]['title'].lower())
-#         data_train_target.append(data[i]['score'])
-#
-#     features = cv.transform(data_train)
-#     model.fit(features, data_train_target)
+    retrain_request = request.get_json()
+    retrain_data, retrain_data_target = news_classifier.normalizeData(retrain_request)
+    news_classifier.mergeDataTrain(retrain_data, retrain_data_target)
 
-#     with open("python/dataset/news/dataset_test.json") as json_test:
-#         test_data = json.load(json_test)
-#
-#     dataset_test = []
-#     dataset_test_target = []
-#     for i in range(0, len(test_data)):
-#         dataset_test.append(test_data[i]['title'].lower())
-#         dataset_test_target.append(test_data[i]['score'])
-#
-#     score_test = model.score(cv.transform(dataset_test), dataset_test_target)
+    news_classifier.retrainModel()
+    after_score = news_classifier.getScoreByTestData()
 
-#     return jsonify(score=str(score_test))
+    result_retrain = news_classifier.analyzeRetrain(before_train_score, after_score)
+    return jsonify(result=str(result_retrain), before=before_train_score, after=after_score)
+
+    # return jsonify(score=len(before_train_score))
+
+    # data =
+    #
+    # with open("python/dataset/news/dataset.json") as json_file:
+    #     data_train_file = json.load(json_file)
+    #
+    # data_train = []
+    # data_train_target = []
+    # for i in range(0, len(data_train_file)):
+    #     data_train.append(data_train_file[i]['title'].lower())
+    #     data_train_target.append(data_train_file[i]['score'])
+    #
+    # for i in range(0, len(data)):
+    #     data_train.append(data[i]['title'].lower())
+    #     data_train_target.append(data[i]['score'])
+    #
+    # features = cv.transform(data_train)
+    # model.fit(features, data_train_target)
+    #
+    # with open("python/dataset/news/dataset_test.json") as json_test:
+    #     test_data = json.load(json_test)
+    #
+    # dataset_test = []
+    # dataset_test_target = []
+    # for i in range(0, len(test_data)):
+    #     dataset_test.append(test_data[i]['title'].lower())
+    #     dataset_test_target.append(test_data[i]['score'])
+    #
+    # score_test = model.score(cv.transform(dataset_test), dataset_test_target)
+
 
 @app.route('/classification/test-score')
 def classificationModelTest():
-    with open('python/models/classification-news/model.pkl', 'rb') as f:
+    with open('python/models/classification_news/model.pkl', 'rb') as f:
         model, cv = pickle.load(f)
 
     with open("python/dataset/news/dataset_test.json") as json_test:
@@ -59,10 +81,8 @@ def classificationModelTest():
     return jsonify(score=str(score_test))
 
 
-
 @app.route('/news/predict')
 def predictNews():
-#     predict_news = request.args.get('news')
     with open("python/dataset/news/dataset_test.json") as json_test:
         test_data = json.load(json_test)
 
@@ -84,13 +104,13 @@ def predictNews():
                         'C': [1, 10, 100, 1000]}
     model = svm.SVC(kernel='linear', gamma=0.001, C=1)
 
-#     with open('python/models/classification-news/model.pkl', 'rb') as f:
-#         model = pickle.load(f)
+    #     with open('python/models/classification_news/model.pkl', 'rb') as f:
+    #         model = pickle.load(f)
     # model = GridSearchCV(svm.SVC(), tuned_parameters)
 
     model.fit(features, dataset_target)
 
-    with open('python/models/classification-news/model.pkl', 'wb') as f:
+    with open('python/models/classification_news/model.pkl', 'wb') as f:
         pickle.dump((model, cv), f)
     dataset_test = []
     dataset_test_target = []
@@ -99,5 +119,5 @@ def predictNews():
         dataset_test_target.append(test_data[i]['score'])
 
     result = model.score(cv.transform(dataset_test), dataset_test_target)
-#     predict = model.predict(cv.transform(predict_news)).tolist()
+    #     predict = model.predict(cv.transform(predict_news)).tolist()
     return jsonify(score=str(result))

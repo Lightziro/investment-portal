@@ -23,9 +23,7 @@ export const registerUser = (form: FormRegister) => ({
     type: "REGISTER_USER",
     form,
 });
-export const clearAlert = () => ({
-    type: "CLEAR_ALERT",
-});
+
 // export const clearViewIdea = () => ({
 //     type: 'CLEAR_VIEW_IDEA'
 // })

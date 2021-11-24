@@ -23,7 +23,7 @@ export const SmartAnalytic: React.FC = () => {
                         <AdminCardInfo
                             iconName="ant-design:eye-outlined"
                             countStats={classificationNews}
-                            title="Market news match coefficient "
+                            title="Mean accuracy predict news type"
                             backgroundColor="rgb(153 186 253)"
                             color="rgb(77 71 171)"
                         />

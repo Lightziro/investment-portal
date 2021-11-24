@@ -43,6 +43,10 @@ export const ruLanguage = {
         "Пользователь с таким email адресом существует",
     "Earn on the fall and on the growth stocks":
         "Зарабатывай на росте и падении акций",
+    "Mean accuracy predict news type":
+        "Средняя точность предсказания типа новости",
+    "Retrain classifier news": "Переобучить классификатор новостей",
+    "Smart Analytics": "Умный аналитик",
     "We offer best ideas": "Мы предлагаем лучшие идеи",
     "Must contain max %amount% symbol":
         "Поле должно содержать %amount% символов",

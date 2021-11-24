@@ -16,12 +16,16 @@ import {
     Typography,
     SelectChangeEvent,
     DialogActions,
+    CircularProgress,
 } from "@mui/material";
 import { NewsPrediction } from "../../../../ts/types/redux/store.types";
 import axios from "axios";
 import { AccordionDetails } from "@mui/material";
 import { Accordion } from "@mui/material";
 import { AccordionSummary } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { retrainNewsClassifier } from "../../../../redux/actions/adminActions";
+
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
         children: React.ReactElement<any, any>;
@@ -41,8 +45,9 @@ export const TrainNewsClassifier: React.FC<TrainNewsClassifier> = ({
     onClose,
 }) => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const [prediction, setPrediction] = useState<NewsPrediction[]>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const handleChangePredict = (event: SelectChangeEvent) => {
         setPrediction((prev) =>
             prev.map((item) => {
@@ -54,20 +59,14 @@ export const TrainNewsClassifier: React.FC<TrainNewsClassifier> = ({
         );
     };
     const handleLoadNews = () => {
+        setLoading(true);
         try {
             axios
                 .get("/api/admin/smart-analytic/last-news")
-                .then((response) => setPrediction(response.data));
-        } catch (e) {}
-    };
-    const sendPredict = () => {
-        try {
-            axios
-                .post(
-                    "/api/admin/smart-analytic/train-news-classifier",
-                    prediction
-                )
-                .then((response) => response.data);
+                .then((response) => {
+                    setPrediction(response.data);
+                    setLoading(false);
+                });
         } catch (e) {}
     };
     return (
@@ -81,16 +80,19 @@ export const TrainNewsClassifier: React.FC<TrainNewsClassifier> = ({
                 {t("Load last news and give prediction by type influences")}
             </DialogTitle>
             <DialogContent>
-                {!prediction && (
-                    <Stack justifyContent="center">
-                        <Button variant="contained" onClick={handleLoadNews}>
-                            Load last news
-                        </Button>
-                    </Stack>
-                )}
-                {prediction &&
+                {loading ? (
+                    <CircularProgress />
+                ) : !prediction ? (
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        onClick={handleLoadNews}
+                    >
+                        Load last news
+                    </Button>
+                ) : (
                     prediction.map((item) => (
-                        <Accordion>
+                        <Accordion key={item.id}>
                             <AccordionSummary
                                 // expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
@@ -114,7 +116,7 @@ export const TrainNewsClassifier: React.FC<TrainNewsClassifier> = ({
                                             "neutral",
                                             "negative",
                                         ].map((type) => (
-                                            <MenuItem value={type}>
+                                            <MenuItem key={type} value={type}>
                                                 {t(type)}
                                             </MenuItem>
                                         ))}
@@ -122,10 +124,17 @@ export const TrainNewsClassifier: React.FC<TrainNewsClassifier> = ({
                                 </FormControl>
                             </AccordionDetails>
                         </Accordion>
-                    ))}
+                    ))
+                )}
                 <DialogActions>
                     {/*<Button onClick={handleClose}>Cancel</Button>*/}
-                    <Button onClick={sendPredict}>Train classifier</Button>
+                    <Button
+                        onClick={() =>
+                            dispatch(retrainNewsClassifier(prediction))
+                        }
+                    >
+                        Train classifier
+                    </Button>
                 </DialogActions>
             </DialogContent>
         </Dialog>

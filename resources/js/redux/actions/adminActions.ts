@@ -1,3 +1,5 @@
+import { NewsPrediction } from "../../ts/types/redux/store.types";
+
 export const fetchInvestmentData = () => ({
     type: "FETCH_ADMIN_INVESTMENT_DATA",
 });
@@ -11,4 +13,8 @@ export const selectCompany = (id: number) => ({
 });
 export const fetchAnalyticData = () => ({
     type: "FETCH_ANALYTIC_DATA",
+});
+export const retrainNewsClassifier = (trainData: NewsPrediction[]) => ({
+    type: "RETRAIN_NEWS_CLASSIFIER",
+    trainData,
 });

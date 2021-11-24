@@ -1,4 +1,4 @@
-import { AdminStore, MainStore, StoreData } from "./store.types";
+import { AdminStore, AlertStore, MainStore, StoreData } from "./store.types";
 
 export const initMainStore: MainStore = {
     user: null,
@@ -17,7 +17,11 @@ export const initMainStore: MainStore = {
         authorInfo: null,
         description: null,
     },
-    alert: null,
+};
+export const initialAlertStore: AlertStore = {
+    message: "",
+    state: false,
+    status: "success",
 };
 export const initialAdminStore: AdminStore = {
     investmentIdeas: {
@@ -41,4 +45,5 @@ export const initialAdminStore: AdminStore = {
 export const initStore: StoreData = {
     main: initMainStore,
     admin: initialAdminStore,
+    alert: initialAlertStore,
 };

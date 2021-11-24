@@ -13,9 +13,8 @@ export interface MainStore {
     news: News[];
     investmentData: InvestmentData;
     ideaView: InvestmentIdeaView;
-    alert: Alert;
 }
-export interface Alert {
+export interface AlertStore {
     message: string;
     status: AlertColor;
     state: boolean;
@@ -89,4 +88,5 @@ export interface Notice {
 export interface StoreData {
     main: MainStore;
     admin: AdminStore;
+    alert: AlertStore;
 }

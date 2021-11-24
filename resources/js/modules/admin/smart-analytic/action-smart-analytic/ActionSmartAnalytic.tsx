@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from "react";
 import { Button, Grid } from "@mui/material";
 import { TrainNewsClassifier } from "../train-news-classifier/TrainNewsClassifier";
-import { useSelector } from "react-redux";
-import { StoreData } from "../../../../ts/types/redux/store.types";
+import { useTranslation } from "react-i18next";
 
 export const ActionSmartAnalytic = () => {
+    const { t } = useTranslation();
     const [dialogTrainNews, setDialogTrainNews] = useState(false);
     return (
         <Fragment>
@@ -14,7 +14,7 @@ export const ActionSmartAnalytic = () => {
                         onClick={() => setDialogTrainNews(true)}
                         variant="contained"
                     >
-                        Train news classifier
+                        {t("Retrain classifier news")}
                     </Button>
                 </Grid>
                 <Grid item xs={3} sm={6} md={2}>

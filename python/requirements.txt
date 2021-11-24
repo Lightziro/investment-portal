@@ -6,5 +6,6 @@ yfinance
 tensorflow
 matplotlib
 keras
+scipy
 sklearn
 yahoofinancials

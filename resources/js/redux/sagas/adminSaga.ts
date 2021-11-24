@@ -1,8 +1,8 @@
 import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
-import { ApiService } from "../../utils/api";
 import axios from "axios";
+import { ResponseRetrainClassifier } from "../../ts/types/response/response.types";
 function* fetchInvestmentData(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -33,9 +33,27 @@ function* fetchAnalyticData(action: AnyAction): Generator {
         yield put({ type: "SET_SMART_ANALYTIC_DATA", data });
     } catch (e) {}
 }
-
+function* retrainClassifierNews(action: AnyAction): Generator {
+    try {
+        const resultTrain: ResponseRetrainClassifier | any = yield axios
+            .post(
+                "/api/admin/smart-analytic/train-news-classifier",
+                action.trainData
+            )
+            .then((response) => response.data);
+        if (resultTrain.newScore) {
+            yield put({
+                type: "SET_ALERT_SUCCESS",
+                message: resultTrain.message,
+            });
+        } else {
+            yield put({ type: "SET_ALERT_INFO", message: resultTrain.message });
+        }
+    } catch (e) {}
+}
 export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_ADMIN_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("FETCH_COMPANIES", fetchCompanies);
     yield takeLatest("FETCH_ANALYTIC_DATA", fetchAnalyticData);
+    yield takeLatest("RETRAIN_NEWS_CLASSIFIER", retrainClassifierNews);
 }
