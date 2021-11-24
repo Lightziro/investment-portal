@@ -13,8 +13,33 @@ app = Flask(__name__)
 
 @app.route('/classification/train', methods=['POST'])
 def trainClassificationNews():
-#     return jsonify(score='Test')
-    return jsonify(score=str(request.data))
+    data = json.loads(request.data)
+#     with open('python/models/classification-news/model.pkl', 'rb') as f:
+#         model, cv = pickle.load(f)
+
+    return jsonify(score=str(123321))
+
+#     data_train = []
+#     data_train_target = []
+#     for i in range(0, len(data))
+#         data_train.append(data[i]['title'].lower())
+#         data_train_target.append(data[i]['score'])
+#
+#     features = cv.transform(data_train)
+#     model.fit(features, data_train_target)
+
+#     with open("python/dataset/news/dataset_test.json") as json_test:
+#         test_data = json.load(json_test)
+#
+#     dataset_test = []
+#     dataset_test_target = []
+#     for i in range(0, len(test_data)):
+#         dataset_test.append(test_data[i]['title'].lower())
+#         dataset_test_target.append(test_data[i]['score'])
+#
+#     score_test = model.score(cv.transform(dataset_test), dataset_test_target)
+
+#     return jsonify(score=str(score_test))
 
 @app.route('/classification/test-score')
 def classificationModelTest():
