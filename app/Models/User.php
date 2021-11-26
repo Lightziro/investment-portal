@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
 /**
+ * @property int user_id
  * @property string email
  * @property string password
  * @property string first_name
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
  * @property null|int role_id
  * @property InvestmentIdea|null investment_ideas
  * @property UserNotices[] notices
+ * @property string avatar_path
  */
 class User extends Authenticatable
 {
@@ -30,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'role_id',
+        'first_name', 'last_name', 'email', 'password', 'role_id', 'avatar_path'
     ];
     protected $primaryKey = 'user_id';
 
@@ -52,6 +54,7 @@ class User extends Authenticatable
             ];
         }
         return [
+            'userId' => $this->user_id,
             'fullName' => $this->getFullName(),
             'role' => $this->role->name,
             'notices' => $ar_notice,

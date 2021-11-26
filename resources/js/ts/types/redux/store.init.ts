@@ -16,6 +16,8 @@ export const initMainStore: MainStore = {
         companyInfo: null,
         authorInfo: null,
         description: null,
+        comments: null,
+        ideaId: null,
     },
 };
 export const initialAlertStore: AlertStore = {

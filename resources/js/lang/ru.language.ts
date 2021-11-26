@@ -47,6 +47,7 @@ export const ruLanguage = {
         "Средняя точность предсказания типа новости",
     "Retrain classifier news": "Переобучить классификатор новостей",
     "Smart Analytics": "Умный аналитик",
+    Comments: "Комментарии",
     "We offer best ideas": "Мы предлагаем лучшие идеи",
     "Must contain max %amount% symbol":
         "Поле должно содержать %amount% символов",

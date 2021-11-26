@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
 use App\Http\Modules\Investment\Controllers\InvestmentController;
+use App\Http\Modules\Investment\Controllers\InvestmentIdeaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,5 +50,9 @@ Route::group(['prefix' => 'investment-data'], function () {
     Route::get('/get', [InvestmentController::class, 'getData']);
     Route::get('/portal', [InvestmentController::class, 'getPortalData']);
     Route::get('/idea/{id}', [InvestmentController::class, 'getInvestmentIdeaData']);
+});
+
+Route::group(['prefix' => 'investment-idea'], function () {
+    Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('userAuth');
 });
 

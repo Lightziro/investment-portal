@@ -104,8 +104,10 @@ class InvestmentController extends BaseController
             }
         }
         $ar_data = [
+            'ideaId' => $idea_model->idea_id,
             'epsStats' => $ar_eps ?? [],
             'analyticsStats' => $ar_stats ?? [],
+            'comments' => $idea_model->getCommentsFrontend(),
             'companyInfo' => [
                 'companyName' => $idea_company_model->name,
                 'ticker' => $idea_company_model->ticker,
@@ -131,7 +133,7 @@ class InvestmentController extends BaseController
             ],
             'description' => $idea_model->description
         ];
-        Cache::put("$idea_model->idea_id-$idea_company_model->ticker", $ar_data, now()->addMinutes(3));
+//        Cache::put("$idea_model->idea_id-$idea_company_model->ticker", $ar_data, now()->addMinutes(3));
         return response()->json($ar_data);
     }
 }

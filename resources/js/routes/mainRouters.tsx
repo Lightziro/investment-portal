@@ -11,6 +11,7 @@ import { AdminPanelLayout } from "../layouts/AdminPanelLayout";
 import { UsersSection } from "../modules/admin/users-section/UsersSection";
 import { CreateIdeaDialog } from "../modules/admin/create-idea-section/CreateIdeaDialog";
 import { SmartAnalytic } from "../modules/admin/smart-analytic/SmartAnalytic";
+import { Profile } from "../modules/profile/Profile";
 
 // ----------------------------------------------------------------------
 
@@ -44,6 +45,10 @@ export const MainRouter: React.FC = () => {
                 {
                     path: "/",
                     element: <Portal />,
+                },
+                {
+                    path: "/profile",
+                    element: <Profile />,
                 },
                 // { path: "*", element: <Navigate to="/404" /> },
             ],

@@ -9,8 +9,9 @@ import { ChartStatsAnalytics } from "./charts-company-data/ChartStatsAnalytics";
 import { IdeaAuthor } from "./idea-author/IdeaAuthor";
 import { CompanyIdeaHeader } from "../../../components/simple/company-idea-header/CompanyIdeaHeader";
 import { CompanyDescription } from "./IdeaInformation/CompanyDescription";
-import {IdeaDescription} from "./idea-description/IdeaDescription";
-import {IdeaInformation} from "./company-description/IdeaInformation";
+import { IdeaDescription } from "./idea-description/IdeaDescription";
+import { IdeaInformation } from "./company-description/IdeaInformation";
+import { IdeaComments } from "./idea-comments/IdeaComments";
 
 export const InvestmentIdeaPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -55,7 +56,7 @@ export const InvestmentIdeaPage: React.FC = () => {
             <Grid container spacing={2}>
                 <Grid item xs={8} container spacing={3}>
                     <Grid item xs={7}>
-                        <IdeaDescription description={ideaData.description}/>
+                        <IdeaDescription description={ideaData.description} />
                     </Grid>
                     <Grid item xs={5}>
                         <IdeaInformation ideaInfo={ideaData.ideaInfo} />
@@ -63,6 +64,14 @@ export const InvestmentIdeaPage: React.FC = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <ChartStatsAnalytics stats={ideaData.analyticsStats} />
+                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+                <Grid item xs={9}>
+                    Test
+                </Grid>
+                <Grid item xs={3}>
+                    <IdeaComments />
                 </Grid>
             </Grid>
         </Fragment>

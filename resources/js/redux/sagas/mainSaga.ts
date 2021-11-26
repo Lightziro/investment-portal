@@ -80,6 +80,7 @@ function* authUser(action: AnyAction): Generator {
         });
     }
 }
+
 export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("USER_LOGIN", authorizationUser);
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);

@@ -21,12 +21,19 @@ export interface AlertStore {
 }
 
 export interface InvestmentIdeaView {
+    ideaId: number;
     epsStats: EpsCompanyStats[] | null;
     analyticsStats: AnalyticsStats[];
     companyInfo: CompanyIdeaInfo;
     authorInfo: AuthorInfo;
     ideaInfo: IdeaInfo;
     description: string;
+    comments: IdeaComment[];
+}
+export interface IdeaComment {
+    fullNameAuthor: string;
+    comment: string;
+    avatar: string;
 }
 
 export interface InvestmentData {
@@ -72,6 +79,7 @@ export interface NewsPrediction {
 }
 
 export interface User {
+    userId: number;
     fullName: string;
     role: string;
     notices: Notice[];

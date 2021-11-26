@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { MainStore } from "../../ts/types/redux/store.types";
 import { initMainStore } from "../../ts/types/redux/store.init";
 import { setNoticeView } from "../utils/user.utils";
+import { addComment } from "../utils/idea.utils";
 
 const mainReducer = (
     state: MainStore = initMainStore,
@@ -37,6 +38,11 @@ const mainReducer = (
                     authorInfo: null,
                     epsStats: null,
                 },
+            };
+        case "ADD_NEW_IDEA_COMMENT":
+            return {
+                ...state,
+                ideaView: addComment(state.ideaView, action.createComment),
             };
         default:
             return state;
