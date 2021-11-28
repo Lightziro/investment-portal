@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class InvestmentIdeaViewing extends Model
 {
     protected $table = 'investment_idea_viewing';
+    const UPDATED_AT = null;
 
     public function user(): HasOne
     {

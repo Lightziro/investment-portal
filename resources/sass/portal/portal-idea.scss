@@ -1,0 +1,31 @@
+.no-comments-idea{
+    max-width: 100px;
+}
+.comments-area{
+    max-height: 400px;
+    overflow-y: scroll;
+    margin: 8px 0;
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: #dfe6e9;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(144, 202, 249, 0.85);
+        border-radius: 10px;
+    }
+}
+.comment-idea-info{
+    transition: all 0.2s ease-in-out 0s;
+    .date-comment {
+        color: darkgrey;
+        margin-left: 8px;
+        font-size: 10px;
+    }
+    .author-comment{
+        font-size: 12px;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+

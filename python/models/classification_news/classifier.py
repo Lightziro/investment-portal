@@ -13,7 +13,6 @@ class ClassificationNews:
     __model = None
     __cv = None
 
-
     def __init__(self):
         with open('python/models/classification_news/model.pkl', 'rb') as f:
             self.model, self.cv = pickle.load(f)
@@ -50,14 +49,23 @@ class ClassificationNews:
 
     def mergeDataTrain(self, data, target):
         self.train_dataset = sp.vstack((self.train_dataset, data))
-        self.train_dataset_target = self.train_dataset_target+target
+        self.train_dataset_target = self.train_dataset_target + target
+
     """
     Если переобучение повлияло на результат, то перезапись модели и тестовых данных
     """
+
     def analyzeRetrain(self, before_score, after_score):
         if after_score > before_score:
             # with open('python/models/classification_news/model.pkl', 'wb') as f:
             #     pickle.dump((self.model, self.cv), f)
-                return True
+            return True
         return False
 
+    def saveTrainResult(self, data_save):
+        with open("python/dataset/news/dataset.json", "r") as file:
+            data = json.load(file)
+        data = [*data, *data_save]
+
+        with open("python/dataset/news/dataset.json", "w") as file:
+            json.dump(data, file)

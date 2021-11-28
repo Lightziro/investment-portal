@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\UserController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
+use App\Http\Modules\Core\Controllers\OtherControllers;
+use App\Http\Modules\Core\Controllers\UserController;
 use App\Http\Modules\Investment\Controllers\InvestmentController;
 use App\Http\Modules\Investment\Controllers\InvestmentIdeaController;
+use App\Http\Modules\Investment\Middleware\AfterViewIdeaMiddleware;
+use App\Http\Modules\Profile\Controllers\ProfileController;
+use App\Http\Modules\Profile\Middleware\BeforeGetAuthUserId;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +35,8 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/authentication', [AuthController::class, 'authentication']);
     Route::post('/notice/view', [UserController::class, 'viewNotice']);
     Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/profile/{id}', [UserController::class, 'getProfile']);
+    Route::post('/profile/update', [ProfileController::class, 'updateProfileData'])->middleware(BeforeGetAuthUserId::class);
 });
 
 Route::group(['prefix' => 'news'], function () {
@@ -49,10 +54,13 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'investment-data'], function () {
     Route::get('/get', [InvestmentController::class, 'getData']);
     Route::get('/portal', [InvestmentController::class, 'getPortalData']);
-    Route::get('/idea/{id}', [InvestmentController::class, 'getInvestmentIdeaData']);
+    Route::get('/idea/{id}', [InvestmentIdeaController::class, 'getInvestmentIdeaData'])->middleware(AfterViewIdeaMiddleware::class);
 });
 
 Route::group(['prefix' => 'investment-idea'], function () {
     Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('userAuth');
+});
+Route::group(['prefix' => 'other'], function () {
+    Route::get('/countries', [OtherControllers::class, 'getCountries']);
 });
 

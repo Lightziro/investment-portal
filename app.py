@@ -29,6 +29,7 @@ def trainClassificationNews():
     after_score = news_classifier.getScoreByTestData()
 
     result_retrain = news_classifier.analyzeRetrain(before_train_score, after_score)
+    news_classifier.saveTrainResult(retrain_request)
     return jsonify(result=str(result_retrain), before=before_train_score, after=after_score)
 
     # return jsonify(score=len(before_train_score))
@@ -65,20 +66,11 @@ def trainClassificationNews():
 
 @app.route('/classification/test-score')
 def classificationModelTest():
-    with open('python/models/classification_news/model.pkl', 'rb') as f:
-        model, cv = pickle.load(f)
+    news_classifier = classifier.ClassificationNews()
+    news_classifier.collectTestData()
+    score = news_classifier.getScoreByTestData()
 
-    with open("python/dataset/news/dataset_test.json") as json_test:
-        test_data = json.load(json_test)
-
-    dataset_test = []
-    dataset_test_target = []
-    for i in range(0, len(test_data)):
-        dataset_test.append(test_data[i]['title'].lower())
-        dataset_test_target.append(test_data[i]['score'])
-
-    score_test = model.score(cv.transform(dataset_test), dataset_test_target)
-    return jsonify(score=str(score_test))
+    return jsonify(score=str(score))
 
 
 @app.route('/news/predict')

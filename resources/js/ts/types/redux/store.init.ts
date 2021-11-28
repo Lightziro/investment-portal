@@ -1,7 +1,31 @@
-import { AdminStore, AlertStore, MainStore, StoreData } from "./store.types";
+import {
+    AdminStore,
+    AlertStore,
+    MainStore,
+    ProfileView,
+    StoreData,
+} from "./store.types";
 
+export const initialIdeaView = {
+    epsStats: null,
+    ideaInfo: null,
+    analyticsStats: null,
+    companyInfo: null,
+    authorInfo: null,
+    description: null,
+    comments: null,
+    ideaId: null,
+};
+export const initialProfileView: ProfileView = {
+    userId: null,
+};
 export const initMainStore: MainStore = {
-    user: null,
+    user: {
+        userId: null,
+        fullName: null,
+        role: null,
+        notices: [],
+    },
     news: null,
     investmentData: {
         bestProfit: null,
@@ -9,17 +33,13 @@ export const initMainStore: MainStore = {
         // actualIdeas: null,
         ideaStatistics: null,
     },
-    ideaView: {
-        epsStats: null,
-        ideaInfo: null,
-        analyticsStats: null,
-        companyInfo: null,
-        authorInfo: null,
-        description: null,
-        comments: null,
-        ideaId: null,
+    ideaView: initialIdeaView,
+    profileView: initialProfileView,
+    otherData: {
+        countries: null,
     },
 };
+
 export const initialAlertStore: AlertStore = {
     message: "",
     state: false,

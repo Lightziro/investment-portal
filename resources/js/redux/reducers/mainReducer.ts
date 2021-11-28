@@ -1,6 +1,9 @@
 import { AnyAction } from "redux";
 import { MainStore } from "../../ts/types/redux/store.types";
-import { initMainStore } from "../../ts/types/redux/store.init";
+import {
+    initialIdeaView,
+    initMainStore,
+} from "../../ts/types/redux/store.init";
 import { setNoticeView } from "../utils/user.utils";
 import { addComment } from "../utils/idea.utils";
 
@@ -17,7 +20,6 @@ const mainReducer = (
                 user: action.userData,
             };
         case "SET_PORTAL_DATA":
-            console.log("PORTAL", action.data);
             return {
                 ...state,
                 news: action.data.news,
@@ -43,6 +45,20 @@ const mainReducer = (
             return {
                 ...state,
                 ideaView: addComment(state.ideaView, action.createComment),
+            };
+        case "CLEAR_IDEA_DATA":
+            return { ...state, ideaView: initialIdeaView };
+        case "SET_PROFILE_VIEW":
+            return { ...state, profileView: action.profile };
+        case "SET_COUNTRIES":
+            return {
+                ...state,
+                otherData: { ...state.otherData, countries: action.countries },
+            };
+        case "SET_PROFILE_DATA":
+            return {
+                ...state,
+                profileView: action.updateData,
             };
         default:
             return state;

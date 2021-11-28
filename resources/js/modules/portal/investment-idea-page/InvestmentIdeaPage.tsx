@@ -12,13 +12,17 @@ import { CompanyDescription } from "./IdeaInformation/CompanyDescription";
 import { IdeaDescription } from "./idea-description/IdeaDescription";
 import { IdeaInformation } from "./company-description/IdeaInformation";
 import { IdeaComments } from "./idea-comments/IdeaComments";
+import { clearIdeaData } from "../../../redux/actions/investmentIdeaActions";
 
 export const InvestmentIdeaPage: React.FC = () => {
     const dispatch = useDispatch();
     const ideaData = useSelector((state: StoreData) => state.main.ideaView);
     const { ideaId } = useParams();
     useEffect(() => {
-        dispatch(fetchInvestmentIdea(parseInt(ideaId)));
+        if (Number(ideaId) !== ideaData.ideaId) {
+            dispatch(clearIdeaData());
+            dispatch(fetchInvestmentIdea(parseInt(ideaId)));
+        }
     }, []);
 
     return (

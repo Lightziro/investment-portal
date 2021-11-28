@@ -80,6 +80,17 @@ function* authUser(action: AnyAction): Generator {
         });
     }
 }
+function* fetchCountries(action: AnyAction): Generator {
+    try {
+        const countries = yield axios
+            .get("/api/other/countries")
+            .then((response) => response.data);
+        yield put({
+            type: "SET_COUNTRIES",
+            countries,
+        });
+    } catch (e) {}
+}
 
 export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("USER_LOGIN", authorizationUser);
@@ -88,4 +99,5 @@ export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("FETCH_INVESTMENT_IDEA", fetchInvestmentIdea);
     yield takeLatest("REGISTER_USER", registerUser);
     yield takeLatest("AUTH_USER", authUser);
+    yield takeLatest("FETCH_COUNTRIES", fetchCountries);
 }

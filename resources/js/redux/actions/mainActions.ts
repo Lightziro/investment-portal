@@ -23,6 +23,9 @@ export const registerUser = (form: FormRegister) => ({
     type: "REGISTER_USER",
     form,
 });
+export const fetchCountries = () => ({
+    type: "FETCH_COUNTRIES",
+});
 
 // export const clearViewIdea = () => ({
 //     type: 'CLEAR_VIEW_IDEA'

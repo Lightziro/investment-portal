@@ -8,7 +8,7 @@ import {
     Typography,
 } from "@mui/material";
 import { MenuProfileItems } from "./MenuProfileItems";
-import { MENU_AUTH } from "../../../../config/menu-items";
+import { MENU_AUTH, menuAuth } from "../../../../config/menu-items";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -24,7 +24,7 @@ export const LoginMenu: React.FC<LoginMenu> = ({ user }) => {
                 {t(`Welcome, user`, { fullName: user.fullName })}
             </Typography>
             <Divider sx={{ my: 1 }} />
-            <MenuProfileItems items={MENU_AUTH} />
+            <MenuProfileItems items={menuAuth(user.userId)} />
             <Divider />
             {user.role === "admin" && (
                 <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>

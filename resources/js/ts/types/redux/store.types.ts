@@ -7,12 +7,28 @@ import {
 } from "../state/stock-market.types";
 import { AuthorInfo } from "../state/user.types";
 import { AlertColor } from "@mui/material";
+import { CountryItem } from "../other/country";
 
 export interface MainStore {
     user: User;
     news: News[];
     investmentData: InvestmentData;
     ideaView: InvestmentIdeaView;
+    profileView: ProfileView;
+    otherData: OtherData;
+}
+export interface OtherData {
+    countries: CountryItem[];
+}
+export interface ProfileView {
+    userId: number;
+    roleName: string;
+    name: {
+        fullName: string;
+        firstName: string;
+        lastName: string;
+    };
+    country: CountryItem;
 }
 export interface AlertStore {
     message: string;
@@ -31,6 +47,8 @@ export interface InvestmentIdeaView {
     comments: IdeaComment[];
 }
 export interface IdeaComment {
+    userId: number;
+    date: string;
     fullNameAuthor: string;
     comment: string;
     avatar: string;

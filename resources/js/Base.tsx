@@ -11,7 +11,7 @@ export const Base: React.FC = () => {
     const dispatch = useDispatch();
     const user = useSelector((store: StoreData) => store.main.user);
     useEffect(() => {
-        if (!user) {
+        if (!user.userId) {
             axios
                 .get("/api/user/authentication")
                 .then((res) => dispatch(setUserData(res.data)));

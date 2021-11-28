@@ -47,7 +47,7 @@ export const MainRouter: React.FC = () => {
                     element: <Portal />,
                 },
                 {
-                    path: "/profile",
+                    path: "/profile/:userId",
                     element: <Profile />,
                 },
                 // { path: "*", element: <Navigate to="/404" /> },

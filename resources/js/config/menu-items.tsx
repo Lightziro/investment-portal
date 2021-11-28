@@ -14,13 +14,15 @@ export const MENU_NO_AUTH: MenuItems[] = [
         link: "/register",
     },
 ];
-export const MENU_AUTH: MenuItems[] = [
-    {
-        text: "Profile",
-        link: "/profile",
-        icon: "eva:clipboard-fill",
-    },
-];
+export const menuAuth = (userId: number): MenuItems[] => {
+    return [
+        {
+            text: "Profile",
+            link: `/profile/${userId}`,
+            icon: "eva:clipboard-fill",
+        },
+    ];
+};
 export const MENU_LANGUAGE = [
     {
         value: "en",

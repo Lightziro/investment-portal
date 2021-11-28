@@ -51,6 +51,9 @@ export const ruLanguage = {
     "We offer best ideas": "Мы предлагаем лучшие идеи",
     "Must contain max %amount% symbol":
         "Поле должно содержать %amount% символов",
+    Country: "Страна",
+    "You have successfully updated your profile data":
+        "Вы успешно обновили данные своего профиля",
     "Company description":
         "Компания %companyName% котируется на фондовом рынке с %dateIPO% под тикером %ticker%.",
 };

@@ -27,7 +27,7 @@ Route::get('/investment-idea/{id}', [Controller::class, 'index']);
 Route::get('/auth', [Controller::class, 'index']);
 Route::get('/register', [Controller::class, 'index']);
 Route::group(['prefix' => '/'], function () {
-    Route::get('/profile', [Controller::class, 'index'])->middleware('userAuth');
+    Route::get('/profile/{id}', [Controller::class, 'index'])->where(['id' => '[0-9]+']);
 });
 
 Route::group(['prefix' => 'admin-panel', 'middleware' => ['checkRoot']], function () {

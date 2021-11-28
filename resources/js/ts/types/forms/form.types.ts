@@ -10,3 +10,8 @@ export interface FormAuth {
     password: string;
     remember: boolean;
 }
+export interface FormProfile {
+    firstName: string;
+    lastName: string;
+    country: number;
+}
