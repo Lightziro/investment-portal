@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { CountryItem } from "../../../../../ts/types/other/country";
+import { CountryItem } from "../../../../../ts/types/other/other.types";
 interface FormProfileSelectField {
     items: CountryItem[];
     value: string | number;

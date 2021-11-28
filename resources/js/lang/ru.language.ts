@@ -54,6 +54,13 @@ export const ruLanguage = {
     Country: "Страна",
     "You have successfully updated your profile data":
         "Вы успешно обновили данные своего профиля",
+    "The best ideas": "Лучшие идеи",
+    Sex: "Пол",
+    Male: "Мужчина",
+    Female: "Женщина",
+    Registered: "Зарегистрировался",
+    "User statistics": "Статистика пользователя",
+    "Total comments": "Всего комментариев",
     "Company description":
         "Компания %companyName% котируется на фондовом рынке с %dateIPO% под тикером %ticker%.",
 };

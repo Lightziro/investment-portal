@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Formik, FormikProps } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { SignUpSchema } from "./registerValidation";
+import { SignUpSchema } from "../../../ts/validation/register.validation";
 import { initRegisterForm } from "../../../ts/consts/forms/init-form";
 import { FormRegister } from "../../../ts/types/forms/form.types";
 import { registerUser } from "../../../redux/actions/mainActions";

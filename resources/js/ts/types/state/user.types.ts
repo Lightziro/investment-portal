@@ -3,4 +3,6 @@ export interface AuthorInfo {
     amountSuccessfulIdeas: number;
     amountFailIdeas: number;
     fullName: string;
+    userId: number;
+    avatar: string;
 }

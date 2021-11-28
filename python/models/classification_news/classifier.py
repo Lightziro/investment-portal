@@ -69,3 +69,6 @@ class ClassificationNews:
 
         with open("python/dataset/news/dataset.json", "w") as file:
             json.dump(data, file)
+
+    def predictNews(self, data):
+        return self.model.predict(data)

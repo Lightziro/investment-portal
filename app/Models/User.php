@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Investment\InvestmentIdeaComments;
 use App\Models\Other\Country;
 use App\Models\User\UserNotices;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +26,7 @@ use JetBrains\PhpStorm\Pure;
  * @property string avatar_path
  * @property Carbon created_at
  * @property Country country
+ * @property string sex
  */
 class User extends Authenticatable
 {
@@ -64,6 +64,7 @@ class User extends Authenticatable
             'fullName' => $this->getFullName(),
             'role' => $this->role->name,
             'notices' => $ar_notice,
+            'avatar' => $this->avatar_path,
         ];
     }
 
@@ -86,7 +87,8 @@ class User extends Authenticatable
                 'country_id' => $country_model->country_id,
                 'code' => $country_model->code,
                 'name' => $country_model->name,
-            ]
+            ],
+            'sex' => $this->sex
         ];
     }
 

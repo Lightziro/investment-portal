@@ -32,37 +32,6 @@ def trainClassificationNews():
     news_classifier.saveTrainResult(retrain_request)
     return jsonify(result=str(result_retrain), before=before_train_score, after=after_score)
 
-    # return jsonify(score=len(before_train_score))
-
-    # data =
-    #
-    # with open("python/dataset/news/dataset.json") as json_file:
-    #     data_train_file = json.load(json_file)
-    #
-    # data_train = []
-    # data_train_target = []
-    # for i in range(0, len(data_train_file)):
-    #     data_train.append(data_train_file[i]['title'].lower())
-    #     data_train_target.append(data_train_file[i]['score'])
-    #
-    # for i in range(0, len(data)):
-    #     data_train.append(data[i]['title'].lower())
-    #     data_train_target.append(data[i]['score'])
-    #
-    # features = cv.transform(data_train)
-    # model.fit(features, data_train_target)
-    #
-    # with open("python/dataset/news/dataset_test.json") as json_test:
-    #     test_data = json.load(json_test)
-    #
-    # dataset_test = []
-    # dataset_test_target = []
-    # for i in range(0, len(test_data)):
-    #     dataset_test.append(test_data[i]['title'].lower())
-    #     dataset_test_target.append(test_data[i]['score'])
-    #
-    # score_test = model.score(cv.transform(dataset_test), dataset_test_target)
-
 
 @app.route('/classification/test-score')
 def classificationModelTest():
@@ -71,6 +40,15 @@ def classificationModelTest():
     score = news_classifier.getScoreByTestData()
 
     return jsonify(score=str(score))
+
+
+@app.route('/classification/predict-news', methods=['POST'])
+def classificationPredictNews():
+    news_classifier = classifier.ClassificationNews()
+    news = request.get_json()
+    predict_vector = news_classifier.convertVector(news)
+    predict_data = news_classifier.predictNews(predict_vector)
+    return jsonify(predict_data.tolist())
 
 
 @app.route('/news/predict')

@@ -9,6 +9,9 @@ import { fetchCountries } from "../../../../redux/actions/mainActions";
 import { FormProfileSelectField } from "./form-profile-fields/FormProfileSelectField";
 import { Button, Stack } from "@mui/material";
 import { updateProfile } from "../../../../redux/actions/profileActions";
+import { FormProfileRadioField } from "./form-profile-fields/FormProfileRadioField";
+import { sexList } from "../../../../ts/init/other/other.init";
+import { ProfileSchema } from "../../../../ts/validation/profile.validation";
 
 interface FormProfile {
     edit: boolean;
@@ -41,9 +44,10 @@ export const FormProfile: React.FC<FormProfile> = ({
                     firstName: profile.name.firstName,
                     lastName: profile.name.lastName,
                     country: profile.country.country_id,
+                    sex: profile.sex,
                 }}
                 onSubmit={handleSubmit}
-                // validationSchema={SignInSchema}
+                validationSchema={ProfileSchema}
             >
                 {({
                     values,
@@ -64,6 +68,7 @@ export const FormProfile: React.FC<FormProfile> = ({
                                 name="firstName"
                                 value={values.firstName}
                                 handleChange={handleChange}
+                                valid={!errors.firstName}
                             />
                         </FormProfileRow>
                         <FormProfileRow
@@ -75,6 +80,7 @@ export const FormProfile: React.FC<FormProfile> = ({
                                 name="lastName"
                                 value={values.lastName}
                                 handleChange={handleChange}
+                                valid={!errors.lastName}
                             />
                         </FormProfileRow>
                         <FormProfileRow
@@ -87,6 +93,21 @@ export const FormProfile: React.FC<FormProfile> = ({
                                 handleChange={handleChange}
                                 items={countries}
                                 name="country"
+                            />
+                        </FormProfileRow>
+                        <FormProfileRow
+                            textValue={profile.sex ?? "Не указан"}
+                            label={`${t("Sex")}`}
+                            edit={edit}
+                        >
+                            <FormProfileRadioField
+                                value={values.sex}
+                                name="sex"
+                                handleChange={handleChange}
+                                items={sexList.map((item) => {
+                                    item.label = t(item.label);
+                                    return item;
+                                })}
                             />
                         </FormProfileRow>
                         {edit && (

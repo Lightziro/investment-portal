@@ -7,7 +7,7 @@ import {
 } from "../state/stock-market.types";
 import { AuthorInfo } from "../state/user.types";
 import { AlertColor } from "@mui/material";
-import { CountryItem } from "../other/country";
+import { CountryItem } from "../other/other.types";
 
 export interface MainStore {
     user: User;
@@ -28,7 +28,11 @@ export interface ProfileView {
         firstName: string;
         lastName: string;
     };
+    allComments: number;
     country: CountryItem;
+    sex: string;
+    avatar: string;
+    dateCreate: string;
 }
 export interface AlertStore {
     message: string;
@@ -101,6 +105,7 @@ export interface User {
     fullName: string;
     role: string;
     notices: Notice[];
+    avatar: string;
 }
 
 export interface Notice {

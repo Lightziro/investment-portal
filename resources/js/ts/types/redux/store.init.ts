@@ -16,9 +16,7 @@ export const initialIdeaView = {
     comments: null,
     ideaId: null,
 };
-export const initialProfileView: ProfileView = {
-    userId: null,
-};
+
 export const initMainStore: MainStore = {
     user: {
         userId: null,
@@ -34,7 +32,7 @@ export const initMainStore: MainStore = {
         ideaStatistics: null,
     },
     ideaView: initialIdeaView,
-    profileView: initialProfileView,
+    profileView: null,
     otherData: {
         countries: null,
     },

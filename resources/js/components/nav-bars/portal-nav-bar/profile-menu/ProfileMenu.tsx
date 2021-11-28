@@ -25,7 +25,13 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 sx={{ p: 0, width: 44, height: 44 }}
                 onClick={onOpen}
             >
-                <Avatar src="/image/picture/avatar_default.jpg" />
+                <Avatar
+                    src={
+                        user
+                            ? `/image/${user.avatar}`
+                            : "/image/picture/avatar_default.jpg"
+                    }
+                />
             </IconButton>
             <MenuPopover
                 open={open}

@@ -8,7 +8,7 @@ import {
     Typography,
 } from "@mui/material";
 import { MenuProfileItems } from "./MenuProfileItems";
-import { MENU_AUTH, menuAuth } from "../../../../config/menu-items";
+import { menuAuth } from "../../../../config/menu-items";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";

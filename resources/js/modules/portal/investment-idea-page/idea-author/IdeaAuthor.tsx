@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar, Card, Grid, Stack, Skeleton, Typography } from "@mui/material";
 import { AuthorInfo } from "../../../../ts/types/state/user.types";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 interface IdeaAuthor {
     data: AuthorInfo;
 }
@@ -16,10 +17,12 @@ export const IdeaAuthor: React.FC<IdeaAuthor> = ({ data }) => {
             className="shadow-wrapper"
         >
             <div className="author-info">
-                <Avatar
-                    src="/image/picture/avatar_default.jpg"
-                    sx={{ width: 56, height: 56 }}
-                />
+                <Link to={`/profile/${data.userId}`}>
+                    <Avatar
+                        src={`/image/${data.avatar}`}
+                        sx={{ width: 56, height: 56 }}
+                    />
+                </Link>
                 <Typography variant="h6" align="center">
                     {data.fullName}
                 </Typography>

@@ -14,4 +14,5 @@ export interface FormProfile {
     firstName: string;
     lastName: string;
     country: number;
+    sex: string;
 }

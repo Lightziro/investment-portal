@@ -6,14 +6,13 @@ import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Formik } from "formik";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
-import { authUser, setUserData } from "../../../redux/actions/mainActions";
+import { authUser } from "../../../redux/actions/mainActions";
 import { useTranslation } from "react-i18next";
 
 import { Link, useNavigate } from "react-router-dom";
-import { SignInSchema } from "./authValidation";
+import { SignInSchema } from "../../../ts/validation/auth.validation";
 import { FormAuth } from "../../../ts/types/forms/form.types";
 
 function Copyright(props: any) {
