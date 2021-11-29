@@ -1,6 +1,8 @@
 import pickle
 import json
 import scipy.sparse as sp
+from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score
 
 
 class ClassificationNews:
@@ -72,3 +74,7 @@ class ClassificationNews:
 
     def predictNews(self, data):
         return self.model.predict(data)
+
+    def f1Score(self):
+        result = self.model.predict(self.test_dataset)
+        return f1_score(self.test_dataset_target, result, average='weighted')

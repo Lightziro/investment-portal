@@ -43,6 +43,11 @@ const adminReducer = (
                     score: action.data.score,
                 },
             };
+        case "SET_ARTICLES_LIST":
+            return {
+                ...state,
+                articles: { ...state.articles, list: action.articlesList },
+            };
         default:
             return state;
     }

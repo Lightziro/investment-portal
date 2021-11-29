@@ -7,3 +7,7 @@ export const initRegisterForm: FormRegister = {
     consent: false,
     password: "",
 };
+export const initialArticleForm = {
+    title: "",
+    content: "",
+};

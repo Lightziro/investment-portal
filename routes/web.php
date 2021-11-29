@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin-panel', 'middleware' => ['checkRoot']], functio
     Route::get('/investment-ideas', [Controller::class, 'index']);
     Route::get('/investment-ideas/create-idea', [Controller::class, 'index']);
     Route::get('/smart-analytic', [Controller::class, 'index']);
+    Route::get('/articles', [Controller::class, 'index']);
 });
 
 

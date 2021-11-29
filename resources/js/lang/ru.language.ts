@@ -59,6 +59,7 @@ export const ruLanguage = {
     Male: "Мужчина",
     Female: "Женщина",
     Registered: "Зарегистрировался",
+    "Incorrectly filled in data": "Неверно заполненные данные",
     "User statistics": "Статистика пользователя",
     "Total comments": "Всего комментариев",
     "Company description":

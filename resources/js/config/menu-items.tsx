@@ -67,4 +67,11 @@ export const MENU_ADMIN = [
         text: "Smart Analytics",
         url: "/admin-panel/smart-analytic",
     },
+    {
+        logo: {
+            name: "ri:article-line",
+        },
+        text: "Articles",
+        url: "/admin-panel/articles",
+    },
 ];

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
+use App\Http\Modules\Admin\Controllers\ArticleAdminController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
 use App\Http\Modules\Core\Controllers\OtherControllers;
@@ -49,6 +50,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/data', [SmartAnalyticController::class, 'getAnalyticData']);
         Route::get('/last-news', [SmartAnalyticController::class, 'getNewsForAnalyze']);
         Route::post('/train-news-classifier', [SmartAnalyticController::class, 'trainNewsClassifier']);
+    });
+    Route::group(['prefix' => 'article'], function() {
+        Route::post('/create', [ArticleAdminController::class, 'createArticle'])->middleware();
+        Route::get('/get/{page}', [ArticleAdminController::class, 'getArticlesByPage'])->middleware(BeforeGetAuthUserId::class);
     });
 });
 Route::group(['prefix' => 'investment-data'], function () {

@@ -38,7 +38,7 @@ class SmartAnalyticController extends Controller
         return response()->json($analyze_news);
     }
 
-    public function trainNewsClassifier(Request $request)
+    public function trainNewsClassifier(Request $request): JsonResponse
     {
         $predict_data = $request->post();
         if (!is_array($predict_data)) {

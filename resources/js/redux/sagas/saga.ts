@@ -3,6 +3,7 @@ import { all } from "redux-saga/effects";
 import { actionAdminWatcher } from "./adminSaga";
 import { actionInvestmentIdea } from "./investmentIdeaSaga";
 import { actionProfileWatcher } from "./profileSaga";
+import { actionArticleWatcher } from "./articleSaga";
 
 export default function* rootSaga(): Generator {
     yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga(): Generator {
         actionAdminWatcher(),
         actionInvestmentIdea(),
         actionProfileWatcher(),
+        actionArticleWatcher(),
     ]);
 }

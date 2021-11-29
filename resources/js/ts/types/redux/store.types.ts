@@ -93,6 +93,9 @@ export interface AdminStore {
         };
         newsForAnalyze: NewsPrediction[];
     };
+    articles: {
+        list: [];
+    };
 }
 export interface NewsPrediction {
     id: number;

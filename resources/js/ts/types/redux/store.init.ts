@@ -60,6 +60,9 @@ export const initialAdminStore: AdminStore = {
         },
         newsForAnalyze: null,
     },
+    articles: {
+        list: null,
+    },
 };
 
 export const initStore: StoreData = {

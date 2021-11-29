@@ -16,3 +16,7 @@ export interface FormProfile {
     country: number;
     sex: string;
 }
+export interface FormArticle {
+    title: string;
+    content: string;
+}

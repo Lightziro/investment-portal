@@ -37,7 +37,8 @@ def trainClassificationNews():
 def classificationModelTest():
     news_classifier = classifier.ClassificationNews()
     news_classifier.collectTestData()
-    score = news_classifier.getScoreByTestData()
+    # score = news_classifier.getScoreByTestData()
+    score = news_classifier.f1Score()
 
     return jsonify(score=str(score))
 

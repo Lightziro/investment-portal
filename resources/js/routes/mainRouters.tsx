@@ -12,6 +12,7 @@ import { UsersSection } from "../modules/admin/users-section/UsersSection";
 import { CreateIdeaDialog } from "../modules/admin/create-idea-section/CreateIdeaDialog";
 import { SmartAnalytic } from "../modules/admin/smart-analytic/SmartAnalytic";
 import { Profile } from "../modules/profile/Profile";
+import { ArticlesSection } from "../modules/admin/articles-section/ArticlesSection";
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,7 @@ export const MainRouter: React.FC = () => {
                     path: "investment-ideas/create-idea",
                     element: <CreateIdeaDialog />,
                 },
+                { path: "articles", element: <ArticlesSection /> },
             ],
         },
         {

@@ -27,7 +27,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
             >
                 <Avatar
                     src={
-                        user
+                        user.avatar
                             ? `/image/${user.avatar}`
                             : "/image/picture/avatar_default.jpg"
                     }
@@ -39,7 +39,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 anchorEl={anchorRef.current}
                 sx={{ width: 220 }}
             >
-                {user ? <LoginMenu user={user} /> : <NoLoginMenu />}
+                {user.userId ? <LoginMenu user={user} /> : <NoLoginMenu />}
             </MenuPopover>
         </Fragment>
     );
