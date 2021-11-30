@@ -1,62 +1,70 @@
 import pickle
-import json
-import scipy.sparse as sp
+from typing import Union
 from sklearn.metrics import f1_score
-from sklearn.metrics import accuracy_score
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn import svm
+from pandas import DataFrame
+import pandas as pd
+import json
+from sklearn.model_selection import cross_validate
+from scipy.sparse.csr import csr_matrix
+from sklearn.model_selection import GridSearchCV
 
 
 class ClassificationNews:
-    train_dataset = []
-    train_dataset_target = []
+    """
+    Classification Market News - Классификатор рыночных новостей
+    Parameters
+    ----------
+    is_new_model: bool, default=False
+        Создаёт новую модель, а не использует уже существующую
+    type_vector: {'tfidf', 'count'}
+        Название векторайзера, который будет использоваться при нормализации текста в векторы
+    """
 
-    test_dataset = []
-    test_dataset_target = []
+    __model: Union[svm.SVC] = None
+    __vector_model = Union[TfidfVectorizer, CountVectorizer]
+    is_new: bool
+    __type_model = {
+        "tfidf": TfidfVectorizer(lowercase=True),
+        "count": CountVectorizer(lowercase=True)
+    }
 
-    __model = None
-    __cv = None
+    def __init__(self, is_new_model: bool = False, type_vector: str = 'tfidf'):
+        if is_new_model:
+            self.__model = svm.SVC(kernel='linear', gamma=0.001, C=1)
+            self.__vector_model = self.__type_model[type_vector]
+        else:
+            with open('python/models/classification_news/model.pkl', 'rb') as f:
+                self.__model, self.__vector_model = pickle.load(f)
+        self.is_new = is_new_model
 
-    def __init__(self):
-        with open('python/models/classification_news/model.pkl', 'rb') as f:
-            self.model, self.cv = pickle.load(f)
-        self.collectDataset()
+    def getCollectDataSet(self, is_test=False):
+        file_path = "python/dataset/news/dataset.json"
+        if is_test:
+            file_path = "python/dataset/news/dataset_test.json"
+        test_data = pd.read_json(file_path, orient='columns')
+        return self.normalizeDataSet(test_data)
 
-    def collectDataset(self):
-        with open("python/dataset/news/dataset.json") as json_file:
-            dataset = json.load(json_file)
-        self.train_dataset, self.train_dataset_target = self.normalizeData(dataset)
-
-    def collectTestData(self):
-        with open("python/dataset/news/dataset_test.json") as json_test:
-            test_data = json.load(json_test)
-        self.test_dataset, self.test_dataset_target = self.normalizeData(test_data)
-
-    def retrainModel(self):
-        self.model.fit(self.train_dataset, self.train_dataset_target)
-
-    def convertVector(self, data_document):
-        return self.cv.transform(data_document)
-
-    def getScoreByTestData(self):
-        return self.model.score(self.test_dataset, self.test_dataset_target)
-
-    def normalizeData(self, data):
-        title = []
-        score = []
-        for i in range(0, len(data)):
-            title.append(data[i]['title'].lower())
-            score.append(data[i]['score'])
-        title_vector = self.convertVector(title)
-
+    def normalizeDataSet(self, data: DataFrame):
+        title = [str(x).lower() for x in data['title']]
+        score = data['score']
+        title_vector = self.convertToVector(title)
         return title_vector, score
 
-    def mergeDataTrain(self, data, target):
-        self.train_dataset = sp.vstack((self.train_dataset, data))
-        self.train_dataset_target = self.train_dataset_target + target
+    def trainModel(self, data_set: csr_matrix, data_set_target: list):
+        self.__model.fit(data_set, data_set_target)
+
+    def convertToVector(self, document: list):
+        if self.is_new:
+            return self.__vector_model.fit_transform(document)
+        else:
+            return self.__vector_model.transform(document)
 
     """
     Если переобучение повлияло на результат, то перезапись модели и тестовых данных
     """
-
     def analyzeRetrain(self, before_score, after_score):
         if after_score > before_score:
             # with open('python/models/classification_news/model.pkl', 'wb') as f:
@@ -64,7 +72,8 @@ class ClassificationNews:
             return True
         return False
 
-    def saveTrainResult(self, data_save):
+    @staticmethod
+    def saveReTrainResult(data_save):
         with open("python/dataset/news/dataset.json", "r") as file:
             data = json.load(file)
         data = [*data, *data_save]
@@ -72,9 +81,25 @@ class ClassificationNews:
         with open("python/dataset/news/dataset.json", "w") as file:
             json.dump(data, file)
 
-    def predictNews(self, data):
-        return self.model.predict(data)
+    def saveModel(self):
+        with open('python/models/classification_news/model.pkl', 'wb') as f:
+            pickle.dump((self.__model, self.__vector_model), f)
 
-    def f1Score(self):
-        result = self.model.predict(self.test_dataset)
-        return f1_score(self.test_dataset_target, result, average='weighted')
+    def predictNews(self, data: csr_matrix):
+        return self.__model.predict(data)
+
+    def f1Score(self, data, target):
+        result = self.__model.predict(data)
+        return f1_score(target, result, average='weighted')
+
+    @staticmethod
+    def searchBestParams(train, target):
+        """
+        Ищет наилучшие параметры для модели оценивания результатов
+        :return: объект с наилучшими параметрами
+        """
+        tuned_parameters = {'kernel': ['rbf', 'linear'], 'gamma': [1e-3, 1e-4],
+                            'C': [1, 10, 100, 1000]}
+        model = GridSearchCV(svm.SVC(), tuned_parameters)
+        model.fit(train, target)
+        return model.best_params_

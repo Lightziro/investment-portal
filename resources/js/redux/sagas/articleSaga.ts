@@ -16,12 +16,12 @@ function* createArticle(action: AnyAction): Generator {
 }
 function* fetchArticleForAdmin(action: AnyAction): Generator {
     try {
-        const articlesList = yield axios
+        const articlesData = yield axios
             .get(`/api/admin/article/get/${action.page}`)
             .then((response) => response.data);
         yield put({
             type: "SET_ARTICLES_LIST",
-            articlesList,
+            articlesData,
         });
     } catch (e) {}
 }

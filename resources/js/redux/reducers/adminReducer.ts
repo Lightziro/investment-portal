@@ -46,7 +46,11 @@ const adminReducer = (
         case "SET_ARTICLES_LIST":
             return {
                 ...state,
-                articles: { ...state.articles, list: action.articlesList },
+                articles: {
+                    ...state.articles,
+                    list: action.articlesData.items,
+                    lastPage: action.articlesData.lastPage,
+                },
             };
         default:
             return state;

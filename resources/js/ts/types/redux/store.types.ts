@@ -95,6 +95,7 @@ export interface AdminStore {
     };
     articles: {
         list: [];
+        lastPage: number;
     };
 }
 export interface NewsPrediction {

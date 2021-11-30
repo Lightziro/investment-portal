@@ -15,18 +15,12 @@ import { StoreData } from "../../../ts/types/redux/store.types";
 export const ArticlesSection: React.FC = () => {
     const [dialog, setDialog] = useState(false);
     const dispatch = useDispatch();
-    const articles = useSelector(
-        (state: StoreData) => state.admin.articles.list
+    const { list, lastPage } = useSelector(
+        (state: StoreData) => state.admin.articles
     );
     useEffect(() => {
         dispatch(fetchArticlesForAdmin(0));
     }, []);
-    const handlePaginate = (
-        event: React.ChangeEvent<unknown>,
-        value: number
-    ) => {
-        dispatch(fetchArticlesForAdmin(value));
-    };
     return (
         <Container maxWidth="xl">
             <Stack
@@ -47,13 +41,17 @@ export const ArticlesSection: React.FC = () => {
                     Create article
                 </Button>
             </Stack>
-            {articles && (
-                <Pagination
-                    onChange={handlePaginate}
-                    count={10}
-                    color="primary"
-                />
-            )}
+            <Stack justifyContent="center">
+                {list && (
+                    <Pagination
+                        onChange={(e, page) =>
+                            dispatch(fetchArticlesForAdmin(page))
+                        }
+                        count={lastPage}
+                        color="primary"
+                    />
+                )}
+            </Stack>
             {dialog && (
                 <CreateArticle
                     create={dialog}

@@ -1,94 +1,56 @@
-import time
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn import svm
-import json
-import math
-import pickle
-
+import pandas as pd
+import scipy.sparse as sp
 from flask import Flask
 from flask import jsonify
 from flask import request
 
-from python.models.classification_news import classifier
+from python.models.classification_news.classifier import ClassificationNews
 
 app = Flask(__name__)
 
 
 @app.route('/classification/train', methods=['POST'])
 def trainClassificationNews():
-    news_classifier = classifier.ClassificationNews()
-
-    news_classifier.collectTestData()
-    before_train_score = news_classifier.getScoreByTestData()
-
+    news_classifier = ClassificationNews()
+    data, target = news_classifier.getCollectDataSet()
+    test_data, test_target = news_classifier.getCollectDataSet(is_test=True)
+    before_score = news_classifier.f1Score(test_data, test_target)
     retrain_request = request.get_json()
-    retrain_data, retrain_data_target = news_classifier.normalizeData(retrain_request)
-    news_classifier.mergeDataTrain(retrain_data, retrain_data_target)
+    data_retrain = pd.DataFrame.from_dict(retrain_request)
+    retrain_data, retrain_target = news_classifier.normalizeDataSet(data_retrain)
+    combine_data, combine_target = sp.vstack((data, retrain_data)), target.tolist() + retrain_target.tolist()
 
-    news_classifier.retrainModel()
-    after_score = news_classifier.getScoreByTestData()
+    news_classifier.trainModel(combine_data, combine_target)
 
-    result_retrain = news_classifier.analyzeRetrain(before_train_score, after_score)
-    news_classifier.saveTrainResult(retrain_request)
-    return jsonify(result=str(result_retrain), before=before_train_score, after=after_score)
+    after_score = news_classifier.f1Score(test_data, test_target)
+    news_classifier.saveReTrainResult(retrain_request)
+    return jsonify(before=before_score, after=after_score)
 
 
-@app.route('/classification/test-score')
+@app.route('/classification/get/score')
 def classificationModelTest():
-    news_classifier = classifier.ClassificationNews()
-    news_classifier.collectTestData()
-    # score = news_classifier.getScoreByTestData()
-    score = news_classifier.f1Score()
+    news_classifier = ClassificationNews()
+    test_data, test_target = news_classifier.getCollectDataSet(is_test=True)
+    score = news_classifier.f1Score(test_data, test_target)
 
     return jsonify(score=str(score))
 
 
 @app.route('/classification/predict-news', methods=['POST'])
 def classificationPredictNews():
-    news_classifier = classifier.ClassificationNews()
+    news_classifier = ClassificationNews()
     news = request.get_json()
-    predict_vector = news_classifier.convertVector(news)
+    predict_vector = news_classifier.convertToVector(news)
     predict_data = news_classifier.predictNews(predict_vector)
     return jsonify(predict_data.tolist())
 
 
-@app.route('/news/predict')
-def predictNews():
-    with open("python/dataset/news/dataset_test.json") as json_test:
-        test_data = json.load(json_test)
-
-    with open("python/dataset/news/dataset.json") as json_file:
-        data = json.load(json_file)
-
-    dataset_train = []
-    dataset_target = []
-
-    for i in range(0, len(data)):
-        text = data[i]['title']
-        dataset_train.append(text.lower())
-        dataset_target.append(data[i]['score'])
-
-    cv = CountVectorizer()
-    features = cv.fit_transform(dataset_train)
-
-    tuned_parameters = {'kernel': ['rbf', 'linear'], 'gamma': [1e-3, 1e-4],
-                        'C': [1, 10, 100, 1000]}
-    model = svm.SVC(kernel='linear', gamma=0.001, C=1)
-
-    #     with open('python/models/classification_news/model.pkl', 'rb') as f:
-    #         model = pickle.load(f)
-    # model = GridSearchCV(svm.SVC(), tuned_parameters)
-
-    model.fit(features, dataset_target)
-
-    with open('python/models/classification_news/model.pkl', 'wb') as f:
-        pickle.dump((model, cv), f)
-    dataset_test = []
-    dataset_test_target = []
-    for i in range(0, len(test_data)):
-        dataset_test.append(test_data[i]['title'].lower())
-        dataset_test_target.append(test_data[i]['score'])
-
-    result = model.score(cv.transform(dataset_test), dataset_test_target)
-    #     predict = model.predict(cv.transform(predict_news)).tolist()
-    return jsonify(score=str(result))
+@app.route('/classification/test')
+def test():
+    news_classifier = ClassificationNews()
+    data, target = news_classifier.getCollectDataSet()
+    news_classifier.trainModel(data, target)
+    news_classifier.is_new = False
+    test_data, test_target = news_classifier.getCollectDataSet(is_test=True)
+    score = news_classifier.f1Score(test_data, test_target)
+    return jsonify(score)
