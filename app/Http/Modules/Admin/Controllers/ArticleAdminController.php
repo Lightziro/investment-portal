@@ -14,9 +14,8 @@ class ArticleAdminController extends Controller
 {
     private const ARTICLE_PAGE_SIZE = 3;
 
-    public function createArticle(Request $request)
+    public function createArticle(Request $request): JsonResponse
     {
-        $test = '';
         try {
             $validate = Validator::make($request->post(), [
                 'title' => ['required', 'max:255'],
@@ -32,6 +31,7 @@ class ArticleAdminController extends Controller
             $article_model->content = $post['content'];
             $article_model->author_id = $post['userId'];
             $article_model->save();
+            return response()->json($article_model->getFrontend());
         } catch (Throwable $e) {
             return response()->json(['message' => 'Failed to create article'], 400);
         }
@@ -44,10 +44,7 @@ class ArticleAdminController extends Controller
         $articles = Article::query()->paginate(self::ARTICLE_PAGE_SIZE);
         /** @var Article $article_model */
         foreach ($articles as $article_model) {
-            $ar_articles[] = [
-                'articleId' => $article_model->article_id,
-                'title' => $article_model->title,
-            ];
+            $ar_articles[] = $article_model->getFrontend();
         }
         return response()->json([
             'items' => $ar_articles ?? [],

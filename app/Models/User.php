@@ -42,6 +42,11 @@ class User extends Authenticatable
     ];
     protected $primaryKey = 'user_id';
 
+    #[Pure] public function __toString()
+    {
+        return $this->getFullName();
+    }
+
     public function authentication(array $params = null): bool
     {
         return Auth::attempt($params, true);
@@ -74,9 +79,9 @@ class User extends Authenticatable
         return [
             'userId' => $this->user_id,
             'name' => [
-              'fullName' => $this->getFullName(),
-              'firstName' => $this->first_name,
-              'lastName' => $this->last_name,
+                'fullName' => $this->getFullName(),
+                'firstName' => $this->first_name,
+                'lastName' => $this->last_name,
             ],
             'fullName' => $this->getFullName(),
             'dateCreate' => $this->created_at->format('Y-m-d'),

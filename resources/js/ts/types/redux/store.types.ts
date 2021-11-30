@@ -8,6 +8,7 @@ import {
 import { AuthorInfo } from "../state/user.types";
 import { AlertColor } from "@mui/material";
 import { CountryItem } from "../other/other.types";
+import { Article } from "../state/article.types";
 
 export interface MainStore {
     user: User;
@@ -94,7 +95,7 @@ export interface AdminStore {
         newsForAnalyze: NewsPrediction[];
     };
     articles: {
-        list: [];
+        list: Article[];
         lastPage: number;
     };
 }
