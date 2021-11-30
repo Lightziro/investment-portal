@@ -38,9 +38,10 @@ class ArticleAdminController extends Controller
 
     }
 
-    public function getArticlesByPage($page): JsonResponse
+    public function getArticlesByPage(int $page): JsonResponse
     {
-        $articles = Article::query()->paginate(self::ARTICLE_PAGE_SIZE, ['*'], '', $page);
+        Paginator::currentPageResolver(fn() => $page);
+        $articles = Article::query()->paginate(self::ARTICLE_PAGE_SIZE);
         /** @var Article $article_model */
         foreach ($articles as $article_model) {
             $ar_articles[] = [
