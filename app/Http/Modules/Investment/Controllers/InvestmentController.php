@@ -3,6 +3,7 @@
 namespace App\Http\Modules\Investment\Controllers;
 
 use App\Http\Classes\StockMarket;
+use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdeaViewing;
 use App\Models\InvestmentIdea;
 use App\Models\User;
@@ -30,6 +31,11 @@ class InvestmentController extends BaseController
         }
         $count_success_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_SUCCESS])->count();
         $count_fail_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_FAIL])->count();
+        $articles = Article::query()->orderByDesc('created_at')->get();
+        /** @var Article $article_model */
+        foreach ($articles as $article_model) {
+            $ar_articles[] = $article_model->getFrontend();
+        }
 
         $investment_ideas = InvestmentIdea::query()->whereNotIn('status', [InvestmentIdea::STATUS_FAIL])
             ->orderBy('possible_profit', 'DESC')->limit(5)->get();
@@ -57,7 +63,8 @@ class InvestmentController extends BaseController
                     'success' => $count_success_ideas,
                     'fail' => $count_fail_ideas,
                 ]
-            ]
+            ],
+            'articles' => $ar_articles ?? []
 
         ]);
     }

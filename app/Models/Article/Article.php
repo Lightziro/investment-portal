@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 use JetBrains\PhpStorm\ArrayShape;
 
-/**
+/** Article - статьи
  * @property int article_id
  * @property string title
  * @property string content
@@ -19,7 +19,7 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class Article extends CustomModel
 {
-    protected $table = 'investment_articles';
+    protected $table = 'articles';
     protected $primaryKey = 'article_id';
 
     public function __toString()
@@ -38,8 +38,8 @@ class Article extends CustomModel
         return [
             'articleId' => $this->article_id,
             'title' => (string)$this,
-            'dateCreate' => $this->created_at,
-            'dateUpdate' => $this->updated_at,
+            'dateCreate' => $this->created_at->format('Y-m-d H:i:s'),
+            'dateUpdate' => $this->updated_at->format('Y-m-d H:i:s'),
             'preview' => $this->preview_path,
             'content' => $this->content,
             'author' => [
@@ -48,5 +48,9 @@ class Article extends CustomModel
                 'avatar' => $author_model->avatar_path,
             ]
         ];
+    }
+    public function viewing()
+    {
+        $this->hasMany(ArticleViewing::class, 'article_id', 'article_id');
     }
 }

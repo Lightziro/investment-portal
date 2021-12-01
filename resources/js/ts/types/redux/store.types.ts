@@ -17,6 +17,7 @@ export interface MainStore {
     ideaView: InvestmentIdeaView;
     profileView: ProfileView;
     otherData: OtherData;
+    articles: Article[];
 }
 export interface OtherData {
     countries: CountryItem[];
