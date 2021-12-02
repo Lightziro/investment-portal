@@ -28,6 +28,7 @@ class SmartAnalyticController extends Controller
     {
         $market = new StockMarket();
         $news = $market->getMarketNews();
+//        $news = $market->getCompanyNews('BABA', new \DateTime('2021-10-01'), new \DateTime('2021-12-01'));
         $analyze_news = [];
         foreach ($news as $item_news) {
             $analyze_news[] = [

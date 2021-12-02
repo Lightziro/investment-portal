@@ -8,3 +8,7 @@ export const fetchArticlesForAdmin = (page: number) => ({
     type: "FETCH_ARTICLE_FOR_ADMIN",
     page,
 });
+export const fetchArticleView = (articleId: number) => ({
+    type: "FETCH_ARTICLE_VIEW",
+    articleId,
+});

@@ -13,6 +13,7 @@ import { CreateIdeaDialog } from "../modules/admin/create-idea-section/CreateIde
 import { SmartAnalytic } from "../modules/admin/smart-analytic/SmartAnalytic";
 import { Profile } from "../modules/profile/Profile";
 import { ArticlesSection } from "../modules/admin/articles-section/ArticlesSection";
+import { ArticlePage } from "../modules/portal/article-page/ArticlePage";
 
 // ----------------------------------------------------------------------
 
@@ -52,6 +53,7 @@ export const MainRouter: React.FC = () => {
                     path: "/profile/:userId",
                     element: <Profile />,
                 },
+                { path: "/article/:articleId", element: <ArticlePage /> },
                 // { path: "*", element: <Navigate to="/404" /> },
             ],
         },

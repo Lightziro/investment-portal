@@ -31,12 +31,19 @@ class InvestmentController extends BaseController
         }
         $count_success_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_SUCCESS])->count();
         $count_fail_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_FAIL])->count();
-        $articles = Article::query()->orderByDesc('created_at')->get();
+        $popular_articles = Article::mostPopular()->limit(3)->get();
+        $pk_list = [];
         /** @var Article $article_model */
-        foreach ($articles as $article_model) {
-            $ar_articles[] = $article_model->getFrontend();
+        foreach ($popular_articles as $article_model) {
+            $pk_list[] = $article_model->article_id;
+            $articles_popular[] = $article_model->getFrontend();
         }
-
+        $articles = Article::query()->whereNotIn('article_id', $pk_list)
+            ->orderByDesc('created_at')
+            ->limit(10)->get();
+        foreach ($articles as $article_model) {
+            $articles_simple[] = $article_model->getFrontend();
+        }
         $investment_ideas = InvestmentIdea::query()->whereNotIn('status', [InvestmentIdea::STATUS_FAIL])
             ->orderBy('possible_profit', 'DESC')->limit(5)->get();
 
@@ -53,7 +60,6 @@ class InvestmentController extends BaseController
         }
 
         return response()->json([
-
             'news' => $news,
             'investmentData' => [
                 'bestProfit' => $max_profit,
@@ -64,7 +70,10 @@ class InvestmentController extends BaseController
                     'fail' => $count_fail_ideas,
                 ]
             ],
-            'articles' => $ar_articles ?? []
+            'articles' => [
+                'popular' => $articles_popular ?? null,
+//                'simple' => $articles_simple ?? null
+            ]
 
         ]);
     }

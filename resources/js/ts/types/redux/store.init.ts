@@ -5,6 +5,8 @@ import {
     ProfileView,
     StoreData,
 } from "./store.types";
+import { initialArticleView } from "../../init/entity/article.init";
+import { initialViewStore } from "../../init/redux/reducer.initial";
 
 export const initialIdeaView = {
     epsStats: null,
@@ -32,9 +34,14 @@ export const initMainStore: MainStore = {
         ideaStatistics: null,
     },
     ideaView: initialIdeaView,
+
     profileView: null,
     otherData: {
         countries: null,
+    },
+    articles: {
+        popular: null,
+        simple: null,
     },
 };
 
@@ -70,4 +77,5 @@ export const initStore: StoreData = {
     main: initMainStore,
     admin: initialAdminStore,
     alert: initialAlertStore,
+    view: initialViewStore,
 };

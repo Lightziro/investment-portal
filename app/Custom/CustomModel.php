@@ -4,14 +4,18 @@ namespace App\Custom;
 
 use App\Custom\Query\CustomQueryBuilder;
 use App\Custom\Relations\CustomHasMany;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use JetBrains\PhpStorm\Pure;
 
-
+/**
+ * @property Carbon created_at
+ * @property Carbon updated_at
+ */
 abstract class CustomModel extends Model
 {
-
-    public function newEloquentBuilder($query): CustomQueryBuilder
+    #[Pure] public function newEloquentBuilder($query): CustomQueryBuilder
     {
         return new CustomQueryBuilder($query);
     }
@@ -46,4 +50,17 @@ abstract class CustomModel extends Model
     {
         return parent::newQueryWithoutScopes();
     }
+
+    public function beforeInstanceSave(): void { }
+
+    public function save(array $options = [])
+    {
+        $this->beforeInstanceSave();
+        $save = parent::save($options);
+        if ($save) {
+            $this->afterInstanceSave();
+        }
+    }
+
+    public function afterInstanceSave(): void { }
 }

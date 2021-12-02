@@ -22,8 +22,7 @@ const mainReducer = (
         case "SET_PORTAL_DATA":
             return {
                 ...state,
-                news: action.data.news,
-                investmentData: action.data.investmentData,
+                ...action.data,
             };
         case "SET_NOTICE_VIEW":
             return setNoticeView(state, action.noticeId);

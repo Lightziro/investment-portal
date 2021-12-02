@@ -25,7 +25,19 @@ function* fetchArticleForAdmin(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* fetchArticleView(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`/api/article/get/${action.articleId}`)
+            .then((response) => response.data);
+        yield put({
+            type: "SET_ARTICLE_DATA",
+            data,
+        });
+    } catch (e) {}
+}
 export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("CREATE_ARTICLE", createArticle);
+    yield takeLatest("FETCH_ARTICLE_VIEW", fetchArticleView);
     yield takeLatest("FETCH_ARTICLE_FOR_ADMIN", fetchArticleForAdmin);
 }

@@ -8,7 +8,7 @@ import {
 import { AuthorInfo } from "../state/user.types";
 import { AlertColor } from "@mui/material";
 import { CountryItem } from "../other/other.types";
-import { Article } from "../state/article.types";
+import { Article, ArticleView } from "../state/article.types";
 
 export interface MainStore {
     user: User;
@@ -17,7 +17,11 @@ export interface MainStore {
     ideaView: InvestmentIdeaView;
     profileView: ProfileView;
     otherData: OtherData;
-    articles: Article[];
+    articles: {
+        popular: Article[];
+        simple: Article[];
+    };
+    articleView: Article;
 }
 export interface OtherData {
     countries: CountryItem[];
@@ -126,4 +130,10 @@ export interface StoreData {
     main: MainStore;
     admin: AdminStore;
     alert: AlertStore;
+    view: ViewStore;
+}
+export interface ViewStore {
+    profile: ProfileView;
+    idea: InvestmentIdeaView;
+    article: ArticleView;
 }

@@ -26,6 +26,10 @@ export const registerUser = (form: FormRegister) => ({
 export const fetchCountries = () => ({
     type: "FETCH_COUNTRIES",
 });
+export const clearView = (entity: string) => ({
+    type: "CLEAR_VIEW",
+    entity,
+});
 
 // export const clearViewIdea = () => ({
 //     type: 'CLEAR_VIEW_IDEA'

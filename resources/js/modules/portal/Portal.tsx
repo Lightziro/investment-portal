@@ -23,6 +23,7 @@ import { NewsPortalList } from "../../components/news-list/NewsPortalList";
 import { PortalAd } from "../../components/portal-ad/PortalAd";
 import { IdeaStatistics } from "./idea-statistics/IdeaStatistics";
 import { IdeaList } from "./idea-list/IdeaList";
+import { ArticleList } from "./article-list/ArticleList";
 
 export const Portal: React.FC = () => {
     // const { t, i18n } = useTranslation();
@@ -35,19 +36,20 @@ export const Portal: React.FC = () => {
     }, []);
     return (
         <Fragment>
-            <Grid container spacing={2}>
-                <Grid item xs={3}>
+            <Grid container spacing={3}>
+                <Grid item sm={3}>
                     <NewsPortalList />
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item sm={9}>
                     <Paper elevation={2} sx={{ p: 1, mb: 2 }}>
                         <Typography variant="h3">Investments</Typography>
                     </Paper>
-                    <Grid container spacing={2}>
-                        <Grid item xs={9}>
-                            <Paper>Testick123</Paper>
+                    <Grid container spacing={3}>
+                        <Grid direction="column" item sm={9}>
+                            <ArticleList />
+                            <div>Test</div>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item sm={3}>
                             <PortalAd />
                             <IdeaStatistics />
                             <IdeaList />

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Modules\Portal\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -28,6 +29,7 @@ Route::get('/auth', [Controller::class, 'index']);
 Route::get('/register', [Controller::class, 'index']);
 Route::group(['prefix' => '/'], function () {
     Route::get('/profile/{id}', [Controller::class, 'index'])->where(['id' => '[0-9]+']);
+    Route::get('/article/{id}', [Controller::class, 'index'])->where(['id' => '[0-9]+']);
 });
 
 Route::group(['prefix' => 'admin-panel', 'middleware' => ['checkRoot']], function () {
