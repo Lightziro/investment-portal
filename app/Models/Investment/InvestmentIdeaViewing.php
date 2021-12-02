@@ -6,6 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @property int user_id
+ * @property int idea_id
+ */
 class InvestmentIdeaViewing extends Model
 {
     protected $table = 'investment_idea_viewing';
