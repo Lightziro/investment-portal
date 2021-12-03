@@ -4,11 +4,12 @@ export interface Article {
     dateCreate: string;
     dateUpdate: string;
     preview: string;
-    author: {
-        userId: number;
-        avatar: string;
-        fullName: string;
-    };
+    author: ArticleAuthor;
+}
+export interface ArticleAuthor {
+    userId: number;
+    avatar: string;
+    fullName: string;
 }
 export interface ArticleLabel {
     icon: string;

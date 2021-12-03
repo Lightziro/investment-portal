@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { MenuItems } from "../../../../ts/types/menu-items.types";
-import { MENU_NO_AUTH } from "../../../../config/menu-items";
 import { Box, ListItemText, MenuItem } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
@@ -14,20 +13,20 @@ export const MenuProfileItems: React.FC<MenuProfileItems> = ({ items }) => {
     return (
         <Fragment>
             {items.map((item) => (
-                <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>
-                    <Box
-                        component={Icon}
-                        icon={item.icon}
-                        sx={{
-                            mr: 2,
-                            width: 24,
-                            height: 24,
-                        }}
-                    />
-                    <ListItemText>
-                        <Link to={item.link}>{t(item.text)}</Link>
-                    </ListItemText>
-                </MenuItem>
+                <Link to={item.link}>
+                    <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>
+                        <Box
+                            component={Icon}
+                            icon={item.icon}
+                            sx={{
+                                mr: 2,
+                                width: 24,
+                                height: 24,
+                            }}
+                        />
+                        <ListItemText>{t(item.text)}</ListItemText>
+                    </MenuItem>
+                </Link>
             ))}
         </Fragment>
     );

@@ -11604,6 +11604,32 @@ textarea.form-control-lg {
   text-transform: uppercase;
 }
 
+.author-wrapper {
+  background-color: #f5eeff;
+  box-shadow: 0px 0px 20px 0px rgba(192, 192, 192, 0.35);
+  padding: 30px 40px;
+}
+@media (max-width: 600px) {
+  .author-wrapper {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column !important;
+  }
+}
+.author-wrapper .author-article-info {
+  padding-left: 45px;
+}
+@media (max-width: 600px) {
+  .author-wrapper .author-article-info {
+    padding: 0;
+    margin-top: 20px;
+  }
+}
+.author-wrapper .author-article-info .name {
+  font: 600 22px/1 "Oswald", sans-serif;
+  color: #282331;
+}
+
 .page-wrapper {
   background-color: #e3f2fd;
 }

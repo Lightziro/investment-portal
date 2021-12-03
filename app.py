@@ -30,16 +30,18 @@ def trainClassificationNews():
 
 @app.route('/classification/get/score')
 def classificationModelTest():
-    # news_classifier = ClassificationNews(is_new_model=True)
-    # data, target = news_classifier.getCollectDataSet()
-    # x_train, x_test, y_train, y_test = train_test_split(data, target, shuffle=False, train_size=.8, random_state=42)
-    # news_classifier.trainModel(x_train, y_train)
-    # score = news_classifier.f1Score(x_test, y_test)
-    news_classifier = ClassificationNews()
-    test_data, test_target = news_classifier.getCollectDataSet(is_test=False)
-    score = news_classifier.f1Score(test_data, test_target)
-
-    return jsonify(score=str(score))
+    news_classifier = ClassificationNews(is_new_model=True, type_vector='count')
+    data, target = news_classifier.getCollectDataSet()
+    x_train, x_test, y_train, y_test = train_test_split(data, target, shuffle=False, train_size=.8, random_state=42)
+    news_classifier.trainModel(x_train, y_train)
+    score = news_classifier.f1Score(x_test, y_test)
+    news_classifier.is_new = False
+    # transform = news_classifier.convertToVector()
+    # news_classifier = ClassificationNews()
+    # test_data, test_target = news_classifier.getCollectDataSet(is_test=False)
+    # score = news_classifier.f1Score(test_data, test_target)
+    return jsonify(news_classifier.vector_model.transform(['Alibaba']).toarray().tolist())
+    # return jsonify(score=str(score))
 
 
 

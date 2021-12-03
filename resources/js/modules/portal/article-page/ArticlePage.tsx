@@ -5,8 +5,9 @@ import { StoreData } from "../../../ts/types/redux/store.types";
 import { fetchArticleView } from "../../../redux/actions/articleArtions";
 import { Container, Divider, Paper, Skeleton } from "@mui/material";
 import { clearView } from "../../../redux/actions/mainActions";
-import { LabelList } from "./article-header/label-list/LabelList";
 import { ArticleHeader } from "./article-header/ArticleHeader";
+import { ArticleContent } from "./article-content/ArticleContent";
+import { AboutAuthor } from "./article-content/about-author/AboutAuthor";
 
 export const ArticlePage: React.FC = () => {
     const article = useSelector((state: StoreData) => state.view.article);
@@ -30,16 +31,11 @@ export const ArticlePage: React.FC = () => {
                     dateCreate={article.dateCreate}
                 />
                 <Divider />
-                <div className="wrapper-article-preview">
-                    <img
-                        className="preview"
-                        src={`/image/preview/${article.preview}`}
-                    />
-                </div>
-                <div
-                    className="article-content"
-                    dangerouslySetInnerHTML={{ __html: article.content }}
+                <ArticleContent
+                    preview={article.preview}
+                    content={article.content}
                 />
+                <AboutAuthor author={article.author} />
             </Paper>
         </Container>
     );

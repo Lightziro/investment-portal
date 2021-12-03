@@ -47,3 +47,27 @@
     }
 }
 
+.author-wrapper {
+    background-color: #f5eeff;
+    box-shadow: 0px 0px 20px 0px rgb(192 192 192 / 35%);
+    padding: 30px 40px;
+    @media(max-width: 600px) {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column !important;
+    }
+
+    .author-article-info {
+        @media(max-width: 600px) {
+            padding: 0;
+            margin-top: 20px;
+        }
+        padding-left: 45px;
+
+        .name {
+            font: 600 22px/1 "Oswald", sans-serif;
+            color: #282331;
+        }
+    }
+}
+

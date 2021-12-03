@@ -7,7 +7,7 @@ interface LabelList {
 }
 export const LabelList: React.FC<LabelList> = ({ labels }) => {
     return (
-        <Grid item container sm={10} spacing={2} direction="row">
+        <Grid item container sm={"auto"} spacing={2} direction="row">
             {labels ? (
                 labels.map((label) => (
                     <Grid item sm={"auto"}>

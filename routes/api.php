@@ -10,6 +10,7 @@ use App\Http\Modules\Core\Controllers\UserController;
 use App\Http\Modules\Investment\Controllers\InvestmentController;
 use App\Http\Modules\Investment\Controllers\InvestmentIdeaController;
 use App\Http\Modules\Portal\Controllers\ViewController;
+use App\Http\Modules\Portal\Middleware\AfterViewArticleMiddleware;
 use App\Http\Modules\Portal\Middleware\AfterViewIdeaMiddleware;
 use App\Http\Modules\Profile\Controllers\ProfileController;
 use App\Http\Modules\Profile\Middleware\BeforeGetAuthUserId;
@@ -67,7 +68,7 @@ Route::group(['prefix' => 'investment-idea'], function () {
     Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('userAuth');
 });
 Route::group(['prefix' => 'article'], function () {
-   Route::get('/get/{id}', [ViewController::class, 'getViewArticle']);
+   Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
 });
 Route::group(['prefix' => 'other'], function () {
     Route::get('/countries', [OtherControllers::class, 'getCountries']);
