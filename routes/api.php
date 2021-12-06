@@ -5,8 +5,10 @@ use App\Http\Controllers\NewsController;
 use App\Http\Modules\Admin\Controllers\ArticleAdminController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
+use App\Http\Modules\Article\Controllers\ArticleActionsController;
 use App\Http\Modules\Core\Controllers\OtherControllers;
 use App\Http\Modules\Core\Controllers\UserController;
+use App\Http\Modules\Core\Middleware\BeforeGetUserAuth;
 use App\Http\Modules\Investment\Controllers\InvestmentController;
 use App\Http\Modules\Investment\Controllers\InvestmentIdeaController;
 use App\Http\Modules\Portal\Controllers\ViewController;
@@ -53,7 +55,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/last-news', [SmartAnalyticController::class, 'getNewsForAnalyze']);
         Route::post('/train-news-classifier', [SmartAnalyticController::class, 'trainNewsClassifier']);
     });
-    Route::group(['prefix' => 'article'], function() {
+    Route::group(['prefix' => 'article'], function () {
         Route::post('/create', [ArticleAdminController::class, 'createArticle'])->middleware(BeforeGetAuthUserId::class);
         Route::get('/get/{page}', [ArticleAdminController::class, 'getArticlesByPage'])->middleware(BeforeGetAuthUserId::class);
     });
@@ -65,10 +67,11 @@ Route::group(['prefix' => 'investment-data'], function () {
 });
 
 Route::group(['prefix' => 'investment-idea'], function () {
-    Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('userAuth');
+    Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware(BeforeGetUserAuth::class);
 });
 Route::group(['prefix' => 'article'], function () {
-   Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
+    Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
+    Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware(BeforeGetUserAuth::class);
 });
 Route::group(['prefix' => 'other'], function () {
     Route::get('/countries', [OtherControllers::class, 'getCountries']);

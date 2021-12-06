@@ -11684,6 +11684,15 @@ textarea.form-control-lg {
   box-shadow: rgba(145, 158, 171, 0.24) 0 0 2px 0, rgba(145, 158, 171, 0.24) 0 16px 32px -4px !important;
 }
 
+.article-item-wrapper {
+  background: white;
+  height: 200px;
+}
+.article-item-wrapper .title {
+  margin-top: 12px;
+  padding: 0 5px;
+}
+
 .back-icon img {
   transition: all 0.5s ease-out;
 }

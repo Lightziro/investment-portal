@@ -9,4 +9,5 @@ export const initialArticleView: ArticleView = {
     author: null,
     title: null,
     labels: null,
+    comments: null,
 };

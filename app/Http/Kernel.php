@@ -10,7 +10,6 @@ use App\Http\Middleware\RootAdmin;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
-use App\Http\Modules\Profile\Middleware\UserAuth;
 use Fruitcake\Cors\HandleCors;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
@@ -87,6 +86,5 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
         'checkRoot' => RootAdmin::class,
-        'userAuth' => UserAuth::class
     ];
 }

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
-use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 
 /** Article - статьи
@@ -23,6 +22,7 @@ use JetBrains\PhpStorm\Pure;
  * @property User author
  * @property Collection|ArticleLabels[] labels
  * @property Collection|ArticleViewing[] viewing
+ * @property Collection|ArticleComments[] comments
  */
 class Article extends CustomModel
 {
@@ -62,6 +62,7 @@ class Article extends CustomModel
         return array_merge($front_end, [
             'labels' => $this->getLabels(),
             'content' => $this->content,
+            'comments' => $this->getComments(),
         ]);
     }
 
@@ -80,6 +81,20 @@ class Article extends CustomModel
         return $this->hasMany(ArticleLabels::class, 'article_id', 'article_id');
     }
 
+    public function comments(): CustomHasMany
+    {
+        return $this->hasMany(ArticleComments::class, 'article_id', 'article_id');
+    }
+
+    public function getComments(): array
+    {
+        /** @var ArticleComments $comment */
+        foreach ($this->comments()->orderByDesc('created_at')->get() as $comment) {
+            $ar_comments[] = $comment->getFrontendComment();
+        }
+        return $ar_comments ?? [];
+    }
+
     #[Pure] public function getLabels(): array
     {
         $ar_labels = [];
@@ -93,7 +108,7 @@ class Article extends CustomModel
         foreach (['carbon:view-filled', 'bx:bxs-comment-detail'] as $fake_label) {
             $text = match ($fake_label) {
                 'carbon:view-filled' => $this->viewing->count(),
-                'bx:bxs-comment-detail' => 0,
+                'bx:bxs-comment-detail' => $this->comments->count(),
                 default => '',
             };
             $ar_labels[] = [
