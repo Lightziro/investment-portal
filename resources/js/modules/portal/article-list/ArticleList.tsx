@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
-import { Grid, Skeleton } from "@mui/material";
+import { Grid } from "@mui/material";
 import { ArticleItem } from "./article-item/ArticleItem";
-import { useTranslation } from "react-i18next";
 import { LoadArticleItems } from "./load-article-items/LoadArticleItems";
 
 export const ArticleList: React.FC = () => {
@@ -15,7 +14,7 @@ export const ArticleList: React.FC = () => {
             <Grid justifyContent="center" container direction="row" spacing={3}>
                 {popular ? (
                     popular.map((article) => (
-                        <Grid item sm={4}>
+                        <Grid xs={12} item sm={4}>
                             <ArticleItem item={article} />
                         </Grid>
                     ))
@@ -31,7 +30,11 @@ export const ArticleList: React.FC = () => {
                 spacing={3}
             >
                 {simple ? (
-                    simple.map((article) => <div>{article.title}</div>)
+                    simple.map((article) => (
+                        <Grid xs={6} md={4} lg={4} xl={3} item sm={6}>
+                            <ArticleItem item={article} />
+                        </Grid>
+                    ))
                 ) : (
                     <LoadArticleItems sm={3} count={8} height={206} />
                 )}

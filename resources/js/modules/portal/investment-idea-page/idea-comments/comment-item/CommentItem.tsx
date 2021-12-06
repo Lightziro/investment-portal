@@ -1,12 +1,13 @@
 import React from "react";
 import { IdeaComment } from "../../../../../ts/types/redux/store.types";
-import { Avatar, Stack, Typography, Divider } from "@mui/material";
+import { Avatar, Stack, Typography, Divider, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { stringAvatar } from "../../../../../utils/string-avatar";
+import { ArticleComment } from "../../../../../ts/types/state/article.types";
 interface CommentItem {
-    comment: IdeaComment;
+    comment: IdeaComment | ArticleComment;
 }
 export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
     const { i18n } = useTranslation();
@@ -22,7 +23,7 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
                 />
             )}
             <Stack ml={1} justifyContent="flex-start">
-                <div className="comment-idea-info">
+                <Grid className="comment-idea-info">
                     <span className="author-comment">
                         <Link to={`/profile/${comment.userId}`}>
                             {comment.fullNameAuthor}
@@ -31,7 +32,7 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
                     <span className="date-comment">
                         {moment(comment.date).fromNow()}
                     </span>
-                </div>
+                </Grid>
                 <Divider />
                 <Typography variant="body2">{comment.comment}</Typography>
             </Stack>

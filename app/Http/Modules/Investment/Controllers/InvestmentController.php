@@ -72,7 +72,7 @@ class InvestmentController extends BaseController
             ],
             'articles' => [
                 'popular' => $articles_popular ?? null,
-//                'simple' => $articles_simple ?? null
+                'simple' => $articles_simple ?? null
             ]
 
         ]);

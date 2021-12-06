@@ -40,8 +40,8 @@ def classificationModelTest():
     # news_classifier = ClassificationNews()
     # test_data, test_target = news_classifier.getCollectDataSet(is_test=False)
     # score = news_classifier.f1Score(test_data, test_target)
-    return jsonify(news_classifier.vector_model.transform(['Alibaba']).toarray().tolist())
-    # return jsonify(score=str(score))
+    # return jsonify(news_classifier.vector_model.transform(['Alibaba']).toarray().tolist())
+    return jsonify(score=str(score))
 
 
 

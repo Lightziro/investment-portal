@@ -5,7 +5,7 @@ import {
     initMainStore,
 } from "../../ts/types/redux/store.init";
 import { setNoticeView } from "../utils/user.utils";
-import { addComment } from "../utils/idea.utils";
+import { addComment } from "../utils/view.utils";
 
 const mainReducer = (
     state: MainStore = initMainStore,

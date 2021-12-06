@@ -23,7 +23,7 @@ class StockMarket
 
     public function __construct()
     {
-        $this->config = Configuration::getDefaultConfiguration()->setApiKey('token', 'c5pu62qad3ib146a39ng');
+        $this->config = Configuration::getDefaultConfiguration()->setApiKey('token', $this->api_key);
         $this->client = new DefaultApi(
             new Client(),
             $this->config

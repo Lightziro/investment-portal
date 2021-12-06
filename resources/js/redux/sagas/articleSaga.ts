@@ -36,8 +36,20 @@ function* fetchArticleView(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* createArticleComment(action: AnyAction): Generator {
+    try {
+        const comment = yield axios
+            .post("/api/article/create-comment", action.commentData)
+            .then((response) => response.data);
+        yield put({
+            type: "ADD_NEW_ARTICLE_COMMENT",
+            comment,
+        });
+    } catch (e) {}
+}
 export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("CREATE_ARTICLE", createArticle);
     yield takeLatest("FETCH_ARTICLE_VIEW", fetchArticleView);
     yield takeLatest("FETCH_ARTICLE_FOR_ADMIN", fetchArticleForAdmin);
+    yield takeLatest("CREATE_ARTICLE_COMMENT", createArticleComment);
 }

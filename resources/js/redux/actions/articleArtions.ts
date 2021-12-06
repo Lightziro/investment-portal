@@ -12,3 +12,7 @@ export const fetchArticleView = (articleId: number) => ({
     type: "FETCH_ARTICLE_VIEW",
     articleId,
 });
+export const createArticleComment = (articleId: number, comment: string) => ({
+    type: "CREATE_ARTICLE_COMMENT",
+    commentData: { articleId, comment },
+});

@@ -37,19 +37,23 @@ export const Portal: React.FC = () => {
     return (
         <Fragment>
             <Grid container spacing={3}>
-                <Grid item sm={3}>
+                <Grid
+                    display={{ xs: "none", sm: "none", md: "block" }}
+                    item
+                    md={3}
+                >
                     <NewsPortalList />
                 </Grid>
-                <Grid item sm={9}>
+                <Grid xs={false} item md={9}>
                     <Paper elevation={2} sx={{ p: 1, mb: 2 }}>
                         <Typography variant="h3">Investments</Typography>
                     </Paper>
                     <Grid container spacing={3}>
-                        <Grid direction="column" item sm={9}>
+                        <Grid direction="column" item md={9} sm={12}>
                             <ArticleList />
                             <div>Test</div>
                         </Grid>
-                        <Grid item sm={3}>
+                        <Grid item sm={12} md={3}>
                             <PortalAd />
                             <IdeaStatistics />
                             <IdeaList />
