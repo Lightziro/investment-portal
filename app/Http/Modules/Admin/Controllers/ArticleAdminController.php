@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
+use JetBrains\PhpStorm\ArrayShape;
 use Throwable;
 
 class ArticleAdminController extends Controller
@@ -31,24 +32,66 @@ class ArticleAdminController extends Controller
             $article_model->content = $post['content'];
             $article_model->author_id = $post['userId'];
             $article_model->save();
-            return response()->json($article_model->getFrontend());
+            return response()->json(array_merge($article_model->getFrontend(), [
+                'content' => $article_model->content
+            ]));
         } catch (Throwable $e) {
             return response()->json(['message' => 'Failed to create article'], 400);
         }
 
     }
 
+    public function updateArticle(Request $request): JsonResponse
+    {
+        $post = $request->post();
+        try {
+            /** @var Article $article_model */
+            $article_model = Article::query()->where(['article_id' => $post['articleId']])->first();
+            if (!$article_model) {
+                return response()->json(['message' => 'Could not find an updated article'], 400);
+            }
+            $article_model->title = $post['title'];
+            $article_model->content = $post['content'];
+            if (!$article_model->save()) {
+                return response()->json(['Failed to update data'], 400);
+            }
+            return response()->json(array_merge($article_model->getFrontend(), [
+                'content' => $article_model->content,
+            ]));
+        } catch (Throwable $e) {
+            return response()->json(['message' => 'Error update'], 400);
+        }
+    }
+
     public function getArticlesByPage(int $page): JsonResponse
+    {
+        return response()->json($this->articleListByPage($page));
+    }
+
+    #[ArrayShape(['items' => "array", 'lastPage' => "int"])] private function articleListByPage(int $page): array
     {
         Paginator::currentPageResolver(fn() => $page);
         $articles = Article::query()->paginate(self::ARTICLE_PAGE_SIZE);
-        /** @var Article $article_model */
         foreach ($articles as $article_model) {
-            $ar_articles[] = $article_model->getFrontend();
+            $ar_articles[] = array_merge($article_model->getFrontend(), [
+                'content' => $article_model->content
+            ]);
         }
-        return response()->json([
-            'items' => $ar_articles ?? [],
-            'lastPage' => $articles->lastPage(),
-        ]);
+        return ['items' => $ar_articles ?? [], 'lastPage' => $articles->lastPage()];
+    }
+
+    public function deleteArticle(Request $request)
+    {
+        try {
+            $post = $request->post();
+            Paginator::currentPageResolver(fn() => $post['page']);
+            $article = Article::query()->where(['article_id' => $post['articleId']])->first();
+            if ($article && $article->delete()) {
+                return response()->json($this->articleListByPage($request['page']));
+            }
+        } catch (Throwable $e) {
+            return response()->json(['message' => 'Not success'], 400);
+        }
+
     }
 }

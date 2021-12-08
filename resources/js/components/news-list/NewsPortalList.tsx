@@ -21,7 +21,7 @@ export const NewsPortalList: React.FC = () => {
             >
                 {news
                     ? news.map((item) => (
-                          <a href={item.url} target="_blank">
+                          <a key={item.id} href={item.url} target="_blank">
                               <Typography
                                   className="news-title"
                                   variant="body2"
@@ -35,8 +35,12 @@ export const NewsPortalList: React.FC = () => {
                       ))
                     : Array(20)
                           .fill(0)
-                          .map((item) => (
-                              <Skeleton variant={"rectangular"} height={51} />
+                          .map((_, i) => (
+                              <Skeleton
+                                  key={i}
+                                  variant={"rectangular"}
+                                  height={51}
+                              />
                           ))}
             </Stack>
         </Paper>

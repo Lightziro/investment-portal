@@ -30,10 +30,6 @@ export const MainRouter: React.FC = () => {
                 },
                 { path: "users", element: <UsersSection /> },
                 { path: "smart-analytic", element: <SmartAnalytic /> },
-                {
-                    path: "investment-ideas/create-idea",
-                    element: <CreateIdeaDialog />,
-                },
                 { path: "articles", element: <ArticlesSection /> },
             ],
         },

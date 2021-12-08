@@ -4,13 +4,11 @@ import { StoreData } from "../../ts/types/redux/store.types";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import SwiperCore, { Pagination, Navigation } from "swiper";
-import { LinkNewsItem } from "./LinkNewsItem";
 import { Box, Paper, Skeleton } from "@mui/material";
 
 SwiperCore.use([Navigation]);
@@ -34,23 +32,23 @@ export const NewsSliderList: React.FC = () => {
                             {news.map((item) => (
                                 <SwiperSlide>
                                     <div className="swiper-content-wrapper">
-                                        <LinkNewsItem
-                                            url={item.url}
-                                            className="link-image-news"
-                                        >
-                                            <img
-                                                src={item.image}
-                                                alt={item.headline}
-                                            />
-                                        </LinkNewsItem>
-                                        <LinkNewsItem
-                                            url={item.url}
-                                            className="link-title-news"
-                                        >
-                                            <span className="news-title">
-                                                {item.headline}
-                                            </span>
-                                        </LinkNewsItem>
+                                        {/*<LinkNewsItem*/}
+                                        {/*    url={item.url}*/}
+                                        {/*    className="link-image-news"*/}
+                                        {/*>*/}
+                                        {/*    <img*/}
+                                        {/*        src={item.image}*/}
+                                        {/*        alt={item.headline}*/}
+                                        {/*    />*/}
+                                        {/*</LinkNewsItem>*/}
+                                        {/*<LinkNewsItem*/}
+                                        {/*    url={item.url}*/}
+                                        {/*    className="link-title-news"*/}
+                                        {/*>*/}
+                                        {/*    <span className="news-title">*/}
+                                        {/*        {item.headline}*/}
+                                        {/*    </span>*/}
+                                        {/*</LinkNewsItem>*/}
                                     </div>
                                 </SwiperSlide>
                             ))}

@@ -1,11 +1,7 @@
 import { AnyAction } from "redux";
 import { MainStore } from "../../ts/types/redux/store.types";
-import {
-    initialIdeaView,
-    initMainStore,
-} from "../../ts/types/redux/store.init";
+import { initMainStore } from "../../ts/types/redux/store.init";
 import { setNoticeView } from "../utils/user.utils";
-import { addComment } from "../utils/view.utils";
 
 const mainReducer = (
     state: MainStore = initMainStore,
@@ -26,27 +22,11 @@ const mainReducer = (
             };
         case "SET_NOTICE_VIEW":
             return setNoticeView(state, action.noticeId);
-        case "SET_IDEA_VIEW_DATA":
-            return { ...state, ideaView: action.data };
-        case "FETCH_INVESTMENT_IDEA":
-            return {
-                ...state,
-                ideaView: {
-                    ...state.ideaView,
-                    ideaInfo: null,
-                    companyInfo: null,
-                    analyticsStats: null,
-                    authorInfo: null,
-                    epsStats: null,
-                },
-            };
-        case "ADD_NEW_IDEA_COMMENT":
-            return {
-                ...state,
-                ideaView: addComment(state.ideaView, action.createComment),
-            };
-        case "CLEAR_IDEA_DATA":
-            return { ...state, ideaView: initialIdeaView };
+        // case "ADD_NEW_IDEA_COMMENT":
+        //     return {
+        //         ...state,
+        //         ideaView: addComment(state.ideaView, action.createComment),
+        //     };
         case "SET_PROFILE_VIEW":
             return { ...state, profileView: action.profile };
         case "SET_COUNTRIES":

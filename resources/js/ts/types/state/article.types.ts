@@ -7,6 +7,7 @@ export interface Article {
     dateUpdate: string;
     preview: string;
     author: ArticleAuthor;
+    content: string;
 }
 
 export interface ArticleAuthor {
@@ -17,7 +18,7 @@ export interface ArticleAuthor {
 
 export interface ArticleLabel {
     icon: string;
-    text: string;
+    text: string | number;
 }
 
 export interface ArticleView extends Article {

@@ -14,7 +14,7 @@ export const ArticleList: React.FC = () => {
             <Grid justifyContent="center" container direction="row" spacing={3}>
                 {popular ? (
                     popular.map((article) => (
-                        <Grid xs={12} item sm={4}>
+                        <Grid key={article.articleId} xs={12} item sm={4}>
                             <ArticleItem item={article} />
                         </Grid>
                     ))
@@ -31,7 +31,15 @@ export const ArticleList: React.FC = () => {
             >
                 {simple ? (
                     simple.map((article) => (
-                        <Grid xs={6} md={4} lg={4} xl={3} item sm={6}>
+                        <Grid
+                            key={article.articleId}
+                            xs={6}
+                            md={4}
+                            lg={4}
+                            xl={3}
+                            item
+                            sm={6}
+                        >
                             <ArticleItem item={article} />
                         </Grid>
                     ))

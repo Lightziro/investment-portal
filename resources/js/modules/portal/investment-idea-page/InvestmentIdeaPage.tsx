@@ -1,7 +1,10 @@
 import React, { useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInvestmentIdea } from "../../../redux/actions/mainActions";
+import {
+    clearView,
+    fetchInvestmentIdea,
+} from "../../../redux/actions/mainActions";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { Divider, Grid } from "@mui/material";
 import { ChartStatsEPS } from "./charts-company-data/ChartStatsEPS";
@@ -11,15 +14,14 @@ import { CompanyIdeaHeader } from "../../../components/simple/company-idea-heade
 import { CompanyDescription } from "./IdeaInformation/CompanyDescription";
 import { IdeaDescription } from "./idea-description/IdeaDescription";
 import { IdeaInformation } from "./company-description/IdeaInformation";
-import { clearIdeaData } from "../../../redux/actions/investmentIdeaActions";
 
 export const InvestmentIdeaPage: React.FC = () => {
     const dispatch = useDispatch();
-    const ideaData = useSelector((state: StoreData) => state.main.ideaView);
+    const ideaData = useSelector((state: StoreData) => state.view.idea);
     const { ideaId } = useParams();
     useEffect(() => {
         if (Number(ideaId) !== ideaData.ideaId) {
-            dispatch(clearIdeaData());
+            dispatch(clearView("idea"));
             dispatch(fetchInvestmentIdea(parseInt(ideaId)));
         }
     }, []);

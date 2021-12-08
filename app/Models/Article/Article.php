@@ -8,6 +8,8 @@ use App\Custom\Relations\CustomHasMany;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 use JetBrains\PhpStorm\Pure;
@@ -20,11 +22,12 @@ use JetBrains\PhpStorm\Pure;
  * @property Carbon updated_at
  * @property string preview_path
  * @property User author
+ * @property int author_id
  * @property Collection|ArticleLabels[] labels
  * @property Collection|ArticleViewing[] viewing
  * @property Collection|ArticleComments[] comments
  */
-class Article extends CustomModel
+class Article extends Model
 {
     protected $table = 'articles';
     protected $primaryKey = 'article_id';
@@ -66,7 +69,7 @@ class Article extends CustomModel
         ]);
     }
 
-    public function viewing(): CustomHasMany
+    public function viewing(): HasMany
     {
         return $this->hasMany(ArticleViewing::class, 'article_id', 'article_id');
     }
@@ -76,12 +79,12 @@ class Article extends CustomModel
         return self::query()->withCount('viewing')->orderBy('viewing_count', 'desc');
     }
 
-    public function labels(): CustomHasMany
+    public function labels(): HasMany
     {
         return $this->hasMany(ArticleLabels::class, 'article_id', 'article_id');
     }
 
-    public function comments(): CustomHasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(ArticleComments::class, 'article_id', 'article_id');
     }

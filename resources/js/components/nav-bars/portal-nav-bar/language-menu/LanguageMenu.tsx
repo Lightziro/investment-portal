@@ -44,6 +44,7 @@ export const LanguageMenu: React.FC<LanguageMenu> = ({
             >
                 {MENU_LANGUAGE.map((language) => (
                     <MenuItem
+                        key={language.value}
                         id={language.value}
                         onClick={() => handleChangeLanguage(language.value)}
                         selected={language.value === i18n.language}

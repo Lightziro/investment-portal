@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Investment\InvestmentIdeaComments;
 use App\Models\Other\Country;
 use App\Models\User\UserNotices;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +22,7 @@ use JetBrains\PhpStorm\Pure;
  * @property string remember_token
  * @property UsersRole|null role
  * @property null|int role_id
- * @property InvestmentIdea|null investment_ideas
+ * @property InvestmentIdea|Collection|null investment_ideas
  * @property UserNotices[] notices
  * @property string avatar_path
  * @property Carbon created_at

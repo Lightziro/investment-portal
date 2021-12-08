@@ -37,17 +37,6 @@ function* viewNotice(action: AnyAction): Generator {
         });
     }
 }
-function* fetchInvestmentIdea(action: AnyAction): Generator {
-    try {
-        const data = yield axios
-            .get(`/api/investment-data/idea/${action.ideaId}`)
-            .then((response) => response.data);
-        yield put({
-            type: "SET_IDEA_VIEW_DATA",
-            data,
-        });
-    } catch (error) {}
-}
 function* registerUser(action: AnyAction): Generator {
     try {
         const userData = yield axios
@@ -96,7 +85,6 @@ export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("USER_LOGIN", authorizationUser);
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("VIEW_NOTICE", viewNotice);
-    yield takeLatest("FETCH_INVESTMENT_IDEA", fetchInvestmentIdea);
     yield takeLatest("REGISTER_USER", registerUser);
     yield takeLatest("AUTH_USER", authUser);
     yield takeLatest("FETCH_COUNTRIES", fetchCountries);

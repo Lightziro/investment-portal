@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Cache;
 
 class InvestmentIdeaController extends Controller
 {
-    public function createComment(Request $request) {
+    public function createComment(Request $request): JsonResponse
+    {
         $commentData = $request->post();
         $user_id = $commentData['userId'];
         if (!isset($commentData['ideaId'], $commentData['text']) || !is_numeric($request->post()['ideaId'])) {

@@ -14,8 +14,8 @@ export const LoadArticleItems: React.FC<LoadArticleItems> = ({
         <Fragment>
             {Array(count)
                 .fill(1)
-                .map((item) => (
-                    <Grid key={item} item sm={sm}>
+                .map((_, i) => (
+                    <Grid key={i} item sm={sm}>
                         <Skeleton height={height} variant={"rectangular"} />
                     </Grid>
                 ))}

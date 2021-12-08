@@ -38,6 +38,7 @@
         "@mui/material": "^5.0.4",
         "@mui/styled-engine-sc": "^5.0.3",
         "@mui/utils": "^5.0.0",
+        "@mui/x-data-grid": "^5.1.0",
         "@testing-library/jest-dom": "^5.14.1",
         "@tinymce/tinymce-react": "^3.13.0",
         "@trendyol-js/react-carousel": "^2.0.0",
