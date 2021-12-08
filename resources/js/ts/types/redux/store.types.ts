@@ -14,14 +14,12 @@ export interface MainStore {
     user: User;
     news: News[];
     investmentData: InvestmentData;
-    ideaView: InvestmentIdeaView;
     profileView: ProfileView;
     otherData: OtherData;
     articles: {
         popular: Article[];
         simple: Article[];
     };
-    articleView: Article;
 }
 export interface OtherData {
     countries: CountryItem[];
@@ -99,10 +97,14 @@ export interface AdminStore {
         };
         newsForAnalyze: NewsPrediction[];
     };
-    articles: {
-        list: Article[];
-        lastPage: number;
-    };
+    articles: AdminArticle;
+}
+export interface AdminArticle {
+    list: Article[];
+    lastPage: number;
+    loading: boolean;
+    dialog: boolean;
+    edit: Article;
 }
 export interface NewsPrediction {
     id: number;

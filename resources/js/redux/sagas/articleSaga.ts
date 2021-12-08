@@ -14,6 +14,14 @@ function* createArticle(action: AnyAction): Generator {
         });
     }
 }
+function* updateArticle(action: AnyAction): Generator {
+    try {
+        const articleData = yield axios
+            .post("/api/admin/article/update", action.articleForm)
+            .then((response) => response.data);
+        yield put({ type: "REPLACE_UPDATE_ARTICLE", articleData });
+    } catch (e) {}
+}
 function* fetchArticleForAdmin(action: AnyAction): Generator {
     try {
         const articlesData = yield axios
@@ -21,6 +29,7 @@ function* fetchArticleForAdmin(action: AnyAction): Generator {
             .then((response) => response.data);
         yield put({
             type: "SET_ARTICLES_LIST",
+            page: action.page,
             articlesData,
         });
     } catch (e) {}
@@ -31,7 +40,8 @@ function* fetchArticleView(action: AnyAction): Generator {
             .get(`/api/article/get/${action.articleId}`)
             .then((response) => response.data);
         yield put({
-            type: "SET_ARTICLE_DATA",
+            type: "SET_ENTITY_DATA",
+            entity: "article",
             data,
         });
     } catch (e) {}
@@ -45,6 +55,29 @@ function* createArticleComment(action: AnyAction): Generator {
             type: "ADD_NEW_ARTICLE_COMMENT",
             comment,
         });
+    } catch (e) {
+        yield put({
+            type: "SET_ALERT_ERROR",
+            message: "Error occurred, try again later",
+        });
+    }
+}
+function* deleteArticle(action: AnyAction): Generator {
+    try {
+        const articlesData = yield axios
+            .post(`/api/admin/article/delete`, {
+                page: action.page,
+                articleId: action.articleId,
+            })
+            .then((response) => response.data);
+        yield put({
+            type: "SET_ARTICLES_LIST",
+            articlesData,
+        });
+        yield put({
+            type: "SET_ALERT_SUCCESS",
+            message: "Entity successfully deleted",
+        });
     } catch (e) {}
 }
 export function* actionArticleWatcher(): SagaIterator {
@@ -52,4 +85,6 @@ export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("FETCH_ARTICLE_VIEW", fetchArticleView);
     yield takeLatest("FETCH_ARTICLE_FOR_ADMIN", fetchArticleForAdmin);
     yield takeLatest("CREATE_ARTICLE_COMMENT", createArticleComment);
+    yield takeLatest("UPDATE_ARTICLE", updateArticle);
+    yield takeLatest("DELETE_ARTICLE", deleteArticle);
 }

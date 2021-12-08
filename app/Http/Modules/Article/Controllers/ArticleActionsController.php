@@ -4,18 +4,19 @@ namespace App\Http\Modules\Article\Controllers;
 
 use App\Models\Article\Article;
 use App\Models\Article\ArticleComments;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Throwable;
 
 class ArticleActionsController extends Controller
 {
-    public function createComment(Request $request)
+    public function createComment(Request $request): JsonResponse
     {
         try {
             $post = $request->post();
             if (!is_numeric($post['articleId'])) {
-                return false;
+                return response()->json(['message' => 'No correct articleId'], 400);
             }
             /** @var Article $article_model */
             $article_model = Article::query()->where(['article_id' => $post['articleId']])->first();

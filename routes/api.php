@@ -57,7 +57,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::group(['prefix' => 'article'], function () {
         Route::post('/create', [ArticleAdminController::class, 'createArticle'])->middleware(BeforeGetAuthUserId::class);
+        Route::post('/update', [ArticleAdminController::class, 'updateArticle'])->middleware(BeforeGetAuthUserId::class);
         Route::get('/get/{page}', [ArticleAdminController::class, 'getArticlesByPage'])->middleware(BeforeGetAuthUserId::class);
+        Route::post('/delete', [ArticleAdminController::class, 'deleteArticle'])->middleware(BeforeGetAuthUserId::class);
     });
 });
 Route::group(['prefix' => 'investment-data'], function () {

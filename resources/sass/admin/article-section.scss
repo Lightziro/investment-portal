@@ -2,3 +2,12 @@
     position: absolute !important;
     right: 8px;
 }
+.article-admin-item-wrapper{
+    width: 100%;
+    margin: 8px 8px;
+    .title{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

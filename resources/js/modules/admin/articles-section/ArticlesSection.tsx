@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-    Button,
-    Container,
-    Pagination,
-    Stack,
-    Typography,
-} from "@mui/material";
+import { Button, Container, Divider, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { CreateArticle } from "./create-article/CreateArticle";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchArticlesForAdmin } from "../../../redux/actions/articleArtions";
-import { StoreData } from "../../../ts/types/redux/store.types";
+import { ArticleListAdmin } from "./article-list-admin/ArticleListAdmin";
+import { setArticleDialog } from "../../../redux/actions/adminActions";
 
 export const ArticlesSection: React.FC = () => {
-    const [dialog, setDialog] = useState(false);
     const dispatch = useDispatch();
-    const { list, lastPage } = useSelector(
-        (state: StoreData) => state.admin.articles
-    );
+
     useEffect(() => {
         dispatch(fetchArticlesForAdmin(0));
     }, []);
@@ -36,28 +28,14 @@ export const ArticlesSection: React.FC = () => {
                     variant="contained"
                     color="primary"
                     startIcon={<Icon icon="ant-design:plus-outlined" />}
-                    onClick={() => setDialog(true)}
+                    onClick={() => dispatch(setArticleDialog())}
                 >
                     Create article
                 </Button>
             </Stack>
-            <Stack justifyContent="center">
-                {list && (
-                    <Pagination
-                        onChange={(e, page) =>
-                            dispatch(fetchArticlesForAdmin(page))
-                        }
-                        count={lastPage}
-                        color="primary"
-                    />
-                )}
-            </Stack>
-            {dialog && (
-                <CreateArticle
-                    create={dialog}
-                    onClose={() => setDialog(false)}
-                />
-            )}
+            <Divider />
+            <ArticleListAdmin />
+            <CreateArticle />
         </Container>
     );
 };

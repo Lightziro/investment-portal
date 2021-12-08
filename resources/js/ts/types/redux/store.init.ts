@@ -1,23 +1,5 @@
-import {
-    AdminStore,
-    AlertStore,
-    MainStore,
-    ProfileView,
-    StoreData,
-} from "./store.types";
-import { initialArticleView } from "../../init/entity/article.init";
+import { AdminStore, AlertStore, MainStore, StoreData } from "./store.types";
 import { initialViewStore } from "../../init/redux/reducer.initial";
-
-export const initialIdeaView = {
-    epsStats: null,
-    ideaInfo: null,
-    analyticsStats: null,
-    companyInfo: null,
-    authorInfo: null,
-    description: null,
-    comments: null,
-    ideaId: null,
-};
 
 export const initMainStore: MainStore = {
     user: {
@@ -25,15 +7,15 @@ export const initMainStore: MainStore = {
         fullName: null,
         role: null,
         notices: [],
+        avatar: null,
     },
     news: null,
     investmentData: {
         bestProfit: null,
         worseProfit: null,
-        // actualIdeas: null,
+        investmentIdeas: null,
         ideaStatistics: null,
     },
-    ideaView: initialIdeaView,
 
     profileView: null,
     otherData: {
@@ -70,6 +52,9 @@ export const initialAdminStore: AdminStore = {
     articles: {
         list: null,
         lastPage: null,
+        loading: true,
+        dialog: false,
+        edit: null,
     },
 };
 

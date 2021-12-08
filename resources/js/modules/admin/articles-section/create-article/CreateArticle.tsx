@@ -1,24 +1,34 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import "suneditor/dist/css/suneditor.min.css";
-import { CreateArticleForm } from "./create-article-form/CreateArticleForm"; // Import Sun Editor's CSS File
-interface CreateArticle {
-    create: boolean;
-    onClose: () => void;
-}
-export const CreateArticle: React.FC<CreateArticle> = ({ create, onClose }) => {
+import { ArticleForm } from "./article-form/ArticleForm";
+import { useDispatch, useSelector } from "react-redux";
+import { StoreData } from "../../../../ts/types/redux/store.types";
+import { setArticleDialog } from "../../../../redux/actions/adminActions";
+export const CreateArticle: React.FC = () => {
+    const { dialog, edit } = useSelector(
+        (state: StoreData) => state.admin.articles
+    );
+    const dispatch = useDispatch();
     return (
-        <Dialog open={create} onClose={onClose}>
-            <DialogTitle>
-                Create
-                <IconButton className="close-button" onClick={onClose}>
-                    <CloseIcon />
-                </IconButton>
-            </DialogTitle>
-            <DialogContent dividers>
-                <CreateArticleForm />
-            </DialogContent>
-        </Dialog>
+        <Fragment>
+            {dialog && (
+                <Dialog open={dialog}>
+                    <DialogTitle>
+                        Create
+                        <IconButton
+                            className="close-button"
+                            onClick={() => dispatch(setArticleDialog(false))}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent dividers>
+                        <ArticleForm edit={edit} />
+                    </DialogContent>
+                </Dialog>
+            )}
+        </Fragment>
     );
 };

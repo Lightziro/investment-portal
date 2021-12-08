@@ -18,3 +18,7 @@ export const retrainNewsClassifier = (trainData: NewsPrediction[]) => ({
     type: "RETRAIN_NEWS_CLASSIFIER",
     trainData,
 });
+export const setArticleDialog = (state: boolean = true) => ({
+    type: "SET_ARTICLE_DIALOG",
+    state,
+});
