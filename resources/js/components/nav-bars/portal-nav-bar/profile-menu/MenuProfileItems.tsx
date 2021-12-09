@@ -12,8 +12,8 @@ export const MenuProfileItems: React.FC<MenuProfileItems> = ({ items }) => {
     const { t } = useTranslation();
     return (
         <Fragment>
-            {items.map((item) => (
-                <Link to={item.link}>
+            {items.map((item, i) => (
+                <Link key={i} to={item.link}>
                     <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>
                         <Box
                             component={Icon}
