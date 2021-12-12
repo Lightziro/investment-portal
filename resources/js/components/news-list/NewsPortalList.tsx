@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
+import { fetchNews } from "../../redux/actions/mainActions";
 
 export const NewsPortalList: React.FC = () => {
     const { i18n, t } = useTranslation();
     moment.locale(i18n.language);
     const news = useSelector((state: StoreData) => state.main.news);
-
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (!news) {
+            dispatch(fetchNews());
+        }
+    }, []);
     return (
         <Paper elevation={2} sx={{ px: 2, py: 1 }}>
             <Typography variant="h5" gutterBottom>

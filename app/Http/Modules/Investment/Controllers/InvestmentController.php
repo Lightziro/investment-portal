@@ -24,11 +24,7 @@ class InvestmentController extends BaseController
 //        $popular_ideas = InvestmentIdea::query()->getRelatedWithOrderByCount('views', 'user_view_id');
         $max_profit = InvestmentIdea::query()->max('profit');
         $min_profit = InvestmentIdea::query()->min('profit');
-        if (!$news = Cache::get("last-news")) {
-            $market = new StockMarket();
-            $news = $market->getMarketNews();
-            Cache::put("last-news", $news, now()->addHour(10));
-        }
+
         $count_success_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_SUCCESS])->count();
         $count_fail_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_FAIL])->count();
         $popular_articles = Article::mostPopular()->limit(3)->get();
@@ -60,7 +56,6 @@ class InvestmentController extends BaseController
         }
 
         return response()->json([
-            'news' => $news,
             'investmentData' => [
                 'bestProfit' => $max_profit,
                 'worseProfit' => $min_profit,
@@ -76,5 +71,15 @@ class InvestmentController extends BaseController
             ]
 
         ]);
+    }
+
+    public function getNews(): JsonResponse
+    {
+        if (!$news = Cache::get("last-news")) {
+            $market = new StockMarket();
+            $news = array_slice($market->getMarketNews(), 0, 10);
+            Cache::put("last-news", $news, now()->addHour(1));
+        }
+        return response()->json($news ?? []);
     }
 }

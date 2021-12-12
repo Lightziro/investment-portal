@@ -14,6 +14,7 @@ import { SmartAnalytic } from "../modules/admin/smart-analytic/SmartAnalytic";
 import { Profile } from "../modules/profile/Profile";
 import { ArticlesSection } from "../modules/admin/articles-section/ArticlesSection";
 import { ArticlePage } from "../modules/portal/article-page/ArticlePage";
+import { ForgotPassword } from "../modules/login-user/forgot-password/ForgotPassword";
 
 // ----------------------------------------------------------------------
 
@@ -64,6 +65,10 @@ export const MainRouter: React.FC = () => {
                 {
                     path: "register",
                     element: <Register />,
+                },
+                {
+                    path: "forgot-password",
+                    element: <ForgotPassword />,
                 },
             ],
         },

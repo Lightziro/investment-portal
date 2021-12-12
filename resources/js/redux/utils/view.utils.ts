@@ -22,3 +22,12 @@ export const addCommentArticle = (
         }),
     };
 };
+export const addCommentIdea = (
+    state: InvestmentIdeaView,
+    comment: IdeaComment
+): InvestmentIdeaView => {
+    return {
+        ...state,
+        comments: [comment, ...state.comments],
+    };
+};

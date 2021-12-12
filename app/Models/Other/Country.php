@@ -8,6 +8,7 @@ use App\Custom\CustomModel;
  * @property int country_id
  * @property string code
  * @property string name
+ * @method static orderBy(string $string)
  */
 class Country extends CustomModel
 {

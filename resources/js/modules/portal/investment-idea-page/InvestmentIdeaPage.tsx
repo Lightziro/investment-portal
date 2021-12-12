@@ -14,6 +14,8 @@ import { CompanyIdeaHeader } from "../../../components/simple/company-idea-heade
 import { CompanyDescription } from "./IdeaInformation/CompanyDescription";
 import { IdeaDescription } from "./idea-description/IdeaDescription";
 import { IdeaInformation } from "./company-description/IdeaInformation";
+import { CommentsWrapper } from "../../../components/smart/CommentsWrapper";
+import { createComment } from "../../../redux/actions/investmentIdeaActions";
 
 export const InvestmentIdeaPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -75,9 +77,14 @@ export const InvestmentIdeaPage: React.FC = () => {
                 <Grid item xs={9}>
                     Test
                 </Grid>
-                {/*<Grid item xs={3}>*/}
-                {/*    <IdeaComments />*/}
-                {/*</Grid>*/}
+                <Grid item xs={3}>
+                    <CommentsWrapper
+                        entityId={ideaData.ideaId}
+                        entityName="idea"
+                        comments={ideaData.comments}
+                        callbackEnter={createComment}
+                    />
+                </Grid>
             </Grid>
         </Fragment>
     );

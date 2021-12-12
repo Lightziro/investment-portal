@@ -117,7 +117,7 @@ export const Auth: React.FC = () => {
                 <Grid item xs>
                     <Link to="/forgot-password">
                         <Typography variant="body2">
-                            {t("Forgot password")}
+                            {t("Forgot password?")}
                         </Typography>
                     </Link>
                 </Grid>

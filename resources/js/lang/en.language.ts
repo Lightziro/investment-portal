@@ -6,7 +6,7 @@ export const enLanguage = {
     "Fail ideas": "Fail ideas: %amount%",
     "Successful ideas": "Successful ideas: %amount%",
     "Total ideas": "Total ideas: %amount%",
-    "Forgot password": "Forgot password?",
+    "Forgot password?": "Forgot password?",
     "Investment term": "Investment term %term% months",
     "Company description":
         "The company %companyName% listed on the stock market since %dateIPO% under the ticker %ticker%.",

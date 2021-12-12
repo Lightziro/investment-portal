@@ -5,12 +5,13 @@ import axios from "axios";
 
 function* createComment(action: AnyAction): Generator {
     try {
-        const createComment = yield axios
+        console.log("AGA");
+        const commentData = yield axios
             .post("/api/investment-idea/create-comment", action.commentData)
             .then((response) => response.data);
         yield put({
             type: "ADD_NEW_IDEA_COMMENT",
-            createComment,
+            commentData,
         });
     } catch (e) {}
 }

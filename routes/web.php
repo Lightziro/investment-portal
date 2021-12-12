@@ -30,6 +30,7 @@ Route::get('/register', [Controller::class, 'index']);
 Route::group(['prefix' => '/'], function () {
     Route::get('/profile/{id}', [Controller::class, 'index'])->where(['id' => '[0-9]+']);
     Route::get('/article/{id}', [Controller::class, 'index'])->where(['id' => '[0-9]+']);
+    Route::get('/forgot-password', [Controller::class, 'index']);
 });
 
 Route::group(['prefix' => 'admin-panel', 'middleware' => ['checkRoot']], function () {

@@ -1,24 +1,7 @@
 import React, { Fragment, useEffect } from "react";
-import { NewsSliderList } from "../../components/news-list/NewsSliderList";
-import {
-    Box,
-    Button,
-    Card,
-    Container,
-    Divider,
-    Grid,
-    Paper,
-    Stack,
-    Typography,
-} from "@mui/material";
-import { PortalNavBar } from "../../components/nav-bars/portal-nav-bar/PortalNavBar";
-import { PortalStatsIdea } from "../../components/simple/portal-stats-idea/PortalStatsIdea";
+import { Grid, Paper, Typography } from "@mui/material";
 import { fetchInvestmentData } from "../../redux/actions/mainActions";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../ts/types/redux/store.types";
-import moment from "moment";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { NewsPortalList } from "../../components/news-list/NewsPortalList";
 import { PortalAd } from "../../components/portal-ad/PortalAd";
 import { IdeaStatistics } from "./idea-statistics/IdeaStatistics";
