@@ -19,6 +19,7 @@ import { ArticleHeader } from "./article-header/ArticleHeader";
 import { ArticleContent } from "./article-content/ArticleContent";
 import { AboutAuthor } from "./article-content/about-author/AboutAuthor";
 import { CommentsWrapper } from "../../../components/smart/CommentsWrapper";
+import { NewsPortalList } from "../../../components/news-list/NewsPortalList";
 
 export const ArticlePage: React.FC = () => {
     const article = useSelector((state: StoreData) => state.view.article);
@@ -51,13 +52,25 @@ export const ArticlePage: React.FC = () => {
                         <AboutAuthor author={article.author} />
                     </Paper>
                 </Grid>
-                <Grid item md={4} lg={3}>
-                    <CommentsWrapper
-                        entityId={article.articleId}
-                        entityName="article"
-                        callbackEnter={createArticleComment}
-                        comments={article.comments}
-                    />
+                <Grid
+                    container
+                    direction="column"
+                    item
+                    md={4}
+                    lg={3}
+                    spacing={2}
+                >
+                    <Grid item>
+                        <CommentsWrapper
+                            entityId={article.articleId}
+                            entityName="article"
+                            callbackEnter={createArticleComment}
+                            comments={article.comments}
+                        />
+                    </Grid>
+                    <Grid item direction="column">
+                        <NewsPortalList />
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>

@@ -15,6 +15,7 @@ interface CommentsWrapper {
 }
 export const CommentsWrapper: React.FC<CommentsWrapper> = ({
     entityId,
+    entityName,
     callbackEnter,
     comments,
 }) => {
@@ -33,17 +34,17 @@ export const CommentsWrapper: React.FC<CommentsWrapper> = ({
         return null;
     }
     return (
-        <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
+        <Card sx={{ bgcolor: "white", p: 2 }} className="shadow-wrapper">
             <Typography variant="h6">{t("Comments")}</Typography>
             <Divider />
             <Form.Control
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={
-                    !user ? "Log in and send comment" : "Enter comment"
+                    !user.userId ? "Log in and send comment" : "Enter comment"
                 }
                 onKeyDown={handleKeyDown}
-                disabled={!user}
+                disabled={!user.userId}
             />
             <Stack justifyContent="flex-start" className="comments-area">
                 {comments.length ? (

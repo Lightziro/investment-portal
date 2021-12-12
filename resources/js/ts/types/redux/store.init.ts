@@ -1,14 +1,11 @@
 import { AdminStore, AlertStore, MainStore, StoreData } from "./store.types";
-import { initialViewStore } from "../../init/redux/reducer.initial";
+import {
+    initialUser,
+    initialViewStore,
+} from "../../init/redux/reducer.initial";
 
 export const initMainStore: MainStore = {
-    user: {
-        userId: null,
-        fullName: null,
-        role: null,
-        notices: [],
-        avatar: null,
-    },
+    user: initialUser,
     news: null,
     investmentData: {
         bestProfit: null,

@@ -18,7 +18,6 @@ export const PortalNavBar: React.FC = () => {
     const handleOpen = (state: boolean, name: string) => {
         setOpen({ ...open, [name]: state });
     };
-    console.log("AGA");
 
     return (
         <header className="portal-nav-bar">

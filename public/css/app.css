@@ -11540,7 +11540,7 @@ textarea.form-control-lg {
 
 .comments-area {
   max-height: 400px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 8px 0;
 }
 .comments-area::-webkit-scrollbar {
@@ -11565,6 +11565,11 @@ textarea.form-control-lg {
 }
 .comment-idea-info .author-comment:hover {
   opacity: 0.8;
+}
+
+.footer-wrapper {
+  background-color: #d7dffd;
+  width: 100%;
 }
 
 .article-title {
@@ -11829,7 +11834,7 @@ img {
   padding: 20px;
   border-radius: 12px;
   width: 95%;
-  margin: 88px auto 0;
+  margin: 88px auto 20px;
 }
 
 .invest-idea-wrapper {

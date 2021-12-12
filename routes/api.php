@@ -6,7 +6,7 @@ use App\Http\Modules\Admin\Controllers\ArticleAdminController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
 use App\Http\Modules\Article\Controllers\ArticleActionsController;
-use App\Http\Modules\Core\Controllers\OtherControllers;
+use App\Http\Modules\Core\Controllers\OtherController;
 use App\Http\Modules\Core\Controllers\UserController;
 use App\Http\Modules\Core\Middleware\BeforeGetUserAuth;
 use App\Http\Modules\Investment\Controllers\InvestmentController;
@@ -42,6 +42,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/profile/{id}', [UserController::class, 'getProfile']);
     Route::post('/profile/update', [ProfileController::class, 'updateProfileData'])->middleware(BeforeGetAuthUserId::class);
+    Route::get('/exit', [AuthController::class, 'exitUser']);
 });
 
 Route::group(['prefix' => 'news'], function () {
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'investment-data'], function () {
     Route::get('/get', [InvestmentController::class, 'getData']);
     Route::get('/portal', [InvestmentController::class, 'getPortalData']);
+    Route::get('/news', [InvestmentController::class, 'getNews']);
     Route::get('/idea/{id}', [InvestmentIdeaController::class, 'getInvestmentIdeaData'])->middleware(AfterViewIdeaMiddleware::class);
 });
 
@@ -76,6 +78,7 @@ Route::group(['prefix' => 'article'], function () {
     Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware(BeforeGetUserAuth::class);
 });
 Route::group(['prefix' => 'other'], function () {
-    Route::get('/countries', [OtherControllers::class, 'getCountries']);
+    Route::get('/countries', [OtherController::class, 'getCountries']);
+    Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);
 });
 

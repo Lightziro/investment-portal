@@ -2,9 +2,10 @@ import React, { Fragment, useRef } from "react";
 import { Avatar, IconButton } from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
 import { StoreData } from "../../../../ts/types/redux/store.types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NoLoginMenu } from "./NoLoginMenu";
 import { LoginMenu } from "./LoginMenu";
+import { exitUser } from "../../../../redux/actions/mainActions";
 
 interface ProfileMenu {
     open: boolean;
@@ -18,6 +19,11 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
 }) => {
     const anchorRef = useRef(null);
     const user = useSelector((state: StoreData) => state.main.user);
+    const dispatch = useDispatch();
+    const handleExit = () => {
+        dispatch(exitUser());
+        onClose();
+    };
     return (
         <Fragment>
             <IconButton
@@ -39,7 +45,11 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 anchorEl={anchorRef.current}
                 sx={{ width: 220 }}
             >
-                {user.userId ? <LoginMenu user={user} /> : <NoLoginMenu />}
+                {user.userId ? (
+                    <LoginMenu user={user} handleExit={handleExit} />
+                ) : (
+                    <NoLoginMenu />
+                )}
             </MenuPopover>
         </Fragment>
     );

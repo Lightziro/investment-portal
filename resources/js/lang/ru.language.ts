@@ -23,7 +23,7 @@ export const ruLanguage = {
     "Email Address": "Электронная почта",
     "I consent to the processing of personal data and confirm that I am the owner of the specified data.":
         "Я даю согласие на обработку персональных данных и подтверждаю, что являюсь владельцем указанных данных.",
-    "Forgot password": "Забыли пароль?",
+    "Forgot password?": "Забыли пароль?",
     "Don't have an account? Sign Up": "Нет аккаунта? Регистрируйся",
     "Already have an account? Log in":
         "У вас есть учетная запись? Авторизоваться",
@@ -62,6 +62,13 @@ export const ruLanguage = {
     "Incorrectly filled in data": "Неверно заполненные данные",
     "User statistics": "Статистика пользователя",
     "Total comments": "Всего комментариев",
+    Exit: "Выйти",
+    "Specify your email address": "Укажите свою электронную почту",
+    Subscribe: "Подписаться",
+    "You successfully subscribed portal news":
+        "Вы успешно подписались на рассылку портала",
+    "Failed subscribe. Try again later":
+        "Не удалось подписаться. Повторите попытку позже",
     "Company description":
         "Компания %companyName% котируется на фондовом рынке с %dateIPO% под тикером %ticker%.",
 };

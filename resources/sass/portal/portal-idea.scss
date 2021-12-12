@@ -3,7 +3,7 @@
 }
 .comments-area{
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 8px 0;
     &::-webkit-scrollbar {
         width: 8px;
