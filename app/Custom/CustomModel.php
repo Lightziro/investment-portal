@@ -60,6 +60,7 @@ abstract class CustomModel extends Model
         if ($save) {
             $this->afterInstanceSave();
         }
+        return $save;
     }
 
     public function afterInstanceSave(): void { }

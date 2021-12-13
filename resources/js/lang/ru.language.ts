@@ -69,6 +69,8 @@ export const ruLanguage = {
         "Вы успешно подписались на рассылку портала",
     "Failed subscribe. Try again later":
         "Не удалось подписаться. Повторите попытку позже",
+    "You successfully changed your password": "Вы успешно сменили свой пароль",
+    "Error occurred, try again later": "Произошла ошибка, повторите позднее",
     "Company description":
         "Компания %companyName% котируется на фондовом рынке с %dateIPO% под тикером %ticker%.",
 };

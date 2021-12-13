@@ -6,6 +6,7 @@ use App\Http\Modules\Admin\Controllers\ArticleAdminController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
 use App\Http\Modules\Article\Controllers\ArticleActionsController;
+use App\Http\Modules\Auth\Controllers\UserActionController;
 use App\Http\Modules\Core\Controllers\OtherController;
 use App\Http\Modules\Core\Controllers\UserController;
 use App\Http\Modules\Core\Middleware\BeforeGetUserAuth;
@@ -43,6 +44,8 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/profile/{id}', [UserController::class, 'getProfile']);
     Route::post('/profile/update', [ProfileController::class, 'updateProfileData'])->middleware(BeforeGetAuthUserId::class);
     Route::get('/exit', [AuthController::class, 'exitUser']);
+    Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('/recovery-password', [UserActionController::class, 'recoveryPassword']);
 });
 
 Route::group(['prefix' => 'news'], function () {

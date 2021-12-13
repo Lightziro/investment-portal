@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Modules\Auth\Middleware\CheckKeyRecoveryMiddleware;
 use App\Http\Modules\Portal\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -31,6 +32,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/profile/{id}', [Controller::class, 'index'])->where(['id' => '[0-9]+']);
     Route::get('/article/{id}', [Controller::class, 'index'])->where(['id' => '[0-9]+']);
     Route::get('/forgot-password', [Controller::class, 'index']);
+    Route::get('/recovery/{key}', [Controller::class, 'index'])->middleware(CheckKeyRecoveryMiddleware::class);
 });
 
 Route::group(['prefix' => 'admin-panel', 'middleware' => ['checkRoot']], function () {

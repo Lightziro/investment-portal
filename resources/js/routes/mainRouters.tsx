@@ -15,6 +15,7 @@ import { Profile } from "../modules/profile/Profile";
 import { ArticlesSection } from "../modules/admin/articles-section/ArticlesSection";
 import { ArticlePage } from "../modules/portal/article-page/ArticlePage";
 import { ForgotPassword } from "../modules/login-user/forgot-password/ForgotPassword";
+import { RecoveryPassword } from "../modules/login-user/recovery-password/RecoveryPassword";
 
 // ----------------------------------------------------------------------
 
@@ -69,6 +70,10 @@ export const MainRouter: React.FC = () => {
                 {
                     path: "forgot-password",
                     element: <ForgotPassword />,
+                },
+                {
+                    path: "/recovery/:key",
+                    element: <RecoveryPassword />,
                 },
             ],
         },

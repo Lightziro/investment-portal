@@ -13,8 +13,6 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../ts/types/redux/store.types";
-import { RoleUserChip } from "./role-user=chip/RoleUserChip";
-import EditIcon from "@mui/icons-material/Edit";
 import { ProfileUserInfo } from "./profile-user-info/ProfileUserInfo";
 import { useParams } from "react-router-dom";
 import { fetchProfileView } from "../../redux/actions/profileActions";

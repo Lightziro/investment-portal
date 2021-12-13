@@ -19,7 +19,7 @@ export const SnackbarAlert: React.FC = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
                     <Alert
-                        onClose={() => dispatch(clearAlert())}
+                        // onClose={() => dispatch(clearAlert())}
                         severity={alert.status}
                         sx={{ width: "100%" }}
                     >
