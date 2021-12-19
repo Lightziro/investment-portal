@@ -71,6 +71,7 @@ export const ruLanguage = {
         "Не удалось подписаться. Повторите попытку позже",
     "You successfully changed your password": "Вы успешно сменили свой пароль",
     "Error occurred, try again later": "Произошла ошибка, повторите позднее",
+    "Next stage": "Следующая стадия",
     "Company description":
         "Компания %companyName% котируется на фондовом рынке с %dateIPO% под тикером %ticker%.",
 };

@@ -28,14 +28,13 @@ class InvestmentDataController extends Controller
         return response()->json($ar_response);
     }
 
-    public function getCompanies(Request $request): JsonResponse
+    public function getCompanies(string $query): JsonResponse
     {
-        $name = $request->post()['name'];
-        $companies = Company::query()->where('name', 'LIKE', "%{$name}%");
+        $companies = Company::query()->where('name', 'LIKE', "%{$query}%");
         if ($companies->count() > 0) { // Поиск по базе
             /** @var Company $company */
             foreach ($companies->limit(5)->get() as $company) {
-                $ar_company[] = $company->name;
+                $ar_company[] = (string)$company;
             }
         }
         return response()->json($ar_company ?? []);

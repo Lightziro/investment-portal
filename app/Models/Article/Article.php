@@ -2,10 +2,8 @@
 
 namespace App\Models\Article;
 
-use App\Custom\CustomModel;
 use App\Custom\Query\CustomQueryBuilder;
-use App\Custom\Relations\CustomHasMany;
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

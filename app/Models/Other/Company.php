@@ -3,7 +3,6 @@
 namespace App\Models\Other;
 
 use App\Models\Company\CompanyActivity;
-use App\Models\UsersRole;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -23,6 +22,11 @@ class Company extends Model
     protected $primaryKey = 'company_id';
 
     protected $table = 'companies';
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function activity(): HasOne
     {

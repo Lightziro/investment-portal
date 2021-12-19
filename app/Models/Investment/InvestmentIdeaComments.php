@@ -3,11 +3,9 @@
 namespace App\Models\Investment;
 
 use App\Custom\CustomModel;
-use App\Models\User;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * @property User user

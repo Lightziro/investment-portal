@@ -3,8 +3,8 @@
 namespace App\Http\Modules\Investment\Controllers;
 
 use App\Http\Classes\StockMarket;
+use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
-use App\Models\InvestmentIdea;
 use Finnhub\Model\BasicFinancials;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

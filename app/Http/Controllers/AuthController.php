@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ForgotPassword;
-use App\Models\User;
+use App\Models\User\User;
 use App\Models\User\UserRecovery;
-use App\Models\UsersRole;
+use App\Models\User\UsersRole;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Throwable;
@@ -50,19 +50,6 @@ class AuthController extends BaseController
         return response()->json($user->getFrontendData())->cookie($cookie);
     }
 
-
-    public function authentication(): JsonResponse
-    {
-        $cookie = Cookie::get();
-        if (empty($cookie['token'])) {
-            return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
-        }
-        $user = User::query()->where('remember_token', $cookie['token'])->first();
-        if (!$user) {
-            return response()->json(['error' => 'Не удалось аутентифицировать пользователя'], 400);
-        }
-        return response()->json($user->getFrontendData());
-    }
 
     public function register(Request $request): RedirectResponse|JsonResponse
     {
@@ -103,14 +90,6 @@ class AuthController extends BaseController
         return redirect()->to('/', 400);
     }
 
-    public function exitUser(): JsonResponse|Redirector|RedirectResponse|Application
-    {
-        $cookie = Cookie::get();
-        if (empty($cookie['token'])) {
-            return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
-        }
-        return response()->json(['status' => true])->withCookie(Cookie::forget('token'));
-    }
 
     public function authGitHub()
     {
@@ -120,32 +99,5 @@ class AuthController extends BaseController
     public function redirectToGithub(): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         return Socialite::driver('github')->stateless()->redirect();
-    }
-
-    public function forgotPassword(Request $request): JsonResponse
-    {
-        $post = $request->post();
-        /** @var User $user */
-        if (!$user = User::query()->where(['email' => $post['email']])->first()) {
-            return response()->json(['message' => "Couldn't find a user with this email address"], 400);
-        }
-//        $key = Hash::make($user->user_id);
-        $key = md5($user->user_id);
-        $recovery_model = new UserRecovery();
-        $recovery_model->user_id = $user->user_id;
-        $recovery_model->recovery_ip = $_SERVER['REMOTE_ADDR'];
-        $recovery_model->key = $key;
-
-        try {
-            $error_message = 'Error occurred, try again later';
-            if ($recovery_model->save()) {
-                Mail::to($user->email)->send(new ForgotPassword($recovery_model));
-                return response()->json(['message' => 'A confirmation message has been sent to your email']);
-            }
-        } catch (Throwable $e) {
-            $error_message = 'A confirmation message has been sent to your email';
-        }
-        return response()->json(['message' => $error_message], 400);
-
     }
 }

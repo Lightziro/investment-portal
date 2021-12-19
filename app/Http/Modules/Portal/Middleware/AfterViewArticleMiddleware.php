@@ -3,8 +3,7 @@
 namespace App\Http\Modules\Portal\Middleware;
 
 use App\Models\Article\ArticleViewing;
-use App\Models\Investment\InvestmentIdeaViewing;
-use App\Models\User;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Collection;

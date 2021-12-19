@@ -2,7 +2,7 @@
 
 namespace App\Http\Modules\Profile\Middleware;
 
-use App\Models\User;
+use App\Models\User\User;
 use Closure;
 
 class BeforeGetAuthUserId

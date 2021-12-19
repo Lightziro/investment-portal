@@ -3,7 +3,6 @@
 namespace App\Models\User;
 
 use App\Custom\CustomModel;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

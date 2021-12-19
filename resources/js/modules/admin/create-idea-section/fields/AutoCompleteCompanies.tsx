@@ -10,14 +10,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanies } from "../../../../redux/actions/adminActions";
 import { AdminStore, StoreData } from "../../../../ts/types/redux/store.types";
 interface AutoCompleteCompanies {
-    setSelected: (id: number) => void;
+    changeCompany: (value: string) => void;
+    company: string;
 }
 export const AutoCompleteCompanies: React.FC<AutoCompleteCompanies> = ({
-    setSelected,
+    changeCompany,
+    company,
 }) => {
     const dispatch = useDispatch();
 
-    const { loadInput, companies, selectedCompany } = useSelector(
+    const { loadInput, companies } = useSelector(
         (state: StoreData) => state.admin.createIdea
     );
     const [value, setValue] = useState("");
@@ -36,7 +38,7 @@ export const AutoCompleteCompanies: React.FC<AutoCompleteCompanies> = ({
             onClose={() => {
                 setOpen(false);
             }}
-            // onChange={(e) => setSelected(Number(e.target.id ?? null))}
+            onChange={(e, value) => changeCompany(value)}
             getOptionLabel={(option) => option ?? ""}
             options={companies}
             loading={loadInput}

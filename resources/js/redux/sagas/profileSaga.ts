@@ -5,12 +5,13 @@ import { AnyAction } from "redux";
 
 function* fetchProfileView(action: AnyAction): Generator {
     try {
-        const profile = yield axios
+        const data = yield axios
             .get(`/api/user/profile/${action.userId}`)
             .then((response) => response.data);
         yield put({
-            type: "SET_PROFILE_VIEW",
-            profile,
+            type: "SET_ENTITY_DATA",
+            entity: "profile",
+            data,
         });
     } catch (e) {}
 }
@@ -27,7 +28,12 @@ function* updateProfile(action: AnyAction): Generator {
             type: "SET_ALERT_SUCCESS",
             message: "You have successfully updated your profile data",
         });
-    } catch (e) {}
+    } catch (e) {
+        yield put({
+            type: "SET_ALERT_ERROR",
+            message: "Error occurred, try again later",
+        });
+    }
 }
 
 export function* actionProfileWatcher(): SagaIterator {

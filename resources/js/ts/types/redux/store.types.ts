@@ -85,12 +85,6 @@ export interface AdminStore {
         viewToday: number;
         commentsToday: number;
     };
-    createIdea: {
-        companies: string[];
-        loadInput: boolean;
-        selectedCompany: null;
-        stage: number;
-    };
     smartAnalytic: {
         score: {
             classificationNews: number;
@@ -98,6 +92,7 @@ export interface AdminStore {
         newsForAnalyze: NewsPrediction[];
     };
     articles: AdminArticle;
+    createIdea: CreateIdea;
 }
 export interface AdminArticle {
     list: Article[];
@@ -138,4 +133,10 @@ export interface ViewStore {
     profile: ProfileView;
     idea: InvestmentIdeaView;
     article: ArticleView;
+}
+export interface CreateIdea {
+    companies: [];
+    stage: number;
+    selectedCompany: string;
+    loadInput: boolean;
 }

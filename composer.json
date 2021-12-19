@@ -15,7 +15,9 @@
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "php-ai/php-ml": "^0.4.1"
+        "php-ai/php-ml": "^0.4.1",
+        "php-amqplib/php-amqplib": "dev-master",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -2,11 +2,8 @@
 
 namespace App\Http\Modules\Core\Middleware;
 
-use App\Models\Investment\InvestmentIdeaViewing;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Models\User\User;
 use Closure;
-use Illuminate\Support\Collection;
 
 class BeforeGetUserAuth
 {

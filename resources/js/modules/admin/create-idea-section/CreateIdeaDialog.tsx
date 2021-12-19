@@ -1,18 +1,9 @@
 import React from "react";
-import {
-    Box,
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    Button,
-    DialogActions,
-} from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Dialog, DialogTitle } from "@mui/material";
+import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
 import { stageName } from "../../../utils/create-idea";
-import { selectCompany } from "../../../redux/actions/adminActions";
-import { AutoCompleteCompanies } from "./fields/AutoCompleteCompanies";
 import { PickCompanyStage } from "./stages/pick-company/PickCompanyStage";
 import { SelectTypeAnalyticsStage } from "./stages/select-type-analytics/SelectTypeAnalyticsStage";
 interface CreateIdeaDialog {

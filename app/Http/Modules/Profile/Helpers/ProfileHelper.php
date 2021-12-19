@@ -2,8 +2,7 @@
 
 namespace App\Http\Modules\Profile\Helpers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\App;
+use App\Models\User\User;
 
 class ProfileHelper
 {

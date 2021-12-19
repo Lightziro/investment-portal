@@ -20,7 +20,7 @@ import { ProfileAvatar } from "./profile-avatar/ProfileAvatar";
 import { ProfileStats } from "./profile-stats/ProfileStats";
 
 export const Profile: React.FC = () => {
-    const profile = useSelector((state: StoreData) => state.main.profileView);
+    const profile = useSelector((state: StoreData) => state.view.profile);
     const { userId } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -47,7 +47,7 @@ export const Profile: React.FC = () => {
                     </Grid>
                 </Grid>
                 <Grid item sm={6}>
-                    {profile ? (
+                    {profile.userId ? (
                         <ProfileUserInfo profile={profile} />
                     ) : (
                         <Skeleton variant={"rectangular"} height={500} />

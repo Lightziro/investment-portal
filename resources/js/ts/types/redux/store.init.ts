@@ -1,5 +1,6 @@
 import { AdminStore, AlertStore, MainStore, StoreData } from "./store.types";
 import {
+    initialCreateIdeaStore,
     initialUser,
     initialViewStore,
 } from "../../init/redux/reducer.initial";
@@ -30,15 +31,10 @@ export const initialAlertStore: AlertStore = {
     status: "success",
 };
 export const initialAdminStore: AdminStore = {
+    createIdea: initialCreateIdeaStore,
     investmentIdeas: {
         viewToday: null,
         commentsToday: null,
-    },
-    createIdea: {
-        companies: [],
-        loadInput: false,
-        selectedCompany: null,
-        stage: 1,
     },
     smartAnalytic: {
         score: {

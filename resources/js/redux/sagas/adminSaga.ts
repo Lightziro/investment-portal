@@ -17,7 +17,7 @@ function* fetchInvestmentData(action: AnyAction): Generator {
 function* fetchCompanies(action: AnyAction): Generator {
     try {
         const companies = yield axios
-            .post("/api/admin/companies", { name: action.name })
+            .get(`/api/admin/companies/${action.name}`)
             .then((response) => response.data);
         yield put({
             type: "SET_LIST_COMPANIES",

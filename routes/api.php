@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
 use App\Http\Modules\Admin\Controllers\ArticleAdminController;
+use App\Http\Modules\Admin\Controllers\CreateIdeaController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
 use App\Http\Modules\Article\Controllers\ArticleActionsController;
@@ -35,7 +36,6 @@ Route::middleware('auth-register:sanctum')->get('/user', function (Request $requ
     return $request->user();
 });
 
-//Route::get('/news/all', [Controller::class, 'getNews']);
 Route::group(['prefix' => 'user'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/authentication', [AuthController::class, 'authentication']);
@@ -43,8 +43,8 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/profile/{id}', [UserController::class, 'getProfile']);
     Route::post('/profile/update', [ProfileController::class, 'updateProfileData'])->middleware(BeforeGetAuthUserId::class);
-    Route::get('/exit', [AuthController::class, 'exitUser']);
-    Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::get('/exit', [UserActionController::class, 'exitUser']);
+    Route::post('/forgot-password', [UserActionController::class, 'forgotPassword']);
     Route::post('/recovery-password', [UserActionController::class, 'recoveryPassword']);
 });
 
@@ -53,7 +53,8 @@ Route::group(['prefix' => 'news'], function () {
 });
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/investment-data', [InvestmentDataController::class, 'getInvestmentData']);
-    Route::post('/companies', [InvestmentDataController::class, 'getCompanies']);
+    Route::get('/companies/{query}', [InvestmentDataController::class, 'getCompanies']);
+    Route::post('/classification-news', [CreateIdeaController::class, 'predictNews']);
     Route::group(['prefix' => 'smart-analytic'], function () {
         Route::get('/data', [SmartAnalyticController::class, 'getAnalyticData']);
         Route::get('/last-news', [SmartAnalyticController::class, 'getNewsForAnalyze']);
@@ -84,4 +85,5 @@ Route::group(['prefix' => 'other'], function () {
     Route::get('/countries', [OtherController::class, 'getCountries']);
     Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);
 });
+Route::get('/test', [OtherController::class, 'test']);
 

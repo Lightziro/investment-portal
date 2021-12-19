@@ -5,6 +5,7 @@ import {
     initMainStore,
 } from "../../ts/types/redux/store.init";
 import { replaceUpdateArticle, setEditArticle } from "../utils/article.utils";
+import createIdeaReducer from "./createIdeaReducer";
 
 const adminReducer = (
     state: AdminStore = initialAdminStore,
@@ -13,29 +14,7 @@ const adminReducer = (
     switch (action.type) {
         case "SET_ADMIN_INVESTMENT_DATA":
             return { ...state, investmentIdeas: action.data };
-        case "FETCH_COMPANIES":
-            return {
-                ...state,
-                createIdea: { ...state.createIdea, loadInput: true },
-            };
-        case "SET_LIST_COMPANIES":
-            return {
-                ...state,
-                createIdea: {
-                    ...state.createIdea,
-                    loadInput: false,
-                    companies: action.companies,
-                },
-            };
-        case "SET_SELECT_COMPANY_ANALYTICS":
-            return {
-                ...state,
-                createIdea: {
-                    ...state.createIdea,
-                    selectedCompany: action.id,
-                    stage: 2,
-                },
-            };
+
         case "SET_SMART_ANALYTIC_DATA":
             return {
                 ...state,
@@ -82,7 +61,10 @@ const adminReducer = (
                 ),
             };
         default:
-            return state;
+            return {
+                ...state,
+                createIdea: createIdeaReducer(state.createIdea, action),
+            };
     }
 };
 export default adminReducer;

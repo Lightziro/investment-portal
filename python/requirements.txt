@@ -1,6 +1,7 @@
 flask
 datetime
 numpy
+transformers
 pandas
 yfinance
 tensorflow
@@ -9,3 +10,5 @@ keras
 scipy
 sklearn
 yahoofinancials
+torch
+nltk

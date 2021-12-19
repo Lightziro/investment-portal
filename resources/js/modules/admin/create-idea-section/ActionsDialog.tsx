@@ -11,8 +11,8 @@ export const ActionsDialog: React.FC<ActionsDialog> = ({ handler }) => {
     const { t } = useTranslation();
     return (
         <DialogActions>
-            <Button onClick={handler}>{t("Cancel")}</Button>
-            <Button>{t("Next stage")}</Button>
+            <Button>{t("Cancel")}</Button>
+            <Button onClick={handler}>{t("Next stage")}</Button>
         </DialogActions>
     );
 };

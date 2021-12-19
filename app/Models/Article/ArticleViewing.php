@@ -3,8 +3,7 @@
 namespace App\Models\Article;
 
 use App\Custom\CustomModel;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /** ArticleViewing - просмотры статьи

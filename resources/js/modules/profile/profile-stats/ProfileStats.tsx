@@ -8,7 +8,7 @@ interface ProfileStats {
 }
 export const ProfileStats: React.FC<ProfileStats> = ({ profile }) => {
     const { t } = useTranslation();
-    if (!profile) {
+    if (!profile.userId) {
         return <Skeleton variant={"rectangular"} height={200} />;
     }
     return (

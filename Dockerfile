@@ -1,4 +1,4 @@
-FROM php:8.1-rc-fpm
+FROM php:8.1.0-fpm
 
 ## Arguments defined in docker-compose.yml
 ARG user=sammy
@@ -25,7 +25,7 @@ RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 ## Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli pdo
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli pdo sockets
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
