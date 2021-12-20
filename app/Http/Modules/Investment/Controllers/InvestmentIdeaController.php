@@ -5,6 +5,7 @@ namespace App\Http\Modules\Investment\Controllers;
 use App\Http\Classes\StockMarket;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
+use App\Models\Investment\InvestmentIdeaStatuses;
 use Finnhub\Model\BasicFinancials;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -88,8 +89,10 @@ class InvestmentIdeaController extends Controller
                 'userId' => $author_model->user_id,
                 'avatar' => $author_model->avatar_path,
                 'totalIdeas' => $author_model->investment_ideas->count(),
-                'amountSuccessfulIdeas' => $author_model->investment_ideas->where('status', InvestmentIdea::STATUS_SUCCESS)->count(),
-                'amountFailIdeas' => $author_model->investment_ideas->where('status', InvestmentIdea::STATUS_FAIL)->count(),
+                'amountSuccessfulIdeas' => $author_model->investment_ideas()->with('status', fn ($query) => $query
+                    ->where(['status' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count(),
+                'amountFailIdeas' => $author_model->investment_ideas()->with('status', fn ($query) => $query
+                    ->where(['status' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
                 'fullName' => $author_model->getFullName(),
             ],
             'ideaInfo' => [

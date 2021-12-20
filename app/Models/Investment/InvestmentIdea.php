@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use JetBrains\PhpStorm\Pure;
 
-/**
+/** Модель инвестиционной идеи
  * @property int idea_id
  * @property User author
  * @property int author_id
@@ -19,16 +19,17 @@ use JetBrains\PhpStorm\Pure;
  * @property bool is_short
  * @property string stock_name
  * @property Company company
+ * @property int company_id
  * @property InvestmentIdeaComments[] comments
  * @property string date_create
  * @property string date_end
  * @property string description
  * @property float possible_profit
+ * @property int status_id
+ * @property InvestmentIdeaStatuses $status
  */
 class InvestmentIdea extends CustomModel
 {
-    public const STATUS_FAIL = 'fail';
-    public const STATUS_SUCCESS = 'success';
     protected $table = 'investment_ideas';
     protected $primaryKey = 'idea_id';
 
@@ -76,5 +77,13 @@ class InvestmentIdea extends CustomModel
     public function comments(): CustomHasMany
     {
         return $this->hasMany(InvestmentIdeaComments::class, 'idea_id', 'idea_id');
+    }
+    public function status(): HasOne
+    {
+        return $this->hasOne(InvestmentIdeaStatuses::class, 'status_id', 'status_id');
+    }
+    public function analyze(): CustomHasMany
+    {
+        return $this->hasMany(InvestmentIdeaAnalyze::class, 'idea_id', 'idea_id');
     }
 }

@@ -12,3 +12,5 @@ sklearn
 yahoofinancials
 torch
 nltk
+celery
+pika

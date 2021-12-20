@@ -5,6 +5,7 @@ namespace App\Http\Modules\Investment\Controllers;
 use App\Http\Classes\StockMarket;
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
+use App\Models\Investment\InvestmentIdeaStatuses;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
@@ -17,8 +18,8 @@ class InvestmentController extends BaseController
         $max_profit = InvestmentIdea::query()->max('profit');
         $min_profit = InvestmentIdea::query()->min('profit');
 
-        $count_success_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_SUCCESS])->count();
-        $count_fail_ideas = InvestmentIdea::query()->where(['status' => InvestmentIdea::STATUS_FAIL])->count();
+        $count_success_ideas = InvestmentIdea::query()->with('status', fn ($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count();
+        $count_fail_ideas = InvestmentIdea::query()->with('status', fn ($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count();
         $popular_articles = Article::mostPopular()->limit(3)->get();
         $pk_list = [];
         /** @var Article $article_model */
@@ -32,7 +33,8 @@ class InvestmentController extends BaseController
         foreach ($articles as $article_model) {
             $articles_simple[] = $article_model->getFrontend();
         }
-        $investment_ideas = InvestmentIdea::query()->whereNotIn('status', [InvestmentIdea::STATUS_FAIL])
+        $investment_ideas = InvestmentIdea::query()
+            ->with('status',  callback: fn ($query) => $query->whereNotIn('name', [InvestmentIdeaStatuses::STATUS_FAILED]))
             ->orderBy('possible_profit', 'DESC')->limit(5)->get();
 
 

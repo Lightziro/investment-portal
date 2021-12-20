@@ -51,7 +51,7 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['prefix' => 'news'], function () {
     Route::get('/all', [NewsController::class, 'getAllNews']);
 });
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => [BeforeGetAuthUserId::class]], function () {
     Route::get('/investment-data', [InvestmentDataController::class, 'getInvestmentData']);
     Route::get('/companies/{query}', [InvestmentDataController::class, 'getCompanies']);
     Route::post('/classification-news', [CreateIdeaController::class, 'predictNews']);
@@ -65,6 +65,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update', [ArticleAdminController::class, 'updateArticle'])->middleware(BeforeGetAuthUserId::class);
         Route::get('/get/{page}', [ArticleAdminController::class, 'getArticlesByPage'])->middleware(BeforeGetAuthUserId::class);
         Route::post('/delete', [ArticleAdminController::class, 'deleteArticle'])->middleware(BeforeGetAuthUserId::class);
+    });
+    Route::group(['prefix' => 'investment-idea'], function () {
+        Route::post('/create', [CreateIdeaController::class, 'analyzeIdea']);
     });
 });
 Route::group(['prefix' => 'investment-data'], function () {

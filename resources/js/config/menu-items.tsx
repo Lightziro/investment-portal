@@ -75,3 +75,17 @@ export const MENU_ADMIN = [
         url: "/admin-panel/articles",
     },
 ];
+export const OPTIONS_NEWS_ANALYZE = [
+    {
+        label: "3 Month",
+        value: 3,
+    },
+    {
+        label: "6 Month",
+        value: 6,
+    },
+    {
+        label: "12 Month",
+        value: 12,
+    },
+];

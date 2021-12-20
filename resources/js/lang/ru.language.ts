@@ -72,6 +72,10 @@ export const ruLanguage = {
     "You successfully changed your password": "Вы успешно сменили свой пароль",
     "Error occurred, try again later": "Произошла ошибка, повторите позднее",
     "Next stage": "Следующая стадия",
+    "Period news analysis": "За какой период учитывать новости?",
+    "Send to analyze": "Отправить на анализ",
+    "You successfully created an idea, when a smart analytical analyzes, you will receive an alert":
+        "Вы успешно создали идею, когда интеллектуальный аналитик проведет анализ, вы получите оповещение",
     "Company description":
         "Компания %companyName% котируется на фондовом рынке с %dateIPO% под тикером %ticker%.",
 };

@@ -6,13 +6,17 @@ import { StoreData } from "../../../ts/types/redux/store.types";
 
 interface ActionsDialog {
     handler: () => void;
+    textSuccessButton?: string;
 }
-export const ActionsDialog: React.FC<ActionsDialog> = ({ handler }) => {
+export const ActionsDialog: React.FC<ActionsDialog> = ({
+    handler,
+    textSuccessButton = "Next stage",
+}) => {
     const { t } = useTranslation();
     return (
         <DialogActions>
             <Button>{t("Cancel")}</Button>
-            <Button onClick={handler}>{t("Next stage")}</Button>
+            <Button onClick={handler}>{t(textSuccessButton)}</Button>
         </DialogActions>
     );
 };

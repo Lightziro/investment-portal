@@ -20,3 +20,6 @@ export interface FormArticle {
     title: string;
     content: string;
 }
+export interface FormParamsAnalyze {
+    monthPeriod: number;
+}

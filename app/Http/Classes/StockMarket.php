@@ -110,7 +110,7 @@ class StockMarket
             return [];
         }
     }
-    public function getCompanyNews(string $ticker, \DateTime $from, \DateTime $to): ?array
+    public function getCompanyNews(string $ticker, DateTime $from, DateTime $to): ?array
     {
         try {
             return $this->client->companyNews($ticker, $from, $to);
