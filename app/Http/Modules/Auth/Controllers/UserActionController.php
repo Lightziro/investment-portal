@@ -83,6 +83,7 @@ class UserActionController extends Controller
         if (empty($cookie['token'])) {
             return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
         }
+        /** @var User $user */
         $user = User::query()->where('remember_token', $cookie['token'])->first();
         if (!$user) {
             return response()->json(['error' => 'Не удалось аутентифицировать пользователя'], 400);

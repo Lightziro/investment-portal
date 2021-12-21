@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Modules\Admin\Middleware\BeforeCheckRootAdmin;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -42,6 +43,17 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
+
+            Route::prefix('api/user')
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/user_api.php'));
+
+            Route::prefix('api/admin')
+                ->middleware('api')
+                ->middleware(BeforeCheckRootAdmin::class)
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin_api.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)

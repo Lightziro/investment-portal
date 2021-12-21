@@ -2,11 +2,13 @@
 
 namespace App\Models\Investment;
 
+use App\Custom\CustomCollection;
 use App\Custom\CustomModel;
 use App\Custom\Relations\CustomHasMany;
 use App\Models\Other\Company;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use JetBrains\PhpStorm\Pure;
 
@@ -27,6 +29,8 @@ use JetBrains\PhpStorm\Pure;
  * @property float possible_profit
  * @property int status_id
  * @property InvestmentIdeaStatuses $status
+ * @property CustomCollection analyze
+ * @property CustomCollection|AnalyticalQuestion[] questions
  */
 class InvestmentIdea extends CustomModel
 {
@@ -78,12 +82,34 @@ class InvestmentIdea extends CustomModel
     {
         return $this->hasMany(InvestmentIdeaComments::class, 'idea_id', 'idea_id');
     }
+
     public function status(): HasOne
     {
         return $this->hasOne(InvestmentIdeaStatuses::class, 'status_id', 'status_id');
     }
+
     public function analyze(): CustomHasMany
     {
         return $this->hasMany(InvestmentIdeaAnalyze::class, 'idea_id', 'idea_id');
+    }
+
+    public function questions(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            AnalyticalQuestion::class,
+            InvestmentIdeaAnalyze::class,
+            'idea_id',
+            'question_id',
+            'idea_id',
+            'question_id'
+        );
+    }
+
+    /** Возвращает итоговый балл проанализированной идеи
+     * @return mixed
+     */
+    public function getScoreAnalyze(): mixed
+    {
+        return $this->questions->sum('score');
     }
 }
