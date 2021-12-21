@@ -51,28 +51,28 @@ export const MENU_ADMIN = [
             name: "bi:bar-chart-fill",
         },
         text: "Investment ideas",
-        url: "/admin-panel/investment-ideas",
+        url: "/admin/investment-ideas",
     },
     {
         logo: {
             name: "bi:person-circle",
         },
         text: "Users",
-        url: "/admin-panel/users",
+        url: "/admin/users",
     },
     {
         logo: {
             name: "bi:clipboard-data",
         },
         text: "Smart Analytics",
-        url: "/admin-panel/smart-analytic",
+        url: "/admin/smart-analytic",
     },
     {
         logo: {
             name: "ri:article-line",
         },
         text: "Articles",
-        url: "/admin-panel/articles",
+        url: "/admin/articles",
     },
 ];
 export const OPTIONS_NEWS_ANALYZE = [

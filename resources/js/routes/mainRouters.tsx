@@ -9,7 +9,6 @@ import { UserLoginLayout } from "../layouts/UserLoginLayout";
 import { Register } from "../modules/login-user/register/Register";
 import { AdminPanelLayout } from "../layouts/AdminPanelLayout";
 import { UsersSection } from "../modules/admin/users-section/UsersSection";
-import { CreateIdeaDialog } from "../modules/admin/create-idea-section/CreateIdeaDialog";
 import { SmartAnalytic } from "../modules/admin/smart-analytic/SmartAnalytic";
 import { Profile } from "../modules/profile/Profile";
 import { ArticlesSection } from "../modules/admin/articles-section/ArticlesSection";
@@ -22,7 +21,7 @@ import { RecoveryPassword } from "../modules/login-user/recovery-password/Recove
 export const MainRouter: React.FC = () => {
     return useRoutes([
         {
-            path: "/admin-panel",
+            path: "/admin",
             element: <AdminPanelLayout />,
             children: [
                 // { path: "/", element: <div>Base</div> },

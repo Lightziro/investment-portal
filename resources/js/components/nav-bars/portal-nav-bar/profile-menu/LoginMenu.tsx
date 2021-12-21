@@ -30,7 +30,7 @@ export const LoginMenu: React.FC<LoginMenu> = ({ user, handleExit }) => {
             <MenuProfileItems items={menuAuth(user.userId)} />
             <Divider />
             {user.role === "admin" && (
-                <Link to="/admin-panel">
+                <Link to="/admin">
                     <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>
                         <Box
                             component={Icon}
