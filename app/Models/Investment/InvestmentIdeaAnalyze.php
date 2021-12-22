@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int idea_id
  * @property InvestmentIdea idea
  * @property AnalyticalQuestion question
+ * @property bool result
  */
 class InvestmentIdeaAnalyze extends CustomModel
 {

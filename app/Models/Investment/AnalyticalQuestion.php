@@ -14,4 +14,9 @@ class AnalyticalQuestion extends CustomModel
 {
     protected $table = 'analytical_questions';
     protected $primaryKey = 'question_id';
+
+    public function __toString()
+    {
+        return $this->code;
+    }
 }

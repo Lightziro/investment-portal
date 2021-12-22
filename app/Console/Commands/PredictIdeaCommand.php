@@ -4,7 +4,10 @@ namespace App\Console\Commands;
 
 use App\Exceptions\ConsumerException;
 use App\Http\Classes\QueueRabbit;
+use App\Http\Modules\Admin\Helpers\AnalyticsHelper;
+use App\Models\Investment\AnalyticalQuestion;
 use App\Models\Investment\InvestmentIdea;
+use App\Models\Investment\InvestmentIdeaAnalyze;
 use App\Models\Investment\InvestmentIdeaStatuses;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -64,9 +67,22 @@ class PredictIdeaCommand extends Command
                 }
                 /** @var InvestmentIdeaStatuses $status_model */
                 $status_model = InvestmentIdea::query()->where(['name' => InvestmentIdeaStatuses::STATUS_ANALYZED])->first();
-//                    foreach ($data['news_predict'] as $item_news) {
-//
-//                    }
+                $analytic_helper = new AnalyticsHelper($idea_model);
+                /** @var AnalyticalQuestion $question */
+                foreach (AnalyticalQuestion::all() as $question) {
+                    $method = "analytic$question";
+                    $result = 0;
+                    if (method_exists($analytic_helper, $method)) {
+                        $result = $analytic_helper->$method();
+                    }
+
+                    $analyze_model = InvestmentIdeaAnalyze::query()->updateOrCreate([
+                        'question_id' => $question->question_id,
+                        'idea_id' => $idea_model->idea_id
+                    ], [
+                        'result' => $result
+                    ]);
+                }
                 $idea_model->status_id = $status_model->status_id;
                 $idea_model->save();
             }

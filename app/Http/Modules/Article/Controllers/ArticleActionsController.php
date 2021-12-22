@@ -7,6 +7,7 @@ use App\Models\Article\ArticleComments;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class ArticleActionsController extends Controller
@@ -30,7 +31,8 @@ class ArticleActionsController extends Controller
             $comment->save();
             return response()->json($comment->getFrontendComment());
 
-        } catch (Throwable $exception) {
+        } catch (Throwable $e) {
+            Log::error('Try error create comment', [$e->getMessage(), $e->getFile(), $e->getLine(), $post ?? null]);
             return response()->json(['message' => 'Error'], 400);
         }
 
