@@ -22,7 +22,6 @@ export const Register: React.FC = () => {
     const user = useSelector((state: StoreData) => state.main.user);
     const navigate = useNavigate();
     if (user) {
-        console.log("Авторизовался чувак");
         navigate("/");
     }
     const { t } = useTranslation();

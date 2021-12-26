@@ -2,7 +2,6 @@ import { AnyAction } from "redux";
 import { MainStore } from "../../ts/types/redux/store.types";
 import { initMainStore } from "../../ts/types/redux/store.init";
 import { setNoticeView } from "../utils/user.utils";
-import { initialUser } from "../../ts/init/redux/reducer.initial";
 
 const mainReducer = (
     state: MainStore = initMainStore,
@@ -35,13 +34,8 @@ const mainReducer = (
                 ...state,
                 otherData: { ...state.otherData, countries: action.countries },
             };
-        case "SET_PROFILE_DATA":
-            return {
-                ...state,
-                profileView: action.updateData,
-            };
         case "SET_EXIT_USER":
-            return { ...state, user: initialUser };
+            return { ...state, user: null };
         case "SET_NEWS":
             return { ...state, news: action.news };
         default:

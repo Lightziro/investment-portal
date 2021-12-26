@@ -5,7 +5,6 @@ namespace App\Custom\GlobalHelpers;
 class ToolHelper
 {
     public const SEASONS_NUMBER = [
-        'Winter',
         'Spring',
         'Summer',
         'Autumn'
@@ -17,6 +16,9 @@ class ToolHelper
             $num_month = date('n');
         }
         $result = floor(date($num_month) / 3);
-        return self::SEASONS_NUMBER[$result];
+        return match ($result) {
+            1, 2, 3 => self::SEASONS_NUMBER[$result],
+            default => 'Winter',
+        };
     }
 }

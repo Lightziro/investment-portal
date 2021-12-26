@@ -21,7 +21,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export const ArticleListAdmin: React.FC = () => {
     const [page, setPage] = useState(0);
-    const user = useSelector((state: StoreData) => state.main.user);
     const { list, lastPage, loading } = useSelector(
         (state: StoreData) => state.admin.articles
     );
@@ -82,24 +81,22 @@ export const ArticleListAdmin: React.FC = () => {
                                         }
                                     />
                                 </IconButton>
-                                {user.role === "admin" && (
-                                    <IconButton
-                                        color="primary"
-                                        aria-label="upload picture"
-                                        component="span"
-                                    >
-                                        <DeleteIcon
-                                            onClick={() =>
-                                                dispatch(
-                                                    deleteArticle(
-                                                        article.articleId,
-                                                        page
-                                                    )
+                                <IconButton
+                                    color="primary"
+                                    aria-label="upload picture"
+                                    component="span"
+                                >
+                                    <DeleteIcon
+                                        onClick={() =>
+                                            dispatch(
+                                                deleteArticle(
+                                                    article.articleId,
+                                                    page
                                                 )
-                                            }
-                                        />
-                                    </IconButton>
-                                )}
+                                            )
+                                        }
+                                    />
+                                </IconButton>
                             </Grid>
                         </Grid>
                     </Paper>

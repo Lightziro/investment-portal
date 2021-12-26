@@ -8,13 +8,6 @@ export const initialViewStore: ViewStore = {
     idea: initialIdeaView,
     article: initialArticleView,
 };
-export const initialUser = {
-    userId: null,
-    fullName: null,
-    role: null,
-    notices: [],
-    avatar: null,
-};
 export const initialCreateIdeaStore: CreateIdea = {
     companies: [],
     loadInput: false,

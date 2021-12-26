@@ -41,10 +41,10 @@ export const CommentsWrapper: React.FC<CommentsWrapper> = ({
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={
-                    !user.userId ? "Log in and send comment" : "Enter comment"
+                    !user ? "Log in and send comment" : "Enter comment"
                 }
                 onKeyDown={handleKeyDown}
-                disabled={!user.userId}
+                disabled={!user}
             />
             <Stack justifyContent="flex-start" className="comments-area">
                 {comments.length ? (

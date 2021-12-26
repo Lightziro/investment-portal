@@ -6,6 +6,9 @@ import {
     IdeaComment,
     InvestmentIdeaView,
 } from "../../ts/types/redux/store.types";
+import { initialArticleView } from "../../ts/init/entity/article.init";
+import { initialIdeaView } from "../../ts/init/entity/idea.init";
+import { initialProfile } from "../../ts/init/entity/user.init";
 
 export const addCommentArticle = (
     state: ArticleView,
@@ -30,4 +33,9 @@ export const addCommentIdea = (
         ...state,
         comments: [comment, ...state.comments],
     };
+};
+export const initialByEntity = {
+    profile: initialProfile,
+    article: initialArticleView,
+    idea: initialIdeaView,
 };

@@ -2,13 +2,14 @@
 
 namespace App\Models\User;
 
+use App\Custom\CustomModel;
+use App\Models\Article\ArticleComments;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
 use App\Models\Other\Country;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use JetBrains\PhpStorm\Pure;
@@ -28,16 +29,12 @@ use JetBrains\PhpStorm\Pure;
  * @property Carbon created_at
  * @property Country country
  * @property string sex
+ * @property Collection|ArticleComments[] commentsArticles
  */
-class User extends Authenticatable
+class User extends CustomModel
 {
     protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'role_id', 'avatar_path'
     ];
@@ -86,7 +83,7 @@ class User extends Authenticatable
             ],
             'fullName' => $this->getFullName(),
             'dateCreate' => $this->created_at->format('Y-m-d'),
-            'allComments' => $this->comments()->count(),
+            'allComments' => $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
             'avatar' => $this->avatar_path,
             'roleName' => (string)$this->role,
             'country' => [
@@ -120,9 +117,14 @@ class User extends Authenticatable
         return "$second_name $first_name";
     }
 
-    public function comments(): HasMany
+    public function commentsIdeas(): HasMany
     {
         return $this->hasMany(InvestmentIdeaComments::class, 'user_id', 'user_id');
+    }
+
+    public function commentsArticles(): HasMany
+    {
+        return $this->hasMany(ArticleComments::class, 'user_id', 'user_id');
     }
 
     public function country(): HasOne

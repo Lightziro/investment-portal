@@ -1,8 +1,11 @@
 import { ViewStore } from "../../ts/types/redux/store.types";
 import { AnyAction } from "redux";
 import { initialViewStore } from "../../ts/init/redux/reducer.initial";
-import { initialByEntity } from "../../utils/article.utils";
-import { addCommentArticle, addCommentIdea } from "../utils/view.utils";
+import {
+    addCommentArticle,
+    addCommentIdea,
+    initialByEntity,
+} from "../utils/view.utils";
 
 const viewReducer = (
     state: ViewStore = initialViewStore,

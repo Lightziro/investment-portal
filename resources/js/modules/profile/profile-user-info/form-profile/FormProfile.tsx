@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ProfileView, StoreData } from "../../../../ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
 import { Formik } from "formik";
@@ -7,7 +7,7 @@ import { FormProfileTextField } from "./form-profile-fields/FormProfileTextField
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCountries } from "../../../../redux/actions/mainActions";
 import { FormProfileSelectField } from "./form-profile-fields/FormProfileSelectField";
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { updateProfile } from "../../../../redux/actions/profileActions";
 import { FormProfileRadioField } from "./form-profile-fields/FormProfileRadioField";
 import { sexList } from "../../../../ts/init/other/other.init";
@@ -38,7 +38,7 @@ export const FormProfile: React.FC<FormProfile> = ({
         handleEdit();
     };
     return (
-        <Fragment>
+        <Box my={1}>
             <Formik
                 initialValues={{
                     firstName: profile.name.firstName,
@@ -120,6 +120,6 @@ export const FormProfile: React.FC<FormProfile> = ({
                     </form>
                 )}
             </Formik>
-        </Fragment>
+        </Box>
     );
 };

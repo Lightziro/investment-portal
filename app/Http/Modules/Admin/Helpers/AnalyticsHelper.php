@@ -16,6 +16,18 @@ class AnalyticsHelper
     public function __construct(InvestmentIdea $idea)
     {
         $this->idea = $idea;
+        $this->company = $idea->company;
+    }
+
+    public function prepareNews(array $ar_news)
+    {
+        foreach ($ar_news as $news_item) {
+            $result = $news_item['predict'];
+            $label_key = self::LABELS_KEY[$result];
+            if (in_array($result, ['positive', 'negative']) && $news_item['probability'][$label_key] > 0.75) {
+                $this->totalNews[$result]++;
+            }
+        }
     }
 
     public function analyticCHECKING_WORKING_IN_SEASONS(): bool
@@ -32,6 +44,7 @@ class AnalyticsHelper
         }
         return false;
     }
+
     public function analyticACTIVITY_RELEVANT_FULL_YEAR(): bool
     {
         $activity_company = $this->company->activity;
@@ -44,6 +57,7 @@ class AnalyticsHelper
         }
         return false;
     }
+
     public function analyticCHECKING_NEWS_MOOD(): bool
     {
         if ($this->totalNews['positive'] > $this->totalNews['negative']) {

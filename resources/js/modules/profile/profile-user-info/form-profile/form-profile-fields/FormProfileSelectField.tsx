@@ -1,6 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { CountryItem } from "../../../../../ts/types/other/other.types";
+import { useTranslation } from "react-i18next";
 interface FormProfileSelectField {
     items: CountryItem[];
     value: string | number;
@@ -13,6 +14,7 @@ export const FormProfileSelectField: React.FC<FormProfileSelectField> = ({
     handleChange,
     name,
 }) => {
+    const { t } = useTranslation();
     return (
         <Form.Select
             name={name}
@@ -21,7 +23,7 @@ export const FormProfileSelectField: React.FC<FormProfileSelectField> = ({
             aria-label="Default select example"
         >
             {items.map((item) => (
-                <option value={item.country_id}>{item.name}</option>
+                <option value={item.country_id}>{t(item.name)}</option>
             ))}
         </Form.Select>
     );

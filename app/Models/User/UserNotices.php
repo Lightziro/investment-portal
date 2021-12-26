@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserNotices extends Model
 {
-    public $timestamps = false;
     protected $primaryKey = 'notice_id';
     protected $table = 'user_notices';
     protected $fillable = ['viewed'];

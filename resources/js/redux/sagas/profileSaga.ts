@@ -17,12 +17,13 @@ function* fetchProfileView(action: AnyAction): Generator {
 }
 function* updateProfile(action: AnyAction): Generator {
     try {
-        const updateData = yield axios
+        const data = yield axios
             .post("/api/user/profile/update", action.form)
             .then((response) => response.data);
         yield put({
-            type: "SET_PROFILE_DATA",
-            updateData,
+            type: "SET_ENTITY_DATA",
+            entity: "profile",
+            data,
         });
         yield put({
             type: "SET_ALERT_SUCCESS",

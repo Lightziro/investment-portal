@@ -8,7 +8,6 @@ export const IdeaStatistics: React.FC = () => {
     const stats = useSelector(
         (state: StoreData) => state.main.investmentData.ideaStatistics
     );
-    console.log("STATS", stats);
     const { t } = useTranslation();
     return (
         <div className="portal-component-wrapper">

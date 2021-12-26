@@ -17,12 +17,6 @@ use Throwable;
 
 class CreateIdeaController extends Controller
 {
-    private const LABELS_KEY = [
-        'positive' => 0,
-        'negative' => 1,
-        'neutral' => 2,
-    ];
-
     public function analyzeIdea(Request $request)
     {
         $data = $request->post();

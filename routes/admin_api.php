@@ -22,5 +22,5 @@ Route::group(['prefix' => 'article'], function () {
     Route::post('/delete', [ArticleAdminController::class, 'deleteArticle'])->middleware(BeforeGetAuthUserId::class);
 });
 Route::group(['prefix' => 'investment-idea'], function () {
-    Route::post('/create', [CreateIdeaController::class, 'analyzeIdea']);
+    Route::post('/create', [CreateIdeaController::class, 'analyzeIdea'])->middleware(BeforeGetAuthUserId::class);
 });

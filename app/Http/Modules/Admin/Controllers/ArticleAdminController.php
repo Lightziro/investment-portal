@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use JetBrains\PhpStorm\ArrayShape;
 use Throwable;
@@ -59,6 +60,7 @@ class ArticleAdminController extends Controller
                 'content' => $article_model->content,
             ]));
         } catch (Throwable $e) {
+            Log::error('Error when updating article', [$e->getMessage(), $e->getFile(), $e->getLine()]);
             return response()->json(['message' => 'Error update'], 400);
         }
     }

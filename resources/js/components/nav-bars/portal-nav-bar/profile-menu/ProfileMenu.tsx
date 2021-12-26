@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NoLoginMenu } from "./NoLoginMenu";
 import { LoginMenu } from "./LoginMenu";
 import { exitUser } from "../../../../redux/actions/mainActions";
+import { UserAvatar } from "../../../simple/user-avatar/UserAvatar";
 
 interface ProfileMenu {
     open: boolean;
@@ -31,13 +32,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 sx={{ p: 0, width: 44, height: 44 }}
                 onClick={onOpen}
             >
-                <Avatar
-                    src={
-                        user.avatar
-                            ? `/image/${user.avatar}`
-                            : "/image/picture/avatar_default.jpg"
-                    }
-                />
+                <UserAvatar user={user} />
             </IconButton>
             <MenuPopover
                 open={open}
@@ -45,7 +40,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 anchorEl={anchorRef.current}
                 sx={{ width: 220 }}
             >
-                {user.userId ? (
+                {user ? (
                     <LoginMenu user={user} handleExit={handleExit} />
                 ) : (
                     <NoLoginMenu />

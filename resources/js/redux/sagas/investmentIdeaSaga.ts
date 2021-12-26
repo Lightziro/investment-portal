@@ -5,7 +5,6 @@ import axios from "axios";
 
 function* createComment(action: AnyAction): Generator {
     try {
-        console.log("AGA");
         const commentData = yield axios
             .post("/api/investment-idea/create-comment", action.commentData)
             .then((response) => response.data);

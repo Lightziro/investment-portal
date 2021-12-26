@@ -36,8 +36,8 @@ export const Footer: React.FC = () => {
                             </Typography>
                         </Grid>
                         <Grid container direction="row" spacing={2}>
-                            {["About", "Service"].map((item) => (
-                                <Grid item>
+                            {["About", "Service"].map((item, i) => (
+                                <Grid key={i} item>
                                     <Typography variant="body2">
                                         {item}
                                     </Typography>

@@ -32,7 +32,7 @@ export const ProfileUserInfo: React.FC<ProfileUserInfo> = ({ profile }) => {
                     </Typography>
                     <RoleUserChip role={profile.roleName} />
                 </Stack>
-                {user.userId === profile.userId && (
+                {user?.userId === profile.userId && (
                     <Tooltip title="Edit">
                         <IconButton onClick={() => setEdit(!edit)}>
                             <EditIcon />
@@ -41,15 +41,11 @@ export const ProfileUserInfo: React.FC<ProfileUserInfo> = ({ profile }) => {
                 )}
             </Stack>
             <Divider />
-            <Box my={1}>
-                {
-                    <FormProfile
-                        edit={edit}
-                        profile={profile}
-                        handleEdit={() => setEdit(!edit)}
-                    />
-                }
-            </Box>
+            <FormProfile
+                edit={edit}
+                profile={profile}
+                handleEdit={() => setEdit(!edit)}
+            />
         </Paper>
     );
 };

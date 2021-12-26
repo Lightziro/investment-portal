@@ -48,7 +48,6 @@ class PredictIdeaCommand extends Command
     public function handle(): int
     {
         $queue = new QueueRabbit();
-        $idea = InvestmentIdea::query()->where(['idea_id' => 1])->first();
         $queue->consume('predict-idea', [$this, 'consumer']);
         return 1;
     }
@@ -66,8 +65,9 @@ class PredictIdeaCommand extends Command
                     throw new ConsumerException("Not found idea by id {$data['idea_id']}");
                 }
                 /** @var InvestmentIdeaStatuses $status_model */
-                $status_model = InvestmentIdea::query()->where(['name' => InvestmentIdeaStatuses::STATUS_ANALYZED])->first();
+                $status_model = InvestmentIdeaStatuses::query()->where(['name' => InvestmentIdeaStatuses::STATUS_ANALYZED])->first();
                 $analytic_helper = new AnalyticsHelper($idea_model);
+                $analytic_helper->prepareNews($data['news_predict']);
                 /** @var AnalyticalQuestion $question */
                 foreach (AnalyticalQuestion::all() as $question) {
                     $method = "analytic$question";
@@ -80,7 +80,7 @@ class PredictIdeaCommand extends Command
                         'question_id' => $question->question_id,
                         'idea_id' => $idea_model->idea_id
                     ], [
-                        'result' => $result
+                        'result' => (int)$result
                     ]);
                 }
                 $idea_model->status_id = $status_model->status_id;

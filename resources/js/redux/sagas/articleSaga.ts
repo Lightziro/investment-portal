@@ -19,6 +19,10 @@ function* updateArticle(action: AnyAction): Generator {
         const articleData = yield axios
             .post("/api/admin/article/update", action.articleForm)
             .then((response) => response.data);
+        yield put({
+            type: "SET_ALERT_SUCCESS",
+            message: "Article successful updated",
+        });
         yield put({ type: "REPLACE_UPDATE_ARTICLE", articleData });
     } catch (e) {}
 }

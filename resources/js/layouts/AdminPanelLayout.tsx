@@ -6,11 +6,10 @@ import { StoreData } from "../ts/types/redux/store.types";
 
 export const AdminPanelLayout: React.FC = () => {
     const navigate = useNavigate();
-    const { role } = useSelector((state: StoreData) => state.main.user);
-
+    const user = useSelector((state: StoreData) => state.main.user);
+    console.log(user);
     useEffect(() => {}, []);
-    if (role !== "admin") {
-        console.log("REDIRECT");
+    if (user && user?.role !== "admin") {
         navigate("/");
     }
     return (

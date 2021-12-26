@@ -1,16 +1,5 @@
 import React, { useEffect } from "react";
-import {
-    Container,
-    Grid,
-    Paper,
-    Typography,
-    Divider,
-    Stack,
-    Box,
-    Tooltip,
-    IconButton,
-    Skeleton,
-} from "@mui/material";
+import { Container, Grid, Skeleton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../../ts/types/redux/store.types";
 import { ProfileUserInfo } from "./profile-user-info/ProfileUserInfo";
@@ -18,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { fetchProfileView } from "../../redux/actions/profileActions";
 import { ProfileAvatar } from "./profile-avatar/ProfileAvatar";
 import { ProfileStats } from "./profile-stats/ProfileStats";
+import { clearView } from "../../redux/actions/mainActions";
 
 export const Profile: React.FC = () => {
     const profile = useSelector((state: StoreData) => state.view.profile);
@@ -25,6 +15,7 @@ export const Profile: React.FC = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (!profile || profile.userId !== Number(userId)) {
+            dispatch(clearView("profile"));
             dispatch(fetchProfileView(Number(userId)));
         }
     }, [userId]);
@@ -39,7 +30,7 @@ export const Profile: React.FC = () => {
                             item
                             sm={6}
                         >
-                            <ProfileAvatar avatar={profile?.avatar} />
+                            <ProfileAvatar profile={profile} />
                         </Grid>
                         <Grid item sm={6}>
                             <ProfileStats profile={profile} />
