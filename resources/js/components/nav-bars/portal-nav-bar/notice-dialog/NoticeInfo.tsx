@@ -13,7 +13,10 @@ export const NoticeInfo: React.FC<NoticeInfo> = ({ notice, onViewNotice }) => {
                 <span className="notice-item-title">{notice.title}</span>
                 <span>{moment(notice.created).fromNow()}</span>
             </div>
-            <div className="notice-item-description">{notice.description}</div>
+            <div
+                className="notice-item-description"
+                dangerouslySetInnerHTML={{ __html: notice.description }}
+            />
             <Divider />
         </div>
     );

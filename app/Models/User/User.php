@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Custom\CustomModel;
+use App\Custom\Relations\CustomHasMany;
 use App\Models\Article\ArticleComments;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
@@ -24,12 +25,13 @@ use JetBrains\PhpStorm\Pure;
  * @property UsersRole|null role
  * @property null|int role_id
  * @property InvestmentIdea|Collection|null investment_ideas
- * @property UserNotices[] notices
+ * @property UserNotices[]|Collection notices
  * @property string avatar_path
  * @property Carbon created_at
  * @property Country country
  * @property string sex
  * @property Collection|ArticleComments[] commentsArticles
+ * @property Collection|UserSubscriptions[] subscriptions
  */
 class User extends CustomModel
 {
@@ -53,13 +55,13 @@ class User extends CustomModel
     #[Pure] public function getFrontendData(): array
     {
         $ar_notice = [];
-        foreach ($this->notices as $notice_model) {
+        foreach ($this->notices()->orderByDesc('created_at')->get() as $notice_model) {
             $ar_notice[] = [
                 'id' => $notice_model->notice_id,
                 'description' => $notice_model->description,
                 'viewed' => $notice_model->viewed,
                 'title' => $notice_model->title,
-                'created' => $notice_model->date_create
+                'created' => $notice_model->created_at->format('Y-m-d H:i:s'),
             ];
         }
         return [
@@ -130,5 +132,10 @@ class User extends CustomModel
     public function country(): HasOne
     {
         return $this->hasOne(Country::class, 'country_id', 'country_id');
+    }
+
+    public function subscriptions(): CustomHasMany
+    {
+        return $this->hasMany(UserSubscriptions::class, 'user_id', 'user_id');
     }
 }

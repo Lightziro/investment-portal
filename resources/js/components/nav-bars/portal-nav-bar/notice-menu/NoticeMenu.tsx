@@ -5,6 +5,7 @@ import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
+import { NoticeDialog } from "../notice-dialog/NoticeDialog";
 interface NoticeMenu {
     onOpen: () => void;
     open: boolean;
@@ -49,11 +50,16 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                                     variant="body2"
                                     className="count-notices"
                                 >
-                                    {user.notices.length}
+                                    {
+                                        user.notices.filter(
+                                            (notice) => !notice.viewed
+                                        ).length
+                                    }
                                 </Typography>
                             </Stack>
                         </Box>
                         <Divider />
+                        <NoticeDialog />
                     </MenuPopover>
                 </Fragment>
             )}

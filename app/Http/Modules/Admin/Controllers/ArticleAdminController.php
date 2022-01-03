@@ -2,7 +2,9 @@
 
 namespace App\Http\Modules\Admin\Controllers;
 
+use App\Http\Modules\Admin\Helpers\ArticleHelper;
 use App\Models\Article\Article;
+use App\Models\User\UserSubscriptions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -56,6 +58,7 @@ class ArticleAdminController extends Controller
             if (!$article_model->save()) {
                 return response()->json(['Failed to update data'], 400);
             }
+            ArticleHelper::sendNotices($article_model, 'update');
             return response()->json(array_merge($article_model->getFrontend(), [
                 'content' => $article_model->content,
             ]));
