@@ -14,14 +14,19 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
     moment.locale(i18n.language);
     return (
         <Stack sx={{ my: 1 }} direction="row">
-            {comment.avatar ? (
-                <Avatar src={`/image/${comment.avatar}`} variant="rounded" />
-            ) : (
-                <Avatar
-                    variant="rounded"
-                    {...stringAvatar(comment.fullNameAuthor)}
-                />
-            )}
+            <Link to={`/profile/${comment.userId}`}>
+                {comment.avatar ? (
+                    <Avatar
+                        src={`/image/${comment.avatar}`}
+                        variant="rounded"
+                    />
+                ) : (
+                    <Avatar
+                        variant="rounded"
+                        {...stringAvatar(comment.fullNameAuthor)}
+                    />
+                )}
+            </Link>
             <Stack ml={1} justifyContent="flex-start">
                 <Grid className="comment-idea-info">
                     <span className="author-comment">

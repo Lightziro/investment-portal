@@ -54,7 +54,6 @@ class User extends CustomModel
 
     #[Pure] public function getFrontendData(): array
     {
-        $ar_notice = [];
         foreach ($this->notices()->orderByDesc('created_at')->get() as $notice_model) {
             $ar_notice[] = [
                 'id' => $notice_model->notice_id,
@@ -68,7 +67,7 @@ class User extends CustomModel
             'userId' => $this->user_id,
             'fullName' => $this->getFullName(),
             'role' => $this->role->name,
-            'notices' => $ar_notice,
+            'notices' => $ar_notice ?? [],
             'avatar' => $this->avatar_path,
         ];
     }

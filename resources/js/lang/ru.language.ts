@@ -80,6 +80,6 @@ export const ruLanguage = {
         "Компания %companyName% котируется на фондовом рынке с %dateIPO% под тикером %ticker%.",
     "United States": "Соединенные штаты",
     Canada: "Канада",
-    female: "Женщинский",
+    female: "Женский",
     male: "Мужской",
 };

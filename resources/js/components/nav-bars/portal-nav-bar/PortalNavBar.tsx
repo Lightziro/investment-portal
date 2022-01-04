@@ -1,10 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, Box, Grid, IconButton } from "@mui/material";
-import { useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
-import { Icon } from "@iconify/react";
-import { NoticeDialog } from "./notice-dialog/NoticeDialog";
+import { Box } from "@mui/material";
 import { LanguageMenu } from "./language-menu/LanguageMenu";
 import { ProfileMenu } from "./profile-menu/ProfileMenu";
 import { NoticeMenu } from "./notice-menu/NoticeMenu";

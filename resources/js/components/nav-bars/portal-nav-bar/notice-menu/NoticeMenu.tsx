@@ -1,11 +1,19 @@
 import React, { Fragment, useRef } from "react";
-import { useSelector } from "react-redux";
-import { StoreData } from "../../../../ts/types/redux/store.types";
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Notice, StoreData } from "../../../../ts/types/redux/store.types";
+import {
+    Box,
+    Divider,
+    Grid,
+    IconButton,
+    Stack,
+    Typography,
+} from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
-import { NoticeDialog } from "../notice-dialog/NoticeDialog";
+import { viewNotice } from "../../../../redux/actions/mainActions";
+import { NoticeInfo } from "../notice-dialog/NoticeInfo";
 interface NoticeMenu {
     onOpen: () => void;
     open: boolean;
@@ -13,8 +21,14 @@ interface NoticeMenu {
 }
 export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const anchorRef = useRef(null);
     const user = useSelector((state: StoreData) => state.main.user);
+    const onViewNotice = (notice: Notice) => {
+        if (!notice.viewed) {
+            dispatch(viewNotice(notice.id));
+        }
+    };
     return (
         <Fragment>
             {user && (
@@ -59,7 +73,18 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                             </Stack>
                         </Box>
                         <Divider />
-                        <NoticeDialog />
+                        <Grid
+                            justifyContent="flex-start"
+                            direction="column"
+                            container
+                        >
+                            {user.notices.map((notice) => (
+                                <NoticeInfo
+                                    onViewNotice={() => onViewNotice(notice)}
+                                    notice={notice}
+                                />
+                            ))}
+                        </Grid>
                     </MenuPopover>
                 </Fragment>
             )}
