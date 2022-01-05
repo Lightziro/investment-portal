@@ -48,15 +48,6 @@ services:
         networks:
             - travellist
 
-    node:
-        container_name: node
-        image: "node:14"
-        user: "node"
-        working_dir: /var/www/
-        tty: true
-        volumes:
-            - ./:/var/www
-
     python:
         container_name: python
         working_dir: /var/www/
@@ -77,6 +68,18 @@ services:
             - "5672:5672"
         volumes:
             - ./docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
+
+    node:
+        container_name: node
+        image: "node:14"
+        user: "node"
+        working_dir: /var/www/nextjs
+        tty: true
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/var/www/
+        command: npm run dev-client
 
 networks:
     travellist:
