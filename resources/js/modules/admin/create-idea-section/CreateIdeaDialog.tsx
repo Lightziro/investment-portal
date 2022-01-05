@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog, DialogTitle } from "@mui/material";
 import { useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
 import { stageName } from "../../../utils/create-idea";
 import { PickCompanyStage } from "./stages/pick-company/PickCompanyStage";

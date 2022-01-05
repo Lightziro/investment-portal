@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { Grid, Skeleton } from "@mui/material";
+import Skeleton from "react-loading-skeleton";
+import { Col } from "react-bootstrap";
 interface LoadArticleItems {
     count: number;
     height: number;
@@ -15,9 +16,9 @@ export const LoadArticleItems: React.FC<LoadArticleItems> = ({
             {Array(count)
                 .fill(1)
                 .map((_, i) => (
-                    <Grid key={i} item sm={sm}>
-                        <Skeleton height={height} variant={"rectangular"} />
-                    </Grid>
+                    <Col key={i} sm={sm}>
+                        <Skeleton height={height} />
+                    </Col>
                 ))}
         </Fragment>
     );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Skeleton, Stack, Typography, Divider } from "@mui/material";
-import { IdeaInfo } from "../../../../ts/types/state/stock-market.types";
+import { IdeaInfo } from "../../../../../../nextjs/ts/types/state/stock-market.types";
 interface IdeaInformation {
     ideaInfo: IdeaInfo;
 }

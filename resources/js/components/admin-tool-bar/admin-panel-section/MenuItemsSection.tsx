@@ -2,7 +2,7 @@ import React from "react";
 
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { MENU_ADMIN } from "../../../config/menu-items";
+import { MENU_ADMIN } from "../../../../../nextjs/config/menu-items";
 import { useTranslation } from "react-i18next";
 
 export const MenuItemsSection: React.FC = () => {

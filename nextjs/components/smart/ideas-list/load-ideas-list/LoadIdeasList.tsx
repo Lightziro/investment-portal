@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import { Skeleton } from "@mui/material";
 
-interface EmptyIdeaList {
+interface LoadIdeasList {
     count?: number;
 }
-export const EmptyIdeaList: React.FC<EmptyIdeaList> = ({ count = 5 }) => {
+export const LoadIdeasList: React.FC<LoadIdeasList> = ({ count = 5 }) => {
     return (
         <Fragment>
             {Array(count)

@@ -18,13 +18,13 @@ import {
     DialogActions,
     CircularProgress,
 } from "@mui/material";
-import { NewsPrediction } from "../../../../ts/types/redux/store.types";
+import { NewsPrediction } from "../../../../../../nextjs/ts/types/redux/store.types";
 import axios from "axios";
 import { AccordionDetails } from "@mui/material";
 import { Accordion } from "@mui/material";
 import { AccordionSummary } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { retrainNewsClassifier } from "../../../../redux/actions/adminActions";
+import { retrainNewsClassifier } from "../../../../../../nextjs/redux/actions/adminActions";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {

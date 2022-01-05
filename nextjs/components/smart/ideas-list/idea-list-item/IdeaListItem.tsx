@@ -1,13 +1,13 @@
 import React from "react";
 import { Row } from "react-bootstrap";
-import { InvestmentIdea } from "../../../ts/types/redux/store.types";
+import { InvestmentIdea } from "../../../../ts/types/redux/store.types";
 import { Avatar, Button, Paper } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-interface IdeaItem {
+interface IdeaListItem {
     idea: InvestmentIdea;
 }
-export const IdeaItem: React.FC<IdeaItem> = ({ idea }) => {
+export const IdeaListItem: React.FC<IdeaListItem> = ({ idea }) => {
     const { t } = useTranslation();
     return (
         <Paper elevation={2} sx={{ my: 1 }}>

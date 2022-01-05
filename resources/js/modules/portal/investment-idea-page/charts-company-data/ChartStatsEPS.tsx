@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Grid, Skeleton, Typography } from "@mui/material";
 import Chart from "react-apexcharts";
-import { EpsCompanyStats } from "../../../../ts/types/state/stock-market.types";
+import { EpsCompanyStats } from "../../../../../../nextjs/ts/types/state/stock-market.types";
 interface ChartStatsEPS {
     epsData: EpsCompanyStats[];
 }

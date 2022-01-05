@@ -10,8 +10,9 @@ class BeforeCheckNoAuthUser
     public function handle($request, Closure $next)
     {
         if (!empty($_COOKIE['token'])) {
+            /** @var User $user */
             $user = User::query()->where('remember_token', $_COOKIE['token'])->first();
-            if ($user->count() > 0) {
+            if ($user) {
                 $request->request->add(['userId' => $user->user_id]);
                 return $next($request);
             }

@@ -7,8 +7,11 @@ import {
     TextField,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompanies } from "../../../../redux/actions/adminActions";
-import { AdminStore, StoreData } from "../../../../ts/types/redux/store.types";
+import { fetchCompanies } from "../../../../../../nextjs/redux/actions/adminActions";
+import {
+    AdminStore,
+    StoreData,
+} from "../../../../../../nextjs/ts/types/redux/store.types";
 interface AutoCompleteCompanies {
     changeCompany: (value: string) => void;
     company: string;

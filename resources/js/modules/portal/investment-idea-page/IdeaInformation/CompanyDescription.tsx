@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Typography } from "@mui/material";
-import { CompanyIdeaInfo } from "../../../../ts/types/state/stock-market.types";
+import { CompanyIdeaInfo } from "../../../../../../nextjs/ts/types/state/stock-market.types";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 interface CompanyDescription {

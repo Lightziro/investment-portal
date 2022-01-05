@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../../../nextjs/ts/types/redux/store.types";
 import {
     FormControl,
     FormHelperText,
@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 import { ActionsDialog } from "../../ActionsDialog";
 import { useTranslation } from "react-i18next";
-import { OPTIONS_NEWS_ANALYZE } from "../../../../../config/menu-items";
-import { initialParamsAnalyze } from "../../../../../ts/init/other/other.init";
-import { FormParamsAnalyze } from "../../../../../ts/types/forms/form.types";
-import { sendToAnalyze } from "../../../../../redux/actions/admin/createIdeaActions";
+import { OPTIONS_NEWS_ANALYZE } from "../../../../../../../nextjs/config/menu-items";
+import { initialParamsAnalyze } from "../../../../../../../nextjs/ts/init/other/other.init";
+import { FormParamsAnalyze } from "../../../../../../../nextjs/ts/types/forms/form.types";
+import { sendToAnalyze } from "../../../../../../../nextjs/redux/actions/admin/createIdeaActions";
 
 export const SelectTypeAnalyticsStage: React.FC = () => {
     const dispatch = useDispatch();

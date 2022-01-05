@@ -1,11 +1,11 @@
 import React from "react";
-import { IdeaComment } from "../../../../../ts/types/redux/store.types";
+import { IdeaComment } from "../../../../../../../nextjs/ts/types/redux/store.types";
 import { Avatar, Stack, Typography, Divider, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { stringAvatar } from "../../../../../utils/string-avatar";
-import { ArticleComment } from "../../../../../ts/types/state/article.types";
+import { ArticleComment } from "../../../../../../../nextjs/ts/types/state/article.types";
 interface CommentItem {
     comment: IdeaComment | ArticleComment;
 }

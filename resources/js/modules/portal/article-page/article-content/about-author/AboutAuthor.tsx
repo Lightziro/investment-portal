@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Grid, Stack } from "@mui/material";
-import { ArticleAuthor } from "../../../../../ts/types/state/article.types";
+import { ArticleAuthor } from "../../../../../../../nextjs/ts/types/state/article.types";
 import { Link } from "react-router-dom";
 interface AboutAuthor {
     author: ArticleAuthor;

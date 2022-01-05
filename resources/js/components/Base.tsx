@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
-import { News } from "../ts/types/state/stock-market.types";
+import { News } from "../../../nextjs/ts/types/state/stock-market.types";
 import { Auth } from "../modules/login-user/auth/Auth";
 
 export const Base: React.FC = () => {

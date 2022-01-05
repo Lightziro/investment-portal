@@ -1,11 +1,11 @@
 import React, { Fragment, useRef } from "react";
 import { Avatar, IconButton } from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
-import { StoreData } from "../../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../../nextjs/ts/types/redux/store.types";
 import { useDispatch, useSelector } from "react-redux";
 import { NoLoginMenu } from "./NoLoginMenu";
 import { LoginMenu } from "./LoginMenu";
-import { exitUser } from "../../../../redux/actions/mainActions";
+import { exitUser } from "../../../../../../nextjs/redux/actions/mainActions";
 import { UserAvatar } from "../../../simple/user-avatar/UserAvatar";
 
 interface ProfileMenu {

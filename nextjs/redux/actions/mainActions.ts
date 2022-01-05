@@ -40,6 +40,9 @@ export const subscribeToNews = (email: string) => ({
 export const fetchNews = () => ({
     type: "FETCH_NEWS",
 });
+export const getUser = () => ({
+    type: "FETCH_USER",
+});
 
 // export const clearViewIdea = () => ({
 //     type: 'CLEAR_VIEW_IDEA'

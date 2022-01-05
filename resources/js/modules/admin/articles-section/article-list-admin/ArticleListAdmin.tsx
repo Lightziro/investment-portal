@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../../nextjs/ts/types/redux/store.types";
 import {
     Avatar,
     Divider,
@@ -13,7 +13,7 @@ import {
     deleteArticle,
     editArticle,
     fetchArticlesForAdmin,
-} from "../../../../redux/actions/articleArtions";
+} from "../../../../../../nextjs/redux/actions/articleArtions";
 import { LoadingArticle } from "./loading-article/LoadingArticle";
 import moment from "moment";
 import EditIcon from "@mui/icons-material/Edit";

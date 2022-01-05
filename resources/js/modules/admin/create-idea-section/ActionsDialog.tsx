@@ -2,7 +2,7 @@ import React from "react";
 import { Button, DialogActions } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
 
 interface ActionsDialog {
     handler: () => void;

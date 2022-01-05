@@ -11,7 +11,10 @@ import {
 import { RoleUserChip } from "../role-user=chip/RoleUserChip";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector } from "react-redux";
-import { ProfileView, StoreData } from "../../../ts/types/redux/store.types";
+import {
+    ProfileView,
+    StoreData,
+} from "../../../../../nextjs/ts/types/redux/store.types";
 import { FormProfile } from "./form-profile/FormProfile";
 interface ProfileUserInfo {
     profile: ProfileView;

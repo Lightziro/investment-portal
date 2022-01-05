@@ -11,8 +11,8 @@ import { useTranslation } from "react-i18next";
 import { Button, Form } from "react-bootstrap";
 import { Formik, FormikHelpers } from "formik";
 import { useDispatch } from "react-redux";
-import { subscribeToNews } from "../../redux/actions/mainActions";
-import { SubscribeEmailSchema } from "../../ts/validation/subscribe.validation";
+import { subscribeToNews } from "../../../../nextjs/redux/actions/mainActions";
+import { SubscribeEmailSchema } from "../../../../nextjs/ts/validation/subscribe.validation";
 
 export const Footer: React.FC = () => {
     const { t } = useTranslation();

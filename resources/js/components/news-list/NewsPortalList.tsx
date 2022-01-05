@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Divider, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../ts/types/redux/store.types";
+import { StoreData } from "../../../../nextjs/ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
-import { fetchNews } from "../../redux/actions/mainActions";
+import { fetchNews } from "../../../../nextjs/redux/actions/mainActions";
 
 export const NewsPortalList: React.FC = () => {
     const { i18n, t } = useTranslation();

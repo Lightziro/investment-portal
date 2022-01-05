@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import { StoreData } from "../../../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../../../nextjs/ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 

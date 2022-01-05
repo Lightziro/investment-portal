@@ -7,7 +7,10 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { alertError, alertSuccess } from "../../../redux/actions/alertActions";
+import {
+    alertError,
+    alertSuccess,
+} from "../../../../../nextjs/redux/actions/alertActions";
 export const ForgotPassword: React.FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();

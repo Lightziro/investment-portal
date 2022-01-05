@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { ArticleLabel } from "../../../../ts/types/state/article.types";
+import { ArticleLabel } from "../../../../../../nextjs/ts/types/state/article.types";
 import { Grid, Paper, Skeleton, Stack } from "@mui/material";
 import { LabelList } from "./label-list/LabelList";
 import moment from "moment";

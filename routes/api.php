@@ -24,6 +24,7 @@ Route::group(['prefix' => 'article'], function () {
     Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
     Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware(BeforeCheckNoAuthUser::class);
 });
+
 Route::group(['prefix' => 'other'], function () {
     Route::get('/countries', [OtherController::class, 'getCountries']);
     Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);

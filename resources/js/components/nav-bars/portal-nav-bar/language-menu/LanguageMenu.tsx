@@ -7,7 +7,7 @@ import {
     MenuItem,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { MENU_LANGUAGE } from "../../../../config/menu-items";
+import { MENU_LANGUAGE } from "../../../../../../nextjs/config/menu-items";
 interface LanguageMenu {
     open: boolean;
     onClose: () => void;

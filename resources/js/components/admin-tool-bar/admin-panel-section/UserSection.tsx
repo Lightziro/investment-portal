@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 

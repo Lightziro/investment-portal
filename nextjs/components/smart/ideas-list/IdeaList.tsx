@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { Box, Card, Divider, Skeleton, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { IdeaItem } from "./IdeaItem";
-import { EmptyIdeaList } from "./EmptyIdeaList";
+import { IdeaListItem } from "./idea-list-item/IdeaListItem";
+import { LoadIdeasList } from "./load-ideas-list/LoadIdeasList";
 
 export const IdeaList: React.FC = () => {
     const ideaList = useSelector(
@@ -26,10 +26,10 @@ export const IdeaList: React.FC = () => {
                 <Box padding={1}>
                     {ideaList ? (
                         ideaList.map((idea) => (
-                            <IdeaItem key={idea.id} idea={idea} />
+                            <IdeaListItem key={idea.id} idea={idea} />
                         ))
                     ) : (
-                        <EmptyIdeaList />
+                        <LoadIdeasList />
                     )}
                 </Box>
             </Card>

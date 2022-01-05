@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from "react";
 import { Grid, Paper, Typography } from "@mui/material";
-import { fetchInvestmentData } from "../../redux/actions/mainActions";
+import { fetchInvestmentData } from "../../../../nextjs/redux/actions/mainActions";
 import { useDispatch } from "react-redux";
 import { NewsPortalList } from "../../components/news-list/NewsPortalList";
-import { PortalAd } from "../../components/portal-ad/PortalAd";
-import { IdeaStatistics } from "./idea-statistics/IdeaStatistics";
-import { IdeaList } from "./idea-list/IdeaList";
-import { ArticleList } from "./article-list/ArticleList";
+import { PortalAd } from "../../../../nextjs/components/simple/portal-ad/PortalAd";
+import { IdeaStatistics } from "../../../../nextjs/components/ordinary/ideas-statistics/IdeaStatistics";
+import { IdeaList } from "../../../../nextjs/components/smart/ideas-list/IdeaList";
+import { ArticleList } from "../../../../nextjs/components/smart/article-list/ArticleList";
 
 export const Portal: React.FC = () => {
     // const { t, i18n } = useTranslation();

@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Divider, Paper, Skeleton, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
-import { ProfileView } from "../../../ts/types/redux/store.types";
+import { ProfileView } from "../../../../../nextjs/ts/types/redux/store.types";
 interface ProfileStats {
     profile: ProfileView;
 }

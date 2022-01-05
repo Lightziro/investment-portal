@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Grid, Skeleton, Stack } from "@mui/material";
-import { InvestmentIdea } from "../../../ts/types/redux/store.types";
+import { InvestmentIdea } from "../../../../../nextjs/ts/types/redux/store.types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 interface ListIdea {

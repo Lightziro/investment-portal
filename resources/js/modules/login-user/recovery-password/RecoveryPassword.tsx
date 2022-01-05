@@ -1,13 +1,16 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik } from "formik";
-import { RecoveryPasswordSchema } from "../../../ts/validation/recovery-passowrd.validation";
+import { RecoveryPasswordSchema } from "../../../../../nextjs/ts/validation/recovery-passowrd.validation";
 import TextField from "@mui/material/TextField";
 import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { alertError, alertSuccess } from "../../../redux/actions/alertActions";
+import {
+    alertError,
+    alertSuccess,
+} from "../../../../../nextjs/redux/actions/alertActions";
 
 export const RecoveryPassword: React.FC = () => {
     const { key } = useParams();

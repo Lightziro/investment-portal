@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Card, Grid, Stack, Skeleton, Typography } from "@mui/material";
-import { AuthorInfo } from "../../../../ts/types/state/user.types";
+import { AuthorInfo } from "../../../../../../nextjs/ts/types/state/user.types";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 interface IdeaAuthor {

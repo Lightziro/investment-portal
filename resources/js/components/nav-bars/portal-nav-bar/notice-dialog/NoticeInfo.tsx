@@ -1,5 +1,5 @@
 import React from "react";
-import { Notice } from "../../../../ts/types/redux/store.types";
+import { Notice } from "../../../../../../nextjs/ts/types/redux/store.types";
 import { Divider, Typography } from "@mui/material";
 interface NoticeInfo {
     notice: Notice;

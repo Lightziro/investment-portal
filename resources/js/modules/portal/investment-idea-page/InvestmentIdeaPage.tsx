@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     clearView,
     fetchInvestmentIdea,
-} from "../../../redux/actions/mainActions";
-import { StoreData } from "../../../ts/types/redux/store.types";
+} from "../../../../../nextjs/redux/actions/mainActions";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
 import { Divider, Grid } from "@mui/material";
 import { ChartStatsEPS } from "./charts-company-data/ChartStatsEPS";
 import { ChartStatsAnalytics } from "./charts-company-data/ChartStatsAnalytics";
@@ -15,7 +15,7 @@ import { CompanyDescription } from "./IdeaInformation/CompanyDescription";
 import { IdeaDescription } from "./idea-description/IdeaDescription";
 import { IdeaInformation } from "./company-description/IdeaInformation";
 import { CommentsWrapper } from "../../../components/smart/CommentsWrapper";
-import { createComment } from "../../../redux/actions/investmentIdeaActions";
+import { createComment } from "../../../../../nextjs/redux/actions/investmentIdeaActions";
 
 export const InvestmentIdeaPage: React.FC = () => {
     const dispatch = useDispatch();

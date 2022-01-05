@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { ArticleLabel } from "../../../../../ts/types/state/article.types";
+import { ArticleLabel } from "../../../../../../../nextjs/ts/types/state/article.types";
 import { Grid, Skeleton, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 interface LabelList {

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Avatar } from "@mui/material";
 import { stringAvatar } from "../../../utils/string-avatar";
-import { User } from "../../../ts/types/redux/store.types";
+import { User } from "../../../../../nextjs/ts/types/redux/store.types";
 interface UserAvatar {
     user: User;
 }

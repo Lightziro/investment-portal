@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Throwable;
+use function cookie;
 
 class UserLoginController extends Controller
 {
@@ -41,7 +42,7 @@ class UserLoginController extends Controller
             return response()->json(['error' => 'Password is incorrect'], 400);
         }
         $token = $user->remember_token;
-        $cookie = \cookie('token', $token, $remember ? 24 * 60 : 60);
+        $cookie = cookie('token', $token, $remember ? 24 * 60 : 60);
         return response()->json($user->getFrontendData())->cookie($cookie);
     }
 
@@ -75,7 +76,7 @@ class UserLoginController extends Controller
             $user->role_id = $role_user->role_id;
             $user->remember_token = $token;
             if ($user->save()) {
-                $cookie = \cookie('token', $token, 1234);
+                $cookie = cookie('token', $token, 1234);
                 return response()->json($user->getFrontendData())->cookie($cookie);
             }
         } catch (Throwable $e) {

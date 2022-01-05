@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Container, Grid, Skeleton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../ts/types/redux/store.types";
+import { StoreData } from "../../../../nextjs/ts/types/redux/store.types";
 import { ProfileUserInfo } from "./profile-user-info/ProfileUserInfo";
 import { useParams } from "react-router-dom";
-import { fetchProfileView } from "../../redux/actions/profileActions";
+import { fetchProfileView } from "../../../../nextjs/redux/actions/profileActions";
 import { ProfileAvatar } from "./profile-avatar/ProfileAvatar";
 import { ProfileStats } from "./profile-stats/ProfileStats";
-import { clearView } from "../../redux/actions/mainActions";
+import { clearView } from "../../../../nextjs/redux/actions/mainActions";
 
 export const Profile: React.FC = () => {
     const profile = useSelector((state: StoreData) => state.view.profile);

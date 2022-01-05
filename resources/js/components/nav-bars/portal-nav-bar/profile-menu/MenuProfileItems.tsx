@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { MenuItems } from "../../../../ts/types/menu-items.types";
+import { MenuItems } from "../../../../../../nextjs/ts/types/menu-items.types";
 import { Box, ListItemText, MenuItem } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";

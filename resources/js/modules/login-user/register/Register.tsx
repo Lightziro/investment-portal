@@ -12,11 +12,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Formik, FormikProps } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { SignUpSchema } from "../../../ts/validation/register.validation";
-import { initRegisterForm } from "../../../ts/consts/forms/init-form";
-import { FormRegister } from "../../../ts/types/forms/form.types";
-import { registerUser } from "../../../redux/actions/mainActions";
-import { StoreData } from "../../../ts/types/redux/store.types";
+import { SignUpSchema } from "../../../../../nextjs/ts/validation/register.validation";
+import { initRegisterForm } from "../../../../../nextjs/ts/consts/forms/init-form";
+import { FormRegister } from "../../../../../nextjs/ts/types/forms/form.types";
+import { registerUser } from "../../../../../nextjs/redux/actions/mainActions";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
 
 export const Register: React.FC = () => {
     const user = useSelector((state: StoreData) => state.main.user);

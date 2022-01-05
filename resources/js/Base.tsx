@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "./ts/types/redux/store.types";
+import { StoreData } from "../../nextjs/ts/types/redux/store.types";
 import axios from "axios";
-import { setUserData } from "./redux/actions/mainActions";
+import { setUserData } from "../../nextjs/redux/actions/mainActions";
 import { MainRouter } from "./routes/mainRouters";
 import { SnackbarAlert } from "./components/snackbar-alert/SnackbarAlert";
 

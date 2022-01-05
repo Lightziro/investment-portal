@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { User } from "../../../../ts/types/redux/store.types";
+import { User } from "../../../../../../nextjs/ts/types/redux/store.types";
 import {
     Box,
     Divider,
@@ -8,12 +8,12 @@ import {
     Typography,
 } from "@mui/material";
 import { MenuProfileItems } from "./MenuProfileItems";
-import { menuAuth } from "../../../../config/menu-items";
+import { menuAuth } from "../../../../../../nextjs/config/menu-items";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { exitUser } from "../../../../redux/actions/mainActions";
+import { exitUser } from "../../../../../../nextjs/redux/actions/mainActions";
 
 interface LoginMenu {
     user: User;

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
 import {
     createArticleComment,
     fetchArticleView,
-} from "../../../redux/actions/articleArtions";
+} from "../../../../../nextjs/redux/actions/articleArtions";
 import {
     Collapse,
     Container,
@@ -14,7 +14,7 @@ import {
     Paper,
     Skeleton,
 } from "@mui/material";
-import { clearView } from "../../../redux/actions/mainActions";
+import { clearView } from "../../../../../nextjs/redux/actions/mainActions";
 import { ArticleHeader } from "./article-header/ArticleHeader";
 import { ArticleContent } from "./article-content/ArticleContent";
 import { AboutAuthor } from "./article-content/about-author/AboutAuthor";

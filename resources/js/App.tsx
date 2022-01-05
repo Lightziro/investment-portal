@@ -2,14 +2,14 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";
-import { mainStore } from "./redux/store/mainStore";
+import { store } from "../../nextjs/redux/store/Store";
 import { Base } from "./Base";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MainRouter } from "./routes/mainRouters";
-import "./config/i18next";
+import "../../nextjs/config/i18next";
 
 render(
-    <Provider store={mainStore as any}>
+    <Provider store={store as any}>
         <div className="wrapper-site">
             <Base />
         </div>

@@ -2,7 +2,7 @@ import React, { Fragment, useRef } from "react";
 import SunEditor, { buttonList } from "suneditor-react";
 import { Box, Button } from "@mui/material";
 import { Formik } from "formik";
-import { initialArticleForm } from "../../../../../ts/consts/forms/init-form";
+import { initialArticleForm } from "../../../../../../../nextjs/ts/consts/forms/init-form";
 import { Form } from "react-bootstrap";
 import SunEditorCore from "suneditor/src/lib/core";
 import { useTranslation } from "react-i18next";
@@ -10,8 +10,8 @@ import { useDispatch } from "react-redux";
 import {
     createArticle,
     updateArticle,
-} from "../../../../../redux/actions/articleArtions";
-import { Article } from "../../../../../ts/types/state/article.types";
+} from "../../../../../../../nextjs/redux/actions/articleArtions";
+import { Article } from "../../../../../../../nextjs/ts/types/state/article.types";
 interface ArticleForm {
     edit: Article;
 }

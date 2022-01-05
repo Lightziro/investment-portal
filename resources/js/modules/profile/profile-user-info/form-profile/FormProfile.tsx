@@ -1,17 +1,20 @@
 import React, { useEffect } from "react";
-import { ProfileView, StoreData } from "../../../../ts/types/redux/store.types";
+import {
+    ProfileView,
+    StoreData,
+} from "../../../../../../nextjs/ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
 import { Formik } from "formik";
 import { FormProfileRow } from "./FormProfileRow";
 import { FormProfileTextField } from "./form-profile-fields/FormProfileTextField";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCountries } from "../../../../redux/actions/mainActions";
+import { fetchCountries } from "../../../../../../nextjs/redux/actions/mainActions";
 import { FormProfileSelectField } from "./form-profile-fields/FormProfileSelectField";
 import { Box, Button, Stack } from "@mui/material";
-import { updateProfile } from "../../../../redux/actions/profileActions";
+import { updateProfile } from "../../../../../../nextjs/redux/actions/profileActions";
 import { FormProfileRadioField } from "./form-profile-fields/FormProfileRadioField";
-import { sexList } from "../../../../ts/init/other/other.init";
-import { ProfileSchema } from "../../../../ts/validation/profile.validation";
+import { sexList } from "../../../../../../nextjs/ts/init/other/other.init";
+import { ProfileSchema } from "../../../../../../nextjs/ts/validation/profile.validation";
 
 interface FormProfile {
     edit: boolean;

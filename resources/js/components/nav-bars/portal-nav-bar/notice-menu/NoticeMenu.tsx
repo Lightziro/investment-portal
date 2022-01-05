@@ -1,6 +1,9 @@
 import React, { Fragment, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Notice, StoreData } from "../../../../ts/types/redux/store.types";
+import {
+    Notice,
+    StoreData,
+} from "../../../../../../nextjs/ts/types/redux/store.types";
 import {
     Box,
     Divider,
@@ -12,7 +15,7 @@ import {
 import { MenuPopover } from "../menu-popover/MenuPopover";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
-import { viewNotice } from "../../../../redux/actions/mainActions";
+import { viewNotice } from "../../../../../../nextjs/redux/actions/mainActions";
 import { NoticeInfo } from "../notice-dialog/NoticeInfo";
 interface NoticeMenu {
     onOpen: () => void;

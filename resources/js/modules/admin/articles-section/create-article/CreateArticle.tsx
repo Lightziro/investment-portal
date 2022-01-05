@@ -4,8 +4,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import "suneditor/dist/css/suneditor.min.css";
 import { ArticleForm } from "./article-form/ArticleForm";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../../../ts/types/redux/store.types";
-import { setArticleDialog } from "../../../../redux/actions/adminActions";
+import { StoreData } from "../../../../../../nextjs/ts/types/redux/store.types";
+import { setArticleDialog } from "../../../../../../nextjs/redux/actions/adminActions";
 export const CreateArticle: React.FC = () => {
     const { dialog, edit } = useSelector(
         (state: StoreData) => state.admin.articles

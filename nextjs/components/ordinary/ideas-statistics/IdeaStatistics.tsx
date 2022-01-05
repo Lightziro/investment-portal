@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 
 export const IdeaStatistics: React.FC = () => {
+    const asd = useSelector((state: StoreData) => state.main);
     const stats = useSelector(
         (state: StoreData) => state.main.investmentData.ideaStatistics
     );

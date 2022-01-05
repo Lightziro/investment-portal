@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { MENU_NO_AUTH } from "../../../../config/menu-items";
+import { MENU_NO_AUTH } from "../../../../../../nextjs/config/menu-items";
 import { Typography, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { MenuProfileItems } from "./MenuProfileItems";

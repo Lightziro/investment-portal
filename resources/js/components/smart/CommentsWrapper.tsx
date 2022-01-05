@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IdeaComment, StoreData } from "../../ts/types/redux/store.types";
-import { ArticleComment } from "../../ts/types/state/article.types";
+import {
+    IdeaComment,
+    StoreData,
+} from "../../../../nextjs/ts/types/redux/store.types";
+import { ArticleComment } from "../../../../nextjs/ts/types/state/article.types";
 import { Card, Divider, Stack, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { CommentItem } from "../../modules/portal/investment-idea-page/idea-comments/comment-item/CommentItem";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { CountryItem } from "../../../../../ts/types/other/other.types";
+import { CountryItem } from "../../../../../../../nextjs/ts/types/other/other.types";
 import { useTranslation } from "react-i18next";
 interface FormProfileSelectField {
     items: CountryItem[];

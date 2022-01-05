@@ -1,7 +1,7 @@
 import React from "react";
 import { Skeleton } from "@mui/lab";
 import { Avatar, Stack } from "@mui/material";
-import { ProfileView } from "../../../ts/types/redux/store.types";
+import { ProfileView } from "../../../../../nextjs/ts/types/redux/store.types";
 import { stringAvatar } from "../../../utils/string-avatar";
 interface ProfileAvatar {
     profile: ProfileView;

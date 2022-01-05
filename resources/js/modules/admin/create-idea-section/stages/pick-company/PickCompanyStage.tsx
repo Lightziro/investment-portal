@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import {
     setCompanyIdea,
     setStage,
-} from "../../../../../redux/actions/admin/createIdeaActions";
-import { alertInfo } from "../../../../../redux/actions/alertActions";
+} from "../../../../../../../nextjs/redux/actions/admin/createIdeaActions";
+import { alertInfo } from "../../../../../../../nextjs/redux/actions/alertActions";
 export const PickCompanyStage: React.FC = () => {
     const dispatch = useDispatch();
     const [company, setCompany] = useState<string>(null);

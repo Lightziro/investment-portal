@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../ts/types/redux/store.types";
+import { StoreData } from "../../../../nextjs/ts/types/redux/store.types";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 

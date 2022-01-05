@@ -16,6 +16,10 @@ const mainReducer = (
                 user: action.userData,
             };
         case "SET_PORTAL_DATA":
+            console.log({
+                ...state,
+                ...action.data,
+            });
             return {
                 ...state,
                 ...action.data,

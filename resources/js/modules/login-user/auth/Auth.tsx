@@ -7,13 +7,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
-import { authUser } from "../../../redux/actions/mainActions";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
+import { authUser } from "../../../../../nextjs/redux/actions/mainActions";
 import { useTranslation } from "react-i18next";
 
 import { Link, useNavigate } from "react-router-dom";
-import { SignInSchema } from "../../../ts/validation/auth.validation";
-import { FormAuth } from "../../../ts/types/forms/form.types";
+import { SignInSchema } from "../../../../../nextjs/ts/validation/auth.validation";
+import { FormAuth } from "../../../../../nextjs/ts/types/forms/form.types";
 
 function Copyright(props: any) {
     return (

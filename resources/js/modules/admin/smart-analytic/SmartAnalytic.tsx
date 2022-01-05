@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAnalyticData } from "../../../redux/actions/adminActions";
+import { fetchAnalyticData } from "../../../../../nextjs/redux/actions/adminActions";
 import { Page } from "../../../components/simple/Page";
 import { Container, Grid } from "@mui/material";
 import { AdminCardInfo } from "../../../components/simple/AdminCardInfo/AdminCardInfo";
-import { StoreData } from "../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../nextjs/ts/types/redux/store.types";
 import { ActionSmartAnalytic } from "./action-smart-analytic/ActionSmartAnalytic";
 
 export const SmartAnalytic: React.FC = () => {

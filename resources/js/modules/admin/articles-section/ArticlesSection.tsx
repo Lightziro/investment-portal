@@ -3,9 +3,9 @@ import { Button, Container, Divider, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { CreateArticle } from "./create-article/CreateArticle";
 import { useDispatch } from "react-redux";
-import { fetchArticlesForAdmin } from "../../../redux/actions/articleArtions";
+import { fetchArticlesForAdmin } from "../../../../../nextjs/redux/actions/articleArtions";
 import { ArticleListAdmin } from "./article-list-admin/ArticleListAdmin";
-import { setArticleDialog } from "../../../redux/actions/adminActions";
+import { setArticleDialog } from "../../../../../nextjs/redux/actions/adminActions";
 
 export const ArticlesSection: React.FC = () => {
     const dispatch = useDispatch();
