@@ -1,11 +1,13 @@
 import React, { Fragment } from "react";
-import { Divider, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
+import { PaperWrapper } from "../../simple/paper-wrapper/PaperWrapper";
+import { Divider, Typography } from "antd";
+import Skeleton from "react-loading-skeleton";
+import { Stack } from "react-bootstrap";
 
 export const IdeaStatistics: React.FC = () => {
-    const asd = useSelector((state: StoreData) => state.main);
     const stats = useSelector(
         (state: StoreData) => state.main.investmentData.ideaStatistics
     );
@@ -13,16 +15,12 @@ export const IdeaStatistics: React.FC = () => {
     return (
         <div className="portal-component-wrapper">
             {stats ? (
-                <Paper elevation={2}>
-                    <Typography align="center" variant="h6" sx={{ p: 1 }}>
+                <PaperWrapper>
+                    <Typography.Title level={5}>
                         {t("We offer best ideas")}
-                    </Typography>
-                    <Divider light />
-                    <Stack
-                        direction="row"
-                        spacing={1}
-                        divider={<Divider orientation="vertical" flexItem />}
-                    >
+                    </Typography.Title>
+                    <Divider />
+                    <Stack direction="horizontal" gap={1}>
                         <div className="wrapper-stats-idea">
                             <span className="label-stats-ideas">
                                 {t("Successful ideas")}
@@ -40,9 +38,9 @@ export const IdeaStatistics: React.FC = () => {
                             </span>
                         </div>
                     </Stack>
-                </Paper>
+                </PaperWrapper>
             ) : (
-                <Skeleton height={163} variant="rectangular" />
+                <Skeleton height={163} />
             )}
         </div>
     );

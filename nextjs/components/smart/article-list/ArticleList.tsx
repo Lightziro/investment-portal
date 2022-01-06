@@ -1,7 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
-import { ArticleItem } from "./article-item/ArticleItem";
 import { LoadArticleItems } from "./load-article-items/LoadArticleItems";
 import { Col, Row } from "react-bootstrap";
 

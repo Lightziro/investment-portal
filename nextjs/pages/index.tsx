@@ -10,6 +10,7 @@ import { Col, Row } from "react-bootstrap";
 import { PaperWrapper } from "../components/simple/paper-wrapper/PaperWrapper";
 import { Typography } from "antd";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
+import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 export const getServerSideProps = wrapper.getServerSideProps(
     (store) => async () => {
         const dispatch = store.dispatch;
@@ -43,6 +44,8 @@ const Index: NextPage = () => {
                         </Col>
                         <Col sm={12} md={3}>
                             <PortalAd />
+                            <IdeaStatistics />
+                            <IdeaList />
                         </Col>
                     </Row>
                 </Col>
@@ -57,7 +60,7 @@ const Index: NextPage = () => {
             {/*    </Grid>*/}
             {/*    <Grid xs={false} item md={9}>*/}
             {/*        <Paper elevation={2} sx={{ p: 1, mb: 2 }}>*/}
-            {/*            <Typography variant="h3">Investments</Typography>*/}
+            {/*            <typography variant="h3">Investments</typography>*/}
             {/*        </Paper>*/}
             {/*        <Grid container spacing={3}>*/}
             {/*            <Grid direction="column" item md={9} sm={12}>*/}
