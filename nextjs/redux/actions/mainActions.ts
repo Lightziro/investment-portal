@@ -40,8 +40,9 @@ export const subscribeToNews = (email: string) => ({
 export const fetchNews = () => ({
     type: "FETCH_NEWS",
 });
-export const getUser = () => ({
+export const getUser = (token: string) => ({
     type: "FETCH_USER",
+    token,
 });
 
 // export const clearViewIdea = () => ({

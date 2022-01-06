@@ -27,12 +27,12 @@ export const MENU_LANGUAGE = [
     {
         value: "en",
         text: "English",
-        icon: "/image/picture/language-icons/en-flag.svg",
+        icon: "/images/picture/language-icons/en-flag.svg",
     },
     {
         value: "ru",
         text: "Russia",
-        icon: "/image/picture/language-icons/ru-flag.svg",
+        icon: "/images/picture/language-icons/ru-flag.svg",
     },
 ];
 export const AUTH_BY = [

@@ -2,23 +2,22 @@ import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import axios from "axios";
-
 function* fetchUser(action: AnyAction): Generator {
-    try {
-        const userOrError = yield axios
-            .get("http://localhost:8000/api/user/authentication")
-            .then((response) => response);
-        yield put({ type: action.type });
-    } catch (e) {}
+    console.log("Летит токен:", action.token);
+    // yield put({ type: action.type });
 }
 function* fetchInvestmentData(action: AnyAction): Generator {
-    const data = yield axios
-        .get(`${process.env.API_URL}/api/investment-data/portal`)
-        .then((response) => response.data);
-    yield put({
-        type: "SET_PORTAL_DATA",
-        data,
-    });
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL_DOCKER}/api/investment-data/portal`)
+            .then((response) => response.data);
+        yield put({
+            type: "SET_PORTAL_DATA",
+            data,
+        });
+    } catch (e) {
+        console.log("ERROR", e);
+    }
 }
 function* viewNotice(action: AnyAction): Generator {
     try {
@@ -54,18 +53,20 @@ function* registerUser(action: AnyAction): Generator {
 }
 function* authUser(action: AnyAction): Generator {
     try {
-        const userData = yield axios
-            .post("/api/user/login", action.userData)
+        const data = yield axios
+            .post(`${process.env.API_URL}/api/user/login`, action.userData)
             .then((response) => response.data);
+        localStorage.setItem("token", data.token);
         yield put({
             type: "SET_USER_DATA",
-            userData,
+            userData: data.user,
         });
     } catch (error) {
-        yield put({
-            type: "SET_ALERT_ERROR",
-            message: error.response.data.error,
-        });
+        console.log("ERROR", error);
+        // yield put({
+        //     type: "SET_ALERT_ERROR",
+        //     message: error.response.data.error,
+        // });
     }
 }
 function* fetchCountries(action: AnyAction): Generator {

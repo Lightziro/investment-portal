@@ -9,11 +9,15 @@ use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
 use App\Models\Other\Country;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use JetBrains\PhpStorm\Pure;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @property int user_id
@@ -33,8 +37,10 @@ use JetBrains\PhpStorm\Pure;
  * @property Collection|ArticleComments[] commentsArticles
  * @property Collection|UserSubscriptions[] subscriptions
  */
-class User extends CustomModel
+class User extends Authenticatable
 {
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $table = 'users';
 
     protected $fillable = [

@@ -13,6 +13,7 @@ const resources = {
     },
 };
 const options = {
+    lookupQuerystring: "lng",
     order: ["localStorage"],
     lookupLocalStorage: "i18nextLng",
     caches: ["localStorage", "cookie"],
@@ -23,6 +24,7 @@ i18n.use(LngDetector)
     .use(initReactI18next)
     .init({
         resources,
+        lng: "ru",
         interpolation: {
             escapeValue: false,
             prefix: "%",

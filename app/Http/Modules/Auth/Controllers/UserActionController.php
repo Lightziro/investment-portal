@@ -77,17 +77,20 @@ class UserActionController extends Controller
         return response()->json(['status' => true])->withCookie(Cookie::forget('token'));
     }
 
-    public function authentication(): JsonResponse
+    public function authentication(Request $request): JsonResponse
     {
-        $cookie = Cookie::get();
-        if (empty($cookie['token'])) {
-            return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
-        }
-        /** @var User $user */
-        $user = User::query()->where('remember_token', $cookie['token'])->first();
-        if (!$user) {
-            return response()->json(['error' => 'Не удалось аутентифицировать пользователя'], 400);
-        }
-        return response()->json($user->getFrontendData());
+        return $request->user();
+//        $cookie = Cookie::get();
+//        $user = User::query()->find(5);
+//        $token = $user->createToken($user->user_id)->plainTextToken;
+//        if (empty($cookie['token'])) {
+//            return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
+//        }
+//        /** @var User $user */
+//        $user = User::query()->where('remember_token', $cookie['token'])->first();
+//        if (!$user) {
+//            return response()->json(['error' => 'Не удалось аутентифицировать пользователя'], 400);
+//        }
+//        return response()->json($user->getFrontendData());
     }
 }

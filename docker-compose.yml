@@ -7,15 +7,15 @@ services:
                 uid: 1000
             context: .
             dockerfile: Dockerfile
-        image: travellist
-        container_name: travellist-app
+        image: laravel
+        container_name: app-laravel
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
             - ./docker/php:/usr/local/etc/php/conf.d/
             - ./:/var/www
         networks:
-            - travellist
+            - laravel
         environment:
             PHP_IDE_CONFIG: "serverName=Docker"
 
@@ -34,11 +34,11 @@ services:
             - ./docker/mysql/data:/var/lib/mysql
             - ./docker/mysql/my_dev.cnf:/etc/my.cnf.d/my.cnf
         networks:
-            - travellist
+            - laravel
 
     nginx:
         image: nginx:alpine
-        container_name: travellist-nginx
+        container_name: nginx
         restart: unless-stopped
         ports:
             - "8000:80"
@@ -46,7 +46,7 @@ services:
             - ./:/var/www
             - ./docker/nginx:/etc/nginx/conf.d/
         networks:
-            - travellist
+            - laravel
 
     python:
         container_name: python
@@ -82,5 +82,5 @@ services:
         command: npm run dev-client
 
 networks:
-    travellist:
+    laravel:
         driver: bridge

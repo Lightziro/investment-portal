@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,6 @@ class UserLoginController extends Controller
 {
     public function login(Request $request): JsonResponse
     {
-        $remember = $request->get('remember');
         $messages = [
             'min' => ':attribute поле должно содержать минимум :min символов',
             'max' => ':attribute поле должно содержать минимум :max символов',
@@ -41,9 +41,11 @@ class UserLoginController extends Controller
         if (!Hash::check($request->get('password'), $user->password)) {
             return response()->json(['error' => 'Password is incorrect'], 400);
         }
-        $token = $user->remember_token;
-        $cookie = cookie('token', $token, $remember ? 24 * 60 : 60);
-        return response()->json($user->getFrontendData())->cookie($cookie);
+        if (!Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+            return response()->json(['error' => 'Attemp'], 400);
+        }
+        $token = $user->createToken($user->user_id)->plainTextToken;
+        return response()->json(['user' => $user->getFrontendData(), 'token' => $token]);
     }
 
     public function register(Request $request): RedirectResponse|JsonResponse
