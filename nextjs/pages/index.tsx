@@ -12,6 +12,7 @@ import { Typography } from "antd";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 import { MainLayout } from "../layouts/MainLayout";
+import axios from "../utils/axiosApi";
 export const getServerSideProps = wrapper.getServerSideProps(
     (store) => async () => {
         const dispatch = store.dispatch;
@@ -28,62 +29,23 @@ const Index: NextPage = () => {
     const test = useSelector((state: StoreData) => state.main);
     // const { user } = useAuth({ middleware: "guest" });
     console.log(test);
-    // useEffect(() => {
-    //     axiosApi()
-    //         .get(`${process.env.API_URL}/api/sanctum/csrf-cookie`)
-    //         .then(() => {
-    //             console.log("TRUE!!!");
-    //             // axiosApi()
-    //             //     .get("/api/user", {
-    //             //         headers: {
-    //             //             Authorization: `Bearer ${localStorage.getItem(
-    //             //                 "token"
-    //             //             )}`,
-    //             //         },
-    //             //     })
-    //             //     .then((response) => console.log(response.data))
-    //             //     .catch((e) => console.log(e));
-    //         })
-    //         .catch((e) => console.log(e));
-    //     // axiosApi()
-    //     //     .get("/api/user", {
-    //     //         // headers: {
-    //     //         //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     //         // },
-    //     //     })
-    //     //     .then((response) => console.log(response.data))
-    //     //     .catch((e) => console.log(e));
-    //     // // axios
-    //     //     .get(`${process.env.API_URL}/api/user`, {
-    //     //         headers: {
-    //     //             Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     //         },
-    //     //     })
-    //     //     .then((response) => console.log(response.data))
-    //     //     .catch((e) => console.log("ERROR", e));
-    //     // const user = axios
-    //     //     .get(`${process.env.API_URL}/authentication`, {
-    //     //         headers: {
-    //     //             Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     //             "Access-Control-Allow-Origin": "*",
-    //     //         },
-    //     //         // withCredentials: true,
-    //     //     })
-    //     //     .then(() => {
-    //     //         console.log("NEXT GO!");
-    //     //         // try {
-    //     //         //     return axios
-    //     //         //         .get(`${process.env.API_URL}/api/authentication`, {
-    //     //         //             headers: {
-    //     //         //                 Authorization: `Bearer ${action.token}`,
-    //     //         //             },
-    //     //         //         })
-    //     //         //         .then((response) => response.data);
-    //     //         // } catch (e) {}
-    //     //     })
-    //     //     .catch((e) => console.error("ERROR", e));
-    //     // dispatch(getUser(localStorage.getItem("token")));
-    // }, []);
+    useEffect(() => {
+        axios
+            .get(`${process.env.API_URL}/sanctum/csrf-cookie`)
+            .then(() => {
+                axios
+                    .get(`${process.env.API_URL}/api/user`, {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                                "token"
+                            )}`,
+                        },
+                    })
+                    .then((response) => console.log(response.data))
+                    .catch((e) => console.log(e));
+            })
+            .catch((e) => console.log(e));
+    }, []);
     return (
         <MainLayout title="Главная страница">
             <Row>

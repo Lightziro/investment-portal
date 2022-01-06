@@ -29,3 +29,6 @@ Route::group(['prefix' => 'other'], function () {
     Route::get('/countries', [OtherController::class, 'getCountries']);
     Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);
 });
+Route::get('/user', function (\Illuminate\Http\Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
