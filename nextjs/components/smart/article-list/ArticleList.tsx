@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { LoadArticleItems } from "./load-article-items/LoadArticleItems";
 import { Col, Row } from "react-bootstrap";
+import { ArticleItem } from "./article-item/ArticleItem";
 
 export const ArticleList: React.FC = () => {
     const { popular, simple } = useSelector(
@@ -13,7 +14,7 @@ export const ArticleList: React.FC = () => {
             {popular ? (
                 popular.map((article) => (
                     <Col key={article.articleId} xs={12} sm={4}>
-                        {/*<ArticleItem item={article} />*/}
+                        <ArticleItem item={article} />
                     </Col>
                 ))
             ) : (

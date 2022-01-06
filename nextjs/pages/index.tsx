@@ -12,9 +12,6 @@ import { Typography } from "antd";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 import { MainLayout } from "../layouts/MainLayout";
-import axios from "axios";
-import axiosApi from "../utils/axiosApi";
-import { useAuth } from "../utils/auth";
 export const getServerSideProps = wrapper.getServerSideProps(
     (store) => async () => {
         const dispatch = store.dispatch;

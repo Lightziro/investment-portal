@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Card, CardHeader, CardMedia } from "@mui/material";
 import { Article } from "../../../../ts/types/state/article.types";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Shiitake from "shiitake";
 import moment from "moment";
 interface ArticleItem {
@@ -10,7 +10,7 @@ interface ArticleItem {
 export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
     return (
         <Card sx={{ height: 274 }}>
-            <Link to={`/article/${item.articleId}`}>
+            <Link href={`/article/${item.articleId}`}>
                 <CardMedia
                     component="img"
                     height="194"
@@ -20,20 +20,13 @@ export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
             </Link>
             <CardHeader
                 avatar={
-                    <Link to={`/profile/${item.author.userId}`}>
+                    <Link href={`/profile/${item.author.userId}`}>
                         <Avatar src={`/image/${item.author.avatar}`} />
                     </Link>
                 }
                 title={
-                    <Link to={`/article/${item.articleId}`}>
-                        <Shiitake
-                            lines={2}
-                            throttleRate={200}
-                            className="title"
-                            tagName="div"
-                        >
-                            {item.title}
-                        </Shiitake>
+                    <Link href={`/article/${item.articleId}`}>
+                        <span className="title">{item.title}</span>
                     </Link>
                 }
                 subheader={moment(item.dateCreate).fromNow()}

@@ -32,4 +32,8 @@ class OtherController extends Controller
             return response()->json(['status' => false], 400);
         }
     }
+    public function getImage()
+    {
+        return response()->file();
+    }
 }
