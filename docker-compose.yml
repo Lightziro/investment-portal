@@ -16,6 +16,8 @@ services:
             - ./:/var/www
         networks:
             - laravel
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         environment:
             PHP_IDE_CONFIG: "serverName=Docker"
 
@@ -35,13 +37,16 @@ services:
             - ./docker/mysql/my_dev.cnf:/etc/my.cnf.d/my.cnf
         networks:
             - laravel
+        depends_on:
+            - app
 
     nginx:
         image: nginx:alpine
         container_name: nginx
         restart: unless-stopped
+        tty: true
         ports:
-            - "8000:80"
+            - "80:80"
         volumes:
             - ./:/var/www
             - ./docker/nginx:/etc/nginx/conf.d/

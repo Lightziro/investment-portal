@@ -41,7 +41,7 @@ class UserLoginController extends Controller
         if (!Hash::check($request->get('password'), $user->password)) {
             return response()->json(['error' => 'Password is incorrect'], 400);
         }
-        if (!Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+        if (!Auth::attempt($request->only(['email', 'password']))) {
             return response()->json(['error' => 'Attemp'], 400);
         }
         $token = $user->createToken($user->user_id)->plainTextToken;

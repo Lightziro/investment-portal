@@ -12,14 +12,12 @@ export const PortalAd: React.FC = () => {
                 className="main-picture-portal"
                 src="/images/picture/other/svg-editor-image.svg"
             />
-            {/*<Box padding={2}>*/}
             <Typography.Title level={3}>
                 {t("Earn on the fall and on the growth stocks")}
             </Typography.Title>
             <Link href="/company-goal">
                 <Button type="primary">{t("More detailed")}</Button>
             </Link>
-            {/*</Box>*/}
         </Card>
     );
 };

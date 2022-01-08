@@ -3,18 +3,27 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "../sagas/saga";
 import { StoreData } from "../../ts/types/redux/store.types";
 import { initStore } from "../../ts/types/redux/store.init";
-import { Context, createWrapper, MakeStore } from "next-redux-wrapper";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer } from "../reducers/rootReducer";
 
 const sagaMiddleware = createSagaMiddleware();
+let clientInitStore = initStore;
+if (process.browser) {
+    const serverStore = window.serverStoreState;
+    clientInitStore = { ...initStore, ...serverStore };
+    delete window.serverStoreState;
+}
 
-const store: Store<StoreData> = createStore(
+export const clientStore = createStore(
     reducer,
-    initStore,
-    applyMiddleware(sagaMiddleware) // composeWithDevTools off
+    clientInitStore,
+    composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
-const makeStore: MakeStore<Store<StoreData>> = (context: Context) => store;
-export const wrapper = createWrapper<Store<StoreData>>(makeStore, {
-    debug: true,
-});
 sagaMiddleware.run(rootSaga);
+
+export const serverStore: Store<StoreData> = (initServer) =>
+    createStore(
+        reducer,
+        initServer,
+        composeWithDevTools(applyMiddleware(sagaMiddleware)) // composeWithDevTools off
+    );

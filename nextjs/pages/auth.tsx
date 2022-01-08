@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React, { Fragment } from "react";
+import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useTranslation } from "react-i18next";
@@ -7,22 +7,44 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { StoreData } from "../ts/types/redux/store.types";
 import { FormAuth } from "../ts/types/forms/form.types";
-import { authUser } from "../redux/actions/mainActions";
 import Typography from "@mui/material/Typography";
+import Router from "next/router";
 import { Formik } from "formik";
 import { SignInSchema } from "../ts/validation/auth.validation";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import { login } from "../redux/actions/userActions";
 
 const Auth: NextPage = () => {
     const { t } = useTranslation();
-    const user = useSelector((store: StoreData) => store.main.user);
+    const user = useSelector((store: StoreData) => store.user);
+    if (user) {
+        Router.push("/");
+    }
+    console.log("AGA", user);
     // TODO: ДОБАВИТЬ РОУТ ЕСЛИ USER
     const dispatch = useDispatch();
+
     const handleSubmit = (formData: FormAuth) => {
-        dispatch(authUser(formData));
+        dispatch(login(formData));
+        try {
+            axios
+                .get(`${process.env.API_URL}/sanctum/csrf-cookie`, {
+                    withCredentials: true,
+                    headers: {
+                        "Access-Control-Allow-Credentials": true,
+                    },
+                })
+                .then(() => {
+                    const data = axios
+                        .post(`${process.env.API_URL}/api/user/login`, formData)
+                        .then((response) => console.log("SUCCESS"));
+                });
+        } catch (e) {}
+        // dispatch(authUser(formData));
     };
     return (
         <AuthLayout>
@@ -112,4 +134,5 @@ const Auth: NextPage = () => {
         </AuthLayout>
     );
 };
+
 export default Auth;

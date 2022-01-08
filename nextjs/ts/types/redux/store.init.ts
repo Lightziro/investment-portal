@@ -5,7 +5,6 @@ import {
 } from "../../init/redux/reducer.initial";
 
 export const initMainStore: MainStore = {
-    user: null,
     news: null,
     investmentData: {
         bestProfit: null,

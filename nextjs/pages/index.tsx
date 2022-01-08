@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { NextPage } from "next";
-import { fetchInvestmentData } from "../redux/actions/mainActions";
+import { NextPage, NextPageContext } from "next";
+import {
+    fetchInvestmentData,
+    setPortalData,
+} from "../redux/actions/mainActions";
 import { wrapper } from "../redux/store/Store";
 import { ArticleList } from "../components/smart/article-list/ArticleList";
 import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStatistics";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StoreData } from "../ts/types/redux/store.types";
 import { Col, Row } from "react-bootstrap";
 import { PaperWrapper } from "../components/simple/paper-wrapper/PaperWrapper";
@@ -12,40 +15,24 @@ import { Typography } from "antd";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 import { MainLayout } from "../layouts/MainLayout";
-import axios from "../utils/axiosApi";
-export const getServerSideProps = wrapper.getServerSideProps(
-    (store) => async () => {
-        const dispatch = store.dispatch;
-        await dispatch(await fetchInvestmentData());
+import { axios, instanceAxios } from "../utils/axios";
+// export const getServerSideProps = wrapper.getServerSideProps(
+//     (store) => async () => {
+//         const dispatch = store.dispatch;
+//         await dispatch(await fetchInvestmentData());
+//     }
+// );
+
+export default function Index({ data }) {
+    // console.log("PROPS", data);
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     dispatch(setPortalData(data));
+    // }, []);
+    const asd = useSelector((store: StoreData) => store);
+    if (process.browser) {
+        console.log("BASE STORE", window.__PRELOADED_STATE__);
     }
-);
-
-// export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-//     const dispatch = store.dispatch;
-//     await dispatch(await fetchInvestmentData());s
-// });
-
-const Index: NextPage = () => {
-    const test = useSelector((state: StoreData) => state.main);
-    // const { user } = useAuth({ middleware: "guest" });
-    console.log(test);
-    useEffect(() => {
-        axios
-            .get(`${process.env.API_URL}/sanctum/csrf-cookie`)
-            .then(() => {
-                axios
-                    .get(`${process.env.API_URL}/api/user`, {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem(
-                                "token"
-                            )}`,
-                        },
-                    })
-                    .then((response) => console.log(response.data))
-                    .catch((e) => console.log(e));
-            })
-            .catch((e) => console.log(e));
-    }, []);
     return (
         <MainLayout title="Главная страница">
             <Row>
@@ -96,5 +83,4 @@ const Index: NextPage = () => {
             {/*</Grid>*/}
         </MainLayout>
     );
-};
-export default Index;
+}

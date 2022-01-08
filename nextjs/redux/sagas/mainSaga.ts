@@ -2,10 +2,8 @@ import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import axios from "axios";
-function* fetchUser(action: AnyAction): Generator {
-    console.log("Летит токен:", action.token);
-    // yield put({ type: action.type });
-}
+import cookie from "cookie";
+
 function* fetchInvestmentData(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -54,7 +52,14 @@ function* registerUser(action: AnyAction): Generator {
 function* authUser(action: AnyAction): Generator {
     try {
         const data = yield axios
-            .post(`${process.env.API_URL}/api/user/login`, action.userData)
+            .post(`${process.env.API_URL}/api/user/login`, action.userData, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "X-XSRF-TOKEN":
+                        cookie.parse(document.cookie)["XSRF-TOKEN"] || false,
+                },
+            })
             .then((response) => response.data);
         localStorage.setItem("token", data.token);
         yield put({
@@ -122,7 +127,6 @@ function* fetchNews(action: AnyAction): Generator {
 }
 
 export function* actionMainWatcher(): SagaIterator {
-    yield takeLatest("FETCH_USER", fetchUser);
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("VIEW_NOTICE", viewNotice);
     yield takeLatest("REGISTER_USER", registerUser);

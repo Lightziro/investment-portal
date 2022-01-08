@@ -35,4 +35,9 @@ class UserController extends Controller
         }
         return response()->json(['updated' => false], 400);
     }
+
+    public function getUser()
+    {
+        $qwe = '';
+    }
 }

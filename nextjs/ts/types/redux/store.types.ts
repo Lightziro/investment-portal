@@ -11,7 +11,6 @@ import { CountryItem } from "../other/other.types";
 import { Article, ArticleView } from "../state/article.types";
 
 export interface MainStore {
-    user: User;
     news: News[];
     investmentData: InvestmentData;
     profileView: ProfileView;
@@ -21,6 +20,7 @@ export interface MainStore {
         simple: Article[];
     };
 }
+
 export interface OtherData {
     countries: CountryItem[];
 }
@@ -107,7 +107,7 @@ export interface NewsPrediction {
     prediction: string;
 }
 
-export interface User {
+export interface UserStore {
     userId: number;
     fullName: string;
     role: string;
@@ -128,6 +128,7 @@ export interface StoreData {
     admin: AdminStore;
     alert: AlertStore;
     view: ViewStore;
+    user: UserStore;
 }
 export interface ViewStore {
     profile: ProfileView;

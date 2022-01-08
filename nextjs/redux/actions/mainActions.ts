@@ -1,8 +1,5 @@
 import { FormAuth, FormRegister } from "../../ts/types/forms/form.types";
-export const authUser = (userData: FormAuth): any => ({
-    type: "AUTH_USER",
-    userData,
-});
+
 export const setUserData = (userData): any => ({
     type: "SET_USER_DATA",
     userData,
@@ -40,9 +37,9 @@ export const subscribeToNews = (email: string) => ({
 export const fetchNews = () => ({
     type: "FETCH_NEWS",
 });
-export const getUser = (token: string) => ({
-    type: "FETCH_USER",
-    token,
+export const setPortalData = (data) => ({
+    type: "SET_PORTAL_DATA",
+    data,
 });
 
 // export const clearViewIdea = () => ({

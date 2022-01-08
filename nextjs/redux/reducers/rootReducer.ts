@@ -4,8 +4,10 @@ import mainReducer from "./mainReducer";
 import adminReducer from "./adminReducer";
 import alertReducer from "./alertReducer";
 import viewReducer from "./viewReducer";
+import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
+    user: userReducer,
     main: mainReducer,
     admin: adminReducer,
     alert: alertReducer,

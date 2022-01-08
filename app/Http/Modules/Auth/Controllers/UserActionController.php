@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -79,18 +80,10 @@ class UserActionController extends Controller
 
     public function authentication(Request $request): JsonResponse
     {
-        return $request->user();
-//        $cookie = Cookie::get();
-//        $user = User::query()->find(5);
-//        $token = $user->createToken($user->user_id)->plainTextToken;
-//        if (empty($cookie['token'])) {
-//            return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
-//        }
-//        /** @var User $user */
-//        $user = User::query()->where('remember_token', $cookie['token'])->first();
-//        if (!$user) {
-//            return response()->json(['error' => 'Не удалось аутентифицировать пользователя'], 400);
-//        }
-//        return response()->json($user->getFrontendData());
+        /** @var User $user */
+        if ($user = Auth::user()) {
+            return response()->json($user->getFrontendData());
+        }
+        return response()->json(['status' => false], 400);
     }
 }

@@ -8,19 +8,12 @@ const mainReducer = (
     action: AnyAction
 ): MainStore => {
     switch (action.type) {
-        case "SET_USER_DATA":
-            console.log("SET USER");
-            return { ...state, user: action.userData };
         case "SET_SUCCESS_REGISTER":
             return {
                 ...state,
                 user: action.userData,
             };
         case "SET_PORTAL_DATA":
-            console.log({
-                ...state,
-                ...action.data,
-            });
             return {
                 ...state,
                 ...action.data,
