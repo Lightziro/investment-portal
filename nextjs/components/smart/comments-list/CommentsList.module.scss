@@ -1,4 +1,4 @@
-.commentIdeaInfo{
+.commentInfo{
     transition: all 0.2s ease-in-out 0s;
     .dateComment {
         color: darkgrey;
@@ -11,4 +11,7 @@
             opacity: 0.8;
         }
     }
+}
+.noComments{
+    max-width: 100px;
 }

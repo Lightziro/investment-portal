@@ -1,7 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
-import axios from "axios";
+import { axios } from "../../utils/axios";
 function* createArticle(action: AnyAction): Generator {
     try {
         const articleData = yield axios
@@ -53,7 +53,10 @@ function* fetchArticleView(action: AnyAction): Generator {
 function* createArticleComment(action: AnyAction): Generator {
     try {
         const comment = yield axios
-            .post("/api/article/create-comment", action.commentData)
+            .post(
+                `${process.env.API_URL}/api/article/create-comment`,
+                action.commentData
+            )
             .then((response) => response.data);
         yield put({
             type: "ADD_NEW_ARTICLE_COMMENT",

@@ -32,7 +32,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 sx={{ p: 0, width: 44, height: 44 }}
                 onClick={onOpen}
             >
-                <UserAvatar user={user} />
+                <UserAvatar user={user.avatar} />
             </IconButton>
             <MenuPopover
                 open={open}

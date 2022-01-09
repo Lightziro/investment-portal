@@ -28,10 +28,11 @@ Route::group(['prefix' => 'investment-idea'], function () {
 });
 Route::group(['prefix' => 'article'], function () {
     Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
-    Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware(BeforeCheckNoAuthUser::class);
+    Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware('auth:sanctum');
 });
 
 Route::group(['prefix' => 'other'], function () {
     Route::get('/countries', [OtherController::class, 'getCountries']);
     Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);
+    Route::post('/upload-file', [OtherController::class, 'uploadFile']);
 });

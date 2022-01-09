@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { createArticleComment } from "../../../redux/actions/articleArtions";
 import { CommentsList } from "../../../components/smart/comments-list/CommentsList";
+import { NewsList } from "../../../components/ordinary/news-list/NewsList";
+import { ArticleContent } from "../components/article-content/ArticleContent";
+import { AboutAuthor } from "../components/about-author/AboutAuthor";
 
 export const ArticlePage: React.FC = () => {
     const article = useSelector((store: StoreData) => store.view.article);
@@ -25,27 +28,25 @@ export const ArticlePage: React.FC = () => {
                             dateCreate={article.dateCreate}
                         />
                         <Divider />
-                        {/*<ArticleContent*/}
-                        {/*    preview={article.preview}*/}
-                        {/*    content={article.content}*/}
-                        {/*/>*/}
-                        {/*<AboutAuthor author={article.author} />*/}
+                        <ArticleContent
+                            preview={article.preview}
+                            content={article.content}
+                        />
+                        <AboutAuthor author={article.author} />
                     </Paper>
                 </Col>
                 <Col md={4} lg={3}>
                     <Row>
-                        <Col>
-                            <CommentsList
-                                entityId={article.articleId}
-                                entityName="article"
-                                callbackEnter={createArticleComment}
-                                comments={article.comments}
-                            />
-                        </Col>
+                        <CommentsList
+                            entityId={article.articleId}
+                            entityName="article"
+                            callbackEnter={createArticleComment}
+                            comments={article.comments}
+                        />
                     </Row>
-                    {/*<Grid item direction="column">*/}
-                    {/*    <NewsPortalList />*/}
-                    {/*</Grid>*/}
+                    <Row>
+                        <NewsList />
+                    </Row>
                 </Col>
             </Row>
         </Container>

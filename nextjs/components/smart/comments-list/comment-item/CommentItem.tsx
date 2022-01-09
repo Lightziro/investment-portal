@@ -21,7 +21,7 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
                 />
             </Link>
             <div className="d-flex justify-content-start flex-column ms-2">
-                <div className={classes.commentIdeaInfo}>
+                <div className={classes.commentInfo}>
                     <span className={classes.authorComment}>
                         <Link
                             href={`/profile/[id]`}
