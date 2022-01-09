@@ -90,7 +90,7 @@
 
         /***/ "./node_modules/object-assign/index.js":
             /*!*********************************************!*\
-  !*** ./node_modules/object-assign/index.tsx ***!
+  !*** ./node_modules/object-assign/[id].tsx ***!
   \*********************************************/
             /***/ (module) => {
                 /*
@@ -37735,7 +37735,7 @@ object-assign
 
         /***/ "./node_modules/react-dom/index.js":
             /*!*****************************************!*\
-  !*** ./node_modules/react-dom/index.tsx ***!
+  !*** ./node_modules/react-dom/[id].tsx ***!
   \*****************************************/
             /***/ (module, __unused_webpack_exports, __webpack_require__) => {
                 function checkDCE() {
@@ -40887,7 +40887,7 @@ object-assign
 
         /***/ "./node_modules/react/index.js":
             /*!*************************************!*\
-  !*** ./node_modules/react/index.tsx ***!
+  !*** ./node_modules/react/[id].tsx ***!
   \*************************************/
             /***/ (module, __unused_webpack_exports, __webpack_require__) => {
                 if (false) {
@@ -42072,7 +42072,7 @@ object-assign
 
         /***/ "./node_modules/scheduler/index.js":
             /*!*****************************************!*\
-  !*** ./node_modules/scheduler/index.tsx ***!
+  !*** ./node_modules/scheduler/[id].tsx ***!
   \*****************************************/
             /***/ (module, __unused_webpack_exports, __webpack_require__) => {
                 if (false) {

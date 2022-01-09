@@ -50,3 +50,14 @@
 body {
     overflow-x: hidden;
 }
+a {
+    text-decoration: none !important;
+    color: black !important;
+
+}
+hr {
+    height: auto !important;
+}
+.shadow-wrapper {
+    box-shadow: rgba(145, 158, 171, 0.24) 0 0 2px 0, rgba(145, 158, 171, 0.24) 0 16px 32px -4px !important;
+}

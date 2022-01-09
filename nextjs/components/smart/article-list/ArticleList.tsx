@@ -9,8 +9,6 @@ export const ArticleList: React.FC = () => {
     const { popular, simple } = useSelector(
         (state: StoreData) => state.main.articles
     );
-    console.log(process.browser);
-    console.log("POPULAR", popular);
     return (
         <Row>
             {popular ? (

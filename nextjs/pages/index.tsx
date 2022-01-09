@@ -1,49 +1,32 @@
 import React, { useEffect } from "react";
-import { NextPage, NextPageContext } from "next";
-import {
-    fetchInvestmentData,
-    setPortalData,
-} from "../redux/actions/mainActions";
-import { wrapper } from "../redux/store/Store";
-import { ArticleList } from "../components/smart/article-list/ArticleList";
-import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStatistics";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreData } from "../ts/types/redux/store.types";
+import { MainLayout } from "../layouts/MainLayout";
 import { Col, Row } from "react-bootstrap";
 import { PaperWrapper } from "../components/simple/paper-wrapper/PaperWrapper";
-import { Typography } from "antd";
+import { ArticleList } from "../components/smart/article-list/ArticleList";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
+import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStatistics";
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
-import { MainLayout } from "../layouts/MainLayout";
-import { axios, instanceAxios } from "../utils/axios";
-// export const getServerSideProps = wrapper.getServerSideProps(
-//     (store) => async () => {
-//         const dispatch = store.dispatch;
-//         await dispatch(await fetchInvestmentData());
-//     }
-// );
+import { Typography } from "../components/simple/typography/Typography";
+import { NewsList } from "../components/ordinary/news-list/NewsList";
+import { NextPage } from "next";
+import { getInitialState, getListNews } from "../redux/utils/store.utils";
 
-export default function Index({ data }) {
-    // console.log("PROPS", data);
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(setPortalData(data));
-    // }, []);
-    const asd = useSelector((store: StoreData) => store);
-    if (process.browser) {
-        console.log("BASE STORE", window.__PRELOADED_STATE__);
+const Index = ({ news }) => {
+    console.log("INDEX PAGE", news);
+    if (!process.browser && process.initialState) {
+        console.log("SET!");
+        process.initialState.main["news"] = news;
     }
+    useEffect(() => {}, []);
     return (
         <MainLayout title="Главная страница">
             <Row>
                 <Col xs={false} sm={false} md={3}>
-                    Test
+                    <NewsList />
                 </Col>
                 <Col md={9}>
                     <PaperWrapper>
-                        <Typography.Title level={3}>
-                            Investments
-                        </Typography.Title>
+                        <Typography level={3}>Investments</Typography>
                     </PaperWrapper>
                     <Row>
                         <Col md={9} sm={12}>
@@ -83,4 +66,12 @@ export default function Index({ data }) {
             {/*</Grid>*/}
         </MainLayout>
     );
+};
+export default Index;
+
+export async function getServerSideProps({ params }) {
+    const news = await getListNews();
+    return {
+        props: { news },
+    };
 }

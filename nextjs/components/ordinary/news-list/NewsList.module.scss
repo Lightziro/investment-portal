@@ -1,0 +1,27 @@
+//.linkTitleNews {
+//    width: 150px;
+//    margin-top: 10px;
+//    text-decoration: none;
+//
+//    .newsTitle {
+//        line-height: 16px;
+//        word-wrap: break-word;
+//        text-decoration: none;
+//        color: #1256a0;
+//        outline: none;
+//        font-size: 14px;
+//        font-weight: 700;
+//        text-overflow: ellipsis;
+//        text-align: left;
+//
+//        display: -webkit-box;
+//        -webkit-line-clamp: 3;
+//        -webkit-box-orient: vertical;
+//        overflow: hidden;
+//    }
+//}
+.newsTitle {
+    &:hover {
+        color: #6b6b6b;
+    }
+}

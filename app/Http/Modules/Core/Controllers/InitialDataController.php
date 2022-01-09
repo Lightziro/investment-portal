@@ -8,13 +8,14 @@ use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
 use App\Models\User\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class InitialDataController extends Controller
 {
-    public function getPortalInit(): JsonResponse
+    public function getPortalInit(Request $request): JsonResponse
     {
         //        $popular_ideas = InvestmentIdea::query()->getRelatedWithOrderByCount('views', 'user_view_id');
         $max_profit = InvestmentIdea::query()->max('profit');
@@ -55,22 +56,19 @@ class InitialDataController extends Controller
             $user = $user->getFrontendData();
         }
         return response()->json([
-            'main' => [
-                'investmentData' => [
-                    'bestProfit' => $max_profit,
-                    'worseProfit' => $min_profit,
-                    'investmentIdeas' => $ar_ideas ?? null,
-                    'ideaStatistics' => [
-                        'success' => $count_success_ideas,
-                        'fail' => $count_fail_ideas,
-                    ]
-                ],
-                'articles' => [
-                    'popular' => $articles_popular ?? null,
-                    'simple' => $articles_simple ?? null
+            'investmentData' => [
+                'bestProfit' => $max_profit,
+                'worseProfit' => $min_profit,
+                'investmentIdeas' => $ar_ideas ?? null,
+                'ideaStatistics' => [
+                    'success' => $count_success_ideas,
+                    'fail' => $count_fail_ideas,
                 ]
             ],
-            'user' => $user
+            'articles' => [
+                'popular' => $articles_popular ?? null,
+                'simple' => $articles_simple ?? null
+            ]
         ]);
     }
 }

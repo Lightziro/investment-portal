@@ -1,0 +1,30 @@
+.ideaItemWrapper {
+    display: flex;
+    padding: 8px;
+    transition: all 0.3s;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(0.95);
+    }
+
+    .ideaItemInfo {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        margin-left: 10px;
+
+        .potentialProfit {
+            color: #122740;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .companyName {
+            font-size: 0.875rem;
+            color: #758392;
+        }
+    }
+
+}

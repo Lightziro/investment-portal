@@ -14,18 +14,5 @@
         border-radius: 10px;
     }
 }
-.comment-idea-info{
-    transition: all 0.2s ease-in-out 0s;
-    .date-comment {
-        color: darkgrey;
-        margin-left: 8px;
-        font-size: 10px;
-    }
-    .author-comment{
-        font-size: 12px;
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-}
+
 

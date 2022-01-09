@@ -1,20 +1,14 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { UserStore } from "../../../ts/types/redux/store.types";
 import { Avatar } from "@mui/material";
-import { User } from "../../../ts/types/redux/store.types";
 interface UserAvatar {
-    user: User;
+    user: UserStore;
 }
 export const UserAvatar: React.FC<UserAvatar> = ({ user }) => {
-    if (!user) {
-        return <Avatar />;
-    }
     return (
         <Avatar
-            src={
-                user.avatar
-                    ? `/image/${user.avatar}`
-                    : "/image/picture/avatar_default.jpg"
-            }
+            alt="Avatar user"
+            src={user ? `${process.env.API_URL}/storage/${user.avatar}` : ""}
         />
     );
 };

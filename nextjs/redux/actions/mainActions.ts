@@ -27,9 +27,7 @@ export const clearView = (entity: string) => ({
     type: "CLEAR_VIEW",
     entity,
 });
-export const exitUser = () => ({
-    type: "EXIT_USER",
-});
+
 export const subscribeToNews = (email: string) => ({
     type: "SUBSCRIBE_TO_NEWS",
     email,

@@ -1,12 +1,12 @@
 import React, { Fragment, useRef } from "react";
-import { Avatar, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
 import { StoreData } from "../../../../../ts/types/redux/store.types";
 import { useDispatch, useSelector } from "react-redux";
-import { NoLoginMenu } from "./NoLoginMenu";
-import { LoginMenu } from "./LoginMenu";
-import { exitUser } from "../../../../../redux/actions/mainActions";
 import { UserAvatar } from "../../../../simple/user-avatar/UserAvatar";
+import { LoginMenu } from "./LoginMenu";
+import { NoLoginMenu } from "./NoLoginMenu";
+import { logoutUser } from "../../../../../redux/actions/userActions";
 
 interface ProfileMenu {
     open: boolean;
@@ -19,10 +19,10 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
     onClose,
 }) => {
     const anchorRef = useRef(null);
-    const user = useSelector((state: StoreData) => state.main.user);
+    const user = useSelector((state: StoreData) => state.user);
     const dispatch = useDispatch();
     const handleExit = () => {
-        dispatch(exitUser());
+        dispatch(logoutUser());
         onClose();
     };
     return (

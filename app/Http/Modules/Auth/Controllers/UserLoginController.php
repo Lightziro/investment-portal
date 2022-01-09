@@ -44,8 +44,7 @@ class UserLoginController extends Controller
         if (!Auth::attempt($request->only(['email', 'password']))) {
             return response()->json(['error' => 'Attemp'], 400);
         }
-        $token = $user->createToken($user->user_id)->plainTextToken;
-        return response()->json(['user' => $user->getFrontendData(), 'token' => $token]);
+        return response()->json($user->getFrontendData());
     }
 
     public function register(Request $request): RedirectResponse|JsonResponse
@@ -99,5 +98,22 @@ class UserLoginController extends Controller
     public function redirectToGithub(): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         return Socialite::driver('github')->stateless()->redirect();
+    }
+
+    public function getUser(Request $request): JsonResponse
+    {
+        /** @var User $user */
+        if ($user = $request->user()) {
+            return response()->json($user->getFrontendData());
+        }
+        return response()->json([], 400);
+    }
+    public function logout(): JsonResponse
+    {
+        if (Auth::check()) {
+            Auth::logout();
+            return response()->json([]);
+        }
+        return response()->json(['status' => false], 400);
     }
 }

@@ -7,9 +7,9 @@ import "../../nextjs/config/i18next";
 import { Provider } from "react-redux";
 import { SnackbarAlert } from "../components/smart/snackbar-alert/SnackbarAlert";
 import App from "next/app";
-import getInitialState from "../redux/utils/store.utils";
 import { initStore } from "../ts/types/redux/store.init";
 import { clientStore, serverStore } from "../redux/store/Store";
+import { getInitialState } from "../redux/utils/store.utils";
 
 const MyApp = ({ Component, pageProps, state }): App => {
     return (
@@ -29,6 +29,7 @@ const MyApp = ({ Component, pageProps, state }): App => {
 };
 MyApp.getInitialProps = async function (ctx) {
     const initialProps = App.getInitialProps(ctx);
+    console.log("AGAAAAA", ctx.ctx.req);
     if (!process.browser) {
         const init = await getInitialState(ctx.ctx.req);
         process.initialState = init;

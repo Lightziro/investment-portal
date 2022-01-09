@@ -11,21 +11,30 @@ export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
     return (
         <Card sx={{ height: 274 }}>
             <Link href={`/article/${item.articleId}`}>
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={`/image/preview/${item.preview}`}
-                    alt={`Preview ${item.title}`}
-                />
+                Test
+                {/*<CardMedia*/}
+                {/*    component="img"*/}
+                {/*    height="194"*/}
+                {/*    image={`/image/preview/${item.preview}`}*/}
+                {/*    alt={`Preview ${item.title}`}*/}
+                {/*/>*/}
             </Link>
             <CardHeader
                 avatar={
-                    <Link href={`/profile/${item.author.userId}`}>
-                        <Avatar src={`/image/${item.author.avatar}`} />
+                    <Link
+                        href={`/profile/[id]`}
+                        as={`/profile/${item.author.userId}`}
+                    >
+                        <Avatar
+                            src={`${process.env.API_URL}/storage/${item.author.avatar}`}
+                        />
                     </Link>
                 }
                 title={
-                    <Link href={`/article/${item.articleId}`}>
+                    <Link
+                        href={`/article/[id]`}
+                        as={`/article/${item.articleId}`}
+                    >
                         <span className="title">{item.title}</span>
                     </Link>
                 }

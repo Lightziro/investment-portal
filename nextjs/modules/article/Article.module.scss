@@ -1,0 +1,24 @@
+.articleCreatedWrapper {
+    background: #fff;
+    text-align: center;
+    padding: 15px 0;
+    display: block;
+    font: 700 40px/1 "Oswald", sans-serif;
+    color: #8f49f9 !important;
+
+    span {
+        display: block;
+        font-size: 18px;
+        font-weight: 400;
+        color: black;
+        text-transform: uppercase;
+    }
+}
+.articleTitle {
+    font: 600 62px/75px "Oswald", sans-serif;
+    color: #282331;
+    @media (max-width: 600px) {
+        font-size: 44px;
+        line-height: normal;
+    }
+}

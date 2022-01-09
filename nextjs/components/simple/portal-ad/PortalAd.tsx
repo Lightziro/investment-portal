@@ -1,23 +1,24 @@
 import React from "react";
 import Link from "next/link";
-import { Button, Typography } from "antd";
 import { useTranslation } from "react-i18next";
-import { Card } from "../card/Card";
+import { Box, Button, Card, Typography } from "@mui/material";
 
 export const PortalAd: React.FC = () => {
     const { t } = useTranslation();
     return (
-        <Card backgroundColor="#b0deff">
+        <Card sx={{ bgcolor: "#b0deff", mb: 2 }}>
             <img
                 className="main-picture-portal"
                 src="/images/picture/other/svg-editor-image.svg"
             />
-            <Typography.Title level={3}>
-                {t("Earn on the fall and on the growth stocks")}
-            </Typography.Title>
-            <Link href="/company-goal">
-                <Button type="primary">{t("More detailed")}</Button>
-            </Link>
+            <Box padding={2}>
+                <Typography gutterBottom variant="h5" sx={{ fontWeight: 600 }}>
+                    {t("Earn on the fall and on the growth stocks")}
+                </Typography>
+                <Link href="/company-goal">
+                    <Button variant="outlined">Подробнее</Button>
+                </Link>
+            </Box>
         </Card>
     );
 };

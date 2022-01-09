@@ -6,7 +6,6 @@ import classes from "../../../../styles/nav-bar.module.scss";
 import { ProfileMenu } from "./profile-menu/ProfileMenu";
 
 export const PortalNavBar: React.FC = () => {
-    console.log(classes);
     const [open, setOpen] = useState({
         language: false,
         notice: false,
@@ -21,7 +20,8 @@ export const PortalNavBar: React.FC = () => {
             <div className={classes.navBarWrapper}>
                 <div className={classes.logoWrapper}>
                     <Link href="/">
-                        <img src="/images/logo/logo.svg" />
+                        test
+                        {/*<img src="/images/logo/logo.svg" />*/}
                     </Link>
                 </div>
                 <div className={classes.emptyBlock} />

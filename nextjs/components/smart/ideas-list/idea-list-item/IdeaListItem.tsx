@@ -1,9 +1,9 @@
 import React from "react";
-import { Row } from "react-bootstrap";
 import { InvestmentIdea } from "../../../../ts/types/redux/store.types";
-import { Avatar, Button, Paper } from "@mui/material";
+import { Avatar, Paper } from "@mui/material";
+import Link from "next/link";
+import classes from "../IdeaList.module.scss";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 interface IdeaListItem {
     idea: InvestmentIdea;
 }
@@ -11,19 +11,21 @@ export const IdeaListItem: React.FC<IdeaListItem> = ({ idea }) => {
     const { t } = useTranslation();
     return (
         <Paper elevation={2} sx={{ my: 1 }}>
-            <Link to={`/investment-idea/${idea.id}`}>
-                <div className="idea-item-wrapper">
-                    <Avatar
-                        src={`/image/picture/company-logo/${idea.logo}`}
-                        sx={{ width: 24, height: 24 }}
-                    />
-                    <div className="idea-item-info">
-                        <div className="potential-profit">
+            <Link href={`/investment-idea/${idea.id}`}>
+                <div className={classes.ideaItemWrapper}>
+                    {/*<Avatar*/}
+                    {/*    src={`/image/picture/company-logo/${idea.logo}`}*/}
+                    {/*    sx={{ width: 24, height: 24 }}*/}
+                    {/*/>*/}
+                    <div className={classes.ideaItemInfo}>
+                        <div className={classes.potentialProfit}>
                             {t("Potential profit", {
                                 amount: idea.possibleProfit,
                             })}
                         </div>
-                        <span className="company-name">{idea.stock}</span>
+                        <span className={classes.companyName}>
+                            {idea.stock}
+                        </span>
                     </div>
                 </div>
             </Link>

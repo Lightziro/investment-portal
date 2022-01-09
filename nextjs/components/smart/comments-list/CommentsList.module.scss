@@ -1,0 +1,14 @@
+.commentIdeaInfo{
+    transition: all 0.2s ease-in-out 0s;
+    .dateComment {
+        color: darkgrey;
+        margin-left: 8px;
+        font-size: 10px;
+    }
+    .authorComment{
+        font-size: 12px;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

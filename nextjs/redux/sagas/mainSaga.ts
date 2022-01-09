@@ -85,19 +85,6 @@ function* fetchCountries(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
-function* exitUser(action: AnyAction): Generator {
-    try {
-        yield axios.get("/api/user/exit").then((response) => response.data);
-        yield put({
-            type: "SET_EXIT_USER",
-        });
-    } catch (e) {
-        yield put({
-            type: "SET_ALERT_ERROR",
-            message: "Не удалось выполнить запрос. Попробуйте позже",
-        });
-    }
-}
 function* subscribeNews(action: AnyAction): Generator {
     try {
         yield axios
@@ -132,7 +119,6 @@ export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("REGISTER_USER", registerUser);
     yield takeLatest("AUTH_USER", authUser);
     yield takeLatest("FETCH_COUNTRIES", fetchCountries);
-    yield takeLatest("EXIT_USER", exitUser);
     yield takeLatest("SUBSCRIBE_TO_NEWS", subscribeNews);
     yield takeLatest("FETCH_NEWS", fetchNews);
 }

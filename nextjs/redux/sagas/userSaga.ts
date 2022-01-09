@@ -1,7 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
-import axios from "../../utils/axios";
 import { AnyAction } from "redux";
+import { axios } from "../../utils/axios";
 function* fetchUser(): Generator {
     try {
         const user = yield axios
@@ -18,10 +18,11 @@ function* fetchUser(): Generator {
 function* login(action: AnyAction): Generator {
     try {
         yield axios.get(`${process.env.API_URL}/sanctum/csrf-cookie`);
-        const user = yield axios.post(
-            `${process.env.API_URL}/api/user/login`,
-            action.userData
-        );
+        const user = yield axios
+            .post(`${process.env.API_URL}/login`, action.userData)
+            .then((response) => response.data)
+            .catch((e) => null);
+
         yield put({
             type: "SET_USER",
             user,
@@ -31,10 +32,21 @@ function* login(action: AnyAction): Generator {
             message: "SUCCESS AUTH!",
         });
     } catch (e) {
+        console.log(e);
         console.log("ERROR AUTH");
     }
+}
+function* logout(): Generator {
+    try {
+        yield axios.get(`${process.env.API_URL}/logout`);
+        yield put({
+            type: "SET_USER",
+            user: null,
+        });
+    } catch (e) {}
 }
 export function* actionUserWatcher(): SagaIterator {
     yield takeLatest("FETCH_USER", fetchUser);
     yield takeLatest("LOGIN_USER", login);
+    yield takeLatest("LOGOUT_USER", logout);
 }

@@ -12,7 +12,7 @@ const viewReducer = (
     action: AnyAction
 ): ViewStore => {
     switch (action.type) {
-        case "SET_ENTITY_DATA":
+        case "SET_VIEW_ENTITY":
             return { ...state, [action.entity]: action.data };
         case "CLEAR_VIEW":
             return {
