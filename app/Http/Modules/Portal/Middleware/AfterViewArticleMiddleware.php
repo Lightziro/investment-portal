@@ -6,18 +6,18 @@ use App\Models\Article\ArticleViewing;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Predis\Response\Status;
 
 class AfterViewArticleMiddleware
 {
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
-        if (!empty($_COOKIE['token'])) {
-            /** @var User|Collection $user */
-            $user = User::query()->where('remember_token', $_COOKIE['token'])->first();
-            if ($user) {
-                $article_id = $response->getData()->articleId;
+        /** @var User $user */
+        if ($response->getStatusCode() === 200 && $user = $request->user()) {
+            if ($article_id = $response->getData()->articleId) {
                 $idea_view = ArticleViewing::query()->where(['article_id' => $article_id, 'user_id' => $user->user_id])
                     ->whereDate('created_at', Carbon::today())->first();
 

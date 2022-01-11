@@ -24,8 +24,13 @@ import { Fragment } from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { NextPage, NextPageContext } from "next";
-import { getListNews } from "../../redux/utils/store.utils";
+import {
+    GetServerSideProps,
+    GetServerSidePropsContext,
+    NextPage,
+    NextPageContext,
+} from "next";
+import { getListNews, getViewEntity } from "../../redux/utils/store.utils";
 import { axios } from "../../utils/axios";
 import { MainLayout } from "../../layouts/MainLayout";
 import { Container, Paper } from "@mui/material";
@@ -46,14 +51,10 @@ function Article({ article }) {
 }
 
 export default Article;
-export async function getServerSideProps({ query, req }) {
-    console.log("STATES", process.initialState);
-    const article = await axios
-        .get(`${process.env.API_URL_DOCKER}/api/article/get/${query.id}`)
-        .then((res) => res.data)
-        .catch((e) => initStore.view.article);
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    const article = await getViewEntity("article", ctx);
     process.initialState.view = { article };
     return {
         props: { article },
     };
-}
+};

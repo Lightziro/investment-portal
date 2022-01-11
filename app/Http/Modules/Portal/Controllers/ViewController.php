@@ -8,10 +8,10 @@ use Illuminate\Routing\Controller;
 
 class ViewController extends Controller
 {
-    public function getViewArticle(int $article_id): JsonResponse
+    public function getViewArticle(int $id): JsonResponse
     {
         /** @var Article $article_model */
-        $article_model = Article::query()->where(['article_id' => $article_id])->first();
+        $article_model = Article::query()->where(['article_id' => $id])->first();
         if (!$article_model) {
             return response()->json(['message' => 'Not found article'], 400);
         }
