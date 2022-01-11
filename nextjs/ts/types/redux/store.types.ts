@@ -13,7 +13,6 @@ import { Article, ArticleView } from "../state/article.types";
 export interface MainStore {
     news: News[];
     investmentData: InvestmentData;
-    profileView: ProfileView;
     otherData: OtherData;
     articles: {
         popular: Article[];

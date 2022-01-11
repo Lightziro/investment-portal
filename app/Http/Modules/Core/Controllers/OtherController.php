@@ -36,4 +36,8 @@ class OtherController extends Controller
     {
         $test = '';
     }
+    public function basick(Request $request)
+    {
+        $qwe = '';
+    }
 }

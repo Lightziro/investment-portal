@@ -45,6 +45,7 @@ class UserLoginController extends Controller
             return response()->json(['error' => 'Attemp'], 400);
         }
         return response()->json($user->getFrontendData());
+//        return response()->json($user->getFrontendData());
     }
 
     public function register(Request $request): RedirectResponse|JsonResponse

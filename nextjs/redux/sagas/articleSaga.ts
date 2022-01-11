@@ -44,7 +44,7 @@ function* fetchArticleView(action: AnyAction): Generator {
             .get(`/api/article/get/${action.articleId}`)
             .then((response) => response.data);
         yield put({
-            type: "SET_ENTITY_DATA",
+            type: "SET_VIEW_ENTITY",
             entity: "article",
             data,
         });
@@ -54,7 +54,7 @@ function* createArticleComment(action: AnyAction): Generator {
     try {
         const comment = yield axios
             .post(
-                `${process.env.API_URL}/api/article/create-comment`,
+                `${process.env.API_URL}/article-actions/create-comment`,
                 action.commentData
             )
             .then((response) => response.data);

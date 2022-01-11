@@ -1,0 +1,36 @@
+.countNotices {
+    margin-left: 15px;
+    color: white !important;
+    background-color: #008cff;
+    border-radius: 16px;
+    width: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+}
+.noticeItem {
+    padding: 4px 10px 0;
+
+    &:hover {
+        background-color: #f3f3f3;
+    }
+}
+
+.noticeItemDescription {
+    margin: 5px 0;
+    font-family: Roboto, sans-serif;
+    font-size: 0.75rem;
+    color: rgb(158, 158, 158);
+}
+
+.noticeHeader {
+    &.not-view {
+        font-weight: 600;
+    }
+}
+
+.linkNotice {
+    cursor: pointer;
+}

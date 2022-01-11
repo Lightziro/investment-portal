@@ -82,4 +82,5 @@ export const ruLanguage = {
     Canada: "Канада",
     female: "Женский",
     male: "Мужской",
+    "Investment idea": "Инвестиционная идея",
 };

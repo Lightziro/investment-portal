@@ -3,8 +3,8 @@ import { UserStore } from "../../../ts/types/redux/store.types";
 import { Avatar } from "@mui/material";
 interface UserAvatar {
     user: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
 }
 export const UserAvatar: React.FC<UserAvatar> = ({
     user,

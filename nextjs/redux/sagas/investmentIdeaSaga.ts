@@ -1,7 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
-import axios from "axios";
+import { axios } from "../../utils/axios";
 
 function* createComment(action: AnyAction): Generator {
     try {
@@ -17,10 +17,12 @@ function* createComment(action: AnyAction): Generator {
 function* fetchIdeaData(action: AnyAction): Generator {
     try {
         const data = yield axios
-            .get(`/api/investment-data/idea/${action.ideaId}`)
+            .get(
+                `${process.env.API_URL}/api/investment-data/idea/${action.ideaId}`
+            )
             .then((response) => response.data);
         yield put({
-            type: "SET_ENTITY_DATA",
+            type: "SET_VIEW_ENTITY",
             entity: "idea",
             data,
         });

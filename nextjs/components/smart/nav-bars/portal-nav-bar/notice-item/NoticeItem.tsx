@@ -1,22 +1,27 @@
 import React from "react";
 import { Notice } from "../../../../../ts/types/redux/store.types";
 import { Divider, Typography } from "@mui/material";
-interface NoticeInfo {
+import classes from "../../NavBars.module.scss";
+interface NoticeItem {
     notice: Notice;
     onViewNotice: () => void;
 }
 import moment from "moment";
-export const NoticeInfo: React.FC<NoticeInfo> = ({ notice, onViewNotice }) => {
+export const NoticeItem: React.FC<NoticeItem> = ({ notice, onViewNotice }) => {
     return (
-        <div className="notice-item" onMouseEnter={onViewNotice}>
+        <div className={classes.noticeItem} onMouseEnter={onViewNotice}>
             <Typography variant="caption">
                 {moment(notice.created).fromNow()}
             </Typography>
-            <div className={`notice-header ${!notice.viewed && "not-view"}`}>
+            <div
+                className={`${classes.noticeHeader} ${
+                    !notice.viewed && classes.notView
+                }`}
+            >
                 <span className="notice-item-title">{notice.title}</span>
             </div>
             <div
-                className="notice-item-description"
+                className={classes.noticeItemDescription}
                 dangerouslySetInnerHTML={{ __html: notice.description }}
             />
             <Divider />

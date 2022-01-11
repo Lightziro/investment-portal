@@ -36,22 +36,23 @@ import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
 import { initStore } from "../../ts/types/redux/store.init";
 
-const Article: NextPage = ({ article }) => {
-    const dispatch = useDispatch();
-    dispatch(setViewEntity(article, "article"));
-
+function Article({ article }) {
+    console.log("IS ARTICLE LOAD", article);
     return (
         <MainLayout title="Article">
             <ArticlePage />
         </MainLayout>
     );
-};
+}
+
 export default Article;
 export async function getServerSideProps({ query, req }) {
+    console.log("STATES", process.initialState);
     const article = await axios
         .get(`${process.env.API_URL_DOCKER}/api/article/get/${query.id}`)
         .then((res) => res.data)
         .catch((e) => initStore.view.article);
+    process.initialState.view = { article };
     return {
         props: { article },
     };

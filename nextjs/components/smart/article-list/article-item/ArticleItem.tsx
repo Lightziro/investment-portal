@@ -10,14 +10,12 @@ interface ArticleItem {
 export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
     return (
         <Card sx={{ height: 274 }}>
-            <Link href={`/article/${item.articleId}`}>
-                Test
-                {/*<CardMedia*/}
-                {/*    component="img"*/}
-                {/*    height="194"*/}
-                {/*    image={`/image/preview/${item.preview}`}*/}
-                {/*    alt={`Preview ${item.title}`}*/}
-                {/*/>*/}
+            <Link href={`/article/[id]`} as={`/article/${item.articleId}`}>
+                <img
+                    className="w-100"
+                    src={`${process.env.API_URL}/storage/${item.preview}`}
+                    alt={`Preview ${item.title}`}
+                />
             </Link>
             <CardHeader
                 avatar={

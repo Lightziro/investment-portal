@@ -1,0 +1,12 @@
+.authorInfo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 6px 0;
+    align-items: center;
+
+    .authorName {
+        margin: 3px;
+        font-size: 20px;
+    }
+}

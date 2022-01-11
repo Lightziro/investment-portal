@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { MainLayout } from "../layouts/MainLayout";
-import { Col, Row } from "react-bootstrap";
 import { PaperWrapper } from "../components/simple/paper-wrapper/PaperWrapper";
 import { ArticleList } from "../components/smart/article-list/ArticleList";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
@@ -8,70 +7,66 @@ import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStat
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 import { Typography } from "../components/simple/typography/Typography";
 import { NewsList } from "../components/ordinary/news-list/NewsList";
+import { getInitPortal, getListNews } from "../redux/utils/store.utils";
 import { NextPage } from "next";
-import { getInitialState, getListNews } from "../redux/utils/store.utils";
+import { MainStore } from "../ts/types/redux/store.types";
+import { initMainStore } from "../ts/types/redux/store.init";
+import { useDispatch } from "react-redux";
+import { setPortalData } from "../redux/actions/mainActions";
+import { Grid } from "@mui/material";
+interface Index {
+    initMain: MainStore;
+}
+const Index: NextPage<Index> = ({ initMain }) => {
+    const dispatch = useDispatch();
 
-const Index = ({ news }) => {
-    console.log("INDEX PAGE", news);
-    if (!process.browser && process.initialState) {
-        console.log("SET!");
-        process.initialState.main["news"] = news;
-    }
-    useEffect(() => {}, []);
+    useEffect(() => {
+        if (process.browser && initMain) {
+            dispatch(setPortalData(initMain));
+        }
+    }, []);
+
     return (
         <MainLayout title="Главная страница">
-            <Row>
-                <Col xs={false} sm={false} md={3}>
+            <Grid container spacing={3}>
+                <Grid
+                    display={{ xs: "none", sm: "none", md: "block" }}
+                    item
+                    md={3}
+                >
                     <NewsList />
-                </Col>
-                <Col md={9}>
+                </Grid>
+                <Grid xs={false} item md={9}>
                     <PaperWrapper>
                         <Typography level={3}>Investments</Typography>
                     </PaperWrapper>
-                    <Row>
-                        <Col md={9} sm={12}>
+                    <Grid container spacing={3}>
+                        <Grid direction="column" item md={9} sm={12}>
                             <ArticleList />
-                        </Col>
-                        <Col sm={12} md={3}>
+                        </Grid>
+                        <Grid item sm={12} md={3}>
                             <PortalAd />
                             <IdeaStatistics />
                             <IdeaList />
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-            {/*<Grid spacing={3}>*/}
-            {/*    <Grid*/}
-            {/*        // display={{ xs: "none", sm: "none", md: "block" }}*/}
-            {/*        item*/}
-            {/*        // md={3}*/}
-            {/*    >*/}
-            {/*        /!*<NewsPortalList />*!/*/}
-            {/*    </Grid>*/}
-            {/*    <Grid xs={false} item md={9}>*/}
-            {/*        <Paper elevation={2} sx={{ p: 1, mb: 2 }}>*/}
-            {/*            <typography variant="h3">Investments</typography>*/}
-            {/*        </Paper>*/}
-            {/*        <Grid container spacing={3}>*/}
-            {/*            <Grid direction="column" item md={9} sm={12}>*/}
-            {/*                <ArticleList />*/}
-            {/*            </Grid>*/}
-            {/*            <Grid item sm={12} md={3}>*/}
-            {/*                /!*<PortalAd />*!/*/}
-            {/*                /!*<IdeaStatistics />*!/*/}
-            {/*                /!*<IdeaList />*!/*/}
-            {/*            </Grid>*/}
-            {/*        </Grid>*/}
-            {/*    </Grid>*/}
-            {/*</Grid>*/}
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
         </MainLayout>
     );
 };
 export default Index;
-
-export async function getServerSideProps({ params }) {
-    const news = await getListNews();
+export const getServerSideProps = async (ctx) => {
+    let initMain = initMainStore;
+    if (!process.browser) {
+        const portalData = await getInitPortal();
+        const news = await getListNews();
+        initMain = { ...initMain, news, ...portalData };
+        process.initialState.main = initMain;
+    }
     return {
-        props: { news },
+        props: {
+            initMain,
+        },
     };
-}
+};

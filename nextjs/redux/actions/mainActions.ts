@@ -1,9 +1,5 @@
 import { FormAuth, FormRegister } from "../../ts/types/forms/form.types";
 
-export const setUserData = (userData): any => ({
-    type: "SET_USER_DATA",
-    userData,
-});
 export const fetchInvestmentData = () => ({
     type: "FETCH_INVESTMENT_DATA",
 });
@@ -39,7 +35,3 @@ export const setPortalData = (data) => ({
     type: "SET_PORTAL_DATA",
     data,
 });
-
-// export const clearViewIdea = () => ({
-//     type: 'CLEAR_VIEW_IDEA'
-// })

@@ -12,8 +12,6 @@ export const initMainStore: MainStore = {
         investmentIdeas: null,
         ideaStatistics: null,
     },
-
-    profileView: null,
     otherData: {
         countries: null,
     },

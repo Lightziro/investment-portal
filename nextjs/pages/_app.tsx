@@ -9,7 +9,8 @@ import { SnackbarAlert } from "../components/smart/snackbar-alert/SnackbarAlert"
 import App from "next/app";
 import { initStore } from "../ts/types/redux/store.init";
 import { clientStore, serverStore } from "../redux/store/Store";
-import { getInitialState } from "../redux/utils/store.utils";
+import { getInitUser, getListNews } from "../redux/utils/store.utils";
+import { MainStore, UserStore } from "../ts/types/redux/store.types";
 
 const MyApp = ({ Component, pageProps, state }): App => {
     return (
@@ -17,24 +18,22 @@ const MyApp = ({ Component, pageProps, state }): App => {
             store={
                 process.browser
                     ? clientStore
-                    : serverStore({ ...initStore, ...state })
+                    : serverStore(process.initialState)
             }
         >
-            <Fragment>
-                <Component {...pageProps} />
-                <SnackbarAlert />
-            </Fragment>
+            <Component {...pageProps} />
+            <SnackbarAlert />
         </Provider>
     );
 };
-MyApp.getInitialProps = async function (ctx) {
+export default MyApp;
+MyApp.getInitialProps = async (ctx) => {
     const initialProps = App.getInitialProps(ctx);
-    console.log("AGAAAAA", ctx.ctx.req);
+    console.log("IS INIT PROPS", { ...initialProps });
     if (!process.browser) {
-        const init = await getInitialState(ctx.ctx.req);
-        process.initialState = init;
-        return { ...initialProps, ...{ state: init } };
+        const user: UserStore = await getInitUser(ctx.ctx.req);
+        process.initialState = { user };
+        return { ...initialProps, state: user };
     }
     return { ...initialProps };
 };
-export default MyApp;

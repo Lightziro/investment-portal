@@ -9,7 +9,6 @@ use App\Http\Modules\Investment\Controllers\InvestmentIdeaController;
 use App\Http\Modules\Portal\Controllers\ViewController;
 use App\Http\Modules\Portal\Middleware\AfterViewArticleMiddleware;
 use App\Http\Modules\Portal\Middleware\AfterViewIdeaMiddleware;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'investment-data'], function () {

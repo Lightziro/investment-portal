@@ -1,33 +1,46 @@
 import { axios } from "../../utils/axios";
 import { AxiosRequestConfig } from "axios";
-import { StoreData } from "../../ts/types/redux/store.types";
+import {
+    MainStore,
+    StoreData,
+    UserStore,
+} from "../../ts/types/redux/store.types";
 import { initStore } from "../../ts/types/redux/store.init";
+import { News } from "../../ts/types/state/stock-market.types";
 
-export const getInitialState = async function (req: any) {
+export const getInitUser = async function (req: any): UserStore {
     const config: AxiosRequestConfig = { headers: req.headers };
+
     const user = await axios
         .get(`${process.env.API_URL_DOCKER}/get-user`, config)
         .then((res) => res.data)
         .catch((e) => {
-            console.log("ERROR GET USER", e);
             return initStore.user;
         });
+    return user;
+    // const initData = await axios
+    //     .get(`${process.env.API_URL_DOCKER}/api/init/portal-data`, config)
+    //     .then((res) => res.data)
+    //     .catch((e) => {
+    //         console.log("ERROR GET BASE DATA", e);
+    //         return initStore.main;
+    //     });
+    return user;
+};
+export const getInitPortal = async () => {
     const initData = await axios
-        .get(`${process.env.API_URL_DOCKER}/api/init/portal-data`, config)
+        .get(`${process.env.API_URL_DOCKER}/api/init/portal-data`)
         .then((res) => res.data)
         .catch((e) => {
             console.log("ERROR GET BASE DATA", e);
             return initStore.main;
         });
-    return <StoreData>{ ...initStore, user: user, main: initData };
+    return initData;
 };
 
-export const getListNews = async (req: any) => {
+export const getListNews = async (): News[] => {
     return await axios
         .get(`${process.env.API_URL_DOCKER}/api/investment-data/news`)
         .then((res) => res.data)
-        .catch((e) => {
-            console.log("ERROR NEWS USER", e);
-            return initStore.main.news;
-        });
+        .catch((e) => initStore.main.news);
 };

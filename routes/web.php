@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Modules\Article\Controllers\ArticleActionsController;
 use App\Http\Modules\Auth\Controllers\UserLoginController;
-use App\Http\Modules\Core\Controllers\OtherController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -14,5 +14,9 @@ Route::get('/', function () {
 Route::post('login', [UserLoginController::class, 'login']);
 Route::get('get-user', [UserLoginController::class, 'getUser']);
 Route::get('logout', [UserLoginController::class, 'logout']);
+
+Route::group(['prefix' => 'article-actions'], function () {
+    Route::post('/create-comment', [ArticleActionsController::class, 'createComment']);
+});
 
 

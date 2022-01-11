@@ -8,6 +8,9 @@ interface AboutAuthor {
     author: ArticleAuthor;
 }
 export const AboutAuthor: React.FC<AboutAuthor> = ({ author }) => {
+    if (!author) {
+        return null;
+    }
     return (
         <Grid className={classes.authorWrapper} container direction="row">
             <Link href={`/profile/[id]`} as={`/profile/${author.userId}`}>

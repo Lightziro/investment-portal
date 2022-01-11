@@ -13,7 +13,8 @@ import { MenuPopover } from "../menu-popover/MenuPopover";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
 import { viewNotice } from "../../../../../redux/actions/mainActions";
-import { NoticeInfo } from "../notice-dialog/NoticeInfo";
+import classes from "../../NavBars.module.scss";
+import { NoticeItem } from "../notice-item/NoticeItem";
 interface NoticeMenu {
     onOpen: () => void;
     open: boolean;
@@ -23,7 +24,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const anchorRef = useRef(null);
-    const user = useSelector((state: StoreData) => state.main.user);
+    const user = useSelector((state: StoreData) => state.user);
     const onViewNotice = (notice: Notice) => {
         if (!notice.viewed) {
             dispatch(viewNotice(notice.id));
@@ -62,7 +63,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                                 </Typography>
                                 <Typography
                                     variant="body2"
-                                    className="count-notices"
+                                    className={classes.countNotices}
                                 >
                                     {
                                         user.notices.filter(
@@ -79,7 +80,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                             container
                         >
                             {user.notices.map((notice) => (
-                                <NoticeInfo
+                                <NoticeItem
                                     onViewNotice={() => onViewNotice(notice)}
                                     notice={notice}
                                 />
