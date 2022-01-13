@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/main.scss";
 import "antd/dist/antd.css";
@@ -7,12 +7,12 @@ import "../../nextjs/config/i18next";
 import { Provider } from "react-redux";
 import { SnackbarAlert } from "../components/smart/snackbar-alert/SnackbarAlert";
 import App from "next/app";
-import { initStore } from "../ts/types/redux/store.init";
 import { clientStore, serverStore } from "../redux/store/Store";
-import { getInitUser, getListNews } from "../redux/utils/store.utils";
-import { MainStore, UserStore } from "../ts/types/redux/store.types";
+import { getInitUser } from "../redux/utils/store.utils";
+import { UserStore } from "../ts/types/redux/store.types";
 
-const MyApp = ({ Component, pageProps, state }): App => {
+const MyApp = ({ Component, pageProps }): App => {
+    console.log("GIVE TUT", process.initialState);
     return (
         <Provider
             store={
@@ -29,11 +29,9 @@ const MyApp = ({ Component, pageProps, state }): App => {
 export default MyApp;
 MyApp.getInitialProps = async (ctx) => {
     const initialProps = App.getInitialProps(ctx);
-    console.log("IS INIT PROPS", { ...initialProps });
     if (!process.browser) {
         const user: UserStore = await getInitUser(ctx.ctx.req);
-        process.initialState = { user };
-        return { ...initialProps, state: user };
+        process.initialState["user"] = user;
     }
     return { ...initialProps };
 };

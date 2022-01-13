@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 import { PortalNavBar } from "../components/smart/nav-bars/portal-nav-bar/PortalNavBar";
+import { useTranslation } from "react-i18next";
 interface MainLayout {
     title: string;
 }

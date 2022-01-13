@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { ArticleComment } from "../../../ts/types/state/article.types";
 import { IdeaComment, StoreData } from "../../../ts/types/redux/store.types";
 import { CommentItem } from "./comment-item/CommentItem";
+import classes from "./CommentsList.module.scss";
 import { NoComments } from "./no-comments/NoComments";
 interface CommentsWrapper {
     entityId: number;
@@ -46,7 +47,7 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
                 onKeyDown={handleKeyDown}
                 disabled={!user}
             />
-            <Stack justifyContent="flex-start" className="comments-area">
+            <Stack justifyContent="flex-start" className={classes.commentsArea}>
                 {comments.length ? (
                     comments.map((comment) => <CommentItem comment={comment} />)
                 ) : (

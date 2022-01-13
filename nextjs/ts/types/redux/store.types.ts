@@ -31,6 +31,7 @@ export interface ProfileView {
         firstName: string;
         lastName: string;
     };
+    fullName: string;
     allComments: number;
     country: CountryItem;
     sex: string;

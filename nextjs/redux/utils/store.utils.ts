@@ -16,9 +16,7 @@ export const getInitUser = async function (req: any): UserStore {
     const user = await axios
         .get(`${process.env.API_URL_DOCKER}/get-user`, config)
         .then((res) => res.data)
-        .catch((e) => {
-            return initStore.user;
-        });
+        .catch((e) => initStore.user);
     return user;
     // const initData = await axios
     //     .get(`${process.env.API_URL_DOCKER}/api/init/portal-data`, config)

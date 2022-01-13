@@ -83,4 +83,6 @@ export const ruLanguage = {
     female: "Женский",
     male: "Мужской",
     "Investment idea": "Инвестиционная идея",
+    Profile: "Профиль",
+    "Save profile": "Сохранить профиль",
 };

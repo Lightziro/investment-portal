@@ -20,35 +20,32 @@
 //         article,
 //     };
 // };
-import { Fragment } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import {
-    GetServerSideProps,
-    GetServerSidePropsContext,
-    NextPage,
-    NextPageContext,
-} from "next";
-import { getListNews, getViewEntity } from "../../redux/utils/store.utils";
-import { axios } from "../../utils/axios";
+import { GetServerSidePropsContext } from "next";
+import { getViewEntity } from "../../redux/utils/store.utils";
 import { MainLayout } from "../../layouts/MainLayout";
-import { Container, Paper } from "@mui/material";
-import { Col, Row } from "react-bootstrap";
-import { ArticleHeader } from "../../modules/article/components/article-header/ArticleHeader";
 import { ArticlePage } from "../../modules/article/pages/ArticlePage";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
-import { initStore } from "../../ts/types/redux/store.init";
+import { ArticleView } from "../../ts/types/state/article.types";
+interface Article {
+    article: ArticleView;
+}
+const Article: React.FC<Article> = ({ article }) => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (process.browser) {
+            dispatch(setViewEntity(article, "article"));
+        }
+    }, []);
 
-function Article({ article }) {
-    console.log("IS ARTICLE LOAD", article);
     return (
-        <MainLayout title="Article">
+        <MainLayout title={`Article`}>
             <ArticlePage />
         </MainLayout>
     );
-}
+};
 
 export default Article;
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Skeleton, Stack, Typography } from "@mui/material";
+import { Grid, Skeleton, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { ArticleLabel } from "../../../../ts/types/state/article.types";
 import { Col, Row } from "react-bootstrap";
@@ -8,10 +8,10 @@ interface LabelList {
 }
 export const LabelList: React.FC<LabelList> = ({ labels }) => {
     return (
-        <Row sm={"auto"}>
+        <Grid item container sm={"auto"} spacing={2} direction="row">
             {labels ? (
                 labels.map((label) => (
-                    <Col sm={"auto"}>
+                    <Grid item sm={"auto"}>
                         <Stack
                             className="wrapper-label-item"
                             alignItems="center"
@@ -27,7 +27,7 @@ export const LabelList: React.FC<LabelList> = ({ labels }) => {
                                 {label.text}
                             </span>
                         </Stack>
-                    </Col>
+                    </Grid>
                 ))
             ) : (
                 <Skeleton
@@ -37,6 +37,6 @@ export const LabelList: React.FC<LabelList> = ({ labels }) => {
                     sx={{ ml: 2 }}
                 />
             )}
-        </Row>
+        </Grid>
     );
 };

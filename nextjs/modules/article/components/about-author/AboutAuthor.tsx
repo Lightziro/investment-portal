@@ -14,7 +14,7 @@ export const AboutAuthor: React.FC<AboutAuthor> = ({ author }) => {
     return (
         <Grid className={classes.authorWrapper} container direction="row">
             <Link href={`/profile/[id]`} as={`/profile/${author.userId}`}>
-                <UserAvatar user={author.avatar} width={120} height={120} />
+                <UserAvatar avatar={author.avatar} width={120} height={120} />
             </Link>
             <div className={classes.authorArticleInfo}>
                 <Link href={`/profile/[id]`} as={`/profile/${author.userId}`}>

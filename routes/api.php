@@ -35,3 +35,6 @@ Route::group(['prefix' => 'other'], function () {
     Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);
     Route::post('/upload-file', [OtherController::class, 'uploadFile']);
 });
+//Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
+//    Route::get('/get', [OtherController::class, 'basick']);
+//});

@@ -2,12 +2,12 @@ import React from "react";
 import { UserStore } from "../../../ts/types/redux/store.types";
 import { Avatar } from "@mui/material";
 interface UserAvatar {
-    user: string;
+    avatar: string;
     width?: number;
     height?: number;
 }
 export const UserAvatar: React.FC<UserAvatar> = ({
-    user,
+    avatar,
     width = 40,
     height = 40,
 }) => {
@@ -15,7 +15,7 @@ export const UserAvatar: React.FC<UserAvatar> = ({
         <Avatar
             sx={{ width, height }}
             alt="Avatar user"
-            src={user ? `${process.env.API_URL}/storage/${user}` : ""}
+            src={avatar ? `${process.env.API_URL}/storage/${avatar}` : ""}
         />
     );
 };

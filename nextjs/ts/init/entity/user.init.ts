@@ -8,6 +8,7 @@ export const initialProfile: ProfileView = {
         firstName: null,
         lastName: null,
     },
+    fullName: "",
     allComments: null,
     country: null,
     sex: null,

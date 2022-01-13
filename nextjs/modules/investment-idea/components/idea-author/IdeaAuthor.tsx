@@ -20,7 +20,13 @@ export const IdeaAuthor: React.FC<IdeaAuthor> = ({ data }) => {
         >
             <div className={classes.authorInfo}>
                 <Link href={`/profile/[id]`} as={`/profile/${data.userId}`}>
-                    <UserAvatar user={data.avatar} height={56} width={56} />
+                    <a>
+                        <UserAvatar
+                            avatar={data.avatar}
+                            height={56}
+                            width={56}
+                        />
+                    </a>
                 </Link>
                 <Typography variant="h6" align="center">
                     {data.fullName}

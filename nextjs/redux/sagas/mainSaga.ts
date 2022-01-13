@@ -77,7 +77,7 @@ function* authUser(action: AnyAction): Generator {
 function* fetchCountries(action: AnyAction): Generator {
     try {
         const countries = yield axios
-            .get("/api/other/countries")
+            .get(`${process.env.API_URL}/api/other/countries`)
             .then((response) => response.data);
         yield put({
             type: "SET_COUNTRIES",

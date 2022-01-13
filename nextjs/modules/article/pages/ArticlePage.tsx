@@ -1,23 +1,19 @@
 import React from "react";
-import { Container, Divider, Paper } from "@mui/material";
-import { Col, Row } from "react-bootstrap";
+import { Container, Divider, Grid, Paper } from "@mui/material";
 import { ArticleHeader } from "../components/article-header/ArticleHeader";
-import { useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
 import { createArticleComment } from "../../../redux/actions/articleArtions";
 import { CommentsList } from "../../../components/smart/comments-list/CommentsList";
 import { NewsList } from "../../../components/ordinary/news-list/NewsList";
 import { ArticleContent } from "../components/article-content/ArticleContent";
 import { AboutAuthor } from "../components/about-author/AboutAuthor";
+import { useRootSelector } from "../../../hooks/useTypeSelector";
 
 export const ArticlePage: React.FC = () => {
-    const article = useSelector((store: StoreData) => store.view.article);
-    console.log("STATE");
-    console.log(article);
+    const article = useRootSelector((store) => store.view.article);
     return (
         <Container maxWidth="xl">
-            <Row>
-                <Col md={8} lg={9}>
+            <Grid container spacing={3}>
+                <Grid md={8} item lg={9}>
                     <Paper
                         elevation={3}
                         sx={{ mb: 2, py: 3, px: 3, background: "#ebefff" }}
@@ -34,21 +30,28 @@ export const ArticlePage: React.FC = () => {
                         />
                         <AboutAuthor author={article.author} />
                     </Paper>
-                </Col>
-                <Col md={4} lg={3}>
-                    <Row>
+                </Grid>
+                <Grid
+                    container
+                    direction="column"
+                    item
+                    md={4}
+                    lg={3}
+                    spacing={2}
+                >
+                    <Grid item>
                         <CommentsList
                             entityId={article.articleId}
                             entityName="article"
                             callbackEnter={createArticleComment}
                             comments={article.comments}
                         />
-                    </Row>
-                    <Row>
+                    </Grid>
+                    <Grid item direction="column">
                         <NewsList />
-                    </Row>
-                </Col>
-            </Row>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Container>
     );
 };

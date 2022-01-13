@@ -1,7 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
 import { AnyAction } from "redux";
+import { axios } from "../../utils/axios";
 
 function* fetchProfileView(action: AnyAction): Generator {
     try {
@@ -9,7 +9,7 @@ function* fetchProfileView(action: AnyAction): Generator {
             .get(`/api/user/profile/${action.userId}`)
             .then((response) => response.data);
         yield put({
-            type: "SET_ENTITY_DATA",
+            type: "SET_VIEW_ENTITY",
             entity: "profile",
             data,
         });
@@ -18,10 +18,10 @@ function* fetchProfileView(action: AnyAction): Generator {
 function* updateProfile(action: AnyAction): Generator {
     try {
         const data = yield axios
-            .post("/api/user/profile/update", action.form)
+            .post(`${process.env.API_URL}/user/update`, action.form)
             .then((response) => response.data);
         yield put({
-            type: "SET_ENTITY_DATA",
+            type: "SET_VIEW_ENTITY",
             entity: "profile",
             data,
         });
