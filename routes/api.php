@@ -23,6 +23,7 @@ Route::group(['prefix' => 'init'], function () {
 
 Route::group(['prefix' => 'idea'], function () {
     Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware(BeforeCheckNoAuthUser::class);
+    Route::get('/get/{id}', [ViewController::class, 'getViewIdea'])->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
 });
 Route::group(['prefix' => 'article'], function () {
     Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
@@ -33,6 +34,9 @@ Route::group(['prefix' => 'other'], function () {
     Route::get('/countries', [OtherController::class, 'getCountries']);
     Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);
     Route::post('/upload-file', [OtherController::class, 'uploadFile']);
+});
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/get/{id}', [ViewController::class, 'getViewProfile']);
 });
 //Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
 //    Route::get('/get', [OtherController::class, 'basick']);

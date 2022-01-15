@@ -22,11 +22,5 @@ Route::group(['prefix' => 'user'], function() {
 Route::group(['prefix' => 'article'], function () {
     Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
 });
-Route::group(['prefix' => 'profile'], function () {
-   Route::get('/get/{id}', [ViewController::class, 'getViewProfile']);
-});
-Route::group(['prefix' => 'idea'], function() {
-   Route::get('/get/{id}', [ViewController::class, 'getViewIdea'])->middleware(AfterViewIdeaMiddleware::class);
-});
 
 

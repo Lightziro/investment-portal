@@ -1,5 +1,5 @@
 import React from "react";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { ArticlePage } from "../../modules/article/pages/ArticlePage";
 import { ArticleView } from "../../ts/types/entity/article.types";
@@ -9,7 +9,7 @@ interface Article {
     article: ArticleView;
     news: News[];
 }
-const Article: React.FC<Article> = ({ article, news }) => {
+const Article: NextPage<Article> = ({ article, news }) => {
     return (
         <MainLayout title={`${article.title}`}>
             <ArticlePage article={article} news={news} />

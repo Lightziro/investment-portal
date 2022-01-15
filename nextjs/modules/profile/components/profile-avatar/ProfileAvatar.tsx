@@ -1,7 +1,7 @@
 import React from "react";
-import { Skeleton } from "@mui/lab";
 import { ProfileView } from "../../../../ts/types/redux/store.types";
 import { UserAvatar } from "../../../../components/simple/user-avatar/UserAvatar";
+import { Skeleton } from "@mui/material";
 interface ProfileAvatar {
     profile: ProfileView;
 }
