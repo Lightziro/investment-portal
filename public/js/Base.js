@@ -447,8 +447,8 @@ object-assign
                                 error(
                                     "Can't call %s on a component that is not yet mounted. " +
                                         "This is a no-op, but it might indicate a bug in your application. " +
-                                        "Instead, assign to `this.state` directly or define a `state = {};` " +
-                                        "class property with the desired state in the %s component.",
+                                        "Instead, assign to `this.entity` directly or define a `entity = {};` " +
+                                        "class property with the desired entity in the %s component.",
                                     callerName,
                                     componentName
                                 );
@@ -479,7 +479,7 @@ object-assign
                              * certainty that we are **not** in a DOM transaction.
                              *
                              * You may want to call this when you know that some deeper aspect of the
-                             * component's state has changed but `setState` was not called.
+                             * component's entity has changed but `setState` was not called.
                              *
                              * This will not invoke `shouldComponentUpdate`, but it will invoke
                              * `componentWillUpdate` and `componentDidUpdate`.
@@ -498,14 +498,14 @@ object-assign
                             },
 
                             /**
-                             * Replaces all of the state. Always use this or `setState` to mutate state.
-                             * You should treat `this.state` as immutable.
+                             * Replaces all of the entity. Always use this or `setState` to mutate entity.
+                             * You should treat `this.entity` as immutable.
                              *
-                             * There is no guarantee that `this.state` will be immediately updated, so
-                             * accessing `this.state` after calling this method may return the old value.
+                             * There is no guarantee that `this.entity` will be immediately updated, so
+                             * accessing `this.entity` after calling this method may return the old value.
                              *
                              * @param {ReactClass} publicInstance The instance that should rerender.
-                             * @param {object} completeState Next state.
+                             * @param {object} completeState Next entity.
                              * @param {?function} callback Called after component is updated.
                              * @param {?string} callerName name of the calling function in the public API.
                              * @internal
@@ -520,13 +520,13 @@ object-assign
                             },
 
                             /**
-                             * Sets a subset of the state. This only exists because _pendingState is
+                             * Sets a subset of the entity. This only exists because _pendingState is
                              * internal. This provides a merging strategy that is not available to deep
                              * properties which is confusing. TODO: Expose pendingState or don't use it
                              * during the merge.
                              *
                              * @param {ReactClass} publicInstance The instance that should rerender.
-                             * @param {object} partialState Next partial state to be merged with state.
+                             * @param {object} partialState Next partial entity to be merged with entity.
                              * @param {?function} callback Called after component is updated.
                              * @param {?string} Name of the calling function in the public API.
                              * @internal
@@ -547,7 +547,7 @@ object-assign
                             Object.freeze(emptyObject);
                         }
                         /**
-                         * Base class helpers for the updating state of a component.
+                         * Base class helpers for the updating entity of a component.
                          */
 
                         function Component(props, context, updater) {
@@ -562,11 +562,11 @@ object-assign
 
                         Component.prototype.isReactComponent = {};
                         /**
-                         * Sets a subset of the state. Always use this to mutate
-                         * state. You should treat `this.state` as immutable.
+                         * Sets a subset of the entity. Always use this to mutate
+                         * entity. You should treat `this.entity` as immutable.
                          *
-                         * There is no guarantee that `this.state` will be immediately updated, so
-                         * accessing `this.state` after calling this method may return the old value.
+                         * There is no guarantee that `this.entity` will be immediately updated, so
+                         * accessing `this.entity` after calling this method may return the old value.
                          *
                          * There is no guarantee that calls to `setState` will run synchronously,
                          * as they may eventually be batched together.  You can provide an optional
@@ -575,14 +575,14 @@ object-assign
                          *
                          * When a function is provided to setState, it will be called at some point in
                          * the future (not synchronously). It will be called with the up to date
-                         * component arguments (state, props, context). These values can be different
+                         * component arguments (entity, props, context). These values can be different
                          * from this.* because your function may be called after receiveProps but before
-                         * shouldComponentUpdate, and this new state, props, and context will not yet be
+                         * shouldComponentUpdate, and this new entity, props, and context will not yet be
                          * assigned to this.
                          *
-                         * @param {object|function} partialState Next partial state or function to
-                         *        produce next partial state to be merged with current state.
-                         * @param {?function} callback Called after state is updated.
+                         * @param {object|function} partialState Next partial entity or function to
+                         *        produce next partial entity to be merged with current entity.
+                         * @param {?function} callback Called after entity is updated.
                          * @final
                          * @protected
                          */
@@ -600,7 +600,7 @@ object-assign
                             ) {
                                 {
                                     throw Error(
-                                        "setState(...): takes an object of state variables to update or a function which returns an object of state variables."
+                                        "setState(...): takes an object of entity variables to update or a function which returns an object of entity variables."
                                     );
                                 }
                             }
@@ -617,7 +617,7 @@ object-assign
                          * certainty that we are **not** in a DOM transaction.
                          *
                          * You may want to call this when you know that some deeper aspect of the
-                         * component's state has changed but `setState` was not called.
+                         * component's entity has changed but `setState` was not called.
                          *
                          * This will not invoke `shouldComponentUpdate`, but it will invoke
                          * `componentWillUpdate` and `componentDidUpdate`.
@@ -1800,7 +1800,7 @@ object-assign
                         function lazyInitializer(payload) {
                             if (payload._status === Uninitialized) {
                                 var ctor = payload._result;
-                                var thenable = ctor(); // Transition to the next state.
+                                var thenable = ctor(); // Transition to the next entity.
 
                                 var pending = payload;
                                 pending._status = Pending;
@@ -1823,7 +1823,7 @@ object-assign
                                                         moduleObject
                                                     );
                                                 }
-                                            } // Transition to the next state.
+                                            } // Transition to the next entity.
 
                                             var resolved = payload;
                                             resolved._status = Resolved;
@@ -1832,7 +1832,7 @@ object-assign
                                     },
                                     function (error) {
                                         if (payload._status === Pending) {
-                                            // Transition to the next state.
+                                            // Transition to the next entity.
                                             var rejected = payload;
                                             rejected._status = Rejected;
                                             rejected._result = error;

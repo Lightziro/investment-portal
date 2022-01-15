@@ -78,7 +78,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth-register' => Authenticate::class,
+        'auth' => Authenticate::class,
         'auth-register.basic' => AuthenticateWithBasicAuth::class,
         'cache.headers' => SetCacheHeaders::class,
         'can' => Authorize::class,

@@ -1,4 +1,4 @@
-import { CompanyIdeaInfo } from "../../../ts/types/state/stock-market.types";
+import { CompanyIdeaInfo } from "../../../ts/types/entity/stock-market.types";
 
 const getTitleIdea = (companyInfo: CompanyIdeaInfo): string => {
     if (companyInfo) {

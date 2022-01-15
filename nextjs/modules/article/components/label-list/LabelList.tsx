@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Skeleton, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { ArticleLabel } from "../../../../ts/types/state/article.types";
+import { ArticleLabel } from "../../../../ts/types/entity/article.types";
 import { Col, Row } from "react-bootstrap";
 interface LabelList {
     labels: ArticleLabel[];
@@ -10,8 +10,8 @@ export const LabelList: React.FC<LabelList> = ({ labels }) => {
     return (
         <Grid item container sm={"auto"} spacing={2} direction="row">
             {labels ? (
-                labels.map((label) => (
-                    <Grid item sm={"auto"}>
+                labels.map((label, i) => (
+                    <Grid key={i} item sm={"auto"}>
                         <Stack
                             className="wrapper-label-item"
                             alignItems="center"

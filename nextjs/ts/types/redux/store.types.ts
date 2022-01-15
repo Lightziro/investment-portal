@@ -4,11 +4,11 @@ import {
     EpsCompanyStats,
     IdeaInfo,
     News,
-} from "../state/stock-market.types";
-import { AuthorInfo } from "../state/user.types";
+} from "../entity/stock-market.types";
+import { AuthorInfo } from "../entity/user.types";
 import { AlertColor } from "@mui/material";
 import { CountryItem } from "../other/other.types";
-import { Article, ArticleView } from "../state/article.types";
+import { Article, ArticleView } from "../entity/article.types";
 
 export interface MainStore {
     news: News[];
@@ -52,14 +52,7 @@ export interface InvestmentIdeaView {
     authorInfo: AuthorInfo;
     ideaInfo: IdeaInfo;
     description: string;
-    comments: IdeaComment[];
-}
-export interface IdeaComment {
-    userId: number;
-    date: string;
-    fullNameAuthor: string;
-    comment: string;
-    avatar: string;
+    comments: Comment[];
 }
 
 export interface InvestmentData {
@@ -71,13 +64,6 @@ export interface InvestmentData {
 export interface IdeaStatistics {
     success: number;
     fail: number;
-}
-
-export interface InvestmentIdea {
-    id: number;
-    possibleProfit: number;
-    stock: string;
-    logo: string;
 }
 
 export interface AdminStore {

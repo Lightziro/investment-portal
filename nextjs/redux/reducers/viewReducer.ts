@@ -3,6 +3,7 @@ import { AnyAction } from "redux";
 import { initialViewStore } from "../../ts/init/redux/reducer.initial";
 import {
     addCommentArticle,
+    addCommentEntity,
     addCommentIdea,
     initialByEntity,
 } from "../utils/view.utils";
@@ -13,22 +14,17 @@ const viewReducer = (
 ): ViewStore => {
     switch (action.type) {
         case "SET_VIEW_ENTITY":
-            console.log("Я тут");
             return { ...state, [action.entity]: action.data };
         case "CLEAR_VIEW":
             return {
                 ...state,
                 [action.entity]: initialByEntity[action.entity],
             };
-        case "ADD_NEW_ARTICLE_COMMENT":
+        case "ADD_ENTITY_COMMENT":
+            const { entity, comment } = action;
             return {
                 ...state,
-                article: addCommentArticle(state.article, action.comment),
-            };
-        case "ADD_NEW_IDEA_COMMENT":
-            return {
-                ...state,
-                idea: addCommentIdea(state.idea, action.commentData),
+                [entity]: addCommentEntity(state[entity], comment),
             };
         default:
             return state;

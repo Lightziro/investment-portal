@@ -9,6 +9,7 @@ import mainReducer from "../reducers/mainReducer";
 import adminReducer from "../reducers/adminReducer";
 import alertReducer from "../reducers/alertReducer";
 import viewReducer from "../reducers/viewReducer";
+import { createWrapper } from "next-redux-wrapper";
 
 const sagaMiddleware = createSagaMiddleware();
 let clientInitStore = initStore;
@@ -29,6 +30,15 @@ export const clientStore = createStore(
     clientInitStore,
     composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
+export const makeStore = (initState) =>
+    createStore(
+        reducers,
+        initState,
+        composeWithDevTools(applyMiddleware(sagaMiddleware))
+    );
+export const wrapper = createWrapper<Store<StoreData>>(makeStore, {
+    debug: true,
+});
 sagaMiddleware.run(rootSaga);
 
 export const serverStore: Store<StoreData> = (initServer) =>

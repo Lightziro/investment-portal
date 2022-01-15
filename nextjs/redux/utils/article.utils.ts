@@ -1,5 +1,5 @@
 import { AdminArticle } from "../../ts/types/redux/store.types";
-import { Article } from "../../ts/types/state/article.types";
+import { Article } from "../../ts/types/entity/article.types";
 
 export const setEditArticle = (
     store: AdminArticle,

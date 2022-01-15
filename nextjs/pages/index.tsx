@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { MainLayout } from "../layouts/MainLayout";
 import { PaperWrapper } from "../components/simple/paper-wrapper/PaperWrapper";
 import { ArticleList } from "../components/smart/article-list/ArticleList";
@@ -7,25 +7,16 @@ import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStat
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 import { Typography } from "../components/simple/typography/Typography";
 import { NewsList } from "../components/ordinary/news-list/NewsList";
-import { getInitPortal, getListNews } from "../redux/utils/store.utils";
-import { NextPage } from "next";
-import { MainStore } from "../ts/types/redux/store.types";
-import { initMainStore } from "../ts/types/redux/store.init";
-import { useDispatch } from "react-redux";
-import { setPortalData } from "../redux/actions/mainActions";
+import { GetServerSideProps, NextPage } from "next";
 import { Grid } from "@mui/material";
+import { getBasePortal, getListNews } from "../utils/api/get-data";
+import { News } from "../ts/types/entity/stock-market.types";
+import { DtoPortal } from "../ts/types/response/response.types";
 interface Index {
-    initMain: MainStore;
+    news: News[];
+    baseData: DtoPortal;
 }
-const Index: NextPage<Index> = ({ initMain }) => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (process.browser && initMain) {
-            dispatch(setPortalData(initMain));
-        }
-    }, []);
-
+const MainPage: NextPage<Index> = ({ news, baseData }) => {
     return (
         <MainLayout title="Главная страница">
             <Grid container spacing={3}>
@@ -34,7 +25,7 @@ const Index: NextPage<Index> = ({ initMain }) => {
                     item
                     md={3}
                 >
-                    <NewsList />
+                    <NewsList items={news} />
                 </Grid>
                 <Grid xs={false} item md={9}>
                     <PaperWrapper>
@@ -42,12 +33,15 @@ const Index: NextPage<Index> = ({ initMain }) => {
                     </PaperWrapper>
                     <Grid container spacing={3}>
                         <Grid direction="column" item md={9} sm={12}>
-                            <ArticleList />
+                            <ArticleList
+                                popular={baseData.articles.popular}
+                                simple={baseData.articles.simple}
+                            />
                         </Grid>
                         <Grid item sm={12} md={3}>
                             <PortalAd />
-                            <IdeaStatistics />
-                            <IdeaList />
+                            <IdeaStatistics stats={baseData.stats} />
+                            <IdeaList items={baseData.ideas} />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -55,18 +49,28 @@ const Index: NextPage<Index> = ({ initMain }) => {
         </MainLayout>
     );
 };
-export default Index;
-export const getServerSideProps = async (ctx) => {
-    let initMain = initMainStore;
-    if (!process.browser) {
-        const portalData = await getInitPortal();
-        const news = await getListNews();
-        initMain = { ...initMain, news, ...portalData };
-        process.initialState.main = initMain;
-    }
+export default MainPage;
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+    const news = await getListNews();
+    const baseData = await getBasePortal();
     return {
         props: {
-            initMain,
+            news,
+            baseData,
         },
     };
 };
+// export const getServerSideProps = async (ctx) => {
+//     let initMain = initMainStore;
+//     if (!process.browser) {
+//         const portalData = await getInitPortal();
+//         const news = await getListNews();
+//         initMain = { ...initMain, news, ...portalData };
+//         process.initialState.main = initMain;
+//     }
+//     return {
+//         props: {
+//             initMain,
+//         },
+//     };
+// };

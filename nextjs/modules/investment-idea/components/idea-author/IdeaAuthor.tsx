@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Card, Grid, Stack, Skeleton, Typography } from "@mui/material";
-import { AuthorInfo } from "../../../../ts/types/state/user.types";
+import { AuthorInfo } from "../../../../ts/types/entity/user.types";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { UserAvatar } from "../../../../components/simple/user-avatar/UserAvatar";

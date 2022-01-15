@@ -3,31 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { Card, Divider, Stack, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { ArticleComment } from "../../../ts/types/state/article.types";
-import { IdeaComment, StoreData } from "../../../ts/types/redux/store.types";
 import { CommentItem } from "./comment-item/CommentItem";
 import classes from "./CommentsList.module.scss";
 import { NoComments } from "./no-comments/NoComments";
+import { useRootSelector } from "../../../hooks/useTypeSelector";
+import { Comment, EntityName } from "../../../ts/types/other/view.types";
+import { createEntityComment } from "../../../redux/actions/viewActions";
 interface CommentsWrapper {
     entityId: number;
-    entityName: string;
-    callbackEnter: (entityId: number, value: string) => any;
-    comments: ArticleComment[] | IdeaComment[];
+    entityName: EntityName;
+    comments: Comment[];
 }
 export const CommentsList: React.FC<CommentsWrapper> = ({
     entityId,
     entityName,
-    callbackEnter,
     comments,
 }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [value, setValue] = useState("");
-    const user = useSelector((state: StoreData) => state.user);
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const user = useRootSelector((state) => state.user);
+    const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && value.trim() && user) {
-            dispatch(callbackEnter(entityId, value));
+            dispatch(createEntityComment(entityId, entityName, value));
             setValue("");
         }
     };
@@ -49,7 +47,12 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
             />
             <Stack justifyContent="flex-start" className={classes.commentsArea}>
                 {comments.length ? (
-                    comments.map((comment) => <CommentItem comment={comment} />)
+                    comments.map((comment, i) => (
+                        <CommentItem
+                            key={comment.commentId}
+                            comment={comment}
+                        />
+                    ))
                 ) : (
                     <NoComments />
                 )}

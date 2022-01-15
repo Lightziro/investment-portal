@@ -54,7 +54,7 @@ function* createArticleComment(action: AnyAction): Generator {
     try {
         const comment = yield axios
             .post(
-                `${process.env.API_URL}/article/create-comment`,
+                `${process.env.API_URL}/api/article/create-comment`,
                 action.commentData
             )
             .then((response) => response.data);

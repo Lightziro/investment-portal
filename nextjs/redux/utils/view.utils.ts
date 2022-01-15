@@ -1,38 +1,27 @@
-import {
-    ArticleComment,
-    ArticleView,
-} from "../../ts/types/state/article.types";
-import {
-    IdeaComment,
-    InvestmentIdeaView,
-} from "../../ts/types/redux/store.types";
+import { ArticleView } from "../../ts/types/entity/article.types";
+import { InvestmentIdeaView } from "../../ts/types/redux/store.types";
 import { initialArticleView } from "../../ts/init/entity/article.init";
 import { initialIdeaView } from "../../ts/init/entity/idea.init";
 import { initialProfile } from "../../ts/init/entity/user.init";
+import { Comment, typeView } from "../../ts/types/other/view.types";
 
-export const addCommentArticle = (
-    state: ArticleView,
-    comment: ArticleComment
-): ArticleView => {
-    return {
+export const addCommentEntity = (
+    state: typeView,
+    comment: Comment
+): typeView => {
+    const newState = {
         ...state,
         comments: [comment, ...state.comments],
-        labels: state.labels.map((label) => {
+    };
+    if (state.hasOwnProperty("labels")) {
+        newState.labels = state.labels.map((label) => {
             if (label.icon === "bx:bxs-comment-detail") {
                 label.text = Number(label.text) + 1;
             }
             return label;
-        }),
-    };
-};
-export const addCommentIdea = (
-    state: InvestmentIdeaView,
-    comment: IdeaComment
-): InvestmentIdeaView => {
-    return {
-        ...state,
-        comments: [comment, ...state.comments],
-    };
+        });
+    }
+    return newState;
 };
 export const initialByEntity = {
     profile: initialProfile,

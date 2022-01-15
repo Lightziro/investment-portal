@@ -1,4 +1,4 @@
-import { ArticleView } from "../../types/state/article.types";
+import { ArticleView } from "../../types/entity/article.types";
 
 export const initialArticleView: ArticleView = {
     articleId: null,

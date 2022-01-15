@@ -1,13 +1,12 @@
 import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
-import axios from "axios";
-import cookie from "cookie";
+import { axios } from "../../utils/axios";
 
 function* fetchInvestmentData(action: AnyAction): Generator {
     try {
         const data = yield axios
-            .get(`${process.env.API_URL_DOCKER}/api/investment-data/portal`)
+            .get(`${process.env.API_URL_DOCKER}/api/init/portal-data`)
             .then((response) => response.data);
         yield put({
             type: "SET_PORTAL_DATA",
@@ -112,6 +111,22 @@ function* fetchNews(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* createEntityComment(action: AnyAction): Generator {
+    const { entityType, entityId, text } = action;
+    try {
+        const comment = yield axios
+            .post(`${process.env.API_URL}/api/${entityType}/create-comment`, {
+                comment: text,
+                entityId,
+            })
+            .then((response) => response.data);
+        yield put({
+            type: "ADD_ENTITY_COMMENT",
+            comment,
+            entity: entityType,
+        });
+    } catch (e) {}
+}
 
 export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);
@@ -121,4 +136,5 @@ export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("FETCH_COUNTRIES", fetchCountries);
     yield takeLatest("SUBSCRIBE_TO_NEWS", subscribeNews);
     yield takeLatest("FETCH_NEWS", fetchNews);
+    yield takeLatest("CREATE_ENTITY_COMMENT", createEntityComment);
 }

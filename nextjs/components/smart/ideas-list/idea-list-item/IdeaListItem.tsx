@@ -1,9 +1,9 @@
 import React from "react";
-import { InvestmentIdea } from "../../../../ts/types/redux/store.types";
 import { Avatar, Paper } from "@mui/material";
 import Link from "next/link";
 import classes from "../IdeaList.module.scss";
 import { useTranslation } from "react-i18next";
+import { InvestmentIdea } from "../../../../ts/types/entity/stock-market.types";
 interface IdeaListItem {
     idea: InvestmentIdea;
 }

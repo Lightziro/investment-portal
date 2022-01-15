@@ -38,6 +38,7 @@ class ArticleComments extends CustomModel
     {
         $author_model = $this->user;
         return [
+            'commentId' => $this->comment_id,
             'userId' => $author_model->user_id,
             'date' => $this->created_at,
             'fullNameAuthor' => $author_model->getFullName(),

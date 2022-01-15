@@ -22,8 +22,8 @@ const mainReducer = (
             return setNoticeView(state, action.noticeId);
         // case "ADD_NEW_IDEA_COMMENT":
         //     return {
-        //         ...state,
-        //         ideaView: addComment(state.ideaView, action.createComment),
+        //         ...entity,
+        //         ideaView: addComment(entity.ideaView, action.createComment),
         //     };
         case "SET_PROFILE_VIEW":
             return { ...state, profileView: action.profile };

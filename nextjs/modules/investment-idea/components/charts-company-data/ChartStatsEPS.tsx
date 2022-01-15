@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Skeleton } from "@mui/material";
-import { EpsCompanyStats } from "../../../../ts/types/state/stock-market.types";
+import { EpsCompanyStats } from "../../../../ts/types/entity/stock-market.types";
 import dynamic from "next/dynamic";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });

@@ -12,8 +12,7 @@ use App\Http\Modules\Portal\Middleware\AfterViewIdeaMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'investment-data'], function () {
-    Route::get('/get', [InvestmentController::class, 'getData']);
-    Route::get('/portal', [InvestmentController::class, 'getPortalData']);
+    Route::get('/get', [InvestmentController::class, 'getPortalData']);
     Route::get('/news', [InvestmentController::class, 'getNews']);
     Route::get('/idea/{id}', [InvestmentIdeaController::class, 'getInvestmentIdeaData'])->middleware(AfterViewIdeaMiddleware::class);
 
@@ -22,7 +21,7 @@ Route::group(['prefix' => 'init'], function () {
     Route::get('/portal-data', [InitialDataController::class, 'getPortalInit']);
 });
 
-Route::group(['prefix' => 'investment-idea'], function () {
+Route::group(['prefix' => 'idea'], function () {
     Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware(BeforeCheckNoAuthUser::class);
 });
 Route::group(['prefix' => 'article'], function () {

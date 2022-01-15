@@ -6,7 +6,7 @@ import {
     UserStore,
 } from "../../ts/types/redux/store.types";
 import { initStore } from "../../ts/types/redux/store.init";
-import { News } from "../../ts/types/state/stock-market.types";
+import { News } from "../../ts/types/entity/stock-market.types";
 import { GetServerSidePropsContext } from "next";
 import { initialViewStore } from "../../ts/init/redux/reducer.initial";
 
@@ -36,24 +36,4 @@ export const getInitPortal = async () => {
             return initStore.main;
         });
     return initData;
-};
-export const getViewEntity = async (
-    entityName,
-    ctx: GetServerSidePropsContext
-) => {
-    const config: AxiosRequestConfig = { headers: ctx.req.headers };
-    return await axios
-        .get(
-            `${process.env.API_URL_DOCKER}/${entityName}/get/${ctx.query.id}`,
-            config
-        )
-        .then((res) => res.data)
-        .catch((e) => initialViewStore[entityName]);
-};
-
-export const getListNews = async (): News[] => {
-    return await axios
-        .get(`${process.env.API_URL_DOCKER}/api/investment-data/news`)
-        .then((res) => res.data)
-        .catch((e) => initStore.main.news);
 };

@@ -3,11 +3,10 @@ import { Avatar, Typography, Divider, Grid, Stack } from "@mui/material";
 import Link from "next/link";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
-import { IdeaComment } from "../../../../ts/types/redux/store.types";
-import { ArticleComment } from "../../../../ts/types/state/article.types";
 import classes from "../CommentsList.module.scss";
+import { Comment } from "../../../../ts/types/other/view.types";
 interface CommentItem {
-    comment: IdeaComment | ArticleComment;
+    comment: Comment;
 }
 export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
     const { i18n } = useTranslation();
@@ -24,10 +23,11 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
                 <div className={classes.commentInfo}>
                     <span className={classes.authorComment}>
                         <Link
+                            passHref
                             href={`/profile/[id]`}
                             as={`/profile/${comment.userId}`}
                         >
-                            {comment.fullNameAuthor}
+                            <span>{comment.fullNameAuthor}</span>
                         </Link>
                     </span>
                     <span className={classes.dateComment}>

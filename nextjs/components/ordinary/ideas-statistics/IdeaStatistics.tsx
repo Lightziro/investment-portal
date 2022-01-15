@@ -6,11 +6,13 @@ import { PaperWrapper } from "../../simple/paper-wrapper/PaperWrapper";
 import Skeleton from "react-loading-skeleton";
 import { Divider, Paper, Stack, Typography } from "@mui/material";
 import classes from "./IdeaStatistics.module.scss";
-
-export const IdeaStatistics: React.FC = () => {
-    const stats = useSelector(
-        (state: StoreData) => state.main.investmentData.ideaStatistics
-    );
+interface IdeaStatistics {
+    stats: {
+        success: number;
+        fail: number;
+    };
+}
+export const IdeaStatistics: React.FC<IdeaStatistics> = ({ stats }) => {
     const { t } = useTranslation();
     return (
         <div className="portal-component-wrapper">

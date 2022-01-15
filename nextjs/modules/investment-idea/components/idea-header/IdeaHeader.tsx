@@ -8,7 +8,7 @@ import {
     Divider,
     Typography,
 } from "@mui/material";
-import { CompanyIdeaInfo } from "../../../../ts/types/state/stock-market.types";
+import { CompanyIdeaInfo } from "../../../../ts/types/entity/stock-market.types";
 interface CompanyIdeaHeader {
     companyInfo: CompanyIdeaInfo;
 }

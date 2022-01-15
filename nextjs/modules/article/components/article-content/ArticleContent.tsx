@@ -10,7 +10,7 @@ export const ArticleContent: React.FC<ArticleContent> = ({
     content,
 }) => {
     return (
-        <Grid direction="column">
+        <Grid container direction="column">
             <div className={classes.wrapperArticlePreview}>
                 {preview ? (
                     <img

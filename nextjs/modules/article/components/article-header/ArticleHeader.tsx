@@ -1,5 +1,5 @@
 import React from "react";
-import { ArticleLabel } from "../../../../ts/types/state/article.types";
+import { ArticleLabel } from "../../../../ts/types/entity/article.types";
 import { Paper, Skeleton, Grid } from "@mui/material";
 import moment from "moment";
 import { Col, Row } from "react-bootstrap";
@@ -16,7 +16,7 @@ export const ArticleHeader: React.FC<ArticleHeader> = ({
     dateCreate,
 }) => {
     return (
-        <Grid direction="column" justifyContent="flex-start">
+        <Grid container direction="column" justifyContent="flex-start">
             <Grid
                 alignItems="center"
                 item

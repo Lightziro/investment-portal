@@ -36,3 +36,9 @@ export interface AnalyticsStats {
     hold: number;
     sell: number;
 }
+export interface InvestmentIdea {
+    id: number;
+    possibleProfit: number;
+    stock: string;
+    logo: string;
+}

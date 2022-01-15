@@ -24,7 +24,5 @@ export interface ArticleLabel {
 export interface ArticleView extends Article {
     labels: ArticleLabel[];
     content: string;
-    comments: ArticleComment[];
+    comments: Comment[];
 }
-
-export interface ArticleComment extends IdeaComment {}

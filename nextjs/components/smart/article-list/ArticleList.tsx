@@ -1,14 +1,13 @@
 import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
 import { LoadArticleItems } from "./load-article-items/LoadArticleItems";
 import { ArticleItem } from "./article-item/ArticleItem";
 import { Grid } from "@mui/material";
-
-export const ArticleList: React.FC = () => {
-    const { popular, simple } = useSelector(
-        (state: StoreData) => state.main.articles
-    );
+import { Article } from "../../../ts/types/entity/article.types";
+interface ArticleList {
+    popular: Article[];
+    simple: Article[];
+}
+export const ArticleList: React.FC<ArticleList> = ({ popular, simple }) => {
     return (
         <Fragment>
             <Grid justifyContent="center" container direction="row" spacing={3}>

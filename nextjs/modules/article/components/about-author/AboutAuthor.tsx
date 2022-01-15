@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import Link from "next/link";
-import { ArticleAuthor } from "../../../../ts/types/state/article.types";
+import { ArticleAuthor } from "../../../../ts/types/entity/article.types";
 import { UserAvatar } from "../../../../components/simple/user-avatar/UserAvatar";
 import classes from "../../Article.module.scss";
 interface AboutAuthor {

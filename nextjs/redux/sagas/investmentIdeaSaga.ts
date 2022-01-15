@@ -17,9 +17,7 @@ function* createComment(action: AnyAction): Generator {
 function* fetchIdeaData(action: AnyAction): Generator {
     try {
         const data = yield axios
-            .get(
-                `${process.env.API_URL}/api/investment-data/idea/${action.ideaId}`
-            )
+            .get(`${process.env.API_URL}/idea/get/${action.ideaId}`)
             .then((response) => response.data);
         yield put({
             type: "SET_VIEW_ENTITY",

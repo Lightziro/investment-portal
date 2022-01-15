@@ -1,40 +1,51 @@
 import React from "react";
 import { Avatar, Card, CardHeader, CardMedia } from "@mui/material";
-import { Article } from "../../../../ts/types/state/article.types";
-import Link from "next/link";
-import Shiitake from "shiitake";
+import { Article } from "../../../../ts/types/entity/article.types";
 import moment from "moment";
+import Shiitake from "shiitake";
+import { LinkWrapper } from "../../../simple/link/Link";
 interface ArticleItem {
     item: Article;
 }
 export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
     return (
         <Card sx={{ height: 274 }}>
-            <Link href={`/article/[id]`} as={`/article/${item.articleId}`}>
-                <img
-                    className="w-100"
-                    src={`${process.env.API_URL}/storage/${item.preview}`}
+            <LinkWrapper
+                href={`/article/[id]`}
+                as={`/article/${item.articleId}`}
+            >
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image={`${process.env.API_URL}/storage/${item.preview}`}
                     alt={`Preview ${item.title}`}
                 />
-            </Link>
+            </LinkWrapper>
             <CardHeader
                 avatar={
-                    <Link
+                    <LinkWrapper
                         href={`/profile/[id]`}
                         as={`/profile/${item.author.userId}`}
                     >
                         <Avatar
                             src={`${process.env.API_URL}/storage/${item.author.avatar}`}
                         />
-                    </Link>
+                    </LinkWrapper>
                 }
                 title={
-                    <Link
+                    <LinkWrapper
                         href={`/article/[id]`}
                         as={`/article/${item.articleId}`}
                     >
-                        <span className="title">{item.title}</span>
-                    </Link>
+                        <Shiitake
+                            lines={2}
+                            throttleRate={200}
+                            className="title"
+                            tagName="div"
+                        >
+                            {item.title}
+                        </Shiitake>
+                    </LinkWrapper>
                 }
                 subheader={moment(item.dateCreate).fromNow()}
             />

@@ -6,11 +6,11 @@ import { IdeaListItem } from "./idea-list-item/IdeaListItem";
 import { LoadIdeasList } from "./load-ideas-list/LoadIdeasList";
 import Skeleton from "react-loading-skeleton";
 import { Box, Card, Divider, Typography } from "@mui/material";
-
-export const IdeaList: React.FC = () => {
-    const ideaList = useSelector(
-        (state: StoreData) => state.main.investmentData.investmentIdeas
-    );
+import { InvestmentIdea } from "../../../ts/types/entity/stock-market.types";
+interface IdeaList {
+    items: InvestmentIdea[];
+}
+export const IdeaList: React.FC<IdeaList> = ({ items }) => {
     const { t } = useTranslation();
     return (
         <div className="portal-component-wrapper">
@@ -25,8 +25,8 @@ export const IdeaList: React.FC = () => {
                 </Typography>
                 <Divider light />
                 <Box padding={1}>
-                    {ideaList ? (
-                        ideaList.map((idea) => (
+                    {items ? (
+                        items.map((idea) => (
                             <IdeaListItem key={idea.id} idea={idea} />
                         ))
                     ) : (

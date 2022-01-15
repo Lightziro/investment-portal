@@ -21,7 +21,6 @@ Route::group(['prefix' => 'user'], function() {
 
 Route::group(['prefix' => 'article'], function () {
     Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
-    Route::post('/create-comment', [ArticleActionsController::class, 'createComment']);
 });
 Route::group(['prefix' => 'profile'], function () {
    Route::get('/get/{id}', [ViewController::class, 'getViewProfile']);

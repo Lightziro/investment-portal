@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Skeleton } from "@mui/material";
 import Chart from "react-apexcharts";
-import { AnalyticsStats } from "../../../../ts/types/state/stock-market.types";
+import { AnalyticsStats } from "../../../../ts/types/entity/stock-market.types";
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 interface ChartStatsAnalytics {

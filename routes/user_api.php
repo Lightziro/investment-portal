@@ -10,7 +10,7 @@ use App\Http\Modules\Profile\Middleware\BeforeGetAuthUserId;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserLoginController::class, 'login'])->middleware(BeforeClearAuthUser::class);
-Route::get('/authentication', [UserActionController::class, 'authentication']);
+Route::get('/authentication', [UserActionController::class, 'authentication'])->middleware('auth:sanctum');
 Route::post('/notice/view', [UserController::class, 'viewNotice']);
 Route::post('/register', [UserLoginController::class, 'register'])->middleware(BeforeClearAuthUser::class);
 Route::get('/profile/{id}', [UserController::class, 'getProfile']);
