@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
+ * @property int comment_id
  * @property User user
  * @property string comment
  * @property int user_id
@@ -29,6 +30,7 @@ class InvestmentIdeaComments extends CustomModel
     {
         $author_model = $this->user;
         return [
+            'commentId' => $this->comment_id,
             'userId' => $author_model->user_id,
             'date' => $this->created_at->format('Y-m-d H:i:s'),
             'fullNameAuthor' => $author_model->getFullName(),

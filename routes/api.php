@@ -22,7 +22,7 @@ Route::group(['prefix' => 'init'], function () {
 });
 
 Route::group(['prefix' => 'idea'], function () {
-    Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware(BeforeCheckNoAuthUser::class);
+    Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
     Route::get('/get/{id}', [ViewController::class, 'getViewIdea'])->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
 });
 Route::group(['prefix' => 'article'], function () {

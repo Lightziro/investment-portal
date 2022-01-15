@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Divider, Grid } from "@mui/material";
 import { IdeaHeader } from "./components/idea-header/IdeaHeader";
 import { CompanyDescription } from "./components/company-description/CompanyDescription";
@@ -7,15 +7,22 @@ import { ChartStatsEPS } from "./components/charts-company-data/ChartStatsEPS";
 import { IdeaInformation } from "./components/idea-information/IdeaInformation";
 import { ChartStatsAnalytics } from "./components/charts-company-data/ChartStatsAnalytics";
 import { CommentsList } from "../../components/smart/comments-list/CommentsList";
-import { createComment } from "../../redux/actions/investmentIdeaActions";
 import { InvestmentIdeaView } from "../../ts/types/redux/store.types";
 import { IdeaDescription } from "./components/idea-description/IdeaDescription";
+import { useDispatch } from "react-redux";
+import { setViewEntity } from "../../redux/actions/viewActions";
+import { useRootSelector } from "../../hooks/useTypeSelector";
 interface InvestmentIdeaPage {
     ideaData: InvestmentIdeaView;
 }
 export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
     ideaData,
 }) => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(setViewEntity(ideaData, "idea"));
+    }, []);
+    const comments = useRootSelector((store) => store.view.idea.comments);
     return (
         <Fragment>
             <Grid justifyContent="center" container spacing={2}>
@@ -54,8 +61,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                     <CommentsList
                         entityId={ideaData.ideaId}
                         entityName="idea"
-                        comments={ideaData.comments}
-                        callbackEnter={createComment}
+                        comments={comments}
                     />
                 </Grid>
             </Grid>

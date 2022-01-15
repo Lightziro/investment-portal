@@ -87,16 +87,7 @@ class ViewController extends Controller
                 'percentChangeToday' => $quote_info->getDp() ?? null,
                 'changeToday' => $quote_info->getD(),
             ],
-            'authorInfo' => [
-                'userId' => $author_model->user_id,
-                'avatar' => $author_model->avatar_path,
-                'totalIdeas' => $author_model->investment_ideas->count(),
-                'amountSuccessfulIdeas' => $author_model->investment_ideas()->with('status', fn($query) => $query
-                    ->where(['status' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count(),
-                'amountFailIdeas' => $author_model->investment_ideas()->with('status', fn($query) => $query
-                    ->where(['status' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
-                'fullName' => $author_model->getFullName(),
-            ],
+            'authorInfo' => $idea_model->getFrontendAuthor(),
             'ideaInfo' => [
                 'isShort' => $idea_model->is_short,
                 'priceBuy' => $idea_model->price_buy,

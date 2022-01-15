@@ -39,6 +39,7 @@ class InvestmentIdea extends CustomModel
 
     #[Pure] public function getCommentsFrontend(): array
     {
+        /** @var InvestmentIdeaComments $comment_model */
         foreach ($this->comments()->orderByDesc('created_at')->get() as $comment_model) {
             $ar_comments[] = $comment_model->getFrontendComment();
         }
@@ -111,5 +112,19 @@ class InvestmentIdea extends CustomModel
     public function getScoreAnalyze(): mixed
     {
         return $this->questions->sum('score');
+    }
+    public function getFrontendAuthor(): array
+    {
+        $author_model = $this->author;
+        return [
+            'userId' => $author_model->user_id,
+            'avatar' => $author_model->avatar_path,
+            'totalIdeas' => $author_model->investment_ideas->count(),
+            'amountSuccessfulIdeas' => $author_model->investment_ideas()->with('status', fn($query) => $query
+                ->where(['status' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count(),
+            'amountFailIdeas' => $author_model->investment_ideas()->with('status', fn($query) => $query
+                ->where(['status' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
+            'fullName' => (string)$author_model,
+        ];
     }
 }
