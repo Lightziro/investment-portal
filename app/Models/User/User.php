@@ -139,7 +139,7 @@ class User extends Authenticatable
         return $this->hasOne(Country::class, 'country_id', 'country_id');
     }
 
-    public function subscriptions(): CustomHasMany
+    public function subscriptions(): HasMany
     {
         return $this->hasMany(UserSubscriptions::class, 'user_id', 'user_id');
     }

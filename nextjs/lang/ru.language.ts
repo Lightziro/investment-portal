@@ -86,4 +86,9 @@ export const ruLanguage = {
     Profile: "Профиль",
     "Save profile": "Сохранить профиль",
     "Admin panel": "Панель администратора",
+    users: "пользователи",
+    "Users today": "Пользователей за сегодня",
+    "Users week": "Пользователей за неделю",
+    "First name": "Имя",
+    "Last name": "Фамилия",
 };

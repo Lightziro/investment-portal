@@ -1,8 +1,8 @@
 import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
-import axios from "axios";
 import { ResponseRetrainClassifier } from "../../ts/types/response/response.types";
+import { axios } from "../../utils/axios";
 function* fetchInvestmentData(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -67,10 +67,34 @@ function* sendToAnalyzeIdea(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* fetchUsersStats(action: AnyAction): Generator {
+    try {
+        const stats = yield axios
+            .get(`${process.env.API_URL}/api/admin/users/get-stats`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_USERS_STATS",
+            stats,
+        });
+    } catch (e) {}
+}
+function* fetchUsers(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/admin/users/get/${action.page}`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_ADMIN_USERS",
+            data,
+        });
+    } catch (e) {}
+}
 export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_ADMIN_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("FETCH_COMPANIES", fetchCompanies);
     yield takeLatest("FETCH_ANALYTIC_DATA", fetchAnalyticData);
     yield takeLatest("RETRAIN_NEWS_CLASSIFIER", retrainClassifierNews);
     yield takeLatest("SEND_TO_ANALYZE", sendToAnalyzeIdea);
+    yield takeLatest("FETCH_USERS_STATS", fetchUsersStats);
+    yield takeLatest("FETCH_USERS_BY_PAGE", fetchUsers);
 }

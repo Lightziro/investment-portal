@@ -3,22 +3,14 @@ import {
     CompanyIdeaInfo,
     EpsCompanyStats,
     IdeaInfo,
-    News,
+    InvestmentIdea,
 } from "../entity/stock-market.types";
 import { AuthorInfo } from "../entity/user.types";
 import { AlertColor } from "@mui/material";
 import { CountryItem } from "../other/other.types";
-import { Article, ArticleView } from "../entity/article.types";
-
-export interface MainStore {
-    news: News[];
-    investmentData: InvestmentData;
-    otherData: OtherData;
-    articles: {
-        popular: Article[];
-        simple: Article[];
-    };
-}
+import { ArticleView } from "../entity/article.types";
+import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
+import { MainStore } from "../../../redux/ts/types/main/main-store.types";
 
 export interface OtherData {
     countries: CountryItem[];
@@ -66,27 +58,6 @@ export interface IdeaStatistics {
     fail: number;
 }
 
-export interface AdminStore {
-    investmentIdeas: {
-        viewToday: number;
-        commentsToday: number;
-    };
-    smartAnalytic: {
-        score: {
-            classificationNews: number;
-        };
-        newsForAnalyze: NewsPrediction[];
-    };
-    articles: AdminArticle;
-    createIdea: CreateIdea;
-}
-export interface AdminArticle {
-    list: Article[];
-    lastPage: number;
-    loading: boolean;
-    dialog: boolean;
-    edit: Article;
-}
 export interface NewsPrediction {
     id: number;
     title: string;

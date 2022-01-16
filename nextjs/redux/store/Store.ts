@@ -12,12 +12,6 @@ import viewReducer from "../reducers/viewReducer";
 import { createWrapper } from "next-redux-wrapper";
 
 const sagaMiddleware = createSagaMiddleware();
-let clientInitStore = initStore;
-if (process.browser) {
-    const serverStore = window.serverStoreState;
-    clientInitStore = { ...initStore, ...serverStore };
-    delete window.serverStoreState;
-}
 const reducers = combineReducers({
     user: userReducer,
     main: mainReducer,
@@ -27,7 +21,7 @@ const reducers = combineReducers({
 });
 export const clientStore = createStore(
     reducers,
-    clientInitStore,
+    initStore,
     composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 export const makeStore = (initState) =>

@@ -11,7 +11,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { ProfileView } from "../../../../ts/types/redux/store.types";
 import { useRootSelector } from "../../../../hooks/useTypeSelector";
-import { RoleUserChip } from "../role-user-chip/RoleUserChip";
+import { RoleUserChip } from "../../../../components/simple/role-user-chip/RoleUserChip";
 import { FormProfile } from "../form-profile/FormProfile";
 interface ProfileUserInfo {
     profile: ProfileView;

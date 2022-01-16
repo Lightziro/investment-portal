@@ -1,8 +1,9 @@
-import { AdminStore, AlertStore, MainStore, StoreData } from "./store.types";
+import { AlertStore, MainStore, StoreData } from "./store.types";
 import {
     initialCreateIdeaStore,
     initialViewStore,
 } from "../../init/redux/reducer.initial";
+import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
 
 export const initMainStore: MainStore = {
     news: null,
@@ -45,9 +46,18 @@ export const initialAdminStore: AdminStore = {
         dialog: false,
         edit: null,
     },
+    users: {
+        stats: {
+            newUsersWeek: null,
+            newUsersToday: null,
+        },
+        list: [],
+        lastPage: null,
+    },
 };
 
 export const initStore: StoreData = {
+    user: null,
     main: initMainStore,
     admin: initialAdminStore,
     alert: initialAlertStore,

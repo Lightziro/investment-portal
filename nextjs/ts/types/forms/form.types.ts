@@ -23,3 +23,10 @@ export interface FormArticle {
 export interface FormParamsAnalyze {
     monthPeriod: number;
 }
+export interface FormEditUserAdmin {
+    lastName: string;
+    firstName: string;
+    country: number;
+    sex: string;
+    role: number;
+}
