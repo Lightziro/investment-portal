@@ -12,6 +12,7 @@ import { Grid } from "@mui/material";
 import { getBasePortal, getListNews } from "../utils/api/get-data";
 import { News } from "../ts/types/entity/stock-market.types";
 import { DtoPortal } from "../ts/types/response/response.types";
+import { PortalLayout } from "../layouts/PortalLayout";
 interface Index {
     news: News[];
     baseData: DtoPortal;
@@ -19,33 +20,35 @@ interface Index {
 const MainPage: NextPage<Index> = ({ news, baseData }) => {
     return (
         <MainLayout title="Главная страница">
-            <Grid container spacing={3}>
-                <Grid
-                    display={{ xs: "none", sm: "none", md: "block" }}
-                    item
-                    md={3}
-                >
-                    <NewsList items={news} />
-                </Grid>
-                <Grid xs={false} item md={9}>
-                    <PaperWrapper>
-                        <Typography level={3}>Investments</Typography>
-                    </PaperWrapper>
-                    <Grid container spacing={3}>
-                        <Grid direction="column" item md={9} sm={12}>
-                            <ArticleList
-                                popular={baseData.articles.popular}
-                                simple={baseData.articles.simple}
-                            />
-                        </Grid>
-                        <Grid item sm={12} md={3}>
-                            <PortalAd />
-                            <IdeaStatistics stats={baseData.stats} />
-                            <IdeaList items={baseData.ideas} />
+            <PortalLayout>
+                <Grid container spacing={3}>
+                    <Grid
+                        display={{ xs: "none", sm: "none", md: "block" }}
+                        item
+                        md={3}
+                    >
+                        <NewsList items={news} />
+                    </Grid>
+                    <Grid xs={false} item md={9}>
+                        <PaperWrapper>
+                            <Typography level={3}>Investments</Typography>
+                        </PaperWrapper>
+                        <Grid container spacing={3}>
+                            <Grid direction="column" item md={9} sm={12}>
+                                <ArticleList
+                                    popular={baseData.articles.popular}
+                                    simple={baseData.articles.simple}
+                                />
+                            </Grid>
+                            <Grid item sm={12} md={3}>
+                                <PortalAd />
+                                <IdeaStatistics stats={baseData.stats} />
+                                <IdeaList items={baseData.ideas} />
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </PortalLayout>
         </MainLayout>
     );
 };

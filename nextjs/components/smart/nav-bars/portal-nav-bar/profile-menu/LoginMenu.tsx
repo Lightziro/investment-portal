@@ -9,12 +9,9 @@ import {
 import { MenuProfileItems } from "./MenuProfileItems";
 import { menuAuth } from "../../../../../config/menu-items";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { exitUser } from "../../../../../redux/actions/mainActions";
 import { UserStore } from "../../../../../ts/types/redux/store.types";
-
+import Link from "next/link";
 interface LoginMenu {
     user: UserStore;
     handleExit: () => void;
@@ -29,22 +26,22 @@ export const LoginMenu: React.FC<LoginMenu> = ({ user, handleExit }) => {
             <Divider sx={{ my: 1 }} />
             <MenuProfileItems items={menuAuth(user.userId)} />
             <Divider />
-            {/*{user.role === "admin" && (*/}
-            {/*    <Link to="/admin">*/}
-            {/*        <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>*/}
-            {/*            <Box*/}
-            {/*                component={Icon}*/}
-            {/*                icon={"eva:person-add-fill"}*/}
-            {/*                sx={{*/}
-            {/*                    mr: 2,*/}
-            {/*                    width: 24,*/}
-            {/*                    height: 24,*/}
-            {/*                }}*/}
-            {/*            />*/}
-            {/*            <ListItemText>{t("Admin panel")}</ListItemText>*/}
-            {/*        </MenuItem>*/}
-            {/*    </Link>*/}
-            {/*)}*/}
+            {user.role === "admin" && (
+                <Link href="/admin">
+                    <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>
+                        <Box
+                            component={Icon}
+                            icon={"eva:person-add-fill"}
+                            sx={{
+                                mr: 2,
+                                width: 24,
+                                height: 24,
+                            }}
+                        />
+                        <ListItemText>{t("Admin panel")}</ListItemText>
+                    </MenuItem>
+                </Link>
+            )}
             <MenuItem
                 onClick={handleExit}
                 sx={{ typography: "body2", py: 1, px: 2.5 }}

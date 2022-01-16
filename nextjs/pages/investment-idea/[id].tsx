@@ -6,6 +6,7 @@ import getTitleIdea from "../../modules/investment-idea/utils/get-title-idea";
 import { InvestmentIdeaPage } from "../../modules/investment-idea/InvestmentIdeaPage";
 import { getViewEntity } from "../../utils/api/get-data";
 import { InvestmentIdeaView } from "../../ts/types/redux/store.types";
+import { PortalLayout } from "../../layouts/PortalLayout";
 interface InvestmentIdea {
     idea: InvestmentIdeaView;
 }
@@ -17,7 +18,9 @@ const InvestmentIdea: NextPage<InvestmentIdea> = ({ idea }) => {
                 idea.companyInfo
             )}`}
         >
-            <InvestmentIdeaPage ideaData={idea} />
+            <PortalLayout>
+                <InvestmentIdeaPage ideaData={idea} />
+            </PortalLayout>
         </MainLayout>
     );
 };

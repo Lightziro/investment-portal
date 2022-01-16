@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
 import { useRouter } from "next/router";
+import { PortalLayout } from "../../layouts/PortalLayout";
 interface Profile {
     profile: ProfileView;
 }
@@ -21,7 +22,9 @@ const Profile: NextPage<Profile> = ({ profile }) => {
     }, []);
     return (
         <MainLayout title={`${t("Profile")} ${profile.fullName}`}>
-            <ProfilePage profile={profile} />
+            <PortalLayout>
+                <ProfilePage profile={profile} />
+            </PortalLayout>
         </MainLayout>
     );
 };

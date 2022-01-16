@@ -85,4 +85,5 @@ export const ruLanguage = {
     "Investment idea": "Инвестиционная идея",
     Profile: "Профиль",
     "Save profile": "Сохранить профиль",
+    "Admin panel": "Панель администратора",
 };

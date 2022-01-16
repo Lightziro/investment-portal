@@ -7,6 +7,7 @@ import { UserAvatar } from "../../../../simple/user-avatar/UserAvatar";
 import { LoginMenu } from "./LoginMenu";
 import { NoLoginMenu } from "./NoLoginMenu";
 import { logoutUser } from "../../../../../redux/actions/userActions";
+import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 
 interface ProfileMenu {
     open: boolean;
@@ -19,7 +20,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
     onClose,
 }) => {
     const anchorRef = useRef(null);
-    const user = useSelector((state: StoreData) => state.user);
+    const user = useRootSelector((store) => store.user);
     const dispatch = useDispatch();
     const handleExit = () => {
         dispatch(logoutUser());
