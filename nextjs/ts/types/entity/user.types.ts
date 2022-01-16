@@ -11,7 +11,3 @@ export interface AuthorInfo {
 export interface UserAdminEdit extends ProfileView {
     roleId: number;
 }
-export interface Role {
-    roleId: number;
-    name: string;
-}

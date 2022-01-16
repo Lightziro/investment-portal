@@ -12,6 +12,7 @@ class ProfileHelper
         'country' => 'country_id',
         'userId' => 'user_id',
         'sex' => 'sex',
+        'role' => 'role_id',
     ];
 
     public static function replaceUpdateField(User &$user_model, array $fields)
@@ -21,7 +22,7 @@ class ProfileHelper
             if (!$field_name || $field_name === $user_model->getKeyName() || $user_model->$field_name === $value) {
                 continue;
             }
-            $user_model->$field_name = trim($value);
+            $user_model->$field_name = $value;
         }
     }
 }

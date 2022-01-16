@@ -4,6 +4,7 @@ import { GetServerSidePropsContext } from "next";
 import { AxiosRequestConfig } from "axios";
 import { axios } from "../axios";
 import { initialViewStore } from "../../ts/init/redux/reducer.initial";
+import { Role } from "../../ts/types/entity/user.types";
 
 export const getListNews = async (): News[] => {
     const response = await fetch(
@@ -30,3 +31,13 @@ export const getViewEntity = async (
         .then((res) => res.data)
         .catch((e) => initialViewStore[entityName]);
 };
+export const getRoles = async () =>
+    await axios
+        .get(`${process.env.API_URL}/api/other/roles`)
+        .then((res) => res.data)
+        .catch(() => []);
+export const getCountries = async () =>
+    await axios
+        .get(`${process.env.API_URL}/api/other/countries`)
+        .then((res) => res.data)
+        .catch(() => []);

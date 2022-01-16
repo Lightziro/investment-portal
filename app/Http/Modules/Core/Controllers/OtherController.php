@@ -24,7 +24,7 @@ class OtherController extends Controller
         $roles = UsersRole::all();
         /** @var UsersRole $role_model */
         foreach ($roles as $role_model) {
-            $ar_roles[] = $role_model->toArray();
+            $ar_roles[] = $role_model->getFrontendData();
         }
         return response()->json($ar_roles ?? []);
     }

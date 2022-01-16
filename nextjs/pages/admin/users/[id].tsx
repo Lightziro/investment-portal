@@ -27,8 +27,12 @@ export const EditUser = () => {
         }
     }, [id]);
     const handleSubmit = async (formData) => {
+        console.log("DATA SET!");
         await axios
-            .put(`${process.env.API_URL}/api/admin/users/update`, formData)
+            .put(`${process.env.API_URL}/api/admin/users/update`, {
+                ...formData,
+                userId: id,
+            })
             .then(() => router.push("/admin/users"))
             .catch(() => dispatch(alertError("Failed to update data")));
     };

@@ -2,12 +2,14 @@
 
 namespace App\Http\Modules\Admin\Controllers;
 
+use App\Http\Modules\Profile\Helpers\ProfileHelper;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
+use Throwable;
 
 class UsersAdminController extends Controller
 {
@@ -35,8 +37,19 @@ class UsersAdminController extends Controller
         return response()->json(['newUsersToday' => $users_today, 'newUsersWeek' => $users_week]);
     }
 
-    public function updateUser(Request $request)
+    public function updateUser(Request $request): JsonResponse
     {
-        $data = '';
+        $form_data = $request->post();
+        try {
+            /** @var User $user */
+            if (!$user = User::query()->find($form_data['userId'])) {
+                return response()->json(['Not found user'], 404);
+            }
+            ProfileHelper::replaceUpdateField($user, $form_data);
+            $user->save();
+            return response()->json(['status' => 'success']);
+        } catch (Throwable  $e) {
+
+        }
     }
 }

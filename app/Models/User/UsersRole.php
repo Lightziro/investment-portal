@@ -24,4 +24,12 @@ class UsersRole extends Model
     {
         return $this->belongsTo(User::class, 'role_id');
     }
+
+    public function getFrontendData(): array
+    {
+        return [
+            'roleId' => $this->role_id,
+            'name' => (string)$this
+        ];
+    }
 }

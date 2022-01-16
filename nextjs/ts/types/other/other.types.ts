@@ -7,3 +7,7 @@ export interface Sex {
     value: string;
     label: string;
 }
+export interface Role {
+    roleId: number;
+    name: string;
+}
