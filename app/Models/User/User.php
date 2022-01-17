@@ -32,6 +32,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property UserNotices[]|Collection notices
  * @property string avatar_path
  * @property Carbon created_at
+ * @property Carbon updated_at
  * @property Country country
  * @property string sex
  * @property Collection|ArticleComments[] commentsArticles

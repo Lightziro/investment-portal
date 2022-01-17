@@ -29,6 +29,7 @@ export interface ProfileView {
     sex: string;
     avatar: string;
     dateCreate: string;
+    dateUpdate: string;
 }
 export interface AlertStore {
     message: string;

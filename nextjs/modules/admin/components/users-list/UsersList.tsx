@@ -29,6 +29,7 @@ export const UsersList: React.FC = () => {
                             <th scope="col">Role</th>
                             <th scope="col">Country</th>
                             <th scope="col">Date create</th>
+                            <th scope="col">Date update</th>
                             <th scope="col">Edit</th>
                         </tr>
                     </thead>
@@ -43,6 +44,7 @@ export const UsersList: React.FC = () => {
                                 </td>
                                 <td>{user.country.name}</td>
                                 <td>{moment(user.dateCreate).format("ll")}</td>
+                                <td>{moment(user.dateUpdate).format("ll")}</td>
                                 <td>
                                     <IconButton
                                         color="primary"

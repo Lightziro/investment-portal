@@ -91,4 +91,7 @@ export const ruLanguage = {
     "Users week": "Пользователей за неделю",
     "First name": "Имя",
     "Last name": "Фамилия",
+    "Create article": "Создание статьи",
+    Title: "Заголовок",
+    "Failed create article": "Не удалось создать статью",
 };

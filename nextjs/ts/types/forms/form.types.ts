@@ -19,6 +19,7 @@ export interface FormProfile {
 export interface FormArticle {
     title: string;
     content: string;
+    sendNotice: boolean;
 }
 export interface FormParamsAnalyze {
     monthPeriod: number;

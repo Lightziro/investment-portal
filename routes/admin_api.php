@@ -17,9 +17,9 @@ Route::group(['prefix' => 'smart-analytic'], function () {
     Route::get('/last-news', [SmartAnalyticController::class, 'getNewsForAnalyze']);
     Route::post('/train-news-classifier', [SmartAnalyticController::class, 'trainNewsClassifier']);
 });
-Route::group(['prefix' => 'article'], function () {
-    Route::post('/create', [ArticleAdminController::class, 'createArticle'])->middleware(BeforeGetAuthUserId::class);
-    Route::post('/update', [ArticleAdminController::class, 'updateArticle'])->middleware(BeforeGetAuthUserId::class);
+Route::group(['prefix' => 'article', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
+    Route::post('/create', [ArticleAdminController::class, 'createArticle']);
+    Route::post('/update', [ArticleAdminController::class, 'updateArticle']);
     Route::get('/get/{page}', [ArticleAdminController::class, 'getArticlesByPage'])->middleware(BeforeGetAuthUserId::class);
     Route::post('/delete', [ArticleAdminController::class, 'deleteArticle'])->middleware(BeforeGetAuthUserId::class);
 });

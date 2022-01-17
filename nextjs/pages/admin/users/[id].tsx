@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { AdminLayout } from "../../../layouts/AdminLayout";
 import { MainLayout } from "../../../layouts/MainLayout";
@@ -8,6 +8,7 @@ import { axios } from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { alertError } from "../../../redux/actions/alertActions";
 import { UserAdminEdit } from "../../../ts/types/entity/user.types";
+import { Typography } from "@mui/material";
 
 export const EditUser = () => {
     const dispatch = useDispatch();
@@ -40,7 +41,16 @@ export const EditUser = () => {
         <MainLayout title={`${t("Admin panel")} - ${t("users")}`}>
             <AdminLayout>
                 {editUser && (
-                    <UserEditForm callback={handleSubmit} userData={editUser} />
+                    <Fragment>
+                        <Typography align="center" variant="h4">
+                            Edit user data -{" "}
+                            {`${editUser.fullName}[${editUser.userId}]`}
+                        </Typography>
+                        <UserEditForm
+                            callback={handleSubmit}
+                            userData={editUser}
+                        />
+                    </Fragment>
                 )}
             </AdminLayout>
         </MainLayout>

@@ -24,6 +24,7 @@ class UsersAdminController extends Controller
             $user_data = $user_model->getProfile();
             $ar_users[] = array_merge($user_data, [
                 'roleId' => $user_model->role_id,
+                'dateUpdate' => $user_model->updated_at->format('Y-m-d')
             ]);
         }
         return response()->json(['items' => $ar_users ?? [], 'lastPage' => $users->lastPage()]);

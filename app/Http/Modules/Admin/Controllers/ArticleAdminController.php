@@ -4,6 +4,7 @@ namespace App\Http\Modules\Admin\Controllers;
 
 use App\Http\Modules\Admin\Helpers\ArticleHelper;
 use App\Models\Article\Article;
+use App\Models\User\User;
 use App\Models\User\UserSubscriptions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,20 +25,21 @@ class ArticleAdminController extends Controller
             $validate = Validator::make($request->post(), [
                 'title' => ['required', 'max:255'],
                 'content' => ['required'],
-                'userId' => ['required']
             ]);
             if ($validate->fails()) {
                 return response()->json(['message' => 'Incorrectly filled in data'], 400);
             }
+            /** @var User $author */
+            $author = $request->user();
+
             $post = $request->post();
             $article_model = new Article();
             $article_model->title = $post['title'];
             $article_model->content = $post['content'];
-            $article_model->author_id = $post['userId'];
+            $article_model->author_id = $author->user_id;
             $article_model->save();
-            return response()->json(array_merge($article_model->getFrontend(), [
-                'content' => $article_model->content
-            ]));
+
+            return response()->json(['status' => true]);
         } catch (Throwable $e) {
             return response()->json(['message' => 'Failed to create article'], 400);
         }
@@ -58,10 +60,8 @@ class ArticleAdminController extends Controller
             if (!$article_model->save()) {
                 return response()->json(['Failed to update data'], 400);
             }
-            ArticleHelper::sendNotices($article_model, 'update');
-            return response()->json(array_merge($article_model->getFrontend(), [
-                'content' => $article_model->content,
-            ]));
+//            ArticleHelper::sendNotices($article_model, 'update');
+            return response()->json(['status' => true]);
         } catch (Throwable $e) {
             Log::error('Error when updating article', [$e->getMessage(), $e->getFile(), $e->getLine()]);
             return response()->json(['message' => 'Error update'], 400);
