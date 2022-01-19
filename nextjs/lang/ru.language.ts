@@ -94,4 +94,8 @@ export const ruLanguage = {
     "Create article": "Создание статьи",
     Title: "Заголовок",
     "Failed create article": "Не удалось создать статью",
+    Articles: "Статьи",
+    "Content article": "Контент статьи",
+    Content: "Контент",
+    Preview: "Главное изображение",
 };

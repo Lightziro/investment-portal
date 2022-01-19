@@ -20,6 +20,7 @@ export interface FormArticle {
     title: string;
     content: string;
     sendNotice: boolean;
+    preview: File;
 }
 export interface FormParamsAnalyze {
     monthPeriod: number;

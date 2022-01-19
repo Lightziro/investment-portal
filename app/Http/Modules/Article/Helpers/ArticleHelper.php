@@ -2,12 +2,23 @@
 
 namespace App\Http\Modules\Admin\Helpers;
 
+use App\Custom\Traits\ModelHelperTrait;
 use App\Models\Article\Article;
 use App\Models\User\UserNotices;
 use App\Models\User\UserSubscriptions;
 
 class ArticleHelper
 {
+    use ModelHelperTrait;
+
+    const FRONTEND_FIELD = [
+        'title' => 'title',
+        'content' => 'content',
+        'authorId' => 'author_id',
+        'articleId' => 'article_id',
+        'preview' => 'preview_path',
+    ];
+
     public static function sendNotices(Article $article_model, string $type): void
     {
         /** @var UserSubscriptions[] $subscriptions */

@@ -7,6 +7,7 @@ import { RoleUserChip } from "../../../../components/simple/role-user-chip/RoleU
 import moment from "moment";
 import EditIcon from "@mui/icons-material/Edit";
 import { useRouter } from "next/router";
+import { EntityTable } from "../../../../components/simple/entity-table/EntityTable";
 
 export const UsersList: React.FC = () => {
     const dispatch = useDispatch();
@@ -20,49 +21,37 @@ export const UsersList: React.FC = () => {
     return (
         <Fragment>
             {list.length ? (
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Full name</th>
-                            <th scope="col">sex</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Country</th>
-                            <th scope="col">Date create</th>
-                            <th scope="col">Date update</th>
-                            <th scope="col">Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {list.map((user) => (
-                            <tr>
-                                <th scope="row">{user.userId}</th>
-                                <td>{user.fullName}</td>
-                                <td>{user.sex}</td>
-                                <td>
-                                    <RoleUserChip role={user.roleName} />
-                                </td>
-                                <td>{user.country.name}</td>
-                                <td>{moment(user.dateCreate).format("ll")}</td>
-                                <td>{moment(user.dateUpdate).format("ll")}</td>
-                                <td>
-                                    <IconButton
-                                        color="primary"
-                                        aria-label="upload picture"
-                                        component="span"
-                                        onClick={() =>
-                                            router.push(
-                                                `/admin/users/${user.userId}`
-                                            )
-                                        }
-                                    >
-                                        <EditIcon />
-                                    </IconButton>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <EntityTable
+                    columns={[
+                        "ID",
+                        "Full name",
+                        "Sex",
+                        "Role",
+                        "Country",
+                        "Date create",
+                        "Date update",
+                        "Edit",
+                    ]}
+                    row={list.map((user) => [
+                        user.userId,
+                        user.fullName,
+                        user.sex,
+                        <RoleUserChip role={user.roleName} />,
+                        user.country.name,
+                        moment(user.dateCreate).format("ll"),
+                        moment(user.dateUpdate).format("ll"),
+                        <IconButton
+                            color="primary"
+                            aria-label="upload picture"
+                            component="span"
+                            onClick={() =>
+                                router.push(`/admin/users/${user.userId}`)
+                            }
+                        >
+                            <EditIcon />
+                        </IconButton>,
+                    ])}
+                />
             ) : (
                 <Skeleton height={240} variant="rectangular" />
             )}

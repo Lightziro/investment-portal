@@ -47,3 +47,11 @@ export const settingsSunEditor = {
         "Trebuchet MS",
     ],
 };
+export const getPhoto = (photo) => {
+    if (!photo) {
+        return null;
+    }
+    return typeof photo === "string"
+        ? `${process.env.API_URL}/storage/${photo}`
+        : URL.createObjectURL(photo);
+};

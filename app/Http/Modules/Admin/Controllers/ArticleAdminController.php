@@ -5,7 +5,6 @@ namespace App\Http\Modules\Admin\Controllers;
 use App\Http\Modules\Admin\Helpers\ArticleHelper;
 use App\Models\Article\Article;
 use App\Models\User\User;
-use App\Models\User\UserSubscriptions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -22,21 +21,19 @@ class ArticleAdminController extends Controller
     public function createArticle(Request $request): JsonResponse
     {
         try {
-            $validate = Validator::make($request->post(), [
-                'title' => ['required', 'max:255'],
-                'content' => ['required'],
-            ]);
-            if ($validate->fails()) {
+            if (!$this->validateRequest($request)) {
                 return response()->json(['message' => 'Incorrectly filled in data'], 400);
             }
             /** @var User $author */
             $author = $request->user();
+            $preview_path = $request->file('preview')->store('article-preview', 'public');
 
             $post = $request->post();
             $article_model = new Article();
             $article_model->title = $post['title'];
             $article_model->content = $post['content'];
             $article_model->author_id = $author->user_id;
+            $article_model->preview_path = $preview_path;
             $article_model->save();
 
             return response()->json(['status' => true]);
@@ -48,19 +45,21 @@ class ArticleAdminController extends Controller
 
     public function updateArticle(Request $request): JsonResponse
     {
-        $post = $request->post();
         try {
+            if (!$this->validateRequest($request)) {
+                return response()->json(['message' => 'Incorrectly filled in data'], 400);
+            }
+            $post = $request->post();
             /** @var Article $article_model */
-            $article_model = Article::query()->where(['article_id' => $post['articleId']])->first();
-            if (!$article_model) {
+            if (!$article_model = Article::query()->find($post['articleId'])) {
                 return response()->json(['message' => 'Could not find an updated article'], 400);
             }
-            $article_model->title = $post['title'];
-            $article_model->content = $post['content'];
-            if (!$article_model->save()) {
-                return response()->json(['Failed to update data'], 400);
+
+            ArticleHelper::replaceUpdateField($article_model, $request->all());
+            $article_model->save();
+            if ($post['sendNotice']) {
+                ArticleHelper::sendNotices($article_model, 'update');
             }
-//            ArticleHelper::sendNotices($article_model, 'update');
             return response()->json(['status' => true]);
         } catch (Throwable $e) {
             Log::error('Error when updating article', [$e->getMessage(), $e->getFile(), $e->getLine()]);
@@ -85,7 +84,7 @@ class ArticleAdminController extends Controller
         return ['items' => $ar_articles ?? [], 'lastPage' => $articles->lastPage()];
     }
 
-    public function deleteArticle(Request $request)
+    public function deleteArticle(Request $request): JsonResponse
     {
         try {
             $post = $request->post();
@@ -97,6 +96,28 @@ class ArticleAdminController extends Controller
         } catch (Throwable $e) {
             return response()->json(['message' => 'Not success'], 400);
         }
+    }
 
+    public function getItemArticle(int $id): JsonResponse
+    {
+        /** @var Article $article */
+        if ($article = Article::query()->find($id)) {
+            return response()->json([
+                'articleId' => $article->article_id,
+                'title' => (string)$article,
+                'preview' => $article->preview_path,
+                'content' => $article->content,
+            ]);
+        }
+    }
+
+    private function validateRequest(Request $request): bool
+    {
+        $validate = Validator::make($request->all(), [
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+            'preview' => ['required', 'image', 'mimes:jpeg,png,jpg']
+        ]);
+        return $validate->fails();
     }
 }

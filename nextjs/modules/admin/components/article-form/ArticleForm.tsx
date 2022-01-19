@@ -6,7 +6,7 @@ import SunEditorCore from "suneditor/src/lib/core";
 import { initialArticleForm } from "../../../../ts/init/entity/article.init";
 import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
-import { settingsSunEditor } from "../../../../utils/other";
+import { getPhoto, settingsSunEditor } from "../../../../utils/other";
 interface ArticleForm {
     article?: any;
     callback: (form) => void;
@@ -30,11 +30,9 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
         >
             {({
                 values,
-                errors,
                 handleChange,
-                handleBlur,
+                setFieldValue,
                 handleSubmit,
-                isSubmitting,
             }: FormikProps<FormArticle>) => (
                 <form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
@@ -47,7 +45,7 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                         />
                     </Form.Group>
                     <Row>
-                        <Form.Label>Content article</Form.Label>
+                        <Form.Label>{t("Content")}</Form.Label>
                         <SunEditor
                             defaultValue={values.content}
                             getSunEditorInstance={getSunEditorInstance}
@@ -71,56 +69,28 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                             }
                         />
                     </Form.Group>
-                    {/*<Row className="mb-3">*/}
-                    {/*    <Form.Group as={Col}>*/}
-                    {/*        <Form.Label>{t("Role")}</Form.Label>*/}
-                    {/*        <Form.Select*/}
-                    {/*            name="role"*/}
-                    {/*            onChange={handleChange}*/}
-                    {/*            value={values.role}*/}
-                    {/*        >*/}
-                    {/*            {roles.map((item) => (*/}
-                    {/*                <option*/}
-                    {/*                    key={item.roleId}*/}
-                    {/*                    value={item.roleId}*/}
-                    {/*                >*/}
-                    {/*                    {item.name}*/}
-                    {/*                </option>*/}
-                    {/*            ))}*/}
-                    {/*        </Form.Select>*/}
-                    {/*    </Form.Group>*/}
-                    {/*    <Form.Group as={Col}>*/}
-                    {/*        <Form.Label>{t("Country")}</Form.Label>*/}
-                    {/*        <Form.Select*/}
-                    {/*            name="country"*/}
-                    {/*            onChange={handleChange}*/}
-                    {/*            value={values.country}*/}
-                    {/*        >*/}
-                    {/*            {countries.map((item) => (*/}
-                    {/*                <option*/}
-                    {/*                    key={item.country_id}*/}
-                    {/*                    value={item.country_id}*/}
-                    {/*                >*/}
-                    {/*                    {item.name}*/}
-                    {/*                </option>*/}
-                    {/*            ))}*/}
-                    {/*        </Form.Select>*/}
-                    {/*    </Form.Group>*/}
-                    {/*    <Form.Group as={Col}>*/}
-                    {/*        <Form.Label>{t("Sex")}</Form.Label>*/}
-                    {/*        <Form.Select*/}
-                    {/*            name="sex"*/}
-                    {/*            value={values.sex}*/}
-                    {/*            onChange={handleChange}*/}
-                    {/*        >*/}
-                    {/*            {sexList.map((item) => (*/}
-                    {/*                <option key={item.value} value={item.value}>*/}
-                    {/*                    {t(item.label)}*/}
-                    {/*                </option>*/}
-                    {/*            ))}*/}
-                    {/*        </Form.Select>*/}
-                    {/*    </Form.Group>*/}
-                    {/*</Row>*/}
+                    <Form.Group controlId="formFileSm" className="mb-3">
+                        <Form.Label>{t("Preview")}</Form.Label>
+                        <Form.Control
+                            type="file"
+                            name="preview"
+                            onChange={(e) =>
+                                setFieldValue(
+                                    "preview",
+                                    e.currentTarget.files[0]
+                                )
+                            }
+                            // value={values.preview}
+                            size="sm"
+                        />
+                        {values.preview && (
+                            <img
+                                width="194"
+                                src={getPhoto(values.preview)}
+                                alt={article.title}
+                            />
+                        )}
+                    </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>

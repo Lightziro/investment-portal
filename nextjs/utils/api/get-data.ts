@@ -4,7 +4,6 @@ import { GetServerSidePropsContext } from "next";
 import { AxiosRequestConfig } from "axios";
 import { axios } from "../axios";
 import { initialViewStore } from "../../ts/init/redux/reducer.initial";
-import { Role } from "../../ts/types/entity/user.types";
 
 export const getListNews = async (): News[] => {
     const response = await fetch(
@@ -41,3 +40,16 @@ export const getCountries = async () =>
         .get(`${process.env.API_URL}/api/other/countries`)
         .then((res) => res.data)
         .catch(() => []);
+export const getArticle = async (
+    id: number,
+    ctx: GetServerSidePropsContext
+) => {
+    const config: AxiosRequestConfig = { headers: ctx.req.headers };
+    return await axios
+        .get(
+            `${process.env.API_URL_DOCKER}/api/admin/article/get-item/${id}`,
+            config
+        )
+        .then((res) => res.data)
+        .catch(() => null);
+};

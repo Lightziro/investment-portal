@@ -40,7 +40,7 @@ const adminReducer = (
             };
         case "FETCH_USERS_BY_PAGE":
             return { ...state, users: { ...state.users, list: [] } };
-        case "FETCH_ARTICLE_FOR_ADMIN":
+        case "FETCH_ARTICLE_ADMIN_LIST":
         case "DELETE_ARTICLE":
             return {
                 ...state,

@@ -29,11 +29,10 @@ function* updateArticle(action: AnyAction): Generator {
 function* fetchArticleForAdmin(action: AnyAction): Generator {
     try {
         const articlesData = yield axios
-            .get(`/api/admin/article/get/${action.page}`)
+            .get(`${process.env.API_URL}/api/admin/article/get/${action.page}`)
             .then((response) => response.data);
         yield put({
             type: "SET_ARTICLES_LIST",
-            page: action.page,
             articlesData,
         });
     } catch (e) {}
@@ -90,7 +89,7 @@ function* deleteArticle(action: AnyAction): Generator {
 export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("CREATE_ARTICLE", createArticle);
     yield takeLatest("FETCH_ARTICLE_VIEW", fetchArticleView);
-    yield takeLatest("FETCH_ARTICLE_FOR_ADMIN", fetchArticleForAdmin);
+    yield takeLatest("FETCH_ARTICLE_ADMIN_LIST", fetchArticleForAdmin);
     yield takeLatest("CREATE_ARTICLE_COMMENT", createArticleComment);
     yield takeLatest("UPDATE_ARTICLE", updateArticle);
     yield takeLatest("DELETE_ARTICLE", deleteArticle);

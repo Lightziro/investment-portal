@@ -15,4 +15,6 @@ export const initialArticleView: ArticleView = {
 export const initialArticleForm: FormArticle = {
     title: "",
     content: "",
+    preview: null,
+    sendNotice: false,
 };

@@ -4,10 +4,18 @@ import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 import { Button, Container, Divider, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ArticleListAdmin } from "../../../modules/admin/components/article-list-admin/ArticleListAdmin";
+import { fetchArticlesAdminList } from "../../../redux/actions/admin/adminArticleActions";
 
 const ArticlesAdminPage = () => {
     const { t } = useTranslation();
     const router = useRouter();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchArticlesAdminList(0));
+    }, []);
     return (
         <MainLayout title={t("Investment ideas")}>
             <AdminLayout>
@@ -33,8 +41,7 @@ const ArticlesAdminPage = () => {
                         </Button>
                     </Stack>
                     <Divider />
-                    {/*<ArticleListAdmin />*/}
-                    {/*<CreateArticle />*/}
+                    <ArticleListAdmin />
                 </Container>
             </AdminLayout>
         </MainLayout>
