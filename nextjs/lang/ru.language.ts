@@ -73,7 +73,7 @@ export const ruLanguage = {
     "Error occurred, try again later": "Произошла ошибка, повторите позднее",
     "Next stage": "Следующая стадия",
     "Period news analysis": "За какой период учитывать новости?",
-    "Send to analyze": "Отправить на анализ",
+    "Send to analytics": "Отправить на аналитику",
     "You successfully created an idea, when a smart analytical analyzes, you will receive an alert":
         "Вы успешно создали идею, когда интеллектуальный аналитик проведет анализ, вы получите оповещение",
     "Company description":
@@ -98,4 +98,7 @@ export const ruLanguage = {
     "Content article": "Контент статьи",
     Content: "Контент",
     Preview: "Главное изображение",
+    Creating: "Создание",
+    "Creating idea": "Создание инвестиционной идеи",
+    "Select company": "Выберите компанию",
 };

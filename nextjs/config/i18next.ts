@@ -23,6 +23,7 @@ const options = {
 i18n.use(LngDetector)
     .use(initReactI18next)
     .init({
+        cleanCode: true,
         resources,
         lng: "ru",
         interpolation: {

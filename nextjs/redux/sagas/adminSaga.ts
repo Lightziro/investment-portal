@@ -17,8 +17,8 @@ function* fetchInvestmentData(action: AnyAction): Generator {
 function* fetchCompanies(action: AnyAction): Generator {
     try {
         const companies = yield axios
-            .get(`/api/admin/companies/${action.name}`)
-            .then((response) => response.data);
+            .get(`${process.env.API_URL}/api/admin/companies/${action.name}`)
+            .then((res) => res.data);
         yield put({
             type: "SET_LIST_COMPANIES",
             companies,
@@ -51,15 +51,11 @@ function* retrainClassifierNews(action: AnyAction): Generator {
         }
     } catch (e) {}
 }
-function* sendToAnalyzeIdea(action: AnyAction): Generator {
+function* sendToAnalytics(action: AnyAction): Generator {
     try {
         const ideaData = yield axios
             .post("/api/admin/investment-idea/create", action.form)
             .then((response) => response.data);
-        yield put({
-            type: "SET_CREATED_IDEA",
-            ideaData,
-        });
         yield put({
             type: "SET_ALERT_SUCCESS",
             message:
@@ -94,7 +90,7 @@ export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_COMPANIES", fetchCompanies);
     yield takeLatest("FETCH_ANALYTIC_DATA", fetchAnalyticData);
     yield takeLatest("RETRAIN_NEWS_CLASSIFIER", retrainClassifierNews);
-    yield takeLatest("SEND_TO_ANALYZE", sendToAnalyzeIdea);
+    yield takeLatest("SEND_IDEA_TO_ANALYTICS", sendToAnalytics);
     yield takeLatest("FETCH_USERS_STATS", fetchUsersStats);
     yield takeLatest("FETCH_USERS_BY_PAGE", fetchUsers);
 }

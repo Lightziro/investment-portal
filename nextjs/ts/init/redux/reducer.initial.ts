@@ -2,6 +2,7 @@ import { CreateIdea, ViewStore } from "../../types/redux/store.types";
 import { initialArticleView } from "../entity/article.init";
 import { initialIdeaView } from "../entity/idea.init";
 import { initialProfile } from "../entity/user.init";
+import { CreateIdeaStage } from "../../enums/investment-idea.enum";
 
 export const initialViewStore: ViewStore = {
     profile: initialProfile,
@@ -12,5 +13,5 @@ export const initialCreateIdeaStore: CreateIdea = {
     companies: [],
     loadInput: false,
     selectedCompany: null,
-    stage: 1,
+    stage: CreateIdeaStage.SelectCompany,
 };

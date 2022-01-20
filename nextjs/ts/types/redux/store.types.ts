@@ -11,6 +11,7 @@ import { CountryItem } from "../other/other.types";
 import { ArticleView } from "../entity/article.types";
 import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
 import { MainStore } from "../../../redux/ts/types/main/main-store.types";
+import { CreateIdeaStage } from "../../enums/investment-idea.enum";
 
 export interface OtherData {
     countries: CountryItem[];
@@ -95,7 +96,7 @@ export interface ViewStore {
 }
 export interface CreateIdea {
     companies: [];
-    stage: number;
+    stage: CreateIdeaStage;
     selectedCompany: string;
     loadInput: boolean;
 }

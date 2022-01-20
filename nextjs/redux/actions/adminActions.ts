@@ -3,10 +3,6 @@ import { NewsPrediction } from "../../ts/types/redux/store.types";
 export const fetchInvestmentData = () => ({
     type: "FETCH_ADMIN_INVESTMENT_DATA",
 });
-export const fetchCompanies = (name: string) => ({
-    type: "FETCH_COMPANIES",
-    name,
-});
 export const fetchAnalyticData = () => ({
     type: "FETCH_ANALYTIC_DATA",
 });

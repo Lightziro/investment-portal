@@ -6,10 +6,11 @@ import { ArticleForm } from "../../../modules/admin/components/article-form/Arti
 import { axios } from "../../../utils/axios";
 import { FormArticle } from "../../../ts/types/forms/form.types";
 import { useDispatch } from "react-redux";
-import { alertError } from "../../../redux/actions/alertActions";
-import { headersFile } from "../../../ts/consts/other/api";
+import { alertError, alertSuccess } from "../../../redux/actions/alertActions";
+import { useRouter } from "next/router";
 
 const CreateArticle: NextPage = () => {
+    const router = useRouter();
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const handleSubmit = async (form: FormArticle) => {
@@ -18,7 +19,8 @@ const CreateArticle: NextPage = () => {
         await axios
             .post(`${process.env.API_URL}/api/admin/test`, formData)
             .then((res) => {
-                console.log(res);
+                dispatch(alertSuccess("Article successfully posted"));
+                router.push("/admin/articles");
             })
             .catch((e) => dispatch(alertError("Failed create article")));
     };

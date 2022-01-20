@@ -53,3 +53,16 @@ export const getArticle = async (
         .then((res) => res.data)
         .catch(() => null);
 };
+export const getAdminIdea = async (
+    id: number,
+    ctx: GetServerSidePropsContext
+) => {
+    const config: AxiosRequestConfig = { headers: ctx.req.headers };
+    return await axios
+        .get(
+            `${process.env.API_URL_DOCKER}/api/admin/article/get-item/${id}`,
+            config
+        )
+        .then((res) => res.data)
+        .catch(() => null);
+};

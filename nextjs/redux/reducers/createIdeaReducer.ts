@@ -9,7 +9,7 @@ const createIdeaReducer = (
     switch (action.type) {
         case "SET_COMPANY_IDEA":
             return { ...state, selectedCompany: action.company };
-        case "SET_STAGE":
+        case "SET_STAGE_CREATE_IDEA":
             return { ...state, stage: action.stage };
         case "FETCH_COMPANIES":
             return {
