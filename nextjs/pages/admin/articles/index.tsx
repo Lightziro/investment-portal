@@ -1,47 +1,31 @@
 import { MainLayout } from "../../../layouts/MainLayout";
 import { AdminLayout } from "../../../layouts/AdminLayout";
 import { useTranslation } from "react-i18next";
-import { Icon } from "@iconify/react";
-import { Button, Container, Divider, Stack, Typography } from "@mui/material";
-import { useRouter } from "next/router";
+import { Container, Divider } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ArticleListAdmin } from "../../../modules/admin/components/article-list-admin/ArticleListAdmin";
-import { fetchArticlesAdminList } from "../../../redux/actions/admin/adminArticleActions";
+import { HeaderSection } from "../../../modules/admin/components/header-section/HeaderSection";
+import { fetchEntityList } from "../../../redux/actions/adminActions";
+import { AdminEntity } from "../../../redux/ts/enums/admin/admin.enum";
+import { AdminArticlesList } from "../../../modules/admin/sections/articles/admin-articles-list/AdminArticlesList";
 
 const ArticlesAdminPage = () => {
     const { t } = useTranslation();
-    const router = useRouter();
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchArticlesAdminList(0));
+        dispatch(fetchEntityList(AdminEntity.Article, 0));
     }, []);
     return (
         <MainLayout title={t("Investment ideas")}>
             <AdminLayout>
                 <Container maxWidth="xl">
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="space-between"
-                        mb={2}
-                    >
-                        <Typography variant="h4" gutterBottom>
-                            Stats articles
-                        </Typography>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<Icon icon="ant-design:plus-outlined" />}
-                            onClick={() =>
-                                router.push("/admin/articles/create-article")
-                            }
-                        >
-                            Create article
-                        </Button>
-                    </Stack>
+                    <HeaderSection
+                        urlRedirect="/admin/articles/create-article"
+                        textButton="Create article"
+                        previewText="Stats articles"
+                    />
                     <Divider />
-                    <ArticleListAdmin />
+                    <AdminArticlesList />
                 </Container>
             </AdminLayout>
         </MainLayout>

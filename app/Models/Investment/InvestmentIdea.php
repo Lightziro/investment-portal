@@ -7,6 +7,7 @@ use App\Custom\CustomModel;
 use App\Custom\Relations\CustomHasMany;
 use App\Models\Other\Company;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -22,7 +23,8 @@ use JetBrains\PhpStorm\Pure;
  * @property string stock_name
  * @property Company company
  * @property int company_id
- * @property InvestmentIdeaComments[] comments
+ * @property InvestmentIdeaComments[]|Collection comments
+ * @property InvestmentIdeaViewing[]|Collection views
  * @property string date_create
  * @property string date_end
  * @property string description
@@ -37,7 +39,7 @@ class InvestmentIdea extends CustomModel
     protected $table = 'investment_ideas';
     protected $primaryKey = 'idea_id';
 
-    #[Pure] public function getCommentsFrontend(): array
+    public function getCommentsFrontend(): array
     {
         /** @var InvestmentIdeaComments $comment_model */
         foreach ($this->comments()->orderByDesc('created_at')->get() as $comment_model) {
@@ -111,8 +113,9 @@ class InvestmentIdea extends CustomModel
      */
     public function getScoreAnalyze(): mixed
     {
-        return $this->questions->sum('score');
+        return $this->questions()->where(['result' => true])->sum('score');
     }
+
     public function getFrontendAuthor(): array
     {
         $author_model = $this->author;
@@ -125,6 +128,18 @@ class InvestmentIdea extends CustomModel
             'amountFailIdeas' => $author_model->investment_ideas()->with('status', fn($query) => $query
                 ->where(['status' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
             'fullName' => (string)$author_model,
+        ];
+    }
+
+    public function getFrontendData(): array
+    {
+        return [
+            'ideaId' => $this->idea_id,
+            'company' => (string)$this->company,
+            'status' => $this->status->name,
+            'score' => $this->getScoreAnalyze(),
+            'view' => $this->views->count(),
+            'comments' => $this->comments->count(),
         ];
     }
 }

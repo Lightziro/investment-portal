@@ -60,7 +60,7 @@ class PredictIdeaCommand extends Command
         try {
             if ($message->body && $data = json_decode($message->body, true, 512, JSON_THROW_ON_ERROR)) {
                 /** @var InvestmentIdea $idea_model */
-                $idea_model = InvestmentIdea::query()->where(['idea_id' => $data['idea_id']])->first();
+                $idea_model = InvestmentIdea::query()->find($data['idea_id']);
                 if (!$idea_model) {
                     throw new ConsumerException("Not found idea by id {$data['idea_id']}");
                 }

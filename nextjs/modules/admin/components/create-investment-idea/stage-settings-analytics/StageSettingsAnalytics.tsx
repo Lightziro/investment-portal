@@ -15,12 +15,11 @@ import { OPTIONS_NEWS_ANALYZE } from "../../../../../config/menu-items";
 import { initialParamsAnalyze } from "../../../../../ts/init/other/other.init";
 import { FormParamsAnalyze } from "../../../../../ts/types/forms/form.types";
 import { Button } from "react-bootstrap";
-import {
-    changeStageCreateIdea,
-    sendToAnalytics,
-} from "../../../../../redux/actions/admin/adminIdeaActions";
+import { changeStageCreateIdea } from "../../../../../redux/actions/admin/adminIdeaActions";
 import { CreateIdeaStage } from "../../../../../ts/enums/investment-idea.enum";
 import { useRouter } from "next/router";
+import { axios } from "../../../../../utils/axios";
+import { alertSuccess } from "../../../../../redux/actions/alertActions";
 
 export const StageSettingsAnalytics: React.FC = () => {
     const dispatch = useDispatch();
@@ -39,7 +38,17 @@ export const StageSettingsAnalytics: React.FC = () => {
         return null;
     }
     const handleSendToAnalyze = async () => {
-        await dispatch(sendToAnalytics({ ...params, selectedCompany }));
+        await axios
+            .post(`${process.env.API_URL}/api/admin/investment-idea/create`, {
+                ...params,
+                selectedCompany,
+            })
+            .then((response) => response.data);
+        dispatch(
+            alertSuccess(
+                "You successfully created an idea, when a smart analytical analyzes, you will receive an alert"
+            )
+        );
         await router.push("/admin/investment-ideas");
     };
     return (
@@ -52,7 +61,7 @@ export const StageSettingsAnalytics: React.FC = () => {
                     onChange={changeParams}
                 >
                     {OPTIONS_NEWS_ANALYZE.map((option) => (
-                        <MenuItem value={option.value}>
+                        <MenuItem key={option.value} value={option.value}>
                             {t(option.label)}
                         </MenuItem>
                     ))}

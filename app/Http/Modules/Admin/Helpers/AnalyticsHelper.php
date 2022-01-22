@@ -11,7 +11,7 @@ class AnalyticsHelper
 {
     public Company $company;
     public InvestmentIdea $idea;
-    public array $totalNews;
+    public array $totalNews = ['positive' => 0, 'negative' => 0];
 
     public function __construct(InvestmentIdea $idea)
     {
@@ -19,12 +19,12 @@ class AnalyticsHelper
         $this->company = $idea->company;
     }
 
-    public function prepareNews(array $ar_news)
+    public function prepareNews(string $data_news)
     {
+        $ar_news = json_decode($data_news, true);
         foreach ($ar_news as $news_item) {
-            $result = $news_item['predict'];
-            $label_key = self::LABELS_KEY[$result];
-            if (in_array($result, ['positive', 'negative']) && $news_item['probability'][$label_key] > 0.75) {
+            $result = $news_item['prediction'];
+            if (in_array($result, ['positive', 'negative']) && $news_item['sentiment_score'] > 0.75) {
                 $this->totalNews[$result]++;
             }
         }
@@ -60,9 +60,6 @@ class AnalyticsHelper
 
     public function analyticCHECKING_NEWS_MOOD(): bool
     {
-        if ($this->totalNews['positive'] > $this->totalNews['negative']) {
-            return true;
-        }
-        return false;
+        return $this->totalNews['positive'] > $this->totalNews['negative'];
     }
 }

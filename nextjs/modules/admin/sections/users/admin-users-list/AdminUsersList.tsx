@@ -1,26 +1,31 @@
 import React, { Fragment, useState } from "react";
-import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { IconButton, Pagination, Skeleton, Stack } from "@mui/material";
-import { fetchUsersByPage } from "../../../../redux/actions/admin/adminUsersActions";
 import { useDispatch } from "react-redux";
-import { RoleUserChip } from "../../../../components/simple/role-user-chip/RoleUserChip";
 import moment from "moment";
 import EditIcon from "@mui/icons-material/Edit";
 import { useRouter } from "next/router";
-import { EntityTable } from "../../../../components/simple/entity-table/EntityTable";
+import { useRootSelector } from "../../../../../hooks/useTypeSelector";
+import { fetchEntityList } from "../../../../../redux/actions/adminActions";
+import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
+import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
+import { RoleUserChip } from "../../../../../components/simple/role-user-chip/RoleUserChip";
 
-export const UsersList: React.FC = () => {
+export const AdminUsersList: React.FC = () => {
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
     const router = useRouter();
-    const { list, lastPage } = useRootSelector((state) => state.admin.users);
+    const { list, lastPage, loading } = useRootSelector(
+        (state) => state.admin.users
+    );
     const handleChangePage = (e: React.ChangeEvent, page) => {
         setPage(page);
-        dispatch(fetchUsersByPage(page));
+        dispatch(fetchEntityList(AdminEntity.User, page));
     };
     return (
         <Fragment>
-            {list.length ? (
+            {loading ? (
+                <Skeleton height={240} variant="rectangular" />
+            ) : (
                 <EntityTable
                     columns={[
                         "ID",
@@ -52,8 +57,6 @@ export const UsersList: React.FC = () => {
                         </IconButton>,
                     ])}
                 />
-            ) : (
-                <Skeleton height={240} variant="rectangular" />
             )}
             {lastPage ? (
                 <Stack alignItems="center">

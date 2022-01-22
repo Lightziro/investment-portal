@@ -1,9 +1,10 @@
-import { AlertStore, MainStore, StoreData } from "./store.types";
+import { AlertStore, StoreData } from "./store.types";
 import {
     initialCreateIdeaStore,
     initialViewStore,
 } from "../../init/redux/reducer.initial";
 import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
+import { MainStore } from "../../../redux/ts/types/main/main-store.types";
 
 export const initMainStore: MainStore = {
     news: null,
@@ -32,6 +33,9 @@ export const initialAdminStore: AdminStore = {
     investmentIdeas: {
         viewToday: null,
         commentsToday: null,
+        list: [],
+        lastPage: null,
+        loading: true,
     },
     smartAnalytic: {
         score: {
@@ -40,7 +44,7 @@ export const initialAdminStore: AdminStore = {
         newsForAnalyze: null,
     },
     articles: {
-        list: null,
+        list: [],
         lastPage: null,
         loading: true,
         dialog: false,

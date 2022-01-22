@@ -12,7 +12,7 @@ export const changeStageCreateIdea = (stage: CreateIdeaStage) => ({
     type: "SET_STAGE_CREATE_IDEA",
     stage,
 });
-export const sendToAnalytics = (form) => ({
-    type: "SEND_IDEA_TO_ANALYTICS",
-    form,
+export const fetchAdminIdeas = (page: number) => ({
+    type: "FETCH_ADMIN_IDEAS",
+    page,
 });

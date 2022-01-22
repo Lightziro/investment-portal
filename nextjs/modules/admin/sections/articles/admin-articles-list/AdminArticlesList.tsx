@@ -1,15 +1,16 @@
-import React, { useState, Fragment } from "react";
-import { useRootSelector } from "../../../../hooks/useTypeSelector";
+import React, { Fragment, useState } from "react";
 import { IconButton, Pagination, Skeleton, Stack } from "@mui/material";
 import moment from "moment";
 import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch } from "react-redux";
-import { fetchArticlesAdminList } from "../../../../redux/actions/admin/adminArticleActions";
-import { EntityTable } from "../../../../components/simple/entity-table/EntityTable";
-import { UserAvatar } from "../../../../components/simple/user-avatar/UserAvatar";
 import { useRouter } from "next/router";
+import { fetchEntityList } from "../../../../../redux/actions/adminActions";
+import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
+import { useRootSelector } from "../../../../../hooks/useTypeSelector";
+import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
+import { UserAvatar } from "../../../../../components/simple/user-avatar/UserAvatar";
 
-export const ArticleListAdmin: React.FC = () => {
+export const AdminArticlesList: React.FC = () => {
     const router = useRouter();
     const [page, setPage] = useState(0);
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export const ArticleListAdmin: React.FC = () => {
 
     const handleChangePage = (e: React.ChangeEvent, page) => {
         setPage(page);
-        dispatch(fetchArticlesAdminList(page));
+        dispatch(fetchEntityList(AdminEntity.Article, page));
     };
 
     return (

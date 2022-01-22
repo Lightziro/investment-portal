@@ -8,6 +8,10 @@ import nltk
 
 class TransformText(object):
     def __init__(self):
+        nltk.download('punkt')
+        nltk.download('stopwords')
+        nltk.download('wordnet')
+        nltk.download('omw-1.4')
         self.stopwords = stopwords.words('english')
         self.punc_translator = str.maketrans('', '', string.punctuation)
         self.lemmatizer = WordNetLemmatizer()

@@ -1,4 +1,5 @@
 import { NewsPrediction } from "../../ts/types/redux/store.types";
+import { AdminEntity } from "../ts/enums/admin/admin.enum";
 
 export const fetchInvestmentData = () => ({
     type: "FETCH_ADMIN_INVESTMENT_DATA",
@@ -13,4 +14,9 @@ export const retrainNewsClassifier = (trainData: NewsPrediction[]) => ({
 export const setArticleDialog = (state: boolean = true) => ({
     type: "SET_ARTICLE_DIALOG",
     state,
+});
+export const fetchEntityList = (entity: AdminEntity, page: number) => ({
+    type: "FETCH_ADMIN_ENTITY_LIST",
+    entity,
+    page,
 });

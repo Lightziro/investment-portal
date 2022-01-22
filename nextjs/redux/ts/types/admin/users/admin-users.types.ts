@@ -1,9 +1,7 @@
-import { ProfileView } from "../../../../../ts/types/redux/store.types";
+import { AdminSectionBase } from "../admin-store.types";
 
-export interface AdminUsers {
+export interface AdminUsers extends AdminSectionBase {
     stats: AdminUsersStats;
-    list: ProfileView[];
-    lastPage: number;
 }
 
 export interface AdminUsersStats {

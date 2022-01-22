@@ -17,7 +17,7 @@ class InvestmentIdeaAnalyze extends CustomModel
 {
     protected $table = 'investment_idea_analyze';
     protected $primaryKey = 'analyze_id';
-    protected $fillable = ['question_id', 'idea_id'];
+    protected $fillable = ['question_id', 'idea_id', 'result'];
 
     public function idea(): BelongsTo
     {

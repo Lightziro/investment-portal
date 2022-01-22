@@ -1,18 +1,25 @@
 import { AnyAction } from "redux";
-import {
-    initialAdminStore,
-    initMainStore,
-} from "../../ts/types/redux/store.init";
+import { initialAdminStore } from "../../ts/types/redux/store.init";
 import { replaceUpdateArticle, setEditArticle } from "../utils/article.utils";
 import createIdeaReducer from "./createIdeaReducer";
 import { AdminStore } from "../ts/types/admin/admin-store.types";
-import { setUsersList, setUsersStats } from "../utils/admin.utils";
+import {
+    getSectionByEntity,
+    setEntityList,
+    setUsersStats,
+} from "../utils/admin.utils";
 
 const adminReducer = (
     state: AdminStore = initialAdminStore,
     action: AnyAction
 ): AdminStore => {
     switch (action.type) {
+        case "FETCH_ADMIN_ENTITY_LIST":
+            const section = getSectionByEntity(action.entity);
+            return {
+                ...state,
+                [section]: { ...state[section], loading: true },
+            };
         case "SET_ADMIN_INVESTMENT_DATA":
             return { ...state, investmentIdeas: action.data };
         case "SET_USERS_STATS":
@@ -70,7 +77,18 @@ const adminReducer = (
         case "SET_ADMIN_USERS":
             return {
                 ...state,
-                users: setUsersList(state.users, action.data),
+                users: setEntityList(state.users, action.data),
+            };
+        case "FETCH_ADMIN_IDEAS":
+            return {
+                ...state,
+                investmentIdeas: { ...state, list: null },
+            };
+        case "SET_SECTION_LIST":
+            const { data } = action;
+            return {
+                ...state,
+                [action.section]: setEntityList(state[action.section], data),
             };
         default:
             return {

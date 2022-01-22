@@ -1,5 +1,3 @@
-import { IdeaComment } from "../redux/store.types";
-
 export interface Article {
     articleId: number;
     title: string;

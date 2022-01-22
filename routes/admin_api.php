@@ -22,15 +22,16 @@ Route::group(['prefix' => 'article', 'middleware' => ['auth:sanctum', BeforeChec
     Route::post('/create', [ArticleAdminController::class, 'createArticle']);
     Route::post('/update', [ArticleAdminController::class, 'updateArticle']);
     Route::get('/get-item/{id}', [ArticleAdminController::class, 'getItemArticle']);
-    Route::get('/get/{page}', [ArticleAdminController::class, 'getArticlesByPage']);
+    Route::get('/list/{page}', [ArticleAdminController::class, 'getArticlesByPage']);
     Route::post('/delete', [ArticleAdminController::class, 'deleteArticle'])->middleware(BeforeGetAuthUserId::class);
 });
 Route::group(['prefix' => 'investment-idea', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
     Route::get('/get/{id}', [InvestmentIdeaController::class, 'getItemIdea']);
     Route::post('/create', [CreateIdeaController::class, 'analyzeIdea']);
+    Route::get('/list/{page}', [InvestmentDataController::class, 'getIdeasByPage']);
 });
-Route::group(['prefix' => 'users', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
-    Route::get('/get/{page}', [UsersAdminController::class, 'getUsersByPage']);
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
+    Route::get('/list/{page}', [UsersAdminController::class, 'getUsersByPage']);
     Route::get('/get-stats', [UsersAdminController::class, 'getStats']);
     Route::put('/update', [UsersAdminController::class, 'updateUser']);
 });

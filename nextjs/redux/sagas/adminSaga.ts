@@ -3,6 +3,7 @@ import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { ResponseRetrainClassifier } from "../../ts/types/response/response.types";
 import { axios } from "../../utils/axios";
+import { getSectionByEntity } from "../utils/admin.utils";
 function* fetchInvestmentData(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -51,22 +52,10 @@ function* retrainClassifierNews(action: AnyAction): Generator {
         }
     } catch (e) {}
 }
-function* sendToAnalytics(action: AnyAction): Generator {
-    try {
-        const ideaData = yield axios
-            .post("/api/admin/investment-idea/create", action.form)
-            .then((response) => response.data);
-        yield put({
-            type: "SET_ALERT_SUCCESS",
-            message:
-                "You successfully created an idea, when a smart analytical analyzes, you will receive an alert",
-        });
-    } catch (e) {}
-}
 function* fetchUsersStats(action: AnyAction): Generator {
     try {
         const stats = yield axios
-            .get(`${process.env.API_URL}/api/admin/users/get-stats`)
+            .get(`${process.env.API_URL}/api/admin/user/get-stats`)
             .then((res) => res.data);
         yield put({
             type: "SET_USERS_STATS",
@@ -80,17 +69,60 @@ function* fetchUsers(action: AnyAction): Generator {
             .get(`${process.env.API_URL}/api/admin/users/get/${action.page}`)
             .then((res) => res.data);
         yield put({
-            type: "SET_ADMIN_USERS",
+            type: "SET_SECTION_LIST",
             data,
+            section: "users",
+        });
+    } catch (e) {}
+}
+function* fetchAdminIdeas(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(
+                `${process.env.API_URL}/api/admin/investment-idea/list/${action.page}`
+            )
+            .then((res) => res.data);
+        yield put({
+            type: "SET_SECTION_LIST",
+            data,
+            section: "investment-idea",
+        });
+    } catch (e) {}
+}
+function* fetchArticleForAdmin(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/admin/article/get/${action.page}`)
+            .then((response) => response.data);
+        yield put({
+            type: "SET_SECTION_LIST",
+            data,
+            section: "articles",
+        });
+    } catch (e) {}
+}
+function* fetchEntityList(action: AnyAction): Generator {
+    try {
+        const { entity, page } = action;
+        const section = getSectionByEntity(entity);
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/admin/${entity}/list/${page}`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_SECTION_LIST",
+            data,
+            section,
         });
     } catch (e) {}
 }
 export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_ADMIN_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("FETCH_COMPANIES", fetchCompanies);
+    yield takeLatest("FETCH_ARTICLE_ADMIN_LIST", fetchArticleForAdmin);
     yield takeLatest("FETCH_ANALYTIC_DATA", fetchAnalyticData);
     yield takeLatest("RETRAIN_NEWS_CLASSIFIER", retrainClassifierNews);
-    yield takeLatest("SEND_IDEA_TO_ANALYTICS", sendToAnalytics);
     yield takeLatest("FETCH_USERS_STATS", fetchUsersStats);
     yield takeLatest("FETCH_USERS_BY_PAGE", fetchUsers);
+    yield takeLatest("FETCH_ADMIN_IDEAS", fetchAdminIdeas);
+    yield takeLatest("FETCH_ADMIN_ENTITY_LIST", fetchEntityList);
 }
