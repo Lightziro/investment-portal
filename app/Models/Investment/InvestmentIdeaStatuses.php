@@ -19,4 +19,9 @@ class InvestmentIdeaStatuses extends CustomModel
     public $timestamps = null;
     protected $table = 'investment_idea_statuses';
     protected $primaryKey = 'status_id';
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

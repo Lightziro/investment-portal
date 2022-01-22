@@ -1,21 +1,14 @@
-import {
-    GetServerSidePropsContext,
-    GetStaticPaths,
-    GetStaticPropsContext,
-    NextPage,
-} from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import { MainLayout } from "../../../layouts/MainLayout";
 import { AdminLayout } from "../../../layouts/AdminLayout";
 import { useTranslation } from "react-i18next";
 import { ArticleForm } from "../../../modules/admin/components/article-form/ArticleForm";
-import { axios } from "../../../utils/axios";
 import { FormArticle } from "../../../ts/types/forms/form.types";
-import { useDispatch } from "react-redux";
-import { alertError } from "../../../redux/actions/alertActions";
-import { headersFile } from "../../../ts/consts/other/api";
-import { useRouter } from "next/router";
 import { getArticle } from "../../../utils/api/get-data";
-
+import { DtoEditArticle } from "../../../modules/admin/ts/types/response/admin-response-personal";
+interface UpdateArticle {
+    data: DtoEditArticle;
+}
 const UpdateArticle: NextPage = ({ data }) => {
     const { t } = useTranslation();
     // const dispatch = useDispatch();

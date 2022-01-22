@@ -21,10 +21,12 @@ class UsersAdminController extends Controller
         $users = User::query()->paginate(self::USERS_PAGE_SIZE);
         /** @var User $user_model */
         foreach ($users as $user_model) {
-            $user_data = $user_model->getProfile();
-            $ar_users[] = array_merge($user_data, [
-                'roleId' => $user_model->role_id,
-                'dateUpdate' => $user_model->updated_at->format('Y-m-d')
+            $ar_users[] = array_merge($user_model->only(['user_id', 'sex']), [
+                'full_name' => (string)$user_model,
+                'country' => $user_model->country ? $user_model->country->name : null,
+                'role' => (string)$user_model->role,
+                'created_at' => $user_model->created_at->format('Y-m-d'),
+                'updated_at' => $user_model->updated_at->format('Y-m-d')
             ]);
         }
         return response()->json(['items' => $ar_users ?? [], 'lastPage' => $users->lastPage()]);

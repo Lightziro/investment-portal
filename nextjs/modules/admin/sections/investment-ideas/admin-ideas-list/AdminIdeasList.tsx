@@ -3,13 +3,18 @@ import { useDispatch } from "react-redux";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import { fetchEntityList } from "../../../../../redux/actions/adminActions";
 import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
-import { Pagination, Skeleton, Stack } from "@mui/material";
+import { IconButton, Pagination, Skeleton, Stack } from "@mui/material";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import { InvestmentIdeaItemAdmin } from "../../../../../redux/ts/types/admin/investment-ideas/admin-ideas.types";
 import { IdeaStatus } from "../../../../../ts/enums/investment-idea.enum";
 import { getIdeaStatsText } from "../../../utils/entity-list";
+import PublishIcon from "@mui/icons-material/Publish";
+import { useRouter } from "next/router";
+import { IdeaActionItem } from "../idea-action-item/IdeaActionItem";
+import { DtoIdeaItem } from "../../../ts/types/response/admin-response-item.types";
 
 export const AdminIdeasList: React.FC = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const { loading, list, lastPage } = useRootSelector(
         (state) => state.admin.investmentIdeas
@@ -35,16 +40,18 @@ export const AdminIdeasList: React.FC = () => {
                         "Comments",
                         "Score",
                         "Status",
+                        "Action",
                     ]}
-                    row={list.map((idea: InvestmentIdeaItemAdmin) => [
-                        idea.ideaId,
-                        idea.company,
-                        getIdeaStatsText("view", idea),
+                    row={list.map((idea: DtoIdeaItem) => [
+                        idea.idea_id,
+                        idea.company.name,
+                        getIdeaStatsText("views", idea),
                         getIdeaStatsText("comments", idea),
                         !idea.score && idea.status === IdeaStatus.Created
                             ? "Wait analytic"
                             : idea.score,
                         idea.status,
+                        <IdeaActionItem idea={idea} />,
                     ])}
                 />
             )}

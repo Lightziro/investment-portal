@@ -9,6 +9,7 @@ import { fetchEntityList } from "../../../../../redux/actions/adminActions";
 import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import { RoleUserChip } from "../../../../../components/simple/role-user-chip/RoleUserChip";
+import { DtoUserItem } from "../../../ts/types/response/admin-response-item.types";
 
 export const AdminUsersList: React.FC = () => {
     const dispatch = useDispatch();
@@ -37,20 +38,20 @@ export const AdminUsersList: React.FC = () => {
                         "Date update",
                         "Edit",
                     ]}
-                    row={list.map((user) => [
-                        user.userId,
-                        user.fullName,
+                    row={list.map((user: DtoUserItem) => [
+                        user.user_id,
+                        user.full_name,
                         user.sex,
-                        <RoleUserChip role={user.roleName} />,
-                        user.country.name,
-                        moment(user.dateCreate).format("ll"),
-                        moment(user.dateUpdate).format("ll"),
+                        <RoleUserChip role={user.role} />,
+                        user.country,
+                        moment(user.created_at).format("ll"),
+                        moment(user.updated_at).format("ll"),
                         <IconButton
                             color="primary"
                             aria-label="upload picture"
                             component="span"
                             onClick={() =>
-                                router.push(`/admin/users/${user.userId}`)
+                                router.push(`/admin/users/${user.user_id}`)
                             }
                         >
                             <EditIcon />

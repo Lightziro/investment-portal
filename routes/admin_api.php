@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Modules\Admin\Controllers\ArticleAdminController;
+use App\Http\Modules\Admin\Controllers\CompanyAdminController;
 use App\Http\Modules\Admin\Controllers\CreateIdeaController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\InvestmentIdeaController;
@@ -26,7 +27,7 @@ Route::group(['prefix' => 'article', 'middleware' => ['auth:sanctum', BeforeChec
     Route::post('/delete', [ArticleAdminController::class, 'deleteArticle'])->middleware(BeforeGetAuthUserId::class);
 });
 Route::group(['prefix' => 'investment-idea', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
-    Route::get('/get/{id}', [InvestmentIdeaController::class, 'getItemIdea']);
+    Route::get('/get-item/{id}', [InvestmentIdeaController::class, 'getItemIdea']);
     Route::post('/create', [CreateIdeaController::class, 'analyzeIdea']);
     Route::get('/list/{page}', [InvestmentDataController::class, 'getIdeasByPage']);
 });
@@ -34,4 +35,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', BeforeCheckRo
     Route::get('/list/{page}', [UsersAdminController::class, 'getUsersByPage']);
     Route::get('/get-stats', [UsersAdminController::class, 'getStats']);
     Route::put('/update', [UsersAdminController::class, 'updateUser']);
+});
+
+Route::group(['prefix' => 'company', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
+   Route::get('/list/{page}', [CompanyAdminController::class, 'getCompaniesByPage']);
 });

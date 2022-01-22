@@ -74,6 +74,13 @@ export const MENU_ADMIN = [
         text: "Articles",
         url: "/admin/articles",
     },
+    {
+        logo: {
+            name: "carbon:location-company",
+        },
+        text: "Companies",
+        url: "/admin/companies",
+    },
 ];
 export const OPTIONS_NEWS_ANALYZE = [
     {

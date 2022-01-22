@@ -76,9 +76,15 @@ class ArticleAdminController extends Controller
     {
         Paginator::currentPageResolver(fn() => $page);
         $articles = Article::query()->paginate(self::ARTICLE_PAGE_SIZE);
+        /** @var Article $article_model */
         foreach ($articles as $article_model) {
-            $ar_articles[] = array_merge($article_model->getFrontend(), [
-                'content' => $article_model->content
+            $author_model = $article_model->author;
+            $ar_articles[] = array_merge($article_model->only(['article_id', 'content', 'title']), [
+                'author' => [
+                    'full_name' => (string)$author_model,
+                    'avatar_path' => $author_model->avatar_path
+                ],
+                'created_at' => $article_model->created_at->format('Y-m-d'),
             ]);
         }
         return ['items' => $ar_articles ?? [], 'lastPage' => $articles->lastPage()];

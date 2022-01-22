@@ -9,6 +9,7 @@ import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import { UserAvatar } from "../../../../../components/simple/user-avatar/UserAvatar";
+import { DtoArticleItem } from "../../../ts/types/response/admin-response-item.types";
 
 export const AdminArticlesList: React.FC = () => {
     const router = useRouter();
@@ -30,16 +31,16 @@ export const AdminArticlesList: React.FC = () => {
             ) : (
                 <EntityTable
                     columns={["ID", "Title", "Author", "Date create", "Edit"]}
-                    row={list.map((article) => [
-                        article.articleId,
+                    row={list.map((article: DtoArticleItem) => [
+                        article.article_id,
                         article.title,
                         <Stack direction="row" alignItems="center">
-                            <UserAvatar avatar={article.author.avatar} />
+                            <UserAvatar avatar={article.author.avatar_path} />
                             <span className="ms-2">
-                                {article.author.fullName}
+                                {article.author.full_name}
                             </span>
                         </Stack>,
-                        moment(article.dateCreate).format("D MMM"),
+                        moment(article.created_at).format("D MMM"),
                         <IconButton
                             color="primary"
                             aria-label="upload picture"
@@ -48,7 +49,7 @@ export const AdminArticlesList: React.FC = () => {
                             <EditIcon
                                 onClick={() =>
                                     router.push(
-                                        `/admin/articles/${article.articleId}`
+                                        `/admin/articles/${article.article_id}`
                                     )
                                 }
                             />

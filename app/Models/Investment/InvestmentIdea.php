@@ -131,7 +131,7 @@ class InvestmentIdea extends CustomModel
         ];
     }
 
-    public function getFrontendData(): array
+    public function getBaseData(): array
     {
         return [
             'ideaId' => $this->idea_id,

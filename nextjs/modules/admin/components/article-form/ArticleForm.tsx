@@ -7,8 +7,9 @@ import { initialArticleForm } from "../../../../ts/init/entity/article.init";
 import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
 import { getPhoto, settingsSunEditor } from "../../../../utils/other";
+import { DtoEditArticle } from "../../ts/types/response/admin-response-personal";
 interface ArticleForm {
-    article?: any;
+    article?: DtoEditArticle;
     callback: (form) => void;
 }
 const SunEditor = dynamic(import("suneditor-react"), { ssr: false });

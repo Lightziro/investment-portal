@@ -38,10 +38,17 @@ class InvestmentDataController extends Controller
     public function getIdeasByPage(int $page): JsonResponse
     {
         Paginator::currentPageResolver(fn() => $page);
-        /** @var InvestmentIdea[]|LengthAwarePaginator $ideas */
         $ideas = InvestmentIdea::query()->paginate(self::IDEAS_PAGE_SIZE);
+        /** @var InvestmentIdea $idea_model */
         foreach ($ideas as $idea_model) {
-            $ar_items[] = array_merge($idea_model->getFrontendData(), []);
+            $idea_company = $idea_model->company;
+            $ar_items[] = array_merge($idea_model->only(['idea_id']), [
+                'company' => $idea_company->only(['name', 'logo']),
+                'views' => $idea_model->views->count(),
+                'comments' => $idea_model->comments->count(),
+                'status' => (string)$idea_model->status,
+                'score' => $idea_model->getScoreAnalyze(),
+            ]);
 //            $ar_articles[] = array_merge($idea_model->getFrontend(), [
 //                'content' => $article_model->content
 //            ]);

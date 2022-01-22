@@ -1,15 +1,15 @@
 import {
     CreateIdea,
     NewsPrediction,
-    ProfileView,
 } from "../../../../ts/types/redux/store.types";
 import { AdminUsers } from "./users/admin-users.types";
 import { AdminArticle } from "./articles/admin-articles.types";
+import { AdminIdeas } from "./investment-ideas/admin-ideas.types";
 import {
-    AdminIdeas,
-    InvestmentIdeaItemAdmin,
-} from "./investment-ideas/admin-ideas.types";
-import { Article } from "../../../../ts/types/entity/article.types";
+    DtoArticleItem,
+    DtoIdeaItem,
+    DtoUserItem,
+} from "../../../../modules/admin/ts/types/response/admin-response-item.types";
 
 export interface AdminStore {
     investmentIdeas: AdminIdeas;
@@ -32,5 +32,5 @@ export interface AdminSectionBase {
     lastPage: number;
     loading: boolean;
 }
-export type AdminItems = ProfileView[] | Article[] | InvestmentIdeaItemAdmin[];
+export type AdminItems = DtoArticleItem[] | DtoIdeaItem[] | DtoUserItem[];
 export type AdminSection = AdminUsers | AdminIdeas | AdminArticle;
