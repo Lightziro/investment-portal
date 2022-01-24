@@ -59,6 +59,11 @@ export const initialAdminStore: AdminStore = {
         lastPage: null,
         loading: true,
     },
+    companies: {
+        list: [],
+        lastPage: null,
+        loading: true,
+    },
 };
 
 export const initStore: StoreData = {

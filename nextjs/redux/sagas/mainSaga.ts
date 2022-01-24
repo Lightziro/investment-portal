@@ -18,19 +18,16 @@ function* fetchInvestmentData(action: AnyAction): Generator {
 }
 function* viewNotice(action: AnyAction): Generator {
     try {
-        const result = yield axios
-            .post("/api/user/notice/view", { id: action.id })
+        yield axios
+            .post(`${process.env.API_URL}/api/user/notice/view`, {
+                id: action.id,
+            })
             .then((response) => response.data);
         yield put({
             type: "SET_NOTICE_VIEW",
             noticeId: action.id,
         });
-    } catch (error) {
-        yield put({
-            type: "SET_ERROR_NOTICE_VIEW",
-            noticeId: action.id,
-        });
-    }
+    } catch (error) {}
 }
 function* registerUser(action: AnyAction): Generator {
     try {

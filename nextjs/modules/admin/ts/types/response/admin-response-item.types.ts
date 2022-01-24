@@ -30,3 +30,11 @@ export interface DtoArticleItem {
     };
     created_at: string;
 }
+export interface DtoCompanyItem {
+    company_id: number;
+    name: string;
+    ticker: string;
+    date_ipo: string;
+    logo: string;
+    activity: string;
+}

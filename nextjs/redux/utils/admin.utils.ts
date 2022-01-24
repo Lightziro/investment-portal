@@ -3,7 +3,6 @@ import {
     AdminUsers,
     AdminUsersStats,
 } from "../ts/types/admin/users/admin-users.types";
-import { ProfileView } from "../../ts/types/redux/store.types";
 import {
     AdminEntity,
     AdminSection as SectionEnum,
@@ -30,5 +29,7 @@ export const getSectionByEntity = (entity: AdminEntity): SectionEnum => {
             return SectionEnum.Articles;
         case AdminEntity.InvestmentIdea:
             return SectionEnum.InvestmentIdeas;
+        case AdminEntity.Company:
+            return SectionEnum.Companies;
     }
 };

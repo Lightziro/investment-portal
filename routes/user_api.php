@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserLoginController::class, 'login'])->middleware(BeforeClearAuthUser::class);
 Route::get('/authentication', [UserActionController::class, 'authentication'])->middleware('auth:sanctum');
-Route::post('/notice/view', [UserController::class, 'viewNotice']);
+Route::post('/notice/view', [UserController::class, 'viewNotice'])->middleware('auth:sanctum');
 Route::post('/register', [UserLoginController::class, 'register'])->middleware(BeforeClearAuthUser::class);
 Route::get('/profile/{id}', [UserController::class, 'getProfile']);
 Route::post('/profile/update', [ProfileController::class, 'updateProfileData'])->middleware(BeforeGetAuthUserId::class);

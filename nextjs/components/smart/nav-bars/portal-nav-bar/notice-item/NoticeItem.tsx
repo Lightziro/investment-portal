@@ -15,7 +15,7 @@ export const NoticeItem: React.FC<NoticeItem> = ({ notice, onViewNotice }) => {
             </Typography>
             <div
                 className={`${classes.noticeHeader} ${
-                    !notice.viewed && classes.notView
+                    !notice.viewed ? classes.notView : ""
                 }`}
             >
                 <span className="notice-item-title">{notice.title}</span>

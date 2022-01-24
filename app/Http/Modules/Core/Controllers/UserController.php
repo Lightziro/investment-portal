@@ -26,14 +26,15 @@ class UserController extends Controller
 
     public function viewNotice(Request $request): JsonResponse
     {
-        $notice_model = UserNotices::query()->find($request->all()['id']);
-        if ($notice_model instanceof UserNotices) {
-            $notice_model->viewed = true;
-            if ($notice_model->save()) {
-                return response()->json(['updated' => true]);
-            }
+        $notice_id = $request->all()['id'];
+        /** @var UserNotices $notice_model */
+        $notice_model = UserNotices::query()->find($notice_id);
+        if (!$notice_model) {
+            return response()->json(['message' => 'Not found notice'], 404);
         }
-        return response()->json(['updated' => false], 400);
+        $notice_model->viewed = true;
+        $notice_model->save();
+        return response()->json([]);
     }
 
     public function getUser()

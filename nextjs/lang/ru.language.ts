@@ -105,4 +105,5 @@ export const ruLanguage = {
     "Notify subscribers by email": "Уведомить подписчиков по почте",
     "Short position": "Короткая позиция",
     "Long position": "Длинная позиция",
+    Companies: "Компании",
 };

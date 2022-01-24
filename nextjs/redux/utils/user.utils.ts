@@ -1,4 +1,3 @@
-import { MainStore } from "../ts/types/main/main-store.types";
 import { UserStore } from "../../ts/types/redux/store.types";
 
 export const setNoticeView = (

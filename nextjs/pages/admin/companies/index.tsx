@@ -7,26 +7,19 @@ import { useDispatch } from "react-redux";
 import { HeaderSection } from "../../../modules/admin/components/header-section/HeaderSection";
 import { fetchEntityList } from "../../../redux/actions/adminActions";
 import { AdminEntity } from "../../../redux/ts/enums/admin/admin.enum";
-import { AdminArticlesList } from "../../../modules/admin/sections/articles/admin-articles-list/AdminArticlesList";
+import { AdminCompaniesList } from "../../../modules/admin/sections/companies/admin-companies-list/AdminCompaniesList";
 
 const Companies = () => {
-    // TODO: Create companies crud
     const { t } = useTranslation();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchEntityList(AdminEntity.Company, 0));
     }, []);
     return (
-        <MainLayout title={t("Investment ideas")}>
+        <MainLayout title={t("Companies")}>
             <AdminLayout>
                 <Container maxWidth="xl">
-                    <HeaderSection
-                        urlRedirect="/admin/articles/create-article"
-                        textButton="Create article"
-                        previewText="Stats articles"
-                    />
-                    <Divider />
-                    <AdminArticlesList />
+                    <AdminCompaniesList />
                 </Container>
             </AdminLayout>
         </MainLayout>

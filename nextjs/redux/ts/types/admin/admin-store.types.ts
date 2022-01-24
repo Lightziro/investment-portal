@@ -7,9 +7,11 @@ import { AdminArticle } from "./articles/admin-articles.types";
 import { AdminIdeas } from "./investment-ideas/admin-ideas.types";
 import {
     DtoArticleItem,
+    DtoCompanyItem,
     DtoIdeaItem,
     DtoUserItem,
 } from "../../../../modules/admin/ts/types/response/admin-response-item.types";
+import { AdminCompanies } from "./companies/admin-companies.types";
 
 export interface AdminStore {
     investmentIdeas: AdminIdeas;
@@ -22,6 +24,7 @@ export interface AdminStore {
     articles: AdminArticle;
     createIdea: CreateIdea;
     users: AdminUsers;
+    companies: AdminCompanies;
 }
 export interface DtoItems {
     items: AdminItems;
@@ -32,5 +35,13 @@ export interface AdminSectionBase {
     lastPage: number;
     loading: boolean;
 }
-export type AdminItems = DtoArticleItem[] | DtoIdeaItem[] | DtoUserItem[];
-export type AdminSection = AdminUsers | AdminIdeas | AdminArticle;
+export type AdminItems =
+    | DtoArticleItem[]
+    | DtoIdeaItem[]
+    | DtoUserItem[]
+    | DtoCompanyItem[];
+export type AdminSection =
+    | AdminUsers
+    | AdminIdeas
+    | AdminArticle
+    | AdminCompanies;

@@ -12,9 +12,6 @@ const mainReducer = (
                 ...state,
                 ...action.data,
             };
-        // TODO: Переместить в user reducer
-        // case "SET_NOTICE_VIEW":
-        //     return setNoticeView(state, action.noticeId);
         case "SET_COUNTRIES":
             return {
                 ...state,
