@@ -23,9 +23,11 @@ Route::group(['prefix' => 'init'], function () {
 
 Route::group(['prefix' => 'idea'], function () {
     Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
-    Route::get('/get/{id}', [ViewController::class, 'getViewIdea'])->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
+    Route::get('/all-key', [InitialDataController::class, 'getIdeasKey']);
+    Route::get('/get/{id}', [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
 });
 Route::group(['prefix' => 'article'], function () {
+    Route::get('/all-key', [InitialDataController::class, 'getArticlesKey']);
     Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
     Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware('auth:sanctum');
 });

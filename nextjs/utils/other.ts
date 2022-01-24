@@ -1,22 +1,6 @@
-import {
-    align,
-    font,
-    fontColor,
-    fontSize,
-    formatBlock,
-    hiliteColor,
-    horizontalRule,
-    lineHeight,
-    list,
-    paragraphStyle,
-    table,
-    template,
-    textStyle,
-    image,
-    link,
-} from "suneditor/src/plugins";
+import SetOptions from "suneditor-react/dist/types/SetOptions";
 
-export const settingsSunEditor = {
+export const settingsSunEditor: SetOptions = {
     showPathLabel: false,
     buttonList: [
         ["undo", "redo"],

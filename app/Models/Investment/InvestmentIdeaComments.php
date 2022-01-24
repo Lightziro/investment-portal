@@ -29,13 +29,10 @@ class InvestmentIdeaComments extends CustomModel
     public function getFrontendComment(): array
     {
         $author_model = $this->user;
-        return [
-            'commentId' => $this->comment_id,
-            'userId' => $author_model->user_id,
-            'date' => $this->created_at->format('Y-m-d H:i:s'),
-            'fullNameAuthor' => $author_model->getFullName(),
-            'comment' => $this->comment,
-            'avatar' => $author_model->avatar_path
-        ];
+        return array_merge($this->only('user_id', 'comment_id', 'comment'), [
+            'full_name' => (string)$author_model,
+            'avatar_path' => $author_model->avatar_path,
+            'created_at' => $this->created_at
+        ]);
     }
 }

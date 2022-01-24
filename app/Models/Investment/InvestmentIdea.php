@@ -4,14 +4,15 @@ namespace App\Models\Investment;
 
 use App\Custom\CustomCollection;
 use App\Custom\CustomModel;
+use App\Custom\Query\CustomQueryBuilder;
 use App\Custom\Relations\CustomHasMany;
 use App\Models\Other\Company;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use JetBrains\PhpStorm\Pure;
 
 /** Модель инвестиционной идеи
  * @property int idea_id
@@ -38,6 +39,7 @@ class InvestmentIdea extends CustomModel
 {
     protected $table = 'investment_ideas';
     protected $primaryKey = 'idea_id';
+    protected $fillable = ['price_buy', 'description', 'price_sell', 'is_short', 'status_id', 'date_end'];
 
     public function getCommentsFrontend(): array
     {
@@ -131,15 +133,11 @@ class InvestmentIdea extends CustomModel
         ];
     }
 
-    public function getBaseData(): array
+    public static function mostPopular(): Builder|CustomQueryBuilder
     {
-        return [
-            'ideaId' => $this->idea_id,
-            'company' => (string)$this->company,
-            'status' => $this->status->name,
-            'score' => $this->getScoreAnalyze(),
-            'view' => $this->views->count(),
-            'comments' => $this->comments->count(),
-        ];
+        return self::query()
+            ->withCount('views')
+            ->orderBy('views_count', 'desc')
+            ->with('status', callback: fn($query) => $query->whereNotIn('name', [InvestmentIdeaStatuses::STATUS_FAILED]));
     }
 }

@@ -28,9 +28,8 @@ export const EditUser = () => {
         }
     }, [id]);
     const handleSubmit = async (formData) => {
-        console.log("DATA SET!");
         await axios
-            .put(`${process.env.API_URL}/api/admin/users/update`, {
+            .put(`${process.env.API_URL}/api/admin/user/update`, {
                 ...formData,
                 userId: id,
             })

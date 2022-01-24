@@ -17,9 +17,9 @@ class ViewController extends Controller
     public function getViewArticle(int $id): JsonResponse
     {
         /** @var Article $article_model */
-        $article_model = Article::query()->where(['article_id' => $id])->first();
+        $article_model = Article::query()->find($id);
         if (!$article_model) {
-            return response()->json(['message' => 'Not found article'], 400);
+            return response()->json(['message' => 'Not found article'], 404);
         }
         $data = $article_model->getView();
 
@@ -29,7 +29,7 @@ class ViewController extends Controller
     public function getViewProfile(int $id): JsonResponse
     {
         /** @var User $user */
-        $user = User::query()->where(['user_id' => $id])->first();
+        $user = User::query()->find($id);
         if (!$user) {
             return response()->json(['message' => 'Not found user'], 404);
         }
@@ -40,6 +40,9 @@ class ViewController extends Controller
     {
         /** @var InvestmentIdea $idea_model */
         $idea_model = InvestmentIdea::query()->find($id);
+        if (!$idea_model) {
+            return response()->json(['message' => 'Not found idea'], 404);
+        }
         $market = new StockMarket();
         $idea_company_model = $idea_model->company;
         if ($ar_data = $this->getCacheIdeaData($idea_model->idea_id, $idea_company_model->ticker)) {
@@ -47,7 +50,6 @@ class ViewController extends Controller
         }
 
         $quote_info = $market->getLastQuote($idea_company_model->ticker);
-        $author_model = $idea_model->author;
         $company_stats = $market->getFinancialsStats($idea_company_model->ticker);
 
         if ($company_stats instanceof BasicFinancials) {

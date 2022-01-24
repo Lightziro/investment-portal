@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Avatar, Typography, Divider, Grid, Stack } from "@mui/material";
 import Link from "next/link";
 import moment from "moment";
@@ -13,9 +13,9 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
     moment.locale(i18n.language);
     return (
         <Stack sx={{ my: 1 }} direction="row">
-            <Link href={`/profile/[id]`} as={`/profile/${comment.userId}`}>
+            <Link href={`/profile/[id]`} as={`/profile/${comment.user_id}`}>
                 <Avatar
-                    src={`${process.env.API_URL}/storage/${comment.avatar}`}
+                    src={`${process.env.API_URL}/storage/${comment.avatar_path}`}
                     variant="rounded"
                 />
             </Link>
@@ -25,13 +25,13 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
                         <Link
                             passHref
                             href={`/profile/[id]`}
-                            as={`/profile/${comment.userId}`}
+                            as={`/profile/${comment.user_id}`}
                         >
-                            <span>{comment.fullNameAuthor}</span>
+                            <span>{comment.full_name}</span>
                         </Link>
                     </span>
                     <span className={classes.dateComment}>
-                        {moment(comment.date).fromNow()}
+                        {moment(comment.created_at).fromNow()}
                     </span>
                 </div>
                 <Divider />

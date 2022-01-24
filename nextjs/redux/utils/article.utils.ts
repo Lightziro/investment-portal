@@ -1,5 +1,5 @@
-import { AdminArticle } from "../../ts/types/redux/store.types";
-import { Article } from "../../ts/types/entity/article.types";
+import { AdminArticle } from "../ts/types/admin/articles/admin-articles.types";
+import { DtoArticleItem } from "../../modules/admin/ts/types/response/admin-response-item.types";
 
 export const setEditArticle = (
     store: AdminArticle,
@@ -7,15 +7,15 @@ export const setEditArticle = (
 ): AdminArticle => ({
     ...store,
     dialog: true,
-    edit: store.list.find((article) => article.articleId === editId),
+    edit: store.list.find((article) => article.article_id === editId),
 });
 export const replaceUpdateArticle = (
     store: AdminArticle,
-    updateArticle: Article
+    updateArticle: DtoArticleItem // TODO: FIX TYPE
 ): AdminArticle => ({
     ...store,
     list: store.list.map((item) => {
-        if (item.articleId === updateArticle.articleId) {
+        if (item.article_id === updateArticle.article_id) {
             item = updateArticle;
         }
         return item;

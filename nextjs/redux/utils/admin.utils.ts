@@ -16,18 +16,7 @@ export const setUsersStats = (
     ...state,
     stats: userStats,
 });
-export const setUsersList = (
-    state: AdminUsers,
-    users: { items: ProfileView[]; lastPage: number }
-): AdminUsers => ({
-    ...state,
-    list: users.items,
-    lastPage: users.lastPage,
-});
-export const setEntityList = (
-    state: AdminSection,
-    data: DtoItems
-): AdminSection => ({
+export const setEntityList = (state: AdminSection, data: DtoItems): any => ({
     ...state,
     list: data.items,
     lastPage: data.lastPage,

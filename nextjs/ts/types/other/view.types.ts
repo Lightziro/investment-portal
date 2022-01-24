@@ -5,10 +5,10 @@ export type EntityName = "article" | "idea" | "profile";
 export type typeView = InvestmentIdeaView | ArticleView;
 
 export interface Comment {
-    commentId: number;
-    userId: number;
-    date: string;
-    fullNameAuthor: string;
+    comment_id: number;
+    user_id: number;
+    created_at: string;
+    full_name: string;
     comment: string;
-    avatar: string;
+    avatar_path: string;
 }

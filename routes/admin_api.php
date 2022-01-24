@@ -30,6 +30,7 @@ Route::group(['prefix' => 'investment-idea', 'middleware' => ['auth:sanctum', Be
     Route::get('/get-item/{id}', [InvestmentIdeaController::class, 'getItemIdea']);
     Route::post('/create', [CreateIdeaController::class, 'analyzeIdea']);
     Route::get('/list/{page}', [InvestmentDataController::class, 'getIdeasByPage']);
+    Route::post('/publish', [CreateIdeaController::class, 'publishIdea']);
 });
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
     Route::get('/list/{page}', [UsersAdminController::class, 'getUsersByPage']);
@@ -38,5 +39,5 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', BeforeCheckRo
 });
 
 Route::group(['prefix' => 'company', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
-   Route::get('/list/{page}', [CompanyAdminController::class, 'getCompaniesByPage']);
+    Route::get('/list/{page}', [CompanyAdminController::class, 'getCompaniesByPage']);
 });

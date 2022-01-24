@@ -29,9 +29,7 @@ class InvestmentController extends BaseController
         foreach ($articles as $article_model) {
             $articles_simple[] = $article_model->getFrontend();
         }
-        $investment_ideas = InvestmentIdea::query()
-            ->with('status', callback: fn($query) => $query->whereNotIn('name', [InvestmentIdeaStatuses::STATUS_FAILED]))
-            ->orderBy('possible_profit', 'DESC')->limit(5)->get();
+        $investment_ideas = InvestmentIdea::mostPopular()->limit(5)->get();
 
 
         /** @var InvestmentIdea $idea_model */

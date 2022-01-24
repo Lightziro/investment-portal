@@ -40,7 +40,7 @@ export const RegisterPage: React.FC = () => {
                         handleSubmit,
                     }: FormikProps<FormRegister>) => (
                         <form onSubmit={handleSubmit}>
-                            <Row className="my-3" container spacing={2}>
+                            <Row className="my-3">
                                 <Col xs={12} sm={6}>
                                     <TextField
                                         autoComplete="given-name"

@@ -1,35 +1,31 @@
-import { News } from "../../ts/types/entity/stock-market.types";
-import { DtoPortal } from "../../ts/types/response/response.types";
-import { GetServerSidePropsContext } from "next";
-import { AxiosRequestConfig } from "axios";
+import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
 import { axios } from "../axios";
-import { initialViewStore } from "../../ts/init/redux/reducer.initial";
 import { AdminEntity } from "../../redux/ts/enums/admin/admin.enum";
 
-export const getListNews = async (): News[] => {
+export const getListNews = async () => {
     const response = await fetch(
         `${process.env.API_URL_DOCKER}/api/investment-data/news`
     );
     return await response.json();
 };
-export const getBasePortal = async (): DtoPortal => {
+export const getBasePortal = async () => {
     const response = await fetch(
         `${process.env.API_URL_DOCKER}/api/investment-data/get`
     );
     return await response.json();
 };
-export const getViewEntity = async (
-    entityName,
-    ctx: GetServerSidePropsContext
-) => {
-    const config: AxiosRequestConfig = { headers: ctx.req.headers };
+export const getViewEntity = async (entityName, ctx: GetStaticPropsContext) => {
+    // const config: any = { headers: ctx.req.headers };
     return await axios
         .get(
-            `${process.env.API_URL_DOCKER}/api/${entityName}/get/${ctx.query.id}`,
-            config
+            `${process.env.API_URL_DOCKER}/api/${entityName}/get/${ctx.params.id}`
+            // config
         )
         .then((res) => res.data)
-        .catch((e) => initialViewStore[entityName]);
+        .catch((e) => {
+            console.log(e);
+            return null;
+        });
 };
 export const getRoles = async () =>
     await axios
@@ -46,7 +42,7 @@ export const getEntityAdmin = async (
     entity: AdminEntity,
     ctx: GetServerSidePropsContext
 ) => {
-    const config: AxiosRequestConfig = { headers: ctx.req.headers };
+    const config: any = { headers: ctx.req.headers };
     return await axios
         .get(
             `${process.env.API_URL_DOCKER}/api/admin/${entity}/get-item/${id}`,

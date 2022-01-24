@@ -58,4 +58,23 @@ class CreateIdeaController extends Controller
             Log::error('Error create idea', [$e->getMessage(), $e->getFile(), $e->getLine()]);
         }
     }
+
+    public function publishIdea(Request $request): JsonResponse
+    {
+        $form = $request->post();
+        /** @var $idea InvestmentIdea */
+        if (!$idea = InvestmentIdea::query()->find($form['idea_id'])) {
+            return response()->json(['message' => 'Not found idea'], 404);
+        }
+        try {
+            /** @var InvestmentIdeaStatuses $status */
+            $status = InvestmentIdeaStatuses::query()->where(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED])->first();
+            $idea->update(array_merge($request->only(['price_buy', 'price_sell', 'date_end', 'is_short', 'description']), [
+                'status_id' => $status->status_id,
+            ]));
+            return response()->json(['id' => $idea->idea_id]);
+        } catch (Throwable $e) {
+            return response()->json([], 400);
+        }
+    }
 }

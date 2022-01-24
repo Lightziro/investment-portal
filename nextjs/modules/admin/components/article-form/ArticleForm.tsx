@@ -57,7 +57,7 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                     </Row>
                     <Form.Group className="mt-3">
                         <Form.Check
-                            value={values.sendNotice}
+                            value={Number(values.sendNotice)}
                             name="sendNotice"
                             onChange={handleChange}
                             type="checkbox"
@@ -78,18 +78,14 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                             onChange={(e) =>
                                 setFieldValue(
                                     "preview",
-                                    e.currentTarget.files[0]
+                                    (e.target as HTMLInputElement).files[0]
                                 )
                             }
                             // value={values.preview}
                             size="sm"
                         />
                         {values.preview && (
-                            <img
-                                width="194"
-                                src={getPhoto(values.preview)}
-                                alt={article.title}
-                            />
+                            <img width="194" src={getPhoto(values.preview)} />
                         )}
                     </Form.Group>
                     <Button variant="primary" type="submit">

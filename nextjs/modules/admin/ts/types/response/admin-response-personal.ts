@@ -10,6 +10,7 @@ export interface DtoPersonalIdea {
     comments: number;
     price_buy: number;
     price_sell: number;
+    is_short: boolean;
     company: {
         name: string;
         logo: string;

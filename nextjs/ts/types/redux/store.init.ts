@@ -57,6 +57,7 @@ export const initialAdminStore: AdminStore = {
         },
         list: [],
         lastPage: null,
+        loading: true,
     },
 };
 

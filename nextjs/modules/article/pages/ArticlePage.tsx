@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, Divider, Grid, Paper } from "@mui/material";
 import { ArticleHeader } from "../components/article-header/ArticleHeader";
-import { createArticleComment } from "../../../redux/actions/articleArtions";
 import { CommentsList } from "../../../components/smart/comments-list/CommentsList";
 import { NewsList } from "../../../components/ordinary/news-list/NewsList";
 import { ArticleContent } from "../components/article-content/ArticleContent";
@@ -9,10 +8,7 @@ import { AboutAuthor } from "../components/about-author/AboutAuthor";
 import { ArticleView } from "../../../ts/types/entity/article.types";
 import { News } from "../../../ts/types/entity/stock-market.types";
 import { useDispatch } from "react-redux";
-import {
-    createEntityComment,
-    setViewEntity,
-} from "../../../redux/actions/viewActions";
+import { setViewEntity } from "../../../redux/actions/viewActions";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
 interface ArticlePage {
     article: ArticleView;

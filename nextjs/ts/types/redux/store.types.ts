@@ -12,6 +12,7 @@ import { ArticleView } from "../entity/article.types";
 import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
 import { MainStore } from "../../../redux/ts/types/main/main-store.types";
 import { CreateIdeaStage } from "../../enums/investment-idea.enum";
+import { Comment } from "../other/view.types";
 
 export interface OtherData {
     countries: CountryItem[];
@@ -30,7 +31,7 @@ export interface ProfileView {
     sex: string;
     avatar: string;
     dateCreate: string;
-    dateUpdate: string;
+    dateUpdate?: string;
 }
 export interface AlertStore {
     message: string;

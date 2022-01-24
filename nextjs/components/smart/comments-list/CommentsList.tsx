@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Card, Divider, Stack, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -49,7 +49,7 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
                 {comments.length ? (
                     comments.map((comment, i) => (
                         <CommentItem
-                            key={comment.commentId}
+                            key={comment.comment_id}
                             comment={comment}
                         />
                     ))

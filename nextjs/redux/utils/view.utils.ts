@@ -5,10 +5,7 @@ import { initialIdeaView } from "../../ts/init/entity/idea.init";
 import { initialProfile } from "../../ts/init/entity/user.init";
 import { Comment, typeView } from "../../ts/types/other/view.types";
 
-export const addCommentEntity = (
-    state: typeView,
-    comment: Comment
-): typeView => {
+export const addCommentEntity = (state: any, comment: Comment): typeView => {
     const newState = {
         ...state,
         comments: [comment, ...state.comments],

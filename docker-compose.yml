@@ -87,7 +87,7 @@ services:
             - "3000:3000"
         volumes:
             - ./:/var/www/
-        command: npm run dev-client
+#        command: npm run production
 
 networks:
     laravel:

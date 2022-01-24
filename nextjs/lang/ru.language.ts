@@ -101,4 +101,8 @@ export const ruLanguage = {
     Creating: "Создание",
     "Creating idea": "Создание инвестиционной идеи",
     "Select company": "Выберите компанию",
+    "Publish idea": "Опубликовать идею",
+    "Notify subscribers by email": "Уведомить подписчиков по почте",
+    "Short position": "Короткая позиция",
+    "Long position": "Длинная позиция",
 };

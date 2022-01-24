@@ -14,7 +14,7 @@ use JetBrains\PhpStorm\Pure;
  * @property Article article
  * @property User user
  * @property int user_id
- * @property string text
+ * @property string comment
  * @property Carbon created_at
  */
 class ArticleComments extends CustomModel
@@ -34,16 +34,13 @@ class ArticleComments extends CustomModel
         return $this->hasOne(User::class, 'user_id', 'user_id');
     }
 
-    #[Pure] public function getFrontendComment(): array
+    public function getFrontendComment(): array
     {
         $author_model = $this->user;
-        return [
-            'commentId' => $this->comment_id,
-            'userId' => $author_model->user_id,
-            'date' => $this->created_at,
-            'fullNameAuthor' => $author_model->getFullName(),
-            'comment' => $this->text,
-            'avatar' => $author_model->avatar_path
-        ];
+        return array_merge($this->only(['user_id', 'comment_id', 'comment']), [
+            'created_at' => $this->created_at,
+            'full_name' => (string)$author_model,
+            'avatar_path' => $author_model->avatar_path,
+        ]);
     }
 }

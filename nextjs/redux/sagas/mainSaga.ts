@@ -48,31 +48,6 @@ function* registerUser(action: AnyAction): Generator {
         });
     }
 }
-function* authUser(action: AnyAction): Generator {
-    try {
-        const data = yield axios
-            .post(`${process.env.API_URL}/api/user/login`, action.userData, {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    "X-XSRF-TOKEN":
-                        cookie.parse(document.cookie)["XSRF-TOKEN"] || false,
-                },
-            })
-            .then((response) => response.data);
-        localStorage.setItem("token", data.token);
-        yield put({
-            type: "SET_USER_DATA",
-            userData: data.user,
-        });
-    } catch (error) {
-        console.log("ERROR", error);
-        // yield put({
-        //     type: "SET_ALERT_ERROR",
-        //     message: error.response.data.error,
-        // });
-    }
-}
 function* fetchCountries(action: AnyAction): Generator {
     try {
         const countries = yield axios
@@ -132,7 +107,6 @@ export function* actionMainWatcher(): SagaIterator {
     yield takeLatest("FETCH_INVESTMENT_DATA", fetchInvestmentData);
     yield takeLatest("VIEW_NOTICE", viewNotice);
     yield takeLatest("REGISTER_USER", registerUser);
-    yield takeLatest("AUTH_USER", authUser);
     yield takeLatest("FETCH_COUNTRIES", fetchCountries);
     yield takeLatest("SUBSCRIBE_TO_NEWS", subscribeNews);
     yield takeLatest("FETCH_NEWS", fetchNews);

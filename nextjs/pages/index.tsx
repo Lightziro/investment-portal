@@ -7,7 +7,7 @@ import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStat
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 import { Typography } from "../components/simple/typography/Typography";
 import { NewsList } from "../components/ordinary/news-list/NewsList";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { Grid } from "@mui/material";
 import { getBasePortal, getListNews } from "../utils/api/get-data";
 import { News } from "../ts/types/entity/stock-market.types";
@@ -53,7 +53,7 @@ const MainPage: NextPage<Index> = ({ news, baseData }) => {
     );
 };
 export default MainPage;
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
     const news = await getListNews();
     const baseData = await getBasePortal();
     return {
@@ -61,19 +61,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             news,
             baseData,
         },
+        revalidate: 20,
     };
 };
-// export const getServerSideProps = async (ctx) => {
-//     let initMain = initMainStore;
-//     if (!process.browser) {
-//         const portalData = await getInitPortal();
-//         const news = await getListNews();
-//         initMain = { ...initMain, news, ...portalData };
-//         process.initialState.main = initMain;
-//     }
-//     return {
-//         props: {
-//             initMain,
-//         },
-//     };
-// };

@@ -2,13 +2,24 @@ import { GetServerSidePropsContext, NextPage } from "next";
 import { getEntityAdmin } from "../../../utils/api/get-data";
 import { AdminEntity } from "../../../redux/ts/enums/admin/admin.enum";
 import { DtoIdeaItem } from "../../../modules/admin/ts/types/response/admin-response-item.types";
+import { AdminIdeaPage } from "../../../modules/admin/pages/admin-idea-page/admin-idea-page";
+import { AdminLayout } from "../../../layouts/AdminLayout";
+import { MainLayout } from "../../../layouts/MainLayout";
+import { useTranslation } from "react-i18next";
+import { DtoPersonalIdea } from "../../../modules/admin/ts/types/response/admin-response-personal";
 
 interface InvestmentIdeaEdit {
-    data: DtoIdeaItem;
+    data: DtoPersonalIdea;
 }
 const InvestmentIdeaEdit: NextPage<InvestmentIdeaEdit> = ({ data }) => {
-    console.log(data);
-    return <div>Test23</div>;
+    const { t } = useTranslation();
+    return (
+        <MainLayout title={t("Creating idea")}>
+            <AdminLayout>
+                <AdminIdeaPage idea={data} />
+            </AdminLayout>
+        </MainLayout>
+    );
 };
 export default InvestmentIdeaEdit;
 export const getServerSideProps = async (
@@ -16,7 +27,7 @@ export const getServerSideProps = async (
 ) => {
     const { id } = context.params;
     const data: DtoIdeaItem = await getEntityAdmin(
-        id,
+        Number(id),
         AdminEntity.InvestmentIdea,
         context
     );

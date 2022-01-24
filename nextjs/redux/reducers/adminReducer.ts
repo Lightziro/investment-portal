@@ -74,16 +74,6 @@ const adminReducer = (
                     action.articleData
                 ),
             };
-        case "SET_ADMIN_USERS":
-            return {
-                ...state,
-                users: setEntityList(state.users, action.data),
-            };
-        case "FETCH_ADMIN_IDEAS":
-            return {
-                ...state,
-                investmentIdeas: { ...state, list: null },
-            };
         case "SET_SECTION_LIST":
             const { data } = action;
             return {

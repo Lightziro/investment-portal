@@ -6,16 +6,20 @@ namespace App\Http\Modules\Core\Controllers;
 
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
-use App\Models\Investment\InvestmentIdeaStatuses;
-use App\Models\User\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class InitialDataController extends Controller
 {
-    public function getPortalInit(Request $request): JsonResponse
+    public function getIdeasKey(): JsonResponse
     {
+        $ideas = InvestmentIdea::mostPopular()->limit(5)->get('idea_id')->toArray();
+        return response()->json($ideas);
+    }
+
+    public function getArticlesKey(): JsonResponse
+    {
+        $articles = Article::mostPopular()->limit(3)->get('article_id')->toArray();
+        return response()->json($articles);
     }
 }

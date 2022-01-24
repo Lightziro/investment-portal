@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { StoreData } from "../../../ts/types/redux/store.types";
 import { PaperWrapper } from "../../simple/paper-wrapper/PaperWrapper";
-import Skeleton from "react-loading-skeleton";
-import { Divider, Paper, Stack, Typography } from "@mui/material";
+import { Divider, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import classes from "./IdeaStatistics.module.scss";
 interface IdeaStatistics {
     stats: {

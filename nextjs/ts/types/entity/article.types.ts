@@ -1,3 +1,5 @@
+import { Comment } from "../other/view.types";
+
 export interface Article {
     articleId: number;
     title: string;

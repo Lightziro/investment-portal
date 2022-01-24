@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext, NextPage } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { ProfilePage } from "../../modules/profile/pages/ProfilePage";
-import { useRootSelector } from "../../hooks/useTypeSelector";
 import { useTranslation } from "react-i18next";
 import { getViewEntity } from "../../utils/api/get-data";
 import { ProfileView } from "../../ts/types/redux/store.types";
@@ -18,7 +17,7 @@ const Profile: NextPage<Profile> = ({ profile }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setViewEntity(profile));
+        dispatch(setViewEntity(profile, "profile"));
     }, []);
     return (
         <MainLayout title={`${t("Profile")} ${profile.fullName}`}>

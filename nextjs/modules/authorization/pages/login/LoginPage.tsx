@@ -91,7 +91,7 @@ export const LoginPage: React.FC = () => {
                                     color="primary"
                                 />
                             }
-                            label={t("Remember me")}
+                            label={"Remember"}
                         />
                         <Button
                             type="submit"
