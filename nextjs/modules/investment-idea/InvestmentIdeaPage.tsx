@@ -7,11 +7,12 @@ import { ChartStatsEPS } from "./components/charts-company-data/ChartStatsEPS";
 import { IdeaInformation } from "./components/idea-information/IdeaInformation";
 import { ChartStatsAnalytics } from "./components/charts-company-data/ChartStatsAnalytics";
 import { CommentsList } from "../../components/smart/comments-list/CommentsList";
-import { InvestmentIdeaView } from "../../ts/types/redux/store.types";
 import { IdeaDescription } from "./components/idea-description/IdeaDescription";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
 import { useRootSelector } from "../../hooks/useTypeSelector";
+import { IdeaRatings } from "./components/idea-ratings/IdeaRatings";
+import { InvestmentIdeaView } from "../../redux/ts/types/view/view-store.types";
 interface InvestmentIdeaPage {
     ideaData: InvestmentIdeaView;
 }
@@ -56,6 +57,9 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                 </Grid>
                 <Grid xs={12} md={4} sm={6} item xl={4} lg={4}>
                     <ChartStatsAnalytics stats={ideaData.analyticsStats} />
+                </Grid>
+                <Grid xs={12} sm={6} item xl={3} md={4} lg={4}>
+                    <IdeaRatings />
                 </Grid>
                 <Grid sm={6} item xl={3} md={4}>
                     <CommentsList

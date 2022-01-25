@@ -1,5 +1,7 @@
-import { InvestmentIdeaView } from "../redux/store.types";
-import { ArticleView } from "../entity/article.types";
+import {
+    ArticleView,
+    InvestmentIdeaView,
+} from "../../../redux/ts/types/view/view-store.types";
 
 export type EntityName = "article" | "idea" | "profile";
 export type typeView = InvestmentIdeaView | ArticleView;
@@ -11,4 +13,8 @@ export interface Comment {
     full_name: string;
     comment: string;
     avatar_path: string;
+}
+export interface RatingScore {
+    score: number;
+    count: number;
 }

@@ -2,11 +2,12 @@ import React from "react";
 import { Notice } from "../../../../../ts/types/redux/store.types";
 import { Divider, Typography } from "@mui/material";
 import classes from "../../NavBars.module.scss";
+import moment from "moment";
 interface NoticeItem {
     notice: Notice;
     onViewNotice: () => void;
 }
-import moment from "moment";
+
 export const NoticeItem: React.FC<NoticeItem> = ({ notice, onViewNotice }) => {
     return (
         <div className={classes.noticeItem} onMouseEnter={onViewNotice}>

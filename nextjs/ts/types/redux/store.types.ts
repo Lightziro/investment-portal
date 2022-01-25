@@ -8,46 +8,20 @@ import {
 import { AuthorInfo } from "../entity/user.types";
 import { AlertColor } from "@mui/material";
 import { CountryItem } from "../other/other.types";
-import { ArticleView } from "../entity/article.types";
 import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
 import { MainStore } from "../../../redux/ts/types/main/main-store.types";
 import { CreateIdeaStage } from "../../enums/investment-idea.enum";
 import { Comment } from "../other/view.types";
+import { ViewStore } from "../../../redux/ts/types/view/view-store.types";
 
 export interface OtherData {
     countries: CountryItem[];
 }
-export interface ProfileView {
-    userId: number;
-    roleName: string;
-    name: {
-        fullName: string;
-        firstName: string;
-        lastName: string;
-    };
-    fullName: string;
-    allComments: number;
-    country: CountryItem;
-    sex: string;
-    avatar: string;
-    dateCreate: string;
-    dateUpdate?: string;
-}
+
 export interface AlertStore {
     message: string;
     status: AlertColor;
     state: boolean;
-}
-
-export interface InvestmentIdeaView {
-    ideaId: number;
-    epsStats: EpsCompanyStats[] | null;
-    analyticsStats: AnalyticsStats[];
-    companyInfo: CompanyIdeaInfo;
-    authorInfo: AuthorInfo;
-    ideaInfo: IdeaInfo;
-    description: string;
-    comments: Comment[];
 }
 
 export interface InvestmentData {
@@ -90,11 +64,7 @@ export interface StoreData {
     view: ViewStore;
     user: UserStore;
 }
-export interface ViewStore {
-    profile: ProfileView;
-    idea: InvestmentIdeaView;
-    article: ArticleView;
-}
+
 export interface CreateIdea {
     companies: [];
     stage: CreateIdeaStage;

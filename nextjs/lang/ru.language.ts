@@ -106,4 +106,5 @@ export const ruLanguage = {
     "Short position": "Короткая позиция",
     "Long position": "Длинная позиция",
     Companies: "Компании",
+    "Assign a rating": "Назначить оценку",
 };

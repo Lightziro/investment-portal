@@ -74,6 +74,13 @@ class ViewController extends Controller
                 ];
             }
         }
+        for ($i = 1; $i <= 5; $i++) {
+            $ar_rating[] = ['score' => $i, 'count' => $idea_model->ratings->where('score', $i)->count()];
+        }
+        $rating_data = [
+            'avg' => $idea_model->ratings->avg('score'),
+            'stats' => $ar_rating ?? null
+        ];
         $ar_data = [
             'ideaId' => $idea_model->idea_id,
             'epsStats' => $ar_eps ?? [],
@@ -97,7 +104,8 @@ class ViewController extends Controller
                 'dateStart' => $idea_model->date_create,
                 'dateEnd' => $idea_model->date_end,
             ],
-            'description' => $idea_model->description
+            'description' => $idea_model->description,
+            'ratings' => $rating_data
         ];
 //        Cache::put("$idea_model->idea_id-$idea_company_model->ticker", $ar_data, now()->addMinutes(3));
         return response()->json($ar_data);

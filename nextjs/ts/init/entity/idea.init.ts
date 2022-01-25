@@ -1,4 +1,4 @@
-import { InvestmentIdeaView } from "../../types/redux/store.types";
+import { InvestmentIdeaView } from "../../../redux/ts/types/view/view-store.types";
 
 export const initialIdeaView: InvestmentIdeaView = {
     epsStats: null,
@@ -9,4 +9,5 @@ export const initialIdeaView: InvestmentIdeaView = {
     description: null,
     comments: null,
     ideaId: null,
+    ratings: null,
 };

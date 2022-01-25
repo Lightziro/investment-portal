@@ -20,9 +20,3 @@ export interface ArticleLabel {
     icon: string;
     text: string | number;
 }
-
-export interface ArticleView extends Article {
-    labels: ArticleLabel[];
-    content: string;
-    comments: Comment[];
-}

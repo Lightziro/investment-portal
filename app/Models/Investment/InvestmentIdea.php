@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int company_id
  * @property InvestmentIdeaComments[]|Collection comments
  * @property InvestmentIdeaViewing[]|Collection views
+ * @property InvestmentIdeaRatings[]|Collection ratings
  * @property string date_create
  * @property string date_end
  * @property string description
@@ -55,9 +56,9 @@ class InvestmentIdea extends CustomModel
         return $this->hasMany(InvestmentIdeaViewing::class, 'idea_id', 'idea_id');
     }
 
-    public function reaction(): HasMany
+    public function ratings(): HasMany
     {
-        return $this->hasMany(InvestmentIdeaReaction::class, 'idea_id', 'idea_id');
+        return $this->hasMany(InvestmentIdeaRatings::class, 'idea_id', 'idea_id');
     }
 
     public function descriptions(): HasMany
