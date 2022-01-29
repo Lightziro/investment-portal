@@ -1,9 +1,8 @@
-import { ArticleView } from "../../ts/types/entity/article.types";
-import { InvestmentIdeaView } from "../../ts/types/redux/store.types";
 import { initialArticleView } from "../../ts/init/entity/article.init";
 import { initialIdeaView } from "../../ts/init/entity/idea.init";
 import { initialProfile } from "../../ts/init/entity/user.init";
 import { Comment, typeView } from "../../ts/types/other/view.types";
+import { ViewStore } from "../ts/types/view/view-store.types";
 
 export const addCommentEntity = (state: any, comment: Comment): typeView => {
     const newState = {
@@ -20,6 +19,10 @@ export const addCommentEntity = (state: any, comment: Comment): typeView => {
     }
     return newState;
 };
+export const setIdeaUserRating = (state: ViewStore, data: any): ViewStore => ({
+    ...state,
+    idea: { ...state.idea, userRating: data },
+});
 export const initialByEntity = {
     profile: initialProfile,
     article: initialArticleView,

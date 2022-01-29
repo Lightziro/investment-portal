@@ -1,7 +1,11 @@
-import { ViewStore } from "../../ts/types/redux/store.types";
 import { AnyAction } from "redux";
 import { initialViewStore } from "../../ts/init/redux/reducer.initial";
-import { addCommentEntity, initialByEntity } from "../utils/view.utils";
+import {
+    addCommentEntity,
+    initialByEntity,
+    setIdeaUserRating,
+} from "../utils/view.utils";
+import { ViewStore } from "../ts/types/view/view-store.types";
 
 const viewReducer = (
     state: ViewStore = initialViewStore,
@@ -21,6 +25,9 @@ const viewReducer = (
                 ...state,
                 [entity]: addCommentEntity(state[entity], comment),
             };
+        case "SET_USER_IDEA_RATING":
+            console.log(action.data);
+            return setIdeaUserRating(state, action.data);
         default:
             return state;
     }

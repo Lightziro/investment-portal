@@ -11,9 +11,9 @@ export interface FormAuth {
     remember: boolean;
 }
 export interface FormProfile {
-    firstName: string;
-    lastName: string;
-    country: number;
+    first_name: string;
+    last_name: string;
+    country_id: number;
     sex: string;
 }
 export interface FormArticle {

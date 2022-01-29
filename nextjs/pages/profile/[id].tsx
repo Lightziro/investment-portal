@@ -3,12 +3,12 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { ProfilePage } from "../../modules/profile/pages/ProfilePage";
 import { useTranslation } from "react-i18next";
 import { getViewEntity } from "../../utils/api/get-data";
-import { ProfileView } from "../../ts/types/redux/store.types";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
 import { useRouter } from "next/router";
 import { PortalLayout } from "../../layouts/PortalLayout";
+import { ProfileView } from "../../redux/ts/types/view/view-store.types";
 interface Profile {
     profile: ProfileView;
 }
@@ -20,7 +20,7 @@ const Profile: NextPage<Profile> = ({ profile }) => {
         dispatch(setViewEntity(profile, "profile"));
     }, []);
     return (
-        <MainLayout title={`${t("Profile")} ${profile.fullName}`}>
+        <MainLayout title={`${t("Profile")} ${profile.full_name}`}>
             <PortalLayout>
                 <ProfilePage profile={profile} />
             </PortalLayout>

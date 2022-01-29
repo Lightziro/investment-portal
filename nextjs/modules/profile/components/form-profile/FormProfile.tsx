@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { ProfileView, StoreData } from "../../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import { FormProfileRow } from "./FormProfileRow";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCountries } from "../../../../redux/actions/mainActions";
@@ -12,6 +12,8 @@ import { ProfileSchema } from "../../../../ts/validation/profile.validation";
 import { FormProfileTextField } from "../form-profile-fields/FormProfileTextField";
 import { FormProfileSelectField } from "../form-profile-fields/FormProfileSelectField";
 import { FormProfileRadioField } from "../form-profile-fields/FormProfileRadioField";
+import { ProfileView } from "../../../../redux/ts/types/view/view-store.types";
+import { convertToProfileForm } from "../../utils/convert-to-form";
 
 interface FormProfile {
     edit: boolean;
@@ -37,89 +39,75 @@ export const FormProfile: React.FC<FormProfile> = ({
         dispatch(updateProfile(form));
         handleEdit();
     };
+
+    const formik = useFormik({
+        initialValues: convertToProfileForm(profile),
+        validationSchema: ProfileSchema,
+        onSubmit: handleSubmit,
+    });
+
     return (
         <Box my={1}>
-            <Formik
-                initialValues={{
-                    firstName: profile.name.firstName,
-                    lastName: profile.name.lastName,
-                    country: profile.country.country_id,
-                    sex: profile.sex,
-                }}
-                onSubmit={handleSubmit}
-                validationSchema={ProfileSchema}
-            >
-                {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting,
-                }) => (
-                    <form onSubmit={handleSubmit}>
-                        <FormProfileRow
-                            textValue={profile.name.firstName}
-                            label={`${t("First Name")}`}
-                            edit={edit}
-                        >
-                            <FormProfileTextField
-                                name="firstName"
-                                value={values.firstName}
-                                handleChange={handleChange}
-                                valid={!errors.firstName}
-                            />
-                        </FormProfileRow>
-                        <FormProfileRow
-                            textValue={profile.name.lastName}
-                            label={`${t("Last Name")}`}
-                            edit={edit}
-                        >
-                            <FormProfileTextField
-                                name="lastName"
-                                value={values.lastName}
-                                handleChange={handleChange}
-                                valid={!errors.lastName}
-                            />
-                        </FormProfileRow>
-                        <FormProfileRow
-                            textValue={profile.country.name}
-                            label={`${t("Country")}`}
-                            edit={edit}
-                        >
-                            <FormProfileSelectField
-                                value={values.country}
-                                handleChange={handleChange}
-                                items={countries}
-                                name="country"
-                            />
-                        </FormProfileRow>
-                        <FormProfileRow
-                            textValue={profile.sex ?? "Не указан"}
-                            label={`${t("Sex")}`}
-                            edit={edit}
-                        >
-                            <FormProfileRadioField
-                                value={values.sex}
-                                name="sex"
-                                handleChange={handleChange}
-                                items={sexList.map((item) => {
-                                    item.label = t(item.label);
-                                    return item;
-                                })}
-                            />
-                        </FormProfileRow>
-                        {edit && (
-                            <Stack alignItems="center">
-                                <Button type="submit" variant="contained">
-                                    {t("Save profile")}
-                                </Button>
-                            </Stack>
-                        )}
-                    </form>
+            <form onSubmit={formik.handleSubmit}>
+                <FormProfileRow
+                    textValue={profile.first_name}
+                    label={`${t("First Name")}`}
+                    edit={edit}
+                >
+                    <FormProfileTextField
+                        name="first_name"
+                        value={formik.values.first_name}
+                        handleChange={formik.handleChange}
+                        valid={!formik.errors.first_name}
+                    />
+                </FormProfileRow>
+                <FormProfileRow
+                    textValue={profile.last_name}
+                    label={`${t("Last Name")}`}
+                    edit={edit}
+                >
+                    <FormProfileTextField
+                        name="last_name"
+                        value={formik.values.last_name}
+                        handleChange={formik.handleChange}
+                        valid={!formik.errors.last_name}
+                    />
+                </FormProfileRow>
+                <FormProfileRow
+                    textValue={profile.country_name}
+                    label={`${t("Country")}`}
+                    edit={edit}
+                >
+                    <FormProfileSelectField
+                        value={formik.values.country_id}
+                        handleChange={formik.handleChange}
+                        items={countries}
+                        name="country_id"
+                    />
+                </FormProfileRow>
+                <FormProfileRow
+                    textValue={profile.sex ?? "Не указан"}
+                    label={`${t("Sex")}`}
+                    edit={edit}
+                >
+                    <FormProfileRadioField
+                        value={formik.values.sex}
+                        name="sex"
+                        handleChange={formik.handleChange}
+                        items={sexList.map((item) => {
+                            item.label = t(item.label);
+                            return item;
+                        })}
+                    />
+                </FormProfileRow>
+                {edit && (
+                    <Stack alignItems="center">
+                        <Button type="submit" variant="contained">
+                            {t("Save profile")}
+                        </Button>
+                    </Stack>
                 )}
-            </Formik>
+            </form>
         </Box>
     );
 };

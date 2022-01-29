@@ -14,7 +14,7 @@ Route::get('/authentication', [UserActionController::class, 'authentication'])->
 Route::post('/notice/view', [UserController::class, 'viewNotice'])->middleware('auth:sanctum');
 Route::post('/register', [UserLoginController::class, 'register'])->middleware(BeforeClearAuthUser::class);
 Route::get('/profile/{id}', [UserController::class, 'getProfile']);
-Route::post('/profile/update', [ProfileController::class, 'updateProfileData'])->middleware(BeforeGetAuthUserId::class);
+Route::post('/profile/update', [ProfileController::class, 'updateProfileData'])->middleware('auth:sanctum');
 Route::get('/exit', [UserActionController::class, 'exitUser']);
 Route::post('/forgot-password', [UserActionController::class, 'forgotPassword']);
 Route::post('/recovery-password', [UserActionController::class, 'recoveryPassword']);

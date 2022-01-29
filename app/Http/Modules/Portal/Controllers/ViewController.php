@@ -5,7 +5,6 @@ namespace App\Http\Modules\Portal\Controllers;
 use App\Http\Classes\StockMarket;
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
-use App\Models\Investment\InvestmentIdeaStatuses;
 use App\Models\User\User;
 use Finnhub\Model\BasicFinancials;
 use Illuminate\Http\JsonResponse;
@@ -74,13 +73,7 @@ class ViewController extends Controller
                 ];
             }
         }
-        for ($i = 1; $i <= 5; $i++) {
-            $ar_rating[] = ['score' => $i, 'count' => $idea_model->ratings->where('score', $i)->count()];
-        }
-        $rating_data = [
-            'avg' => $idea_model->ratings->avg('score'),
-            'stats' => $ar_rating ?? null
-        ];
+
         $ar_data = [
             'ideaId' => $idea_model->idea_id,
             'epsStats' => $ar_eps ?? [],
@@ -101,11 +94,11 @@ class ViewController extends Controller
                 'isShort' => $idea_model->is_short,
                 'priceBuy' => $idea_model->price_buy,
                 'priceSell' => $idea_model->price_sell,
-                'dateStart' => $idea_model->date_create,
+                'dateStart' => $idea_model->created_at,
                 'dateEnd' => $idea_model->date_end,
             ],
             'description' => $idea_model->description,
-            'ratings' => $rating_data
+            'ratings' => $idea_model->getRatingStats()
         ];
 //        Cache::put("$idea_model->idea_id-$idea_company_model->ticker", $ar_data, now()->addMinutes(3));
         return response()->json($ar_data);

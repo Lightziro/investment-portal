@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { Card, Divider, Grid, Rating, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { Button, Progress } from "antd";
+import { Button, Modal, Progress } from "antd";
 import { getPercentScore } from "../../utils/ratings-score";
 import classes from "../../InvestmentIdea.module.scss";
+import { SetRatingForm } from "../set-rating-form/SetRatingForm";
+import { useDispatch } from "react-redux";
+import { fetchUserIdeaRating } from "../../../../redux/actions/viewActions";
 
 export const IdeaRatings: React.FC = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const [open, setOpen] = useState();
     const user = useRootSelector((state) => state.user);
-    const ratings = useRootSelector((state) => state.view.idea.ratings);
+    const { ratings, ideaId, userRating } = useRootSelector(
+        (state) => state.view.idea
+    );
+    useEffect(() => {
+        if (ideaId) {
+            dispatch(fetchUserIdeaRating(ideaId));
+        }
+    }, [ideaId]);
     if (!ratings) {
         return null;
     }
@@ -20,7 +32,7 @@ export const IdeaRatings: React.FC = () => {
                 <Typography variant="h6">{`${ratings.avg}/5`}</Typography>
             </Stack>
             <Divider sx={{ my: 1 }} />
-            {ratings.stats.reverse().map((rating) => (
+            {ratings.stats.map((rating) => (
                 <Grid
                     key={rating.score}
                     sx={{ mb: 1 }}
@@ -34,14 +46,26 @@ export const IdeaRatings: React.FC = () => {
                     <Progress
                         className={classes.ratingBar}
                         showInfo={false}
-                        percent={getPercentScore(rating.count, 4)}
+                        percent={getPercentScore(rating.count, ratings.count)}
                         status="active"
                     />
                 </Grid>
             ))}
-            <Button type="primary" disabled={!user} block size="large">
+            {/*{userRating.score}*/}
+            <Button
+                onClick={() => setOpen(true)}
+                type="primary"
+                disabled={!user}
+                block
+                size="large"
+            >
                 {t("Assign a rating")}
             </Button>
+            <SetRatingForm
+                open={open}
+                handleClose={() => setOpen(false)}
+                ideaId={ideaId}
+            />
         </Card>
     );
 };

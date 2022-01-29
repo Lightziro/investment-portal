@@ -107,4 +107,6 @@ export const ruLanguage = {
     "Long position": "Длинная позиция",
     Companies: "Компании",
     "Assign a rating": "Назначить оценку",
+    "Specify a rating from 1 to 5 stars": "Укажите рейтинг от 1 до 5 звезд",
+    "Your rating successfully posted": "Ваш рейтинг успешно опубликован",
 };

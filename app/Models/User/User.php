@@ -82,25 +82,13 @@ class User extends Authenticatable
     public function getProfile(): array
     {
         $country_model = $this->country;
-        return [
-            'userId' => $this->user_id,
-            'name' => [
-                'fullName' => $this->getFullName(),
-                'firstName' => $this->first_name,
-                'lastName' => $this->last_name,
-            ],
-            'fullName' => $this->getFullName(),
-            'dateCreate' => $this->created_at->format('Y-m-d'),
-            'allComments' => $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
-            'avatar' => $this->avatar_path,
-            'roleName' => (string)$this->role,
-            'country' => [
-                'country_id' => $country_model?->country_id,
-                'code' => $country_model?->code,
-                'name' => $country_model?->name,
-            ],
-            'sex' => $this->sex
-        ];
+        return array_merge($this->only(['user_id', 'avatar_path', 'last_name', 'first_name', 'created_at', 'country_id', 'sex']), [
+            'full_name' => (string)$this,
+            'role_name' => (string)$this->role,
+            'count_comments' => $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
+            'country_name' => $country_model?->name,
+            'country_code' => $country_model?->code,
+        ]);
     }
 
     public function role(): HasOne

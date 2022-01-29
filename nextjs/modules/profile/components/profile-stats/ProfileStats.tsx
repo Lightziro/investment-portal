@@ -2,13 +2,13 @@ import React from "react";
 import { Box, Divider, Paper, Skeleton, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
-import { ProfileView } from "../../../../ts/types/redux/store.types";
+import { ProfileView } from "../../../../redux/ts/types/view/view-store.types";
 interface ProfileStats {
     profile: ProfileView;
 }
 export const ProfileStats: React.FC<ProfileStats> = ({ profile }) => {
     const { t } = useTranslation();
-    if (!profile.userId) {
+    if (!profile.user_id) {
         return <Skeleton variant={"rectangular"} height={200} />;
     }
     return (
@@ -17,10 +17,10 @@ export const ProfileStats: React.FC<ProfileStats> = ({ profile }) => {
             <Divider />
             <Box my={1}>
                 <Typography variant="body2">
-                    {t("Total comments")}: {profile.allComments}
+                    {t("Total comments")}: {profile.count_comments}
                 </Typography>
                 <Typography variant="body2">
-                    {t("Registered")}: {moment(profile.dateCreate).format("LL")}
+                    {t("Registered")}: {moment(profile.created_at).format("LL")}
                 </Typography>
             </Box>
         </Paper>

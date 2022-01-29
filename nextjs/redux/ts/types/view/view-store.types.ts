@@ -19,20 +19,19 @@ export interface ViewStore {
 }
 
 export interface ProfileView {
-    userId: number;
-    roleName: string;
-    name: {
-        fullName: string;
-        firstName: string;
-        lastName: string;
-    };
-    fullName: string;
-    allComments: number;
-    country: CountryItem;
+    user_id: number;
+    role_name: string;
+    first_name: string;
+    last_name: string;
+    full_name: string;
+    count_comments: number;
+    country_id: number;
+    country_code: string;
+    country_name: string;
     sex: string;
-    avatar: string;
-    dateCreate: string;
+    created_at: string;
     dateUpdate?: string;
+    avatar_path: string;
 }
 
 export interface ArticleView extends Article {
@@ -53,5 +52,10 @@ export interface InvestmentIdeaView {
     ratings: {
         avg: number;
         stats: RatingScore[];
+        count: number;
+    };
+    userRating?: {
+        score: number;
+        created_at: string;
     };
 }

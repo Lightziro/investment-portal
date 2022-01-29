@@ -2,13 +2,19 @@
 
 namespace App\Models\Investment;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Custom\CustomModel;
 
 /**
- * @property string reaction
+ * @property int rating_id
+ * @property int user_id
+ * @property int idea_id
+ * @property int score
+ *
  */
-class InvestmentIdeaRatings extends Model
+class InvestmentIdeaRatings extends CustomModel
 {
     protected $table = 'investment_idea_ratings';
     protected $primaryKey = 'rating_id';
+    protected $fillable = ['score', 'user_id'];
+    const UPDATED_AT = null;
 }

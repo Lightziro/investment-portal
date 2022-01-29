@@ -20,8 +20,7 @@ class ProfileController extends Controller
             if (!$user_model = $request->user()) {
                 return response()->json(['Not found user'], 404);
             }
-            ProfileHelper::replaceUpdateField($user_model, $form_data);
-            $user_model->save();
+            $user_model->update($form_data);
             return response()->json($user_model->getProfile());
         } catch (Throwable $e) {
             // TODO: УБРАТЬ ВЫВОД ОШИБОК

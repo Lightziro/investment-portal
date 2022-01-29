@@ -141,4 +141,16 @@ class InvestmentIdea extends CustomModel
             ->orderBy('views_count', 'desc')
             ->with('status', callback: fn($query) => $query->whereNotIn('name', [InvestmentIdeaStatuses::STATUS_FAILED]));
     }
+
+    public function getRatingStats(): array
+    {
+        for ($i = 5; $i >= 1; $i--) {
+            $ar_rating[] = ['score' => $i, 'count' => $this->ratings->where('score', $i)->count()];
+        }
+        return [
+            'avg' => $this->ratings->avg('score') ?? 0,
+            'stats' => $ar_rating ?? null,
+            'count' => $this->ratings->count()
+        ];
+    }
 }

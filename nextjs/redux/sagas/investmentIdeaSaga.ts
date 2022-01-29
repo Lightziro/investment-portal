@@ -26,8 +26,26 @@ function* fetchIdeaData(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* fetchIdeaRating(action: AnyAction): Generator {
+    const data = yield axios
+        .get(`${process.env.API_URL}/api/idea/user-rating/${action.ideaId}`)
+        .then((res) => {
+            switch (res.status) {
+                case 204:
+                    return null;
+                case 200:
+                    return res.data;
+            }
+        })
+        .catch((e) => null);
+    yield put({
+        type: "SET_USER_IDEA_RATING",
+        data,
+    });
+}
 
 export function* actionInvestmentIdea(): SagaIterator {
     yield takeLatest("CREATE_IDEA_COMMENT", createComment);
     yield takeLatest("FETCH_INVESTMENT_IDEA", fetchIdeaData);
+    yield takeLatest("FETCH_USER_IDEA_RATING", fetchIdeaRating);
 }

@@ -15,3 +15,12 @@ export const createEntityComment = (
     entityType,
     text,
 });
+
+export const setUserIdeaRating = (score: number) => ({
+    type: "SET_USER_IDEA_RATING",
+    score,
+});
+export const fetchUserIdeaRating = (ideaId: number) => ({
+    type: "FETCH_USER_IDEA_RATING",
+    ideaId,
+});
