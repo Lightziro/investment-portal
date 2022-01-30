@@ -19,9 +19,8 @@ export const PortalNavBar: React.FC = () => {
         <header className={classes.portalNavBar}>
             <div className={classes.navBarWrapper}>
                 <div className={classes.logoWrapper}>
-                    <Link href="/">
-                        test
-                        {/*<img src="/images/logo/logo.svg" />*/}
+                    <Link href="/" passHref>
+                        <img src="/images/logo/logo-base.png" />
                     </Link>
                 </div>
                 <div className={classes.emptyBlock} />

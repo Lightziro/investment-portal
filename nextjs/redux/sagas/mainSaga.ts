@@ -59,7 +59,9 @@ function* fetchCountries(action: AnyAction): Generator {
 function* subscribeNews(action: AnyAction): Generator {
     try {
         yield axios
-            .post("/api/other/subscribe-email", { email: action.email })
+            .post(`${process.env.API_URL}/api/other/subscribe-email`, {
+                email: action.email,
+            })
             .then((response) => response.data);
         yield put({
             type: "SET_ALERT_SUCCESS",
