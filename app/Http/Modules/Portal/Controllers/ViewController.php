@@ -52,15 +52,18 @@ class ViewController extends Controller
         $company_stats = $market->getFinancialsStats($idea_company_model->ticker);
 
         if ($company_stats instanceof BasicFinancials) {
-            foreach ($company_stats->getSeries()['annual']->eps as $eps_year_stats) {
-                $ar_eps[] = [
-                    'date' => $eps_year_stats->period,
-                    'value' => round($eps_year_stats->v, 2),
-                ];
+            if (($series = $company_stats->getSeries()['annual']) && !empty($series->eps)) {
+                foreach ($series->eps as $eps_year_stats) {
+                    $ar_eps[] = [
+                        'date' => $eps_year_stats->period,
+                        'value' => round($eps_year_stats->v, 2),
+                    ];
+                }
             }
             if (!empty($ar_eps)) {
                 $ar_eps = array_reverse($ar_eps);
             }
+
         }
         $analytics_stats = $market->getRecommendationAnalytics($idea_company_model->ticker);
         if (is_array($analytics_stats)) {
