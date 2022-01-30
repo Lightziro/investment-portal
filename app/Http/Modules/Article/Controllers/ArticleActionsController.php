@@ -26,12 +26,12 @@ class ArticleActionsController extends Controller
                 return response()->json(['message' => 'No correct articleId'], 400);
             }
             /** @var Article $article_model */
-            $article_model = Article::query()->where(['article_id' => $entity_id])->first();
+            $article_model = Article::query()->find($entity_id);
             if (!$article_model) {
                 return response()->json(['message' => 'Not found article'], 400);
             }
             $comment = new ArticleComments();
-            $comment->text = $post['comment'];
+            $comment->comment = $post['comment'];
             $comment->user_id = $user->user_id;
             $comment->article_id = $entity_id;
             $comment->save();

@@ -1,34 +1,41 @@
 import React from "react";
-import { Avatar, Paper } from "@mui/material";
-import Link from "next/link";
-import classes from "../IdeaList.module.scss";
+import { Avatar } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { InvestmentIdea } from "../../../../ts/types/entity/stock-market.types";
+import { List } from "antd";
+import { LinkWrapper } from "../../../simple/link/Link";
 interface IdeaListItem {
     idea: InvestmentIdea;
 }
 export const IdeaListItem: React.FC<IdeaListItem> = ({ idea }) => {
     const { t } = useTranslation();
+
     return (
-        <Paper elevation={2} sx={{ my: 1 }}>
-            <Link href={`/investment-idea/${idea.id}`}>
-                <div className={classes.ideaItemWrapper}>
-                    {/*<Avatar*/}
-                    {/*    src={`/image/picture/company-logo/${idea.logo}`}*/}
-                    {/*    sx={{ width: 24, height: 24 }}*/}
-                    {/*/>*/}
-                    <div className={classes.ideaItemInfo}>
-                        <div className={classes.potentialProfit}>
-                            {t("Potential profit", {
-                                amount: idea.possibleProfit,
-                            })}
-                        </div>
-                        <span className={classes.companyName}>
-                            {idea.stock}
-                        </span>
-                    </div>
-                </div>
-            </Link>
-        </Paper>
+        <List.Item>
+            <List.Item.Meta
+                avatar={
+                    <LinkWrapper
+                        href={"/investment-idea/[id]"}
+                        as={`/investment-idea/${idea.id}`}
+                    >
+                        <Avatar
+                            src={`${process.env.API_URL}/storage/${idea.logo}`}
+                            sx={{ width: 24, height: 24 }}
+                        />
+                    </LinkWrapper>
+                }
+                title={
+                    <LinkWrapper
+                        href={"/investment-idea/[id]"}
+                        as={`/investment-idea/${idea.id}`}
+                    >
+                        {idea.stock}
+                    </LinkWrapper>
+                }
+                description={t("Potential profit", {
+                    amount: idea.possibleProfit,
+                })}
+            />
+        </List.Item>
     );
 };

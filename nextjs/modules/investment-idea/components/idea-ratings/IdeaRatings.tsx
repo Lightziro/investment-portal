@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { Card, Divider, Grid, Rating, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { Button, Modal, Progress } from "antd";
+import { Button, Progress } from "antd";
 import { getPercentScore } from "../../utils/ratings-score";
 import classes from "../../InvestmentIdea.module.scss";
 import { SetRatingForm } from "../set-rating-form/SetRatingForm";
 import { useDispatch } from "react-redux";
 import { fetchUserIdeaRating } from "../../../../redux/actions/viewActions";
+import { IdeaUserRating } from "../idea-user-rating/IdeaUserRating";
 
 export const IdeaRatings: React.FC = () => {
     const { t } = useTranslation();
@@ -51,21 +52,26 @@ export const IdeaRatings: React.FC = () => {
                     />
                 </Grid>
             ))}
-            {/*{userRating.score}*/}
-            <Button
-                onClick={() => setOpen(true)}
-                type="primary"
-                disabled={!user}
-                block
-                size="large"
-            >
-                {t("Assign a rating")}
-            </Button>
-            <SetRatingForm
-                open={open}
-                handleClose={() => setOpen(false)}
-                ideaId={ideaId}
-            />
+            {userRating ? (
+                <IdeaUserRating rating={userRating.score} />
+            ) : (
+                <Fragment>
+                    <Button
+                        onClick={() => setOpen(true)}
+                        type="primary"
+                        disabled={!user}
+                        block
+                        size="large"
+                    >
+                        {t("Assign a rating")}
+                    </Button>
+                    <SetRatingForm
+                        open={open}
+                        handleClose={() => setOpen(false)}
+                        ideaId={ideaId}
+                    />
+                </Fragment>
+            )}
         </Card>
     );
 };

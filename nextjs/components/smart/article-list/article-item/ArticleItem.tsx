@@ -1,27 +1,22 @@
 import React from "react";
-import { Avatar, Card, CardHeader, CardMedia } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { Article } from "../../../../ts/types/entity/article.types";
 import moment from "moment";
-import Shiitake from "shiitake";
 import { LinkWrapper } from "../../../simple/link/Link";
+import { Card } from "antd";
+const { Meta } = Card;
 interface ArticleItem {
     item: Article;
 }
 export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
     return (
-        <Card sx={{ height: 274 }}>
-            <LinkWrapper
-                href={`/article/[id]`}
-                as={`/article/${item.articleId}`}
-            >
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={`${process.env.API_URL}/storage/${item.preview}`}
-                    alt={`Preview ${item.title}`}
-                />
-            </LinkWrapper>
-            <CardHeader
+        <Card
+            style={{ width: "100%" }}
+            cover={
+                <img src={`${process.env.API_URL}/storage/${item.preview}`} />
+            }
+        >
+            <Meta
                 avatar={
                     <LinkWrapper
                         href={`/profile/[id]`}
@@ -37,17 +32,10 @@ export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
                         href={`/article/[id]`}
                         as={`/article/${item.articleId}`}
                     >
-                        <Shiitake
-                            lines={2}
-                            throttleRate={200}
-                            className="title"
-                            tagName="div"
-                        >
-                            {item.title}
-                        </Shiitake>
+                        {item.title}
                     </LinkWrapper>
                 }
-                subheader={moment(item.dateCreate).fromNow()}
+                description={moment(item.dateCreate).fromNow()}
             />
         </Card>
     );

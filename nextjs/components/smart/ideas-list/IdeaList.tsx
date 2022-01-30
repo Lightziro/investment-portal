@@ -1,20 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { StoreData } from "../../../ts/types/redux/store.types";
 import { useTranslation } from "react-i18next";
 import { IdeaListItem } from "./idea-list-item/IdeaListItem";
-import { LoadIdeasList } from "./load-ideas-list/LoadIdeasList";
-import Skeleton from "react-loading-skeleton";
 import { Box, Card, Divider, Typography } from "@mui/material";
 import { InvestmentIdea } from "../../../ts/types/entity/stock-market.types";
+import { List } from "antd";
 interface IdeaList {
     items: InvestmentIdea[];
 }
 export const IdeaList: React.FC<IdeaList> = ({ items }) => {
     const { t } = useTranslation();
+
     return (
         <div className="portal-component-wrapper">
-            <Card sx={{ bgcolor: "#b0deff" }}>
+            <Card sx={{ bgcolor: "white", px: 2, py: 1 }}>
                 <Typography
                     align="center"
                     color="black"
@@ -24,15 +22,13 @@ export const IdeaList: React.FC<IdeaList> = ({ items }) => {
                     {t("The best ideas")}
                 </Typography>
                 <Divider light />
-                <Box padding={1}>
-                    {items ? (
-                        items.map((idea) => (
-                            <IdeaListItem key={idea.id} idea={idea} />
-                        ))
-                    ) : (
-                        <LoadIdeasList />
+                <List
+                    itemLayout="horizontal"
+                    dataSource={items}
+                    renderItem={(item: InvestmentIdea) => (
+                        <IdeaListItem key={item.id} idea={item} />
                     )}
-                </Box>
+                />
             </Card>
         </div>
     );
