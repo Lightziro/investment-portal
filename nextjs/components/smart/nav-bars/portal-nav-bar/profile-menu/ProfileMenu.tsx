@@ -1,8 +1,7 @@
 import React, { Fragment, useRef } from "react";
 import { IconButton } from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
-import { StoreData } from "../../../../../ts/types/redux/store.types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { UserAvatar } from "../../../../simple/user-avatar/UserAvatar";
 import { LoginMenu } from "./LoginMenu";
 import { NoLoginMenu } from "./NoLoginMenu";

@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { viewNotice } from "../../../../../redux/actions/mainActions";
 import classes from "../../NavBars.module.scss";
 import { NoticeItem } from "../notice-item/NoticeItem";
+import { Badge } from "antd";
 interface NoticeMenu {
     onOpen: () => void;
     open: boolean;
@@ -30,6 +31,9 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
             dispatch(viewNotice(notice.id));
         }
     };
+    const countNotView = (): number => {
+        return user.notices.filter((notice) => !notice.viewed).length;
+    };
     return (
         <Fragment>
             {user && (
@@ -39,11 +43,13 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                         sx={{ p: 0, width: 44, height: 44 }}
                         onClick={onOpen}
                     >
-                        <Icon
-                            icon="ant-design:bell-outlined"
-                            width={24}
-                            height={24}
-                        />
+                        <Badge color="blue" count={countNotView()}>
+                            <Icon
+                                icon="ant-design:bell-outlined"
+                                width={24}
+                                height={24}
+                            />
+                        </Badge>
                     </IconButton>
                     <MenuPopover
                         open={open}
@@ -65,11 +71,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                                     variant="body2"
                                     className={classes.countNotices}
                                 >
-                                    {
-                                        user.notices.filter(
-                                            (notice) => !notice.viewed
-                                        ).length
-                                    }
+                                    {countNotView()}
                                 </Typography>
                             </Stack>
                         </Box>
@@ -87,6 +89,9 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                                 />
                             ))}
                         </Grid>
+                        <button className={classes.btnAllNotices}>
+                            <span>Show all</span>
+                        </button>
                     </MenuPopover>
                 </Fragment>
             )}
