@@ -49,13 +49,15 @@ export interface InvestmentIdeaView {
     ideaInfo: IdeaInfo;
     description: string;
     comments: Comment[];
-    ratings: {
-        avg: number;
-        stats: RatingScore[];
-        count: number;
-    };
-    userRating?: {
-        score: number;
-        created_at: string;
-    };
+    ratings: IdeaRatingStats;
+    userRating?: UserIdeaRating;
+}
+export interface IdeaRatingStats {
+    avg: number;
+    stats: RatingScore[];
+    count: number;
+}
+export interface UserIdeaRating {
+    score: number;
+    created_at: string;
 }

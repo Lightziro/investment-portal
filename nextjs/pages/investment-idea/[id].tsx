@@ -1,20 +1,14 @@
 import React, { useEffect } from "react";
-import {
-    GetServerSidePropsContext,
-    GetStaticPropsContext,
-    GetStaticPropsResult,
-    NextPage,
-    NextPageContext,
-} from "next";
+import { GetStaticPropsContext, NextPage } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
 import getTitleIdea from "../../modules/investment-idea/utils/get-title-idea";
 import { InvestmentIdeaPage } from "../../modules/investment-idea/InvestmentIdeaPage";
 import { getViewEntity } from "../../utils/api/get-data";
-import { InvestmentIdeaView } from "../../ts/types/redux/store.types";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { useRouter } from "next/router";
 import { axios } from "../../utils/axios";
+import { InvestmentIdeaView } from "../../redux/ts/types/view/view-store.types";
 interface InvestmentIdea {
     idea: InvestmentIdeaView;
 }

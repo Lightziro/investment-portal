@@ -1,4 +1,5 @@
 import { EntityName } from "../../ts/types/other/view.types";
+import { DtoIdeaRatingStats } from "../../modules/investment-idea/ts/types/response.types";
 
 export const setViewEntity = (data: any, entity: EntityName) => ({
     type: "SET_VIEW_ENTITY",
@@ -23,4 +24,8 @@ export const setUserIdeaRating = (score: number) => ({
 export const fetchUserIdeaRating = (ideaId: number) => ({
     type: "FETCH_USER_IDEA_RATING",
     ideaId,
+});
+export const setIdeaRatingStats = (data: DtoIdeaRatingStats) => ({
+    type: "CREATE_IDEA_RATING",
+    data,
 });

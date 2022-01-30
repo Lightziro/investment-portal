@@ -45,8 +45,12 @@ class InvestmentIdeaController extends Controller
         if (!$idea_model = InvestmentIdea::query()->find($post_data['ideaId'])) {
             return response()->json(['message' => 'Not found investment idea'], 404);
         }
-        $idea_model->ratings()->create(['score' => $post_data['score'], 'user_id' => $request->user()->user_id]);
-        return response()->json([]);
+        /** @var InvestmentIdeaRatings $rating_model */
+        $rating_model = $idea_model->ratings()->create(['score' => $post_data['score'], 'user_id' => $request->user()->user_id]);
+        return response()->json([
+            'ratings' => $idea_model->getRatingStats(),
+            'userRating' => ['score' => $rating_model->score, 'created_at' => $rating_model->created_at]
+        ]);
     }
 
     public function getUserRating(Request $request): JsonResponse

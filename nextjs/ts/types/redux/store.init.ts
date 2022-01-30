@@ -4,24 +4,6 @@ import {
     initialViewStore,
 } from "../../init/redux/reducer.initial";
 import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
-import { MainStore } from "../../../redux/ts/types/main/main-store.types";
-
-export const initMainStore: MainStore = {
-    news: null,
-    investmentData: {
-        bestProfit: null,
-        worseProfit: null,
-        investmentIdeas: null,
-        ideaStatistics: null,
-    },
-    otherData: {
-        countries: null,
-    },
-    articles: {
-        popular: null,
-        simple: null,
-    },
-};
 
 export const initialAlertStore: AlertStore = {
     message: "",
@@ -68,7 +50,6 @@ export const initialAdminStore: AdminStore = {
 
 export const initStore: StoreData = {
     user: null,
-    main: initMainStore,
     admin: initialAdminStore,
     alert: initialAlertStore,
     view: initialViewStore,

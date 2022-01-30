@@ -18,7 +18,10 @@ import {
     alertSuccess,
 } from "../../../../redux/actions/alertActions";
 import { axios } from "../../../../utils/axios";
-import { setUserIdeaRating } from "../../../../redux/actions/viewActions";
+import {
+    setIdeaRatingStats,
+    setUserIdeaRating,
+} from "../../../../redux/actions/viewActions";
 interface SetRatingForm {
     open: boolean;
     handleClose: () => void;
@@ -37,7 +40,7 @@ export const SetRatingForm: React.FC<SetRatingForm> = ({
                 ideaId,
             })
             .then((res) => {
-                dispatch(setUserIdeaRating(form.score));
+                dispatch(setIdeaRatingStats(res.data));
                 handleClose();
                 dispatch(alertSuccess("Your rating successfully posted"));
             })
