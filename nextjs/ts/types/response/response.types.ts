@@ -16,3 +16,8 @@ export interface DtoPortal {
         fail: number;
     };
 }
+export interface DtoQuoteItem {
+    name: string;
+    last_price: number;
+    percent_change_today: number;
+}

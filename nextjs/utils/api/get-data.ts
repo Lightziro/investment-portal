@@ -14,6 +14,14 @@ export const getBasePortal = async () => {
     );
     return await response.json();
 };
+
+export const getQuotePortal = async () => {
+    const response = await fetch(
+        `${process.env.API_URL_DOCKER}/api/other/quotes`
+    );
+    return await response.json();
+};
+
 export const getViewEntity = async (entityName, ctx: GetStaticPropsContext) => {
     // const config: any = { headers: ctx.req.headers };
     return await axios

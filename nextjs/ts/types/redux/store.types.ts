@@ -1,22 +1,8 @@
-import {
-    AnalyticsStats,
-    CompanyIdeaInfo,
-    EpsCompanyStats,
-    IdeaInfo,
-    InvestmentIdea,
-} from "../entity/stock-market.types";
-import { AuthorInfo } from "../entity/user.types";
+import { InvestmentIdea } from "../entity/stock-market.types";
 import { AlertColor } from "@mui/material";
-import { CountryItem } from "../other/other.types";
 import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
-import { MainStore } from "../../../redux/ts/types/main/main-store.types";
 import { CreateIdeaStage } from "../../enums/investment-idea.enum";
-import { Comment } from "../other/view.types";
 import { ViewStore } from "../../../redux/ts/types/view/view-store.types";
-
-export interface OtherData {
-    countries: CountryItem[];
-}
 
 export interface AlertStore {
     message: string;
@@ -58,7 +44,6 @@ export interface Notice {
 }
 
 export interface StoreData {
-    main: MainStore;
     admin: AdminStore;
     alert: AlertStore;
     view: ViewStore;

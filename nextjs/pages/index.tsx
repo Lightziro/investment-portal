@@ -5,19 +5,24 @@ import { ArticleList } from "../components/smart/article-list/ArticleList";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
 import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStatistics";
 import { IdeaList } from "../components/smart/ideas-list/IdeaList";
-import { Typography } from "../components/simple/typography/Typography";
 import { NewsList } from "../components/ordinary/news-list/NewsList";
 import { GetStaticProps, NextPage } from "next";
 import { Grid } from "@mui/material";
-import { getBasePortal, getListNews } from "../utils/api/get-data";
+import {
+    getBasePortal,
+    getListNews,
+    getQuotePortal,
+} from "../utils/api/get-data";
 import { News } from "../ts/types/entity/stock-market.types";
-import { DtoPortal } from "../ts/types/response/response.types";
+import { DtoPortal, DtoQuoteItem } from "../ts/types/response/response.types";
 import { PortalLayout } from "../layouts/PortalLayout";
+import { HeaderBestQuote } from "../modules/portal/components/header-best-quote/HeaderBestQuote";
 interface Index {
     news: News[];
     baseData: DtoPortal;
+    quotesData: DtoQuoteItem[];
 }
-const MainPage: NextPage<Index> = ({ news, baseData }) => {
+const MainPage: NextPage<Index> = ({ news, baseData, quotesData }) => {
     return (
         <MainLayout title="Главная страница">
             <PortalLayout>
@@ -30,9 +35,7 @@ const MainPage: NextPage<Index> = ({ news, baseData }) => {
                         <NewsList items={news} />
                     </Grid>
                     <Grid xs={false} item md={9}>
-                        <PaperWrapper>
-                            <Typography level={3}>Investments</Typography>
-                        </PaperWrapper>
+                        <HeaderBestQuote items={quotesData} />
                         <Grid container spacing={3}>
                             <Grid direction="column" item md={9} sm={12}>
                                 <ArticleList
@@ -56,10 +59,12 @@ export default MainPage;
 export const getStaticProps: GetStaticProps = async () => {
     const news = await getListNews();
     const baseData = await getBasePortal();
+    const quotesData = await getQuotePortal();
     return {
         props: {
             news,
             baseData,
+            quotesData,
         },
         revalidate: 20,
     };

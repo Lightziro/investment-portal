@@ -17,11 +17,11 @@ import {
     alertInfo,
     alertSuccess,
 } from "../../../../redux/actions/alertActions";
-import { axios } from "../../../../utils/axios";
+import { axios   } from "../../../../utils/axios";
 import {
     setIdeaRatingStats,
-    setUserIdeaRating,
 } from "../../../../redux/actions/viewActions";
+import {useTranslation} from "react-i18next";
 interface SetRatingForm {
     open: boolean;
     handleClose: () => void;
@@ -32,6 +32,7 @@ export const SetRatingForm: React.FC<SetRatingForm> = ({
     handleClose,
     ideaId,
 }) => {
+    const {t} = useTranslation();
     const dispatch = useDispatch();
     const handleSubmit = async (form: FormRating) => {
         axios
@@ -77,9 +78,9 @@ export const SetRatingForm: React.FC<SetRatingForm> = ({
                 </DialogContent>
                 <DialogActions>
                     <Button type="submit" onClick={handleValidSubmit}>
-                        Set rating
+                        {t("Set a rating")}
                     </Button>
-                    <Button onClick={handleClose}>Agree</Button>
+                    <Button onClick={handleClose}>{t('Cancel')}</Button>
                 </DialogActions>
             </form>
         </Dialog>

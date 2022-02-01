@@ -2,6 +2,8 @@
 
 namespace App\Http\Modules\Core\Controllers;
 
+use App\Http\Classes\StockMarket;
+use App\Models\Other\Company;
 use App\Models\Other\Country;
 use App\Models\Other\EmailSubscription;
 use App\Models\User\UsersRole;
@@ -44,8 +46,22 @@ class OtherController extends Controller
         }
     }
 
-    public function uploadFile(Request $request)
+    public function getQuote(Request $request): JsonResponse
     {
-        $test = '';
+        // TODO: Добавить кэширование
+        $stocks = Company::query()->whereIn('ticker', ['AAPL', 'V', 'MDB', 'BAC', 'TSLA', 'NFLX'])
+            ->orderBy('name')->get(['name', 'ticker']);
+        $market = new StockMarket();
+
+        /** @var Company $company_model */
+        foreach ($stocks as $company_model) {
+            $quote_info = $market->getLastQuote($company_model->ticker);
+            $ar_stock[] = [
+                'name' => $company_model->name,
+                'last_price' => $quote_info->getC(),
+                'percent_change_today' => $quote_info->getDp(),
+            ];
+        }
+        return response()->json($ar_stock ?? []);
     }
 }

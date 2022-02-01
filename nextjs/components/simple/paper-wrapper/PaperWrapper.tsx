@@ -1,5 +1,13 @@
 import React from "react";
-
-export const PaperWrapper: React.FC = ({ children }) => {
-    return <div className="paper-wrapper">{children}</div>;
+import classnames from "classnames";
+interface PaperWrapper {
+    className?: string;
+}
+export const PaperWrapper: React.FC<PaperWrapper> = ({
+    children,
+    className,
+}) => {
+    return (
+        <div className={classnames("paper-wrapper", className)}>{children}</div>
+    );
 };

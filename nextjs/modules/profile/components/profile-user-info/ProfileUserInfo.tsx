@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Divider,
     IconButton,
@@ -12,12 +12,24 @@ import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { RoleUserChip } from "../../../../components/simple/role-user-chip/RoleUserChip";
 import { FormProfile } from "../form-profile/FormProfile";
 import { ProfileView } from "../../../../redux/ts/types/view/view-store.types";
+import { axios } from "../../../../utils/axios";
+import { CountryItem } from "../../../../ts/types/other/other.types";
 interface ProfileUserInfo {
     profile: ProfileView;
 }
 export const ProfileUserInfo: React.FC<ProfileUserInfo> = ({ profile }) => {
     const [edit, setEdit] = useState(false);
+    const [counties, setCountries] = useState<CountryItem[]>([]);
     const user = useRootSelector((store) => store.user);
+    useEffect(() => {
+        fetchCountries();
+    }, []);
+    const fetchCountries = async () => {
+        const countries = await axios
+            .get(`${process.env.API_URL}/api/other/countries`)
+            .then((res) => res.data);
+        await setCountries(countries);
+    };
     return (
         <Paper sx={{ px: 2, py: 1 }} elevation={2}>
             <Stack
@@ -42,6 +54,7 @@ export const ProfileUserInfo: React.FC<ProfileUserInfo> = ({ profile }) => {
                 edit={edit}
                 profile={profile}
                 handleEdit={() => setEdit(!edit)}
+                countries={counties}
             />
         </Paper>
     );

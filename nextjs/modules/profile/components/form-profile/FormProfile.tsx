@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { StoreData } from "../../../../ts/types/redux/store.types";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import { FormProfileRow } from "./FormProfileRow";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCountries } from "../../../../redux/actions/mainActions";
+import { useDispatch } from "react-redux";
 import { Box, Button, Stack } from "@mui/material";
 import { updateProfile } from "../../../../redux/actions/profileActions";
 import { sexList } from "../../../../ts/init/other/other.init";
@@ -14,27 +12,22 @@ import { FormProfileSelectField } from "../form-profile-fields/FormProfileSelect
 import { FormProfileRadioField } from "../form-profile-fields/FormProfileRadioField";
 import { ProfileView } from "../../../../redux/ts/types/view/view-store.types";
 import { convertToProfileForm } from "../../utils/convert-to-form";
+import { CountryItem } from "../../../../ts/types/other/other.types";
 
 interface FormProfile {
     edit: boolean;
     profile: ProfileView;
     handleEdit: () => void;
+    countries: CountryItem[];
 }
 export const FormProfile: React.FC<FormProfile> = ({
     edit,
     profile,
     handleEdit,
+    countries,
 }) => {
     const { t } = useTranslation();
-    const countries = useSelector(
-        (state: StoreData) => state.main.otherData.countries
-    );
     const dispatch = useDispatch();
-    useEffect(() => {
-        if (!countries) {
-            dispatch(fetchCountries());
-        }
-    }, []);
     const handleSubmit = (form) => {
         dispatch(updateProfile(form));
         handleEdit();

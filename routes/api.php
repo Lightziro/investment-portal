@@ -39,6 +39,7 @@ Route::group(['prefix' => 'other'], function () {
     Route::post('/subscribe-email', [OtherController::class, 'subscribeEmail']);
     Route::post('/upload-file', [OtherController::class, 'uploadFile']);
     Route::get('/roles', [OtherController::class, 'getRoles']);
+    Route::get('/quotes', [OtherController::class, 'getQuote']);
 });
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/get/{id}', [ViewController::class, 'getViewProfile']);

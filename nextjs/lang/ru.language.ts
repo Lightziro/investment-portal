@@ -110,4 +110,6 @@ export const ruLanguage = {
     "Specify a rating from 1 to 5 stars": "Укажите рейтинг от 1 до 5 звезд",
     "Your rating successfully posted": "Ваш рейтинг успешно опубликован",
     "Your assessment": "Ваша оценка",
+    "Cancel": "Назад",
+    "Set a rating": "Установить рейтинг"
 };
