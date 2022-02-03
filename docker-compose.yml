@@ -22,8 +22,9 @@ services:
             PHP_IDE_CONFIG: "serverName=Docker"
 
     db:
-        image: mysql:5.7
+        image: mysql:latest
         container_name: mysql
+        platform: linux/amd64
         restart: unless-stopped
         tty: true
         ports:
