@@ -1,7 +1,6 @@
 import React from "react";
-import { PaperWrapper } from "../../../../components/simple/paper-wrapper/PaperWrapper";
 import { DtoQuoteItem } from "../../../../ts/types/response/response.types";
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Paper } from "@mui/material";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import * as classnames from "classnames";
 import classes from "../../Portal.module.scss";
@@ -13,8 +12,11 @@ export const HeaderBestQuote: React.FC<HeaderBestQuote> = ({ items }) => {
     const getClassByChange = (change: number) => {
         return change > 0 ? classes.changePositive : classes.changeNegative;
     };
+    const getIconByChange = (change: number) => {
+        return change > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />;
+    };
     return (
-        <PaperWrapper className="pb-2 mb-3">
+        <Paper className="px-2 py-2 mb-3" elevation={2}>
             <Grid
                 alignItems="center"
                 justifyContent="center"
@@ -51,7 +53,7 @@ export const HeaderBestQuote: React.FC<HeaderBestQuote> = ({ items }) => {
                                     classes.headerIconChange
                                 )}
                             >
-                                <ArrowUpOutlined />
+                                {getIconByChange(quote.percent_change_today)}
                             </div>
                             <span className={classes.quoteLastPrice}>
                                 {quote.last_price}$
@@ -68,6 +70,6 @@ export const HeaderBestQuote: React.FC<HeaderBestQuote> = ({ items }) => {
                     </Grid>
                 ))}
             </Grid>
-        </PaperWrapper>
+        </Paper>
     );
 };

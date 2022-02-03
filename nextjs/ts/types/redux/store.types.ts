@@ -28,8 +28,10 @@ export interface NewsPrediction {
 }
 
 export interface UserStore {
-    userId: number;
-    fullName: string;
+    user_id: number;
+    first_name: string;
+    last_name: string;
+    full_name: string;
     role: string;
     notices: Notice[];
     avatar: string;

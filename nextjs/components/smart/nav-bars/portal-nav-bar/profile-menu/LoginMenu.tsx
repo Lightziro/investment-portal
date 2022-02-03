@@ -21,10 +21,10 @@ export const LoginMenu: React.FC<LoginMenu> = ({ user, handleExit }) => {
     return (
         <Fragment>
             <Typography variant="body2" align="center">
-                {t(`Welcome, user`, { fullName: user.fullName })}
+                {t(`Welcome, user`, { fullName: user.full_name })}
             </Typography>
             <Divider sx={{ my: 1 }} />
-            <MenuProfileItems items={menuAuth(user.userId)} />
+            <MenuProfileItems items={menuAuth(user.user_id)} />
             <Divider />
             {user.role === "admin" && (
                 <Link href="/admin">

@@ -21,6 +21,11 @@ export const menuAuth = (userId: number): MenuItems[] => {
             link: `/profile/${userId}`,
             icon: "eva:clipboard-fill",
         },
+        {
+            text: "Personal account",
+            link: `/personal-account`,
+            icon: "fxemoji:personalcomputer",
+        },
     ];
 };
 export const MENU_LANGUAGE = [

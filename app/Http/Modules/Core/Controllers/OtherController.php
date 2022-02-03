@@ -56,11 +56,13 @@ class OtherController extends Controller
         /** @var Company $company_model */
         foreach ($stocks as $company_model) {
             $quote_info = $market->getLastQuote($company_model->ticker);
-            $ar_stock[] = [
-                'name' => $company_model->name,
-                'last_price' => $quote_info->getC(),
-                'percent_change_today' => $quote_info->getDp(),
-            ];
+            if ($quote_info) {
+                $ar_stock[] = [
+                    'name' => $company_model->name,
+                    'last_price' => $quote_info->getC(),
+                    'percent_change_today' => $quote_info->getDp(),
+                ];
+            }
         }
         return response()->json($ar_stock ?? []);
     }

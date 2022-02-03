@@ -70,13 +70,12 @@ class User extends Authenticatable
                 'created' => $notice_model->created_at->format('Y-m-d H:i:s'),
             ];
         }
-        return [
-            'userId' => $this->user_id,
-            'fullName' => $this->getFullName(),
+        return array_merge($this->only(['user_id', 'first_name', 'last_name']), [
+            'full_name' => $this->getFullName(),
             'role' => $this->role->name,
             'notices' => $ar_notice ?? [],
             'avatar' => $this->avatar_path,
-        ];
+        ]);
     }
 
     public function getProfile(): array

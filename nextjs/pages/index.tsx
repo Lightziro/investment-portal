@@ -1,6 +1,5 @@
 import React from "react";
 import { MainLayout } from "../layouts/MainLayout";
-import { PaperWrapper } from "../components/simple/paper-wrapper/PaperWrapper";
 import { ArticleList } from "../components/smart/article-list/ArticleList";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
 import { IdeaStatistics } from "../components/ordinary/ideas-statistics/IdeaStatistics";
@@ -34,7 +33,7 @@ const MainPage: NextPage<Index> = ({ news, baseData, quotesData }) => {
                     >
                         <NewsList items={news} />
                     </Grid>
-                    <Grid xs={false} item md={9}>
+                    <Grid item md={9}>
                         <HeaderBestQuote items={quotesData} />
                         <Grid container spacing={3}>
                             <Grid direction="column" item md={9} sm={12}>

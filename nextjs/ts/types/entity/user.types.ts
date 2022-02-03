@@ -1,5 +1,3 @@
-import { ProfileView } from "../redux/store.types";
-
 export interface AuthorInfo {
     totalIdeas: number;
     amountSuccessfulIdeas: number;

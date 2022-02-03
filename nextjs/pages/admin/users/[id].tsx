@@ -43,7 +43,7 @@ export const EditUser = () => {
                     <Fragment>
                         <Typography align="center" variant="h4">
                             Edit user data -{" "}
-                            {`${editUser.fullName}[${editUser.userId}]`}
+                            {`${editUser.full_name}[${editUser.userId}]`}
                         </Typography>
                         <UserEditForm
                             callback={handleSubmit}

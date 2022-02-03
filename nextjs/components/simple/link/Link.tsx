@@ -1,9 +1,17 @@
 import React from "react";
 import Link, { LinkProps } from "next/link";
-export const LinkWrapper: React.FC<LinkProps> = ({ children, ...other }) => {
+
+interface LinkWrapper extends LinkProps {
+    className?: string;
+}
+export const LinkWrapper: React.FC<LinkWrapper> = ({
+    children,
+    className,
+    ...other
+}) => {
     return (
         <Link {...other}>
-            <a>{children}</a>
+            <a className={className}>{children}</a>
         </Link>
     );
 };
