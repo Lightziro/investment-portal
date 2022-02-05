@@ -20,8 +20,9 @@ class CompanyAdminController extends Controller
         $companies = Company::query()->paginate(self::COMPANY_PAGE_SIZE);
         /** @var Company $company_model */
         foreach ($companies as $company_model) {
+            $activity = $company_model->activity;
             $ar_companies[] = array_merge($company_model->only(['company_id', 'name', 'ticker', 'date_ipo', 'logo']), [
-                'activity' => $company_model->activity->name,
+                'activity' => $activity->name ?? '',
             ]);
         }
         return response()->json(['items' => $ar_companies ?? [], 'lastPage' => $companies->lastPage()]);

@@ -6,7 +6,10 @@ export const LogoSection: React.FC = () => {
     return (
         <div className={classes.headerBarLogo}>
             <Link href="/" passHref>
-                <img className={classes.logoLink} src="/image/logo/logo.svg" />
+                <img
+                    className={classes.logoLink}
+                    src="/images/logo/logo-hub.png"
+                />
             </Link>
         </div>
     );
