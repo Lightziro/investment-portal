@@ -99,21 +99,20 @@ class ArticleAdminController extends Controller
             if ($article && $article->delete()) {
                 return response()->json($this->articleListByPage($request['page']));
             }
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return response()->json(['message' => 'Not success'], 400);
         }
+        return response()->json(['message' => 'Response']);
     }
 
     public function getItemArticle(int $id): JsonResponse
     {
-        /** @var Article $article */
-        if ($article = Article::query()->find($id)) {
-            return response()->json([
-                'articleId' => $article->article_id,
-                'title' => (string)$article,
-                'preview' => $article->preview_path,
-                'content' => $article->content,
-            ]);
+        try {
+            /** @var Article $article */
+            $article = Article::query()->findOrFail($id)->with('author')->first();
+            return response()->json($article->toArray());
+        } catch (Throwable $e) {
+            return response()->json([], 404);
         }
     }
 

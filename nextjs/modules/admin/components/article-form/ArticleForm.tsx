@@ -7,11 +7,13 @@ import { initialArticleForm } from "../../../../ts/init/entity/article.init";
 import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
 import { getPhoto, settingsSunEditor } from "../../../../utils/other";
-import { DtoEditArticle } from "../../ts/types/response/admin-response-personal";
+import { ArticleModel } from "../../../../ts/types/entity/article.types";
+
 interface ArticleForm {
-    article?: DtoEditArticle;
+    article?: ArticleModel;
     callback: (form) => void;
 }
+
 const SunEditor = dynamic(import("suneditor-react"), { ssr: false });
 export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
     const { t } = useTranslation();
@@ -74,7 +76,7 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                         <Form.Label>{t("Preview")}</Form.Label>
                         <Form.Control
                             type="file"
-                            name="preview"
+                            name="preview_path"
                             onChange={(e) =>
                                 setFieldValue(
                                     "preview",
@@ -84,8 +86,11 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                             // value={values.preview}
                             size="sm"
                         />
-                        {values.preview && (
-                            <img width="194" src={getPhoto(values.preview)} />
+                        {values.preview_path && (
+                            <img
+                                width="194"
+                                src={getPhoto(values.preview_path)}
+                            />
                         )}
                     </Form.Group>
                     <Button variant="primary" type="submit">

@@ -1,19 +1,16 @@
 import { Comment } from "../other/view.types";
+import { UserModel } from "./user.types";
 
-export interface Article {
-    articleId: number;
+export interface ArticleModel {
+    article_id: number;
     title: string;
-    dateCreate: string;
-    dateUpdate: string;
-    preview: string;
-    author: ArticleAuthor;
+    created_at: string;
+    updated_at: string;
+    preview_path: string;
+    author_id: number;
+    author: UserModel;
     content: string;
-}
-
-export interface ArticleAuthor {
-    userId: number;
-    avatar: string;
-    fullName: string;
+    // TODO: добавить комментарии
 }
 
 export interface ArticleLabel {

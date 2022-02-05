@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 import { LoadArticleItems } from "./load-article-items/LoadArticleItems";
 import { ArticleItem } from "./article-item/ArticleItem";
 import { Grid } from "@mui/material";
-import { Article } from "../../../ts/types/entity/article.types";
+import { ArticleModel } from "../../../ts/types/entity/article.types";
 interface ArticleList {
-    popular: Article[];
-    simple: Article[];
+    popular: ArticleModel[];
+    simple: ArticleModel[];
 }
 export const ArticleList: React.FC<ArticleList> = ({ popular, simple }) => {
     return (
@@ -13,7 +13,7 @@ export const ArticleList: React.FC<ArticleList> = ({ popular, simple }) => {
             <Grid justifyContent="center" container direction="row" spacing={3}>
                 {popular ? (
                     popular.map((article) => (
-                        <Grid key={article.articleId} xs={12} item sm={4}>
+                        <Grid key={article.article_id} xs={12} item sm={4}>
                             <ArticleItem item={article} />
                         </Grid>
                     ))
@@ -31,7 +31,7 @@ export const ArticleList: React.FC<ArticleList> = ({ popular, simple }) => {
                 {simple ? (
                     simple.map((article) => (
                         <Grid
-                            key={article.articleId}
+                            key={article.article_id}
                             xs={6}
                             md={4}
                             lg={4}
