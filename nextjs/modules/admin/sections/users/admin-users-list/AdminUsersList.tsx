@@ -9,7 +9,7 @@ import { fetchEntityList } from "../../../../../redux/actions/adminActions";
 import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import { RoleUserChip } from "../../../../../components/simple/role-user-chip/RoleUserChip";
-import { DtoUserItem } from "../../../ts/types/response/admin-response-item.types";
+import { UserModel } from "../../../../../ts/types/entity/user.types";
 
 export const AdminUsersList: React.FC = () => {
     const dispatch = useDispatch();
@@ -38,12 +38,12 @@ export const AdminUsersList: React.FC = () => {
                         "Date update",
                         "Edit",
                     ]}
-                    row={list.map((user: DtoUserItem) => [
+                    row={list.map((user: UserModel) => [
                         user.user_id,
                         user.full_name,
                         user.sex,
-                        <RoleUserChip role={user.role} />,
-                        user.country,
+                        <RoleUserChip role={user.role?.name} />,
+                        user.country?.name,
                         moment(user.created_at).format("ll"),
                         moment(user.updated_at).format("ll"),
                         <IconButton

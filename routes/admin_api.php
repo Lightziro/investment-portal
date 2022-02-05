@@ -6,7 +6,7 @@ use App\Http\Modules\Admin\Controllers\CreateIdeaController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\InvestmentIdeaController;
 use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
-use App\Http\Modules\Admin\Controllers\UsersAdminController;
+use App\Http\Modules\Admin\Controllers\UserAdminController;
 use App\Http\Modules\Admin\Middleware\BeforeCheckRootAdmin;
 use App\Http\Modules\Profile\Middleware\BeforeGetAuthUserId;
 use Illuminate\Support\Facades\Route;
@@ -33,9 +33,10 @@ Route::group(['prefix' => 'investment-idea', 'middleware' => ['auth:sanctum', Be
     Route::post('/publish', [CreateIdeaController::class, 'publishIdea']);
 });
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
-    Route::get('/list/{page}', [UsersAdminController::class, 'getUsersByPage']);
-    Route::get('/get-stats', [UsersAdminController::class, 'getStats']);
-    Route::put('/update', [UsersAdminController::class, 'updateUser']);
+    Route::get('/list/{page}', [UserAdminController::class, 'getUsersByPage']);
+    Route::get('/get-stats', [UserAdminController::class, 'getStats']);
+    Route::put('/{user}', [UserAdminController::class, 'update']);
+    Route::get('get/{id}', [UserAdminController::class, 'get']);
 });
 
 Route::group(['prefix' => 'company', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {

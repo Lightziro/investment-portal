@@ -6,7 +6,6 @@ import { getViewEntity } from "../../utils/api/get-data";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
-import { useRouter } from "next/router";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { ProfileView } from "../../redux/ts/types/view/view-store.types";
 interface Profile {
@@ -14,7 +13,6 @@ interface Profile {
 }
 const Profile: NextPage<Profile> = ({ profile }) => {
     const { t } = useTranslation();
-    const router = useRouter();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setViewEntity(profile, "profile"));

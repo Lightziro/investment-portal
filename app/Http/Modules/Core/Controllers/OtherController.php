@@ -8,6 +8,7 @@ use App\Models\Other\Country;
 use App\Models\Other\EmailSubscription;
 use App\Models\User\UsersRole;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -23,12 +24,9 @@ class OtherController extends Controller
 
     public function getRoles(): JsonResponse
     {
-        $roles = UsersRole::all();
-        /** @var UsersRole $role_model */
-        foreach ($roles as $role_model) {
-            $ar_roles[] = $role_model->getFrontendData();
-        }
-        return response()->json($ar_roles ?? []);
+        /** @var UsersRole[]|Collection $roles */
+        $roles = UsersRole::query()->get()->toArray();
+        return response()->json($roles);
     }
 
     public function subscribeEmail(Request $request): JsonResponse

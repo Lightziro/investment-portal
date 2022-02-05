@@ -11,15 +11,6 @@ export interface DtoIdeaItem {
     status: IdeaStatus;
     score: number;
 }
-export interface DtoUserItem {
-    user_id: number;
-    full_name: string;
-    country: string;
-    sex: string;
-    role: string;
-    created_at: string;
-    updated_at: string;
-}
 export interface DtoArticleItem {
     article_id: number;
     content: string;

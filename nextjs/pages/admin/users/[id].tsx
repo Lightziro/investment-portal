@@ -7,19 +7,19 @@ import { UserEditForm } from "../../../modules/admin/components/user-edit-form/U
 import { axios } from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { alertError } from "../../../redux/actions/alertActions";
-import { UserAdminEdit } from "../../../ts/types/entity/user.types";
+import { UserModel } from "../../../ts/types/entity/user.types";
 import { Typography } from "@mui/material";
 
 export const EditUser = () => {
     const dispatch = useDispatch();
-    const [editUser, setEditUser] = useState<UserAdminEdit>(null);
+    const [editUser, setEditUser] = useState<UserModel>(null);
     const { t } = useTranslation();
     const router = useRouter();
     const { id } = router.query;
     useEffect(() => {
         if (id) {
             axios
-                .get(`${process.env.API_URL}/api/profile/get/${id}`)
+                .get(`${process.env.API_URL}/api/admin/user/get/${id}`)
                 .then((res) => setEditUser(res.data))
                 .catch((e) => {
                     dispatch(alertError("Couldn't find the user"));
@@ -27,12 +27,9 @@ export const EditUser = () => {
                 });
         }
     }, [id]);
-    const handleSubmit = async (formData) => {
+    const handleSubmit = async (formData: UserModel) => {
         await axios
-            .put(`${process.env.API_URL}/api/admin/user/update`, {
-                ...formData,
-                userId: id,
-            })
+            .put(`${process.env.API_URL}/api/admin/user/${id}`, formData)
             .then(() => router.push("/admin/users"))
             .catch(() => dispatch(alertError("Failed to update data")));
     };
@@ -43,7 +40,7 @@ export const EditUser = () => {
                     <Fragment>
                         <Typography align="center" variant="h4">
                             Edit user data -{" "}
-                            {`${editUser.full_name}[${editUser.userId}]`}
+                            {`${editUser.full_name}[${editUser.user_id}]`}
                         </Typography>
                         <UserEditForm
                             callback={handleSubmit}

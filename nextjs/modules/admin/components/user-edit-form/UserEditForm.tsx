@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Formik, FormikProps } from "formik";
-import { CountryItem, Role, Sex } from "../../../../ts/types/other/other.types";
+import { Sex } from "../../../../ts/types/other/other.types";
 import { sexList } from "../../../../ts/init/other/other.init";
 import { useTranslation } from "react-i18next";
-import { FormEditUserAdmin } from "../../../../ts/types/forms/form.types";
-import { convertFormEditUser } from "../../utils/convert-to-form";
-import { UserAdminEdit } from "../../../../ts/types/entity/user.types";
+import { RoleModel, UserModel } from "../../../../ts/types/entity/user.types";
 import { getCountries, getRoles } from "../../../../utils/api/get-data";
+import { CountryModel } from "../../../../ts/types/entity/other.types";
 interface UserEditForm {
-    callback: (formData: FormEditUserAdmin) => void;
-    userData: UserAdminEdit;
+    callback: (formData: UserModel) => void;
+    userData: UserModel;
 }
 export const UserEditForm: React.FC<UserEditForm> = ({
     callback,
     userData,
 }) => {
-    const [roles, setRoles] = useState<Role[]>([]);
-    const [countries, setCountries] = useState<CountryItem[]>([]);
+    const [roles, setRoles] = useState<RoleModel[]>([]);
+    const [countries, setCountries] = useState<CountryModel[]>([]);
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -34,10 +33,7 @@ export const UserEditForm: React.FC<UserEditForm> = ({
     };
 
     return (
-        <Formik
-            initialValues={convertFormEditUser(userData)}
-            onSubmit={callback}
-        >
+        <Formik initialValues={userData} onSubmit={callback}>
             {({
                 values,
                 errors,
@@ -45,15 +41,15 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
-            }: FormikProps<FormEditUserAdmin>) => (
+            }: FormikProps<UserModel>) => (
                 <form onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>{t("First name")}</Form.Label>
                             <Form.Control
-                                name="firstName"
+                                name="first_name"
                                 onChange={handleChange}
-                                value={values.firstName}
+                                value={values.first_name}
                                 placeholder="Enter first name"
                             />
                         </Form.Group>
@@ -61,9 +57,9 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                         <Form.Group as={Col} controlId="formGridPassword">
                             <Form.Label>{t("Last name")}</Form.Label>
                             <Form.Control
-                                name="lastName"
+                                name="last_name"
                                 onChange={handleChange}
-                                value={values.lastName}
+                                value={values.last_name}
                                 placeholder="Enter last name"
                             />
                         </Form.Group>
@@ -72,14 +68,14 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                         <Form.Group as={Col}>
                             <Form.Label>{t("Role")}</Form.Label>
                             <Form.Select
-                                name="role"
+                                name="role_id"
                                 onChange={handleChange}
-                                value={values.role}
+                                value={values.role_id}
                             >
                                 {roles.map((item) => (
                                     <option
-                                        key={item.roleId}
-                                        value={item.roleId}
+                                        key={item.role_id}
+                                        value={item.role_id}
                                     >
                                         {item.name}
                                     </option>
@@ -90,9 +86,9 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                         <Form.Group as={Col}>
                             <Form.Label>{t("Country")}</Form.Label>
                             <Form.Select
-                                name="country"
+                                name="country_id"
                                 onChange={handleChange}
-                                value={values.country}
+                                value={values.country_id}
                             >
                                 {countries.map((item) => (
                                     <option

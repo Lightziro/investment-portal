@@ -9,9 +9,9 @@ import {
     DtoArticleItem,
     DtoCompanyItem,
     DtoIdeaItem,
-    DtoUserItem,
 } from "../../../../modules/admin/ts/types/response/admin-response-item.types";
 import { AdminCompanies } from "./companies/admin-companies.types";
+import { UserModel } from "../../../../ts/types/entity/user.types";
 
 export interface AdminStore {
     investmentIdeas: AdminIdeas;
@@ -26,20 +26,24 @@ export interface AdminStore {
     users: AdminUsers;
     companies: AdminCompanies;
 }
+
 export interface DtoItems {
     items: AdminItems;
     lastPage: number;
 }
+
 export interface AdminSectionBase {
     list: AdminItems;
     lastPage: number;
     loading: boolean;
 }
+
 export type AdminItems =
     | DtoArticleItem[]
     | DtoIdeaItem[]
-    | DtoUserItem[]
+    | UserModel[]
     | DtoCompanyItem[];
+
 export type AdminSection =
     | AdminUsers
     | AdminIdeas

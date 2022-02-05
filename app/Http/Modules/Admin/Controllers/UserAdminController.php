@@ -6,28 +6,22 @@ use App\Http\Modules\Profile\Helpers\ProfileHelper;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Request;
 use Throwable;
 
-class UsersAdminController extends Controller
+class UserAdminController extends Controller
 {
     private const USERS_PAGE_SIZE = 5;
 
     public function getUsersByPage(int $page): JsonResponse
     {
         Paginator::currentPageResolver(fn() => $page);
-        $users = User::query()->paginate(self::USERS_PAGE_SIZE);
+        $users = User::query()->with('role')->with('country')->paginate(self::USERS_PAGE_SIZE);
         /** @var User $user_model */
         foreach ($users as $user_model) {
-            $ar_users[] = array_merge($user_model->only(['user_id', 'sex']), [
-                'full_name' => (string)$user_model,
-                'country' => $user_model->country ? $user_model->country->name : null,
-                'role' => (string)$user_model->role,
-                'created_at' => $user_model->created_at->format('Y-m-d'),
-                'updated_at' => $user_model->updated_at->format('Y-m-d')
-            ]);
+            $ar_users[] = $user_model->toArray();
         }
         return response()->json(['items' => $ar_users ?? [], 'lastPage' => $users->lastPage()]);
     }
@@ -40,19 +34,25 @@ class UsersAdminController extends Controller
         return response()->json(['newUsersToday' => $users_today, 'newUsersWeek' => $users_week]);
     }
 
-    public function updateUser(Request $request): JsonResponse
+    public function update(User $user): JsonResponse
     {
-        $form_data = $request->post();
         try {
-            /** @var User $user */
-            if (!$user = User::query()->find($form_data['userId'])) {
-                return response()->json(['Not found user'], 404);
-            }
-            ProfileHelper::replaceUpdateField($user, $form_data);
-            $user->save();
-            return response()->json(['status' => 'success']);
+            $user->updateOrFail(Request::toArray());
+            return response()->json([]);
+            // TODO: убрать replaceUpdateField
+//            ProfileHelper::replaceUpdateField($user, $form_data);
         } catch (Throwable  $e) {
+            return response()->json([], 400);
+        }
+    }
 
+    public function get(int $id): JsonResponse
+    {
+        try {
+            $user = User::query()->findOrFail($id)->with('role')->with('country')->first();
+            return response()->json($user->toArray());
+        } catch (Throwable $e) {
+            return response()->json([], 404);
         }
     }
 }

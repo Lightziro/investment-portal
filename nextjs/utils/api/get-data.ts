@@ -35,6 +35,7 @@ export const getViewEntity = async (entityName, ctx: GetStaticPropsContext) => {
             return null;
         });
 };
+// TODO переписать на тип сущности
 export const getRoles = async () =>
     await axios
         .get(`${process.env.API_URL}/api/other/roles`)

@@ -1,8 +1,8 @@
 import { AdminSectionBase } from "../admin-store.types";
-import { DtoUserItem } from "../../../../../modules/admin/ts/types/response/admin-response-item.types";
+import { UserModel } from "../../../../../ts/types/entity/user.types";
 
 export interface AdminUsers extends AdminSectionBase {
-    list: DtoUserItem[];
+    list: UserModel[];
     stats: AdminUsersStats;
 }
 
