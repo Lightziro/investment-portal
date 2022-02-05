@@ -1,0 +1,15 @@
+.linkChangeProfile {
+    color: #005bff;
+}
+
+.toolBarItem {
+    color: #1a1e21;
+    padding: 4px 8px;
+    &:hover {
+        text-decoration: underline;
+    }
+    &.active {
+        background: #e5efff;
+        border-radius: 3px;
+    }
+}

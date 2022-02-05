@@ -4,16 +4,18 @@ import { Article } from "../../../../ts/types/entity/article.types";
 import moment from "moment";
 import { LinkWrapper } from "../../../simple/link/Link";
 import { Card } from "antd";
+import {useTranslation} from "react-i18next";
 const { Meta } = Card;
 interface ArticleItem {
     item: Article;
 }
 export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
+    const {t} = useTranslation()
     return (
         <Card
             style={{ width: "100%" }}
             cover={
-                <img src={`${process.env.API_URL}/storage/${item.preview}`} />
+                <img alt={`${t('Preview article')}`} src={`${process.env.API_URL}/storage/${item.preview}`} />
             }
         >
             <Meta

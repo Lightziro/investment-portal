@@ -50,6 +50,16 @@ export const AUTH_BY = [
         icon: <Icon icon="flat-color-icons:google" color="#1877f2" />,
     },
 ];
+export const MENU_PERSONAL_ACCOUNT = [
+    {
+        label: 'Main',
+        url: '/personal-account'
+    },
+    {
+        label: 'My predictions',
+        url: '/personal-account/predictions'
+    }
+]
 export const MENU_ADMIN = [
     {
         logo: {
