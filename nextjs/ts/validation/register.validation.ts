@@ -1,11 +1,11 @@
 import * as Yup from "yup";
 
 export const SignUpSchema = Yup.object().shape({
-    firstName: Yup.string()
+    first_name: Yup.string()
         .min(2, "Must contain min 2 symbol")
         .max(25, "Must contain min 25 symbol")
         .required("Is required field"),
-    lastName: Yup.string()
+    last_name: Yup.string()
         .min(2, "Must contain min 2 symbol")
         .max(25, "Must contain max 25 symbol")
         .required("Is required field"),

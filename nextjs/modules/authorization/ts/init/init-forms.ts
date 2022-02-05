@@ -2,8 +2,8 @@ import { FormAuth, FormRegister } from "../../../../ts/types/forms/form.types";
 
 export const initRegisterForm: FormRegister = {
     email: "",
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     consent: false,
     password: "",
 };

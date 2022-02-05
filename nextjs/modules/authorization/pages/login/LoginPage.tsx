@@ -11,9 +11,9 @@ import { Col, Row } from "react-bootstrap";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { login } from "../../../../redux/actions/userActions";
-import { FormAuth } from "../../../../ts/types/forms/form.types";
 import { initialLoginForm } from "../../ts/init/init-forms";
 import { useTranslation } from "react-i18next";
+import { FormAuth } from "../../ts/types/forms.types";
 
 export const LoginPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -21,21 +21,6 @@ export const LoginPage: React.FC = () => {
     const handleSubmit = (formData: FormAuth) => {
         dispatch(login(formData));
     };
-
-    // try {
-    //     axios
-    //         .get(`${process.env.API_URL}/sanctum/csrf-cookie`, {
-    //             withCredentials: true,
-    //             headers: {
-    //                 "Access-Control-Allow-Credentials": true,
-    //             },
-    //         })
-    //         .then(() => {
-    //             const data = axios
-    //                 .post(`${process.env.API_URL}/api/user/login`, formData)
-    //                 .then((response) => console.log("SUCCESS"));
-    //         });
-    // } catch (e) {}
     return (
         <AuthLayout>
             <Typography component="h1" variant="h5">

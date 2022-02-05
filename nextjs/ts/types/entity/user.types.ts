@@ -1,3 +1,26 @@
+import { CountryModel } from "./other.types";
+
+export interface UserModel {
+    user_id: number;
+    first_name: number;
+    last_name: number;
+    email: string;
+    password?: string;
+    role_id: number;
+    country_id: number;
+    updated_at: string;
+    created_at: string;
+    avatar_path: string;
+    sex: string;
+    full_name: string;
+    role?: RoleModel;
+    country?: CountryModel;
+}
+export interface RoleModel {
+    role_id: number;
+    name: string;
+}
+
 export interface AuthorInfo {
     totalIdeas: number;
     amountSuccessfulIdeas: number;
@@ -5,7 +28,4 @@ export interface AuthorInfo {
     fullName: string;
     userId: number;
     avatar: string;
-}
-export interface UserAdminEdit extends ProfileView {
-    roleId: number;
 }

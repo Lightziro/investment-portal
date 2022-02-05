@@ -45,8 +45,15 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'role_id', 'avatar_path'
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'role_id',
+        'avatar_path',
+        'country_id'
     ];
+    protected $hidden = ['password'];
     protected $primaryKey = 'user_id';
 
     #[Pure] public function __toString()
@@ -130,5 +137,13 @@ class User extends Authenticatable
     public function subscriptions(): HasMany
     {
         return $this->hasMany(UserSubscriptions::class, 'user_id', 'user_id');
+    }
+
+    public function toArray(): array
+    {
+        $attributes = parent::toArray();
+        return array_merge($attributes, [
+            'full_name' => (string)$this
+        ]);
     }
 }

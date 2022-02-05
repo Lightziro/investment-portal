@@ -11,16 +11,22 @@ import {
 } from "@mui/material";
 import { Formik, FormikProps } from "formik";
 import { SignUpSchema } from "../../../../ts/validation/register.validation";
-import { FormRegister } from "../../../../ts/types/forms/form.types";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { initRegisterForm } from "../../ts/init/init-forms";
-import { useDispatch } from "react-redux";
+import { axios } from "../../../../utils/axios";
+import { useRouter } from "next/router";
+import { FormRegister } from "../../ts/types/forms.types";
 
 export const RegisterPage: React.FC = () => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
-    const handleSubmit = (formData: FormRegister) => {};
+    const router = useRouter();
+    const handleSubmit = async (formData: FormRegister) => {
+        await axios
+            .post(`${process.env.API_URL}/api/user/register`, formData)
+            .then(() => router.push("/auth"));
+    };
+    // TODO: Переписать на useFormik
     return (
         <AuthLayout>
             <Container>
@@ -44,18 +50,18 @@ export const RegisterPage: React.FC = () => {
                                 <Col xs={12} sm={6}>
                                     <TextField
                                         autoComplete="given-name"
-                                        name="firstName"
+                                        name="first_name"
                                         required
                                         fullWidth
                                         error={
-                                            touched.firstName &&
-                                            !!errors.firstName
+                                            touched.first_name &&
+                                            !!errors.first_name
                                         }
                                         helperText={
-                                            touched.firstName &&
-                                            t(errors.firstName)
+                                            touched.first_name &&
+                                            t(errors.first_name)
                                         }
-                                        value={values.firstName}
+                                        value={values.first_name}
                                         onChange={handleChange}
                                         label={t("First Name")}
                                         autoFocus
@@ -67,16 +73,16 @@ export const RegisterPage: React.FC = () => {
                                         fullWidth
                                         label={t("Last Name")}
                                         onChange={handleChange}
-                                        value={values.lastName}
+                                        value={values.last_name}
                                         error={
-                                            touched.lastName &&
-                                            !!errors.lastName
+                                            touched.last_name &&
+                                            !!errors.last_name
                                         }
                                         helperText={
-                                            touched.lastName &&
-                                            t(errors.lastName)
+                                            touched.last_name &&
+                                            t(errors.last_name)
                                         }
-                                        name="lastName"
+                                        name="last_name"
                                         autoComplete="family-name"
                                     />
                                 </Col>

@@ -45,47 +45,37 @@ class UserLoginController extends Controller
             return response()->json(['error' => 'Attemp'], 400);
         }
         return response()->json($user->getFrontendData());
-//        return response()->json($user->getFrontendData());
     }
 
-    public function register(Request $request): RedirectResponse|JsonResponse
+    public function register(Request $request): JsonResponse
     {
         try {
             $fields = $request->all();
             $validator = Validator::make($fields, [
-                'firstName' => 'required|min:2|max:25',
-                'lastName' => 'required|min:2|max:25',
+                'first_name' => 'required|min:2|max:25',
+                'last_name' => 'required|min:2|max:25',
                 'password' => 'required|min:8|max:40',
                 'email' => 'required|email',
                 'consent' => 'boolean|accepted',
             ]);
             if ($validator->fails()) {
-                return redirect()->to('/', 400);
+                return response()->json([], 400);
             }
             $user_search = User::query()->where(['email' => $fields['email']])->first();
             if ($user_search) {
                 return response()->json(['error' => 'User with such an email address exists'], 400);
             }
-            $token = hash('sha256', Str::random(80));
-
             /** @var User $role_user */
             $role_user = UsersRole::query()->where(['name' => 'user'])->first();
-            $user = new User();
-            $user->first_name = $fields['firstName'];
-            $user->last_name = $fields['lastName'];
-            $user->password = Hash::make($fields['password']);
-            $user->email = $fields['email'];
+            $fields['password'] = Hash::make($fields['password']);
+            $user = new User($fields);
             $user->role_id = $role_user->role_id;
-            $user->remember_token = $token;
-            if ($user->save()) {
-                $cookie = cookie('token', $token, 1234);
-                return response()->json($user->getFrontendData())->cookie($cookie);
-            }
+            $user->saveOrFail();
+            return response()->json([]);
         } catch (Throwable $e) {
             Log::error('Register user error', [$e->getMessage(), $e->getFile(), $e->getLine()]);
-            return response()->json(['error' => 'Server error'], 400);
+            return response()->json([], 400);
         }
-        return redirect()->to('/', 400);
     }
 
     /** Авторизация через github(Not release)
@@ -109,6 +99,7 @@ class UserLoginController extends Controller
         }
         return response()->json([], 400);
     }
+
     public function logout(): JsonResponse
     {
         if (Auth::check()) {
