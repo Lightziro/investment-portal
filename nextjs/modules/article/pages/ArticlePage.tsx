@@ -5,13 +5,13 @@ import { CommentsList } from "../../../components/smart/comments-list/CommentsLi
 import { NewsList } from "../../../components/ordinary/news-list/NewsList";
 import { ArticleContent } from "../components/article-content/ArticleContent";
 import { AboutAuthor } from "../components/about-author/AboutAuthor";
-import { ArticleView } from "../../../ts/types/entity/article.types";
 import { News } from "../../../ts/types/entity/stock-market.types";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../../redux/actions/viewActions";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
+import {ArticleModel} from "../../../ts/types/entity/article.types";
 interface ArticlePage {
-    article: ArticleView;
+    article: ArticleModel;
     news: News[];
 }
 export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
@@ -26,16 +26,16 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                 <Grid md={8} item lg={9}>
                     <Paper
                         elevation={3}
-                        sx={{ mb: 2, py: 3, px: 3, background: "#ebefff" }}
+                        sx={{ mb: 2, py: 3, px: 3, background: "white" }}
                     >
                         <ArticleHeader
                             title={article.title}
                             labels={articleView.labels}
-                            dateCreate={article.dateCreate}
+                            dateCreate={article.created_at}
                         />
                         <Divider />
                         <ArticleContent
-                            preview={article.preview}
+                            preview={article.preview_path}
                             content={article.content}
                         />
                         <AboutAuthor author={article.author} />
@@ -51,7 +51,7 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                 >
                     <Grid item direction="column">
                         <CommentsList
-                            entityId={article.articleId}
+                            entityId={article.article_id}
                             entityName="article"
                             comments={articleView.comments}
                         />

@@ -15,13 +15,13 @@ export const CommentItem: React.FC<CommentItem> = ({ comment }) => {
         <CommentComponent
             author={
                 <Link href={`/profile/[id]`} as={`/profile/${comment.user_id}`}>
-                    {comment.full_name}
+                    {comment.user.full_name}
                 </Link>
             }
             avatar={
                 <Link href={`/profile/[id]`} as={`/profile/${comment.user_id}`}>
                     <Avatar
-                        src={`${process.env.API_URL}/storage/${comment.avatar_path}`}
+                        src={`${process.env.API_URL}/storage/${comment.user.avatar_path}`}
                     />
                 </Link>
             }

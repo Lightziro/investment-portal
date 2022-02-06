@@ -40,33 +40,6 @@ class Article extends Model
         return $this->hasOne(User::class, 'user_id', 'author_id');
     }
 
-    public function getFrontend(): array
-    {
-        $author_model = $this->author;
-        return [
-            'articleId' => $this->article_id,
-            'title' => (string)$this,
-            'dateCreate' => $this->created_at->format('Y-m-d H:i:s'),
-            'preview' => $this->preview_path,
-            'author' => [
-                'userId' => $author_model->user_id,
-                'fullName' => (string)$author_model,
-                'avatar' => $author_model->avatar_path,
-            ],
-            'views' => $this->viewing()->count() ?? 0
-        ];
-    }
-
-    public function getView(): array
-    {
-        $front_end = $this->getFrontend();
-        return array_merge($front_end, [
-            'labels' => $this->getLabels(),
-            'content' => $this->content,
-            'comments' => $this->getComments(),
-        ]);
-    }
-
     public function viewing(): HasMany
     {
         return $this->hasMany(ArticleViewing::class, 'article_id', 'article_id');
@@ -85,15 +58,6 @@ class Article extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(ArticleComments::class, 'article_id', 'article_id');
-    }
-
-    public function getComments(): array
-    {
-        /** @var ArticleComments $comment */
-        foreach ($this->comments()->orderByDesc('created_at')->get() as $comment) {
-            $ar_comments[] = $comment->getFrontendComment();
-        }
-        return $ar_comments ?? [];
     }
 
     #[Pure] public function getLabels(): array

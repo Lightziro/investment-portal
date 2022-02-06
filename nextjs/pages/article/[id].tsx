@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import {
     GetServerSidePropsContext,
-    GetStaticPropsContext,
     NextPage,
 } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { ArticlePage } from "../../modules/article/pages/ArticlePage";
-import { ArticleView } from "../../ts/types/entity/article.types";
 import { getListNews, getViewEntity } from "../../utils/api/get-data";
 import { News } from "../../ts/types/entity/stock-market.types";
 import { useRouter } from "next/router";
 import { PortalLayout } from "../../layouts/PortalLayout";
+import {ArticleModel} from "../../ts/types/entity/article.types";
 interface Article {
-    article: ArticleView;
+    article: ArticleModel;
     news: News[];
 }
 const Article: NextPage<Article> = ({ article, news }) => {

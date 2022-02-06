@@ -21,6 +21,7 @@ class ArticleComments extends CustomModel
 {
     protected $table = 'article_comments';
     protected $primaryKey = 'comment_id';
+    protected $with = ['user'];
     const UPDATED_AT = null;
 
 
@@ -32,15 +33,5 @@ class ArticleComments extends CustomModel
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'user_id', 'user_id');
-    }
-
-    public function getFrontendComment(): array
-    {
-        $author_model = $this->user;
-        return array_merge($this->only(['user_id', 'comment_id', 'comment']), [
-            'created_at' => $this->created_at,
-            'full_name' => (string)$author_model,
-            'avatar_path' => $author_model->avatar_path,
-        ]);
     }
 }

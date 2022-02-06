@@ -22,9 +22,7 @@ class ArticleActionsController extends Controller
             }
             $post = $request->post();
             $entity_id = $post['entityId'];
-            if (!is_numeric($entity_id)) {
-                return response()->json(['message' => 'No correct articleId'], 400);
-            }
+
             /** @var Article $article_model */
             $article_model = Article::query()->find($entity_id);
             if (!$article_model) {
@@ -35,7 +33,9 @@ class ArticleActionsController extends Controller
             $comment->user_id = $user->user_id;
             $comment->article_id = $entity_id;
             $comment->save();
-            return response()->json($comment->getFrontendComment());
+            return response()->json(array_merge($comment->toArray(), [
+                'user' => $comment->user->toArray()
+            ]));
 
         } catch (Throwable $e) {
             Log::error('Try error create comment', [$e->getMessage(), $e->getFile(), $e->getLine(), $post ?? null]);

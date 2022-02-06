@@ -30,7 +30,7 @@ Route::group(['prefix' => 'idea'], function () {
 });
 Route::group(['prefix' => 'article'], function () {
     Route::get('/all-key', [InitialDataController::class, 'getArticlesKey']);
-    Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
+    Route::get('/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
     Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware('auth:sanctum');
 });
 

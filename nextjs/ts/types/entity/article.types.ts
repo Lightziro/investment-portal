@@ -1,5 +1,5 @@
-import { Comment } from "../other/view.types";
 import { UserModel } from "./user.types";
+import {Comment} from "../other/view.types";
 
 export interface ArticleModel {
     article_id: number;
@@ -8,9 +8,9 @@ export interface ArticleModel {
     updated_at: string;
     preview_path: string;
     author_id: number;
-    author: UserModel;
     content: string;
-    // TODO: добавить комментарии
+    author?: UserModel;
+    comments?: Comment[]
 }
 
 export interface ArticleLabel {
