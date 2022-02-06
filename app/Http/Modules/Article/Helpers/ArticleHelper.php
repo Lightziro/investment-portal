@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Modules\Admin\Helpers;
+namespace App\Http\Modules\Article\Helpers;
 
 use App\Custom\Traits\ModelHelperTrait;
 use App\Models\Article\Article;
@@ -10,14 +10,6 @@ use App\Models\User\UserSubscriptions;
 class ArticleHelper
 {
     use ModelHelperTrait;
-
-    const FRONTEND_FIELD = [
-        'title' => 'title',
-        'content' => 'content',
-        'authorId' => 'author_id',
-        'articleId' => 'article_id',
-        'preview' => 'preview_path',
-    ];
 
     public static function sendNotices(Article $article_model, string $type): void
     {
@@ -40,5 +32,10 @@ DESCRIPTION;
                 $notice_model->save();
             }
         }
+    }
+
+    public static function filterDeletedAuthors(array $ar_article): array
+    {
+        return array_values(array_filter($ar_article, fn($article) => !empty($article['author'])));
     }
 }

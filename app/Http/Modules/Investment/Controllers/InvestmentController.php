@@ -3,9 +3,12 @@
 namespace App\Http\Modules\Investment\Controllers;
 
 use App\Http\Classes\StockMarket;
+use App\Http\Modules\Article\Helpers\ArticleHelper;
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
@@ -17,19 +20,14 @@ class InvestmentController extends BaseController
         $count_success_ideas = InvestmentIdea::query()->with('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count();
         $count_fail_ideas = InvestmentIdea::query()->with('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count();
 
-        $popular_articles = Article::mostPopular()->limit(3)->with('author')->get();
-        $pk_list = [];
-        /** @var Article $article_model */
-        foreach ($popular_articles as $article_model) {
-            $pk_list[] = $article_model->article_id;
-            $articles_popular[] = $article_model->toArray();
-        }
-        $articles = Article::query()->whereNotIn('article_id', $pk_list)
+        $articles_popular = Article::mostPopular()->limit(3)->with('author')->get()->toArray();
+        $articles_popular = ArticleHelper::filterDeletedAuthors($articles_popular);
+        $pk_list = array_column($articles_popular, 'article_id');
+
+        $articles_simple = Article::query()->whereNotIn('article_id', $pk_list)
             ->orderByDesc('created_at')
-            ->limit(10)->with(['author'])->get();
-        foreach ($articles as $article_model) {
-            $articles_simple[] = $article_model->toArray();
-        }
+            ->limit(10)->with('author')->get()->toArray();
+        $articles_simple = ArticleHelper::filterDeletedAuthors($articles_simple);
 
         $investment_ideas = InvestmentIdea::mostPopular()->limit(5)->get();
         /** @var InvestmentIdea $idea_model */
