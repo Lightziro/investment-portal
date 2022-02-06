@@ -18,7 +18,10 @@ function* fetchProfileView(action: AnyAction): Generator {
 function* updateProfile(action: AnyAction): Generator {
     try {
         const data = yield axios
-            .post(`${process.env.API_URL}/api/user/profile/update`, action.form)
+            .put(
+                `${process.env.API_URL}/api/user/${action.form.user}`,
+                action.form
+            )
             .then((response) => response.data);
         yield put({
             type: "SET_VIEW_ENTITY",

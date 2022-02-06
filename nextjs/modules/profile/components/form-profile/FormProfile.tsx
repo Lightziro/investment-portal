@@ -10,15 +10,15 @@ import { ProfileSchema } from "../../../../ts/validation/profile.validation";
 import { FormProfileTextField } from "../form-profile-fields/FormProfileTextField";
 import { FormProfileSelectField } from "../form-profile-fields/FormProfileSelectField";
 import { FormProfileRadioField } from "../form-profile-fields/FormProfileRadioField";
-import { ProfileView } from "../../../../redux/ts/types/view/view-store.types";
 import { convertToProfileForm } from "../../utils/convert-to-form";
-import { CountryItem } from "../../../../ts/types/other/other.types";
+import { ProfileUser } from "../../../../ts/types/other/view.types";
+import { CountryModel } from "../../../../ts/types/entity/other.types";
 
 interface FormProfile {
     edit: boolean;
-    profile: ProfileView;
+    profile: ProfileUser;
     handleEdit: () => void;
-    countries: CountryItem[];
+    countries: CountryModel[];
 }
 export const FormProfile: React.FC<FormProfile> = ({
     edit,
@@ -67,7 +67,7 @@ export const FormProfile: React.FC<FormProfile> = ({
                     />
                 </FormProfileRow>
                 <FormProfileRow
-                    textValue={profile.country_name}
+                    textValue={profile.country.name}
                     label={`${t("Country")}`}
                     edit={edit}
                 >

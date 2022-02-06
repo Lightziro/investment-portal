@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Http\Modules\Auth\Controllers;
+namespace App\Http\Modules\User\Controllers;
 
 use App\Mail\ForgotPassword;
 use App\Models\User\User;
+use App\Models\User\UserNotices;
 use App\Models\User\UserRecovery;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
@@ -69,21 +66,25 @@ class UserActionController extends Controller
         return response()->json(['message' => $error_message], 400);
     }
 
-    public function exitUser(): JsonResponse|Redirector|RedirectResponse|Application
-    {
-        $cookie = Cookie::get();
-        if (empty($cookie['token'])) {
-            return response()->json(['error' => 'Отсутствует токен, авторизуйтесь'], 400);
-        }
-        return response()->json(['status' => true])->withCookie(Cookie::forget('token'));
-    }
-
     public function authentication(Request $request): JsonResponse
     {
         /** @var User $user */
         if ($user = Auth::user()) {
             return response()->json($user->getFrontendData());
         }
-        return response()->json(['status' => false], 400);
+        return response()->json([], 400);
+    }
+
+    public function viewNotice(Request $request): JsonResponse
+    {
+        $notice_id = $request->all()['id'];
+        /** @var UserNotices $notice_model */
+        $notice_model = UserNotices::query()->find($notice_id);
+        if (!$notice_model) {
+            return response()->json(['message' => 'Not found notice'], 404);
+        }
+        $notice_model->viewed = true;
+        $notice_model->save();
+        return response()->json([]);
     }
 }

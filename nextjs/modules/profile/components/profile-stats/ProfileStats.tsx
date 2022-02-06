@@ -2,10 +2,12 @@ import React from "react";
 import { Box, Divider, Paper, Skeleton, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
-import { ProfileView } from "../../../../redux/ts/types/view/view-store.types";
+import { ProfileUser } from "../../../../ts/types/other/view.types";
+
 interface ProfileStats {
-    profile: ProfileView;
+    profile: ProfileUser;
 }
+
 export const ProfileStats: React.FC<ProfileStats> = ({ profile }) => {
     const { t } = useTranslation();
     if (!profile.user_id) {

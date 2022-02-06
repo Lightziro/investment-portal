@@ -1,10 +1,12 @@
 import React from "react";
 import { UserAvatar } from "../../../../components/simple/user-avatar/UserAvatar";
 import { Skeleton } from "@mui/material";
-import { ProfileView } from "../../../../redux/ts/types/view/view-store.types";
+import { ProfileUser } from "../../../../ts/types/other/view.types";
+
 interface ProfileAvatar {
-    profile: ProfileView;
+    profile: ProfileUser;
 }
+
 export const ProfileAvatar: React.FC<ProfileAvatar> = ({ profile }) => {
     if (!profile.user_id) {
         return <Skeleton variant="circular" width={230} height={230} />;

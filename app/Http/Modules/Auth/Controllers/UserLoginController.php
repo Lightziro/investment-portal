@@ -42,7 +42,7 @@ class UserLoginController extends Controller
             return response()->json(['error' => 'Password is incorrect'], 400);
         }
         if (!Auth::attempt($request->only(['email', 'password']))) {
-            return response()->json(['error' => 'Attemp'], 400);
+            return response()->json([], 400);
         }
         return response()->json($user->getFrontendData());
     }
@@ -78,34 +78,12 @@ class UserLoginController extends Controller
         }
     }
 
-    /** Авторизация через github(Not release)
-     * @return void
-     */
-    public function authGitHub()
-    {
-        $user = Socialite::driver('github')->stateless()->user();
-    }
-
-    public function redirectToGithub(): \Symfony\Component\HttpFoundation\RedirectResponse
-    {
-        return Socialite::driver('github')->stateless()->redirect();
-    }
-
-    public function getUser(Request $request): JsonResponse
-    {
-        /** @var User $user */
-        if ($user = $request->user()) {
-            return response()->json($user->getFrontendData());
-        }
-        return response()->json([], 400);
-    }
-
     public function logout(): JsonResponse
     {
         if (Auth::check()) {
             Auth::logout();
             return response()->json([]);
         }
-        return response()->json(['status' => false], 400);
+        return response()->json([], 400);
     }
 }

@@ -7,10 +7,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
 import { PortalLayout } from "../../layouts/PortalLayout";
-import { ProfileView } from "../../redux/ts/types/view/view-store.types";
+import { ProfileUser } from "../../ts/types/other/view.types";
+
 interface Profile {
-    profile: ProfileView;
+    profile: ProfileUser;
 }
+
 const Profile: NextPage<Profile> = ({ profile }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();

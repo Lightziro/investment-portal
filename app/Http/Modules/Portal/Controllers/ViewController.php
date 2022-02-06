@@ -34,13 +34,8 @@ class ViewController extends Controller
         }
     }
 
-    public function getViewProfile(int $id): JsonResponse
+    public function getViewProfile(User $user): JsonResponse
     {
-        /** @var User $user */
-        $user = User::query()->find($id);
-        if (!$user) {
-            return response()->json(['message' => 'Not found user'], 404);
-        }
         return response()->json($user->getProfile());
     }
 

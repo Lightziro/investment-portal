@@ -3,10 +3,12 @@ import { Container, Grid, Skeleton } from "@mui/material";
 import { ProfileUserInfo } from "../components/profile-user-info/ProfileUserInfo";
 import { ProfileAvatar } from "../components/profile-avatar/ProfileAvatar";
 import { ProfileStats } from "../components/profile-stats/ProfileStats";
-import { ProfileView } from "../../../redux/ts/types/view/view-store.types";
+import { ProfileUser } from "../../../ts/types/other/view.types";
+
 interface ProfilePage {
-    profile: ProfileView;
+    profile: ProfileUser;
 }
+
 export const ProfilePage: React.FC<ProfilePage> = ({ profile }) => {
     return (
         <Container>

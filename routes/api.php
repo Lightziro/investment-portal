@@ -25,12 +25,12 @@ Route::group(['prefix' => 'idea'], function () {
     Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
     Route::get('/all-key', [InitialDataController::class, 'getIdeasKey']);
     Route::post('/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum');
-    Route::get('/user-rating/{id}', [InvestmentIdeaController::class, 'getUserRating'])->middleware('auth:sanctum');
+    Route::get('/user-rating/{id}', [InvestmentIdeaController::class, 'getUserRating'])->middleware('');
     Route::get('/get/{id}', [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
 });
 Route::group(['prefix' => 'article'], function () {
     Route::get('/all-key', [InitialDataController::class, 'getArticlesKey']);
-    Route::get('/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
+    Route::get('/get/{id}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
     Route::post('/create-comment', [ArticleActionsController::class, 'createComment'])->middleware('auth:sanctum');
 });
 
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'other'], function () {
     Route::get('/quotes', [OtherController::class, 'getQuote']);
 });
 Route::group(['prefix' => 'profile'], function () {
-    Route::get('/get/{id}', [ViewController::class, 'getViewProfile']);
+    Route::get('/get/{user}', [ViewController::class, 'getViewProfile']);
 });
 //Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
 //    Route::get('/get', [OtherController::class, 'basick']);

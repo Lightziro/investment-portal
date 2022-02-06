@@ -22,12 +22,15 @@ export const getQuotePortal = async () => {
     return await response.json();
 };
 
-export const getViewEntity = async (entityName, ctx: GetStaticPropsContext) => {
-    // const config: any = { headers: ctx.req.headers };
+export const getViewEntity = async (
+    entityName,
+    ctx: GetServerSidePropsContext
+) => {
+    const config: any = { headers: ctx.req.headers };
     return await axios
         .get(
-            `${process.env.API_URL_DOCKER}/api/${entityName}/${ctx.params.id}`
-            // config
+            `${process.env.API_URL_DOCKER}/api/${entityName}/get/${ctx.params.id}`,
+            config
         )
         .then((res) => res.data)
         .catch((e) => {

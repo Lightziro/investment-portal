@@ -2,10 +2,14 @@ import {
     ArticleView,
     InvestmentIdeaView,
 } from "../../../redux/ts/types/view/view-store.types";
-import {UserModel} from "../entity/user.types";
+import { UserModel } from "../entity/user.types";
 
 export type EntityName = "article" | "idea" | "profile";
 export type typeView = InvestmentIdeaView | ArticleView;
+
+export interface ProfileUser extends UserModel {
+    count_comments: number;
+}
 
 export interface Comment {
     comment_id: number;

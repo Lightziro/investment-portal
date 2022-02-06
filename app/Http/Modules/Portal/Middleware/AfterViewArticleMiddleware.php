@@ -7,8 +7,6 @@ use App\Models\User\User;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-use Predis\Response\Status;
 
 class AfterViewArticleMiddleware
 {
@@ -16,11 +14,11 @@ class AfterViewArticleMiddleware
     {
         $response = $next($request);
         /** @var User $user */
-        if ($response->getStatusCode() === 200 && $user = $request->user()) {
-            if ($article_id = $response->getData()->articleId) {
+        if ($response->getStatusCode() === 200 && ($user = $request->user())) {
+            if ($article_id = $request->route()->parameter('id')) {
+
                 $idea_view = ArticleViewing::query()->where(['article_id' => $article_id, 'user_id' => $user->user_id])
                     ->whereDate('created_at', Carbon::today())->first();
-
                 if (!$idea_view) {
                     $idea_view = new ArticleViewing();
                     $idea_view->user_id = $user->user_id;
