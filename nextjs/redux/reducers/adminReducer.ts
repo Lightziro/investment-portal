@@ -76,7 +76,6 @@ const adminReducer = (
             };
         case "SET_SECTION_LIST":
             const { data } = action;
-            console.log("TEST");
             return {
                 ...state,
                 [action.section]: setEntityList(state[action.section], data),

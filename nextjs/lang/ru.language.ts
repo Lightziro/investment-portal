@@ -114,4 +114,6 @@ export const ruLanguage = {
     "Set a rating": "Установить рейтинг",
     "Personal account": "Личный кабинет",
     "Change profile": "Изменить профиль",
+    "Do you really want delete user?":
+        "Вы действительно хотите удалить пользователя?",
 };

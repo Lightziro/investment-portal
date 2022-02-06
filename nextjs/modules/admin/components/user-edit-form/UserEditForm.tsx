@@ -7,13 +7,16 @@ import { useTranslation } from "react-i18next";
 import { RoleModel, UserModel } from "../../../../ts/types/entity/user.types";
 import { getCountries, getRoles } from "../../../../utils/api/get-data";
 import { CountryModel } from "../../../../ts/types/entity/other.types";
+import { Stack } from "@mui/material";
 interface UserEditForm {
     callback: (formData: UserModel) => void;
     userData: UserModel;
+    handleDelete: () => void;
 }
 export const UserEditForm: React.FC<UserEditForm> = ({
     callback,
     userData,
+    handleDelete,
 }) => {
     const [roles, setRoles] = useState<RoleModel[]>([]);
     const [countries, setCountries] = useState<CountryModel[]>([]);
@@ -115,9 +118,19 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                             </Form.Select>
                         </Form.Group>
                     </Row>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+                    <Stack
+                        mx={3}
+                        direction="row"
+                        spacing={2}
+                        justifyContent="center"
+                    >
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                        <Button onClick={handleDelete} variant="danger">
+                            Delete
+                        </Button>
+                    </Stack>
                 </form>
             )}
         </Formik>

@@ -6,20 +6,23 @@ import { useTranslation } from "react-i18next";
 import { UserEditForm } from "../../../modules/admin/components/user-edit-form/UserEditForm";
 import { axios } from "../../../utils/axios";
 import { useDispatch } from "react-redux";
-import { alertError } from "../../../redux/actions/alertActions";
+import { alertError, alertSuccess } from "../../../redux/actions/alertActions";
 import { UserModel } from "../../../ts/types/entity/user.types";
 import { Typography } from "@mui/material";
+import { useDialog } from "../../../hooks/useDialog";
+import { ConfirmAction } from "../../../components/smart/confirm-action/ConfirmAction";
 
 export const EditUser = () => {
     const dispatch = useDispatch();
     const [editUser, setEditUser] = useState<UserModel>(null);
     const { t } = useTranslation();
+    const { open, handleClose, handleOpen } = useDialog();
     const router = useRouter();
     const { id } = router.query;
     useEffect(() => {
         if (id) {
             axios
-                .get(`${process.env.API_URL}/api/admin/user/get/${id}`)
+                .get(`${process.env.API_URL}/api/admin/user/${id}`)
                 .then((res) => setEditUser(res.data))
                 .catch((e) => {
                     dispatch(alertError("Couldn't find the user"));
@@ -33,6 +36,16 @@ export const EditUser = () => {
             .then(() => router.push("/admin/users"))
             .catch(() => dispatch(alertError("Failed to update data")));
     };
+    const handleDelete = async (id) => {
+        await axios
+            .delete(`${process.env.API_URL}/api/admin/user/${id}`)
+            .then((res) => {
+                handleClose();
+                dispatch(alertSuccess("User success deleted"));
+                router.push("/admin/users");
+            })
+            .catch(() => dispatch(alertError("Failed to delete user")));
+    };
     return (
         <MainLayout title={`${t("Admin panel")} - ${t("users")}`}>
             <AdminLayout>
@@ -45,6 +58,14 @@ export const EditUser = () => {
                         <UserEditForm
                             callback={handleSubmit}
                             userData={editUser}
+                            handleDelete={handleOpen}
+                        />
+                        <ConfirmAction
+                            state={open}
+                            onCancelClick={handleClose}
+                            onConfirmClick={handleDelete}
+                            title="Do you really want delete user?"
+                            id={editUser.user_id}
                         />
                     </Fragment>
                 )}

@@ -36,7 +36,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', BeforeCheckRo
     Route::get('/list/{page}', [UserAdminController::class, 'getUsersByPage']);
     Route::get('/get-stats', [UserAdminController::class, 'getStats']);
     Route::put('/{user}', [UserAdminController::class, 'update']);
-    Route::get('get/{id}', [UserAdminController::class, 'get']);
+    Route::get('/{user}', [UserAdminController::class, 'get']);
+    Route::delete('/{user}', [UserAdminController::class, 'delete']);
 });
 
 Route::group(['prefix' => 'company', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {

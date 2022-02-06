@@ -2,7 +2,6 @@
 
 namespace App\Http\Modules\Admin\Controllers;
 
-use App\Http\Modules\Profile\Helpers\ProfileHelper;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -39,20 +38,23 @@ class UserAdminController extends Controller
         try {
             $user->updateOrFail(Request::toArray());
             return response()->json([]);
-            // TODO: убрать replaceUpdateField
-//            ProfileHelper::replaceUpdateField($user, $form_data);
         } catch (Throwable  $e) {
             return response()->json([], 400);
         }
     }
 
-    public function get(int $id): JsonResponse
+    public function get(User $user): JsonResponse
+    {
+        return response()->json($user->toArray());
+    }
+
+    public function delete(User $user): JsonResponse
     {
         try {
-            $user = User::query()->findOrFail($id)->with('role')->with('country')->first();
-            return response()->json($user->toArray());
-        } catch (Throwable $e) {
-            return response()->json([], 404);
+            $user->delete();
+            return response()->json([]);
+        } catch (Throwable) {
+            return response()->json([], 400);
         }
     }
 }

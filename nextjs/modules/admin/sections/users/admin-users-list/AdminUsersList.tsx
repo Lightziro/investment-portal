@@ -48,7 +48,6 @@ export const AdminUsersList: React.FC = () => {
                         moment(user.updated_at).format("ll"),
                         <IconButton
                             color="primary"
-                            aria-label="upload picture"
                             component="span"
                             onClick={() =>
                                 router.push(`/admin/users/${user.user_id}`)
