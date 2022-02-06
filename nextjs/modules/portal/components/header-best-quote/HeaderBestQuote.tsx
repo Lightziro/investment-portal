@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DtoQuoteItem } from "../../../../ts/types/response/response.types";
-import { Grid, Stack, Paper } from "@mui/material";
+import { Grid, Stack, Paper, Skeleton } from "@mui/material";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import * as classnames from "classnames";
 import classes from "../../Portal.module.scss";
-interface HeaderBestQuote {
-    items: DtoQuoteItem[];
-}
-export const HeaderBestQuote: React.FC<HeaderBestQuote> = ({ items }) => {
-    // TODO: переделать рендер на стороне клиента
+import { axios } from "../../../../utils/axios";
+
+export const HeaderBestQuote: React.FC = () => {
+    const [quotes, setQuotes] = useState<DtoQuoteItem[]>(null);
+    useEffect(() => {
+        axios.get(`${process.env.API_URL}/api/other/quotes`).then((res) => {
+            setQuotes(res.data);
+        });
+    }, []);
     const getClassByChange = (change: number) => {
         return change > 0 ? classes.changePositive : classes.changeNegative;
     };
     const getIconByChange = (change: number) => {
         return change > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />;
     };
+    if (!quotes) {
+        return <Skeleton variant="rectangular" height={60} className="mb-3" />;
+    }
     return (
         <Paper className="px-2 py-2 mb-3" elevation={2}>
             <Grid
@@ -25,7 +32,7 @@ export const HeaderBestQuote: React.FC<HeaderBestQuote> = ({ items }) => {
                 direction="row"
                 spacing={1}
             >
-                {items.map((quote) => (
+                {quotes.map((quote) => (
                     <Grid
                         lg={2}
                         xl={2}

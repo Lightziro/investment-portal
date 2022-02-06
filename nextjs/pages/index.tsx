@@ -7,21 +7,16 @@ import { IdeaList } from "../components/smart/ideas-list/IdeaList";
 import { NewsList } from "../components/ordinary/news-list/NewsList";
 import { GetStaticProps, NextPage } from "next";
 import { Grid } from "@mui/material";
-import {
-    getBasePortal,
-    getListNews,
-    getQuotePortal,
-} from "../utils/api/get-data";
+import { getBasePortal, getListNews } from "../utils/api/get-data";
 import { News } from "../ts/types/entity/stock-market.types";
-import { DtoPortal, DtoQuoteItem } from "../ts/types/response/response.types";
+import { DtoPortal } from "../ts/types/response/response.types";
 import { PortalLayout } from "../layouts/PortalLayout";
 import { HeaderBestQuote } from "../modules/portal/components/header-best-quote/HeaderBestQuote";
 interface Index {
     news: News[];
     baseData: DtoPortal;
-    quotesData: DtoQuoteItem[];
 }
-const MainPage: NextPage<Index> = ({ news, baseData, quotesData }) => {
+const MainPage: NextPage<Index> = ({ news, baseData }) => {
     return (
         <MainLayout title="Главная страница">
             <PortalLayout>
@@ -34,7 +29,7 @@ const MainPage: NextPage<Index> = ({ news, baseData, quotesData }) => {
                         <NewsList items={news} />
                     </Grid>
                     <Grid item md={9}>
-                        <HeaderBestQuote items={quotesData} />
+                        <HeaderBestQuote />
                         <Grid container spacing={3}>
                             <Grid direction="column" item md={9} sm={12}>
                                 <ArticleList
@@ -58,12 +53,10 @@ export default MainPage;
 export const getStaticProps: GetStaticProps = async () => {
     const news = await getListNews();
     const baseData = await getBasePortal();
-    const quotesData = await getQuotePortal();
     return {
         props: {
             news,
             baseData,
-            quotesData,
         },
         revalidate: 20,
     };
