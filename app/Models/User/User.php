@@ -53,9 +53,10 @@ class User extends Authenticatable
         'password',
         'role_id',
         'avatar_path',
-        'country_id'
+        'country_id',
+        'sex'
     ];
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'deleted_at', 'email'];
     protected $primaryKey = 'user_id';
 
     #[Pure] public function __toString()

@@ -1,4 +1,5 @@
 export interface FormProfile {
+    user_id: number;
     first_name: string;
     last_name: string;
     country_id: number;

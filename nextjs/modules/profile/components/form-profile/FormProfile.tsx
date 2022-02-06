@@ -1,35 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import { FormProfileRow } from "./FormProfileRow";
 import { useDispatch } from "react-redux";
 import { Box, Button, Stack } from "@mui/material";
-import { updateProfile } from "../../../../redux/actions/profileActions";
 import { sexList } from "../../../../ts/init/other/other.init";
 import { ProfileSchema } from "../../../../ts/validation/profile.validation";
 import { FormProfileTextField } from "../form-profile-fields/FormProfileTextField";
 import { FormProfileSelectField } from "../form-profile-fields/FormProfileSelectField";
 import { FormProfileRadioField } from "../form-profile-fields/FormProfileRadioField";
 import { convertToProfileForm } from "../../utils/convert-to-form";
-import { ProfileUser } from "../../../../ts/types/other/view.types";
 import { CountryModel } from "../../../../ts/types/entity/other.types";
+import { ProfileContext } from "../../contexts/ProfileContext";
+import { axios } from "../../../../utils/axios";
+import {
+    alertError,
+    alertSuccess,
+} from "../../../../redux/actions/alertActions";
 
 interface FormProfile {
     edit: boolean;
-    profile: ProfileUser;
     handleEdit: () => void;
     countries: CountryModel[];
 }
 export const FormProfile: React.FC<FormProfile> = ({
     edit,
-    profile,
     handleEdit,
     countries,
 }) => {
+    const { profile, setProfile } = useContext(ProfileContext);
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const handleSubmit = (form) => {
-        dispatch(updateProfile(form));
+    const handleSubmit = async (form) => {
+        await axios
+            .put(`${process.env.API_URL}/api/user/${form.user_id}`, form)
+            .then((res) => {
+                setProfile(res.data);
+                dispatch(
+                    alertSuccess(
+                        "You have successfully updated your profile data"
+                    )
+                );
+            })
+            .catch((e) =>
+                dispatch(alertError("Error occurred, try again later"))
+            );
         handleEdit();
     };
 

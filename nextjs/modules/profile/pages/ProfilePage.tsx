@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Grid, Skeleton } from "@mui/material";
 import { ProfileUserInfo } from "../components/profile-user-info/ProfileUserInfo";
 import { ProfileAvatar } from "../components/profile-avatar/ProfileAvatar";
 import { ProfileStats } from "../components/profile-stats/ProfileStats";
-import { ProfileUser } from "../../../ts/types/other/view.types";
+import { ProfileContext } from "../contexts/ProfileContext";
 
-interface ProfilePage {
-    profile: ProfileUser;
-}
-
-export const ProfilePage: React.FC<ProfilePage> = ({ profile }) => {
+export const ProfilePage: React.FC = () => {
+    const { profile } = useContext(ProfileContext);
     return (
         <Container>
             <Grid justifyContent="center" container spacing={3}>

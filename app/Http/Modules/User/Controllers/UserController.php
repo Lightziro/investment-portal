@@ -34,16 +34,4 @@ class UserController extends Controller
         }
         return response()->json([], 400);
     }
-
-    public function getProfile(int $id): JsonResponse|Redirector|RedirectResponse|Application
-    {
-        /** @var User $user_model */
-        $user_model = User::query()->where(['user_id' => $id])->first();
-        if (!$user_model) {
-            return redirect('/');
-        }
-
-        return response()->json($user_model->getProfile());
-    }
-
 }

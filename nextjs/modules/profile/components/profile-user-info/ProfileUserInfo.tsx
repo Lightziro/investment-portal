@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     Divider,
     IconButton,
@@ -12,14 +12,11 @@ import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { RoleUserChip } from "../../../../components/simple/role-user-chip/RoleUserChip";
 import { FormProfile } from "../form-profile/FormProfile";
 import { axios } from "../../../../utils/axios";
-import { ProfileUser } from "../../../../ts/types/other/view.types";
 import { CountryModel } from "../../../../ts/types/entity/other.types";
+import { ProfileContext } from "../../contexts/ProfileContext";
 
-interface ProfileUserInfo {
-    profile: ProfileUser;
-}
-
-export const ProfileUserInfo: React.FC<ProfileUserInfo> = ({ profile }) => {
+export const ProfileUserInfo: React.FC = () => {
+    const { profile } = useContext(ProfileContext);
     const [edit, setEdit] = useState(false);
     const [counties, setCountries] = useState<CountryModel[]>([]);
     const user = useRootSelector((store) => store.user);
@@ -54,7 +51,6 @@ export const ProfileUserInfo: React.FC<ProfileUserInfo> = ({ profile }) => {
             <Divider />
             <FormProfile
                 edit={edit}
-                profile={profile}
                 handleEdit={() => setEdit(!edit)}
                 countries={counties}
             />

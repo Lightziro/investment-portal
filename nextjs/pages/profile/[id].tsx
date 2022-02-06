@@ -3,34 +3,35 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { ProfilePage } from "../../modules/profile/pages/ProfilePage";
 import { useTranslation } from "react-i18next";
 import { getViewEntity } from "../../utils/api/get-data";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../redux/actions/viewActions";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { ProfileUser } from "../../ts/types/other/view.types";
+import { ProfileContext } from "../../modules/profile/contexts/ProfileContext";
 
 interface Profile {
-    profile: ProfileUser;
+    profileEntity: ProfileUser;
 }
 
-const Profile: NextPage<Profile> = ({ profile }) => {
+const Profile: NextPage<Profile> = ({ profileEntity }) => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(setViewEntity(profile, "profile"));
-    }, []);
+    const [profile, setProfile] = useState<ProfileUser>(profileEntity);
+
     return (
         <MainLayout title={`${t("Profile")} ${profile.full_name}`}>
             <PortalLayout>
-                <ProfilePage profile={profile} />
+                <ProfileContext.Provider value={{ setProfile, profile }}>
+                    <ProfilePage />
+                </ProfileContext.Provider>
             </PortalLayout>
         </MainLayout>
     );
 };
 export default Profile;
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-    const profile = await getViewEntity("profile", ctx);
+    const profileEntity = await getViewEntity("profile", ctx);
     return {
-        props: { profile },
+        props: { profileEntity },
     };
 };

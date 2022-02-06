@@ -33,7 +33,6 @@ function* login(action: AnyAction): Generator {
         });
     } catch (e) {
         console.log(e);
-        console.log("ERROR AUTH");
     }
 }
 function* logout(): Generator {
