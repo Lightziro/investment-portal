@@ -18,5 +18,8 @@ export const initialCreateIdeaStore: CreateIdea = {
     stage: CreateIdeaStage.SelectCompany,
 };
 export const initialAccountStore: PersonalAccountStore = {
-    predictions: null,
+    predictions: {
+        list: [],
+        loading: true,
+    },
 };

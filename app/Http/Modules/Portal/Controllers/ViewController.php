@@ -85,7 +85,7 @@ class ViewController extends Controller
             'ideaId' => $idea_model->idea_id,
             'epsStats' => $ar_eps ?? [],
             'analyticsStats' => $ar_stats ?? [],
-            'comments' => $idea_model->getCommentsFrontend(),
+            'comments' => $idea_model->comments()->with('user')->get()->toArray(),
             'companyInfo' => [
                 'companyName' => $idea_company_model->name,
                 'ticker' => $idea_company_model->ticker,

@@ -16,38 +16,37 @@ export const MyStockPage: React.FC = () => {
     useEffect(() => {
         dispatch(fetchUserPrediction());
     }, []);
-    const predicts = useRootSelector((state) => state.account.predictions);
+    const { list, loading } = useRootSelector(
+        (state) => state.account.predictions
+    );
     const handleDelete = (predictId: number) => {
         dispatch(deletePredict(predictId));
     };
     return (
         <Paper sx={{ p: 2 }}>
             <HeaderPage title="My predictions">Child</HeaderPage>
-            {predicts && (
-                <List
-                    dataSource={predicts}
-                    renderItem={(item: UserPredict) => (
-                        <List.Item key={item.prediction_id}>
-                            <List.Item.Meta
-                                avatar={
-                                    <Avatar
-                                        src={`${process.env.API_URL}/storage/${item.company.logo}`}
-                                    />
-                                }
-                                title={<span>{item.company.name}</span>}
-                                description={item.predict_price}
-                            />
-                            <IconButton component="span">
-                                <RemoveCircleOutlineIcon
-                                    onClick={() =>
-                                        handleDelete(item.prediction_id)
-                                    }
+            <List
+                loading={loading}
+                dataSource={list}
+                renderItem={(item: UserPredict) => (
+                    <List.Item key={item.prediction_id}>
+                        <List.Item.Meta
+                            avatar={
+                                <Avatar
+                                    src={`${process.env.API_URL}/storage/${item.company.logo}`}
                                 />
-                            </IconButton>
-                        </List.Item>
-                    )}
-                />
-            )}
+                            }
+                            title={<span>{item.company.name}</span>}
+                            description={item.predict_price}
+                        />
+                        <IconButton component="span">
+                            <RemoveCircleOutlineIcon
+                                onClick={() => handleDelete(item.prediction_id)}
+                            />
+                        </IconButton>
+                    </List.Item>
+                )}
+            />
         </Paper>
     );
 };

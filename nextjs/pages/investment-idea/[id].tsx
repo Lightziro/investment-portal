@@ -1,5 +1,9 @@
-import React, { useEffect } from "react";
-import { GetStaticPropsContext, NextPage } from "next";
+import React, { useEffect, useState } from "react";
+import {
+    GetServerSidePropsContext,
+    GetStaticPropsContext,
+    NextPage,
+} from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
 import getTitleIdea from "../../modules/investment-idea/utils/get-title-idea";
@@ -7,7 +11,6 @@ import { InvestmentIdeaPage } from "../../modules/investment-idea/InvestmentIdea
 import { getViewEntity } from "../../utils/api/get-data";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { useRouter } from "next/router";
-import { axios } from "../../utils/axios";
 import { InvestmentIdeaView } from "../../redux/ts/types/view/view-store.types";
 interface InvestmentIdea {
     idea: InvestmentIdeaView;
@@ -15,11 +18,10 @@ interface InvestmentIdea {
 const InvestmentIdea: NextPage<InvestmentIdea> = ({ idea }) => {
     const { t } = useTranslation();
     const router = useRouter();
+    // const [idea, setIdea] = useState(idea);
     useEffect(() => {
         if (!idea) {
             router.push("/404");
-        } else {
-            console.log("IM LOAD!");
         }
     }, [idea]);
     if (!idea) {
@@ -39,26 +41,27 @@ const InvestmentIdea: NextPage<InvestmentIdea> = ({ idea }) => {
 };
 export default InvestmentIdea;
 
-export const getStaticProps = async (context: GetStaticPropsContext) => {
+export const getServerSideProps = async (
+    context: GetServerSidePropsContext
+) => {
     const idea = await getViewEntity("idea", context);
     return {
         props: {
             idea,
         },
-        revalidate: 40,
     };
 };
-
-export async function getStaticPaths() {
-    const ideasKey: any = await axios
-        .get(`${process.env.API_URL_DOCKER}/api/idea/all-key`)
-        .then((res) => {
-            console.log(res.data);
-            return res.data;
-        });
-    const paths = ideasKey.map((idea) => ({
-        params: { id: idea.idea_id.toString() },
-    }));
-
-    return { paths, fallback: "blocking" };
-}
+//
+// export async function getStaticPaths() {
+//     const ideasKey: any = await axios
+//         .get(`${process.env.API_URL_DOCKER}/api/idea/all-key`)
+//         .then((res) => {
+//             console.log(res.data);
+//             return res.data;
+//         });
+//     const paths = ideasKey.map((idea) => ({
+//         params: { id: idea.idea_id.toString() },
+//     }));
+//
+//     return { paths, fallback: "blocking" };
+// }

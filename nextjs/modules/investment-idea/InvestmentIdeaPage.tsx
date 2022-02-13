@@ -13,9 +13,12 @@ import { setViewEntity } from "../../redux/actions/viewActions";
 import { useRootSelector } from "../../hooks/useTypeSelector";
 import { IdeaRatings } from "./components/idea-ratings/IdeaRatings";
 import { InvestmentIdeaView } from "../../redux/ts/types/view/view-store.types";
+import { UserActionIdea } from "./components/user-action-idea/UserActionIdea";
+
 interface InvestmentIdeaPage {
     ideaData: InvestmentIdeaView;
 }
+
 export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
     ideaData,
 }) => {
@@ -58,8 +61,23 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                 <Grid xs={12} md={4} sm={6} item xl={4} lg={4}>
                     <ChartStatsAnalytics stats={ideaData.analyticsStats} />
                 </Grid>
-                <Grid xs={12} sm={6} item xl={3} md={4} lg={4}>
-                    <IdeaRatings />
+                <Grid
+                    direction="column"
+                    container
+                    xs={12}
+                    spacing={2}
+                    sm={6}
+                    item
+                    xl={3}
+                    md={4}
+                    lg={4}
+                >
+                    <Grid item>
+                        <IdeaRatings />
+                    </Grid>
+                    <Grid item>
+                        <UserActionIdea />
+                    </Grid>
                 </Grid>
                 <Grid sm={6} item xl={3} md={4}>
                     <CommentsList
@@ -69,7 +87,6 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                     />
                 </Grid>
             </Grid>
-            <Divider sx={{ my: 2 }} />
         </Fragment>
     );
 };

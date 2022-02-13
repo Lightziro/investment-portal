@@ -3,3 +3,10 @@ export interface CountryModel {
     code: string;
     name: string;
 }
+
+export interface CompanyModel {
+    company_id: number;
+    ticker: string;
+    name: string;
+    logo: string | null;
+}
