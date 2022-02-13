@@ -4,6 +4,7 @@ import { actionAdminWatcher } from "./adminSaga";
 import { actionInvestmentIdea } from "./investmentIdeaSaga";
 import { actionArticleWatcher } from "./articleSaga";
 import { actionUserWatcher } from "./userSaga";
+import { actionAccountWatcher } from "./accountSaga";
 
 export default function* rootSaga(): Generator {
     yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga(): Generator {
         actionInvestmentIdea(),
         actionArticleWatcher(),
         actionUserWatcher(),
+        actionAccountWatcher(),
     ]);
 }

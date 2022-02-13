@@ -4,10 +4,11 @@ import { Stack } from "@mui/material";
 import { LinkWrapper } from "../../../../components/simple/link/Link";
 import classes from "../../PersonalAccount.module.scss";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 export const AccountToolBar: React.FC = () => {
     const router = useRouter();
-
+    const { t } = useTranslation();
     return (
         <div className="mt-3">
             <Stack direction="column">
@@ -20,7 +21,7 @@ export const AccountToolBar: React.FC = () => {
                                     : ""
                             }`}
                         >
-                            {item.label}
+                            {t(item.label)}
                         </span>
                     </LinkWrapper>
                 ))}

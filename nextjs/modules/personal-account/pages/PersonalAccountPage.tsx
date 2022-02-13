@@ -1,20 +1,11 @@
 import React from "react";
-import { Grid, Paper } from "@mui/material";
-import { UserInfo } from "../components/user-info/UserInfo";
-import { AccountToolBar } from "../components/account-tool-bar/AccountToolBar";
+import { Paper } from "@mui/material";
+import { HeaderPage } from "../components/header-page/HeaderPage";
 
 export const PersonalAccountPage = ({}) => {
     return (
-        <Grid direction="row" container spacing={3}>
-            <Grid lg={3} container direction="column" xl={3} item>
-                <Paper elevation={3} sx={{ py: 2, px: 3 }}>
-                    <UserInfo />
-                    <AccountToolBar />
-                </Paper>
-            </Grid>
-            <Grid lg={9} xl={9} item>
-                Test
-            </Grid>
-        </Grid>
+        <Paper sx={{ p: 2 }}>
+            <HeaderPage title="Main">Child</HeaderPage>
+        </Paper>
     );
 };

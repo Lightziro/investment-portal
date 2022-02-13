@@ -7,8 +7,6 @@ use App\Http\Modules\Article\Helpers\ArticleHelper;
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;

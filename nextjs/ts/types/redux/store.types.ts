@@ -3,6 +3,7 @@ import { AlertColor } from "@mui/material";
 import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
 import { CreateIdeaStage } from "../../enums/investment-idea.enum";
 import { ViewStore } from "../../../redux/ts/types/view/view-store.types";
+import { PersonalAccountStore } from "../../../redux/ts/types/personal-account/personal-account-store.type";
 
 export interface AlertStore {
     message: string;
@@ -50,6 +51,7 @@ export interface StoreData {
     alert: AlertStore;
     view: ViewStore;
     user: UserStore;
+    account: PersonalAccountStore;
 }
 
 export interface CreateIdea {

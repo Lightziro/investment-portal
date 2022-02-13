@@ -38,6 +38,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string sex
  * @property Collection|ArticleComments[] commentsArticles
  * @property Collection|UserSubscriptions[] subscriptions
+ * @property Collection|UserPredictions[] predictions
  */
 class User extends Authenticatable
 {
@@ -123,6 +124,11 @@ class User extends Authenticatable
     public function country(): HasOne
     {
         return $this->hasOne(Country::class, 'country_id', 'country_id');
+    }
+
+    public function predictions(): HasMany
+    {
+        return $this->hasMany(UserPredictions::class, 'user_id', 'user_id');
     }
 
     public function subscriptions(): HasMany

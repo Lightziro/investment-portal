@@ -52,14 +52,14 @@ export const AUTH_BY = [
 ];
 export const MENU_PERSONAL_ACCOUNT = [
     {
-        label: 'Main',
-        url: '/personal-account'
+        label: "Main",
+        url: "/personal-account",
     },
     {
-        label: 'My predictions',
-        url: '/personal-account/predictions'
-    }
-]
+        label: "My predictions",
+        url: "/personal-account/predictions",
+    },
+];
 export const MENU_ADMIN = [
     {
         logo: {

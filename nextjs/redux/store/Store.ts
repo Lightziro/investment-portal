@@ -7,6 +7,7 @@ import userReducer from "../reducers/userReducer";
 import adminReducer from "../reducers/adminReducer";
 import alertReducer from "../reducers/alertReducer";
 import viewReducer from "../reducers/viewReducer";
+import accountReducer from "../reducers/accountReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 const reducers = combineReducers({
@@ -14,6 +15,7 @@ const reducers = combineReducers({
     admin: adminReducer,
     alert: alertReducer,
     view: viewReducer,
+    account: accountReducer,
 });
 export const clientStore = createStore(
     reducers,

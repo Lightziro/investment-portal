@@ -1,5 +1,6 @@
 import { AlertStore, StoreData } from "./store.types";
 import {
+    initialAccountStore,
     initialCreateIdeaStore,
     initialViewStore,
 } from "../../init/redux/reducer.initial";
@@ -53,4 +54,5 @@ export const initStore: StoreData = {
     admin: initialAdminStore,
     alert: initialAlertStore,
     view: initialViewStore,
+    account: initialAccountStore,
 };

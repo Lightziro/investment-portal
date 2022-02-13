@@ -1,13 +1,13 @@
-import React from "react";
 import { NextPage } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { Container } from "@mui/material";
-import { useRootSelector } from "../../hooks/useTypeSelector";
-import { PersonalAccountPage } from "../../modules/personal-account/pages/PersonalAccountPage";
 import { PersonalAccountLayout } from "../../layouts/PersonalAccountLayout";
+import React from "react";
+import { useRootSelector } from "../../hooks/useTypeSelector";
+import { MyStockPage } from "../../modules/personal-account/pages/MyStockPage";
 
-export const PersonalAccount: NextPage = () => {
+const Predictions: NextPage = () => {
     const user = useRootSelector((state) => state.user);
     return (
         <MainLayout title="Личный кабинет - Главная">
@@ -15,7 +15,7 @@ export const PersonalAccount: NextPage = () => {
                 {user && (
                     <Container maxWidth="md">
                         <PersonalAccountLayout>
-                            <PersonalAccountPage />
+                            <MyStockPage />
                         </PersonalAccountLayout>
                     </Container>
                 )}
@@ -23,4 +23,4 @@ export const PersonalAccount: NextPage = () => {
         </MainLayout>
     );
 };
-export default PersonalAccount;
+export default Predictions;

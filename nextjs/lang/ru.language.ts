@@ -116,4 +116,7 @@ export const ruLanguage = {
     "Change profile": "Изменить профиль",
     "Do you really want delete user?":
         "Вы действительно хотите удалить пользователя?",
+    "My stock": "Мои акции",
+    Main: "Главная",
+    "My predictions": "Мои прогнозы",
 };

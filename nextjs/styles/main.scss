@@ -1,6 +1,9 @@
 @import "nav-bar.module";
 @import "variables";
 
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+}
 .paper-wrapper {
     background-color: rgb(255, 255, 255);
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -52,6 +55,9 @@
 
 body {
     overflow-x: hidden;
+    // FIX material
+    overflow: auto !important;
+    padding: 0 !important;
 }
 
 a {

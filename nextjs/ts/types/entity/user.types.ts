@@ -1,4 +1,4 @@
-import { CountryModel } from "./other.types";
+import { CompanyModel, CountryModel } from "./other.types";
 
 export interface UserModel {
     user_id: number;
@@ -28,4 +28,12 @@ export interface AuthorInfo {
     fullName: string;
     userId: number;
     avatar: string;
+}
+export interface UserPredict {
+    prediction_id: number;
+    company: CompanyModel;
+    predict_price: number;
+    user_id: number;
+    current_price: number | null;
+    company_id: number;
 }
