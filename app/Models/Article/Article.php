@@ -29,6 +29,7 @@ class Article extends Model
 {
     protected $table = 'articles';
     protected $primaryKey = 'article_id';
+    protected $with = ['author'];
 
     public function __toString()
     {

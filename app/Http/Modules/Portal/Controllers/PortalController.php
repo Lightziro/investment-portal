@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Modules\Investment\Controllers;
+namespace App\Http\Modules\Portal\Controllers;
 
 use App\Http\Classes\StockMarket;
 use App\Http\Modules\Article\Helpers\ArticleHelper;
@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 
-class InvestmentController extends BaseController
+class PortalController extends BaseController
 {
     public function getPortalData(): JsonResponse
     {

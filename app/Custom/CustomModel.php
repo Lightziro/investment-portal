@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\Pure;
 
 /**
- * @property Carbon created_at
- * @property Carbon updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 abstract class CustomModel extends Model
 {

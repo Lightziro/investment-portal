@@ -7,10 +7,12 @@ import { News } from "../../ts/types/entity/stock-market.types";
 import { useRouter } from "next/router";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { ArticleModel } from "../../ts/types/entity/article.types";
+
 interface Article {
     article: ArticleModel;
     news: News[];
 }
+
 const Article: NextPage<Article> = ({ article, news }) => {
     const router = useRouter();
     useEffect(() => {

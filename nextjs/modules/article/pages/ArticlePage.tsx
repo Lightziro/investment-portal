@@ -9,17 +9,25 @@ import { News } from "../../../ts/types/entity/stock-market.types";
 import { useDispatch } from "react-redux";
 import { setViewEntity } from "../../../redux/actions/viewActions";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
-import {ArticleModel} from "../../../ts/types/entity/article.types";
+import { ArticleModel } from "../../../ts/types/entity/article.types";
+import {
+    fetchArticleComments,
+    fetchArticleLabels,
+} from "../../../redux/actions/articleArtions";
+
 interface ArticlePage {
     article: ArticleModel;
     news: News[];
 }
+
 export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setViewEntity(article, "article"));
+        dispatch(fetchArticleComments(article.article_id));
+        dispatch(fetchArticleLabels(article.article_id));
     }, []);
-    const articleView = useRootSelector((store) => store.view.article);
+    const { comments, labels } = useRootSelector((store) => store.view.article);
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>
@@ -30,7 +38,7 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                     >
                         <ArticleHeader
                             title={article.title}
-                            labels={articleView.labels}
+                            labels={labels}
                             dateCreate={article.created_at}
                         />
                         <Divider />
@@ -53,7 +61,7 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                         <CommentsList
                             entityId={article.article_id}
                             entityName="article"
-                            comments={articleView.comments}
+                            comments={comments}
                         />
                     </Grid>
                     <Grid item direction="column">

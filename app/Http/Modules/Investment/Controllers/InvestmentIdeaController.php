@@ -64,7 +64,7 @@ class InvestmentIdeaController extends Controller
 
     public function getComments(InvestmentIdea $idea): JsonResponse
     {
-        $comments = $idea->comments()->with('user')->get()->toArray();
+        $comments = $idea->comments()->with('user')->orderByDesc('created_at')->get()->toArray();
         return response()->json($comments);
     }
 

@@ -11,6 +11,7 @@ import {
     DtoCompanyStats,
     DtoIdeaRatingStats,
 } from "../../modules/investment-idea/ts/types/response.types";
+import { ArticleLabel } from "../../ts/types/entity/article.types";
 
 export const addCommentEntity = (state: any, comment: Comment): typeView => {
     const newState = {
@@ -68,4 +69,11 @@ export const setIdeaCompanyStats = (
 ): ViewStore => ({
     ...state,
     idea: { ...state.idea, ...data },
+});
+export const setArticleLabels = (
+    state: ViewStore,
+    data: ArticleLabel[]
+): ViewStore => ({
+    ...state,
+    article: { ...state.article, labels: data },
 });

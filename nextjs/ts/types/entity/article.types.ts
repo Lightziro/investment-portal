@@ -1,5 +1,5 @@
 import { UserModel } from "./user.types";
-import {Comment} from "../other/view.types";
+import { Comment } from "../other/view.types";
 
 export interface ArticleModel {
     article_id: number;
@@ -10,7 +10,6 @@ export interface ArticleModel {
     author_id: number;
     content: string;
     author?: UserModel;
-    comments?: Comment[]
 }
 
 export interface ArticleLabel {

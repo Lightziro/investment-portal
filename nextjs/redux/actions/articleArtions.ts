@@ -25,3 +25,11 @@ export const deleteArticle = (articleId: number, page: number) => ({
     articleId,
     page,
 });
+export const fetchArticleComments = (articleId: number) => ({
+    type: "FETCH_ARTICLE_COMMENTS",
+    articleId,
+});
+export const fetchArticleLabels = (articleId: number) => ({
+    type: "FETCH_ARTICLE_LABELS",
+    articleId,
+});

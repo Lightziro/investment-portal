@@ -4,34 +4,17 @@ namespace App\Http\Modules\Portal\Controllers;
 
 use App\Http\Classes\StockMarket;
 use App\Models\Article\Article;
-use App\Models\Article\ArticleComments;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\User\User;
-use Finnhub\Model\BasicFinancials;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
-use Throwable;
 
 class ViewController extends Controller
 {
-    public function getViewArticle(int $id): JsonResponse
+    public function getViewArticle(Article $article): JsonResponse
     {
-        try {
-            /** @var Article $article_model */
-            $article_model = Article::query()->with('author')->findOrFail($id);
-
-            $comments = $article_model->comments()->orderByDesc('created_at')->get()->toArray();
-
-            $ar_data = array_merge($article_model->toArray(), [
-                'comments' => $comments ?? [],
-                'labels' => $article_model->getLabels()
-            ]);
-
-            return response()->json($ar_data);
-        } catch (Throwable $e) {
-            return response()->json([], 404);
-        }
+        return response()->json($article->toArray());
     }
 
     public function getViewProfile(User $user): JsonResponse

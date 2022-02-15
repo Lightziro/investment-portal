@@ -76,10 +76,38 @@ function* deleteArticle(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* fetchComments(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(
+                `${process.env.API_URL}/api/article/${action.articleId}/comments`
+            )
+            .then((res) => res.data);
+        yield put({
+            type: "SET_ARTICLE_COMMENTS",
+            data,
+        });
+    } catch (e) {}
+}
+function* fetchLabels(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(
+                `${process.env.API_URL}/api/article/${action.articleId}/labels`
+            )
+            .then((res) => res.data);
+        yield put({
+            type: "SET_ARTICLE_LABELS",
+            data,
+        });
+    } catch (e) {}
+}
 export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("CREATE_ARTICLE", createArticle);
     yield takeLatest("FETCH_ARTICLE_VIEW", fetchArticleView);
     yield takeLatest("CREATE_ARTICLE_COMMENT", createArticleComment);
     yield takeLatest("UPDATE_ARTICLE", updateArticle);
     yield takeLatest("DELETE_ARTICLE", deleteArticle);
+    yield takeLatest("FETCH_ARTICLE_COMMENTS", fetchComments);
+    yield takeLatest("FETCH_ARTICLE_LABELS", fetchLabels);
 }

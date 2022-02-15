@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class ArticleActionsController extends Controller
+class ArticleController extends Controller
 {
     public function createComment(Request $request): JsonResponse
     {
@@ -41,6 +41,15 @@ class ArticleActionsController extends Controller
             Log::error('Try error create comment', [$e->getMessage(), $e->getFile(), $e->getLine(), $post ?? null]);
             return response()->json(['message' => 'Error'], 400);
         }
+    }
 
+    public function getComments(Article $article): JsonResponse
+    {
+        return response()->json($article->comments()->orderByDesc('created_at')->get()->toArray());
+    }
+
+    public function getLabels(Article $article): JsonResponse
+    {
+        return response()->json($article->getLabels());
     }
 }

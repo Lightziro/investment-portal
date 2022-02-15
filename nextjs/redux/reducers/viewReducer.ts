@@ -4,6 +4,7 @@ import {
     addCommentEntity,
     createIdeaRating,
     initialByEntity,
+    setArticleLabels,
     setEntityComments,
     setIdeaCompanyStats,
     setIdeaRating,
@@ -29,6 +30,8 @@ const viewReducer = (
                 ...state,
                 [entity]: addCommentEntity(state[entity], comment),
             };
+        case "SET_ARTICLE_COMMENTS":
+            return setEntityComments(state, "article", action.data);
         case "SET_USER_IDEA_RATING":
             return setIdeaUserRating(state, action.data);
         case "SET_IDEA_RATING":
@@ -39,6 +42,8 @@ const viewReducer = (
             return setIdeaCompanyStats(state, action.data);
         case "CREATE_IDEA_RATING":
             return createIdeaRating(state, action.data);
+        case "SET_ARTICLE_LABELS":
+            return setArticleLabels(state, action.data);
         default:
             return state;
     }

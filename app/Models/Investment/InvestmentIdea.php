@@ -42,15 +42,6 @@ class InvestmentIdea extends CustomModel
     protected $primaryKey = 'idea_id';
     protected $fillable = ['price_buy', 'description', 'price_sell', 'is_short', 'status_id', 'date_end'];
 
-    public function getCommentsFrontend(): array
-    {
-        /** @var InvestmentIdeaComments $comment_model */
-        foreach ($this->comments()->orderByDesc('created_at')->get() as $comment_model) {
-            $ar_comments[] = $comment_model->getFrontendComment();
-        }
-        return $ar_comments ?? [];
-    }
-
     public function views(): HasMany
     {
         return $this->hasMany(InvestmentIdeaViewing::class, 'idea_id', 'idea_id');
