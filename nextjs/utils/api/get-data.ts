@@ -29,7 +29,7 @@ export const getViewEntity = async (
     const config: any = { headers: ctx.req.headers };
     return await axios
         .get(
-            `${process.env.API_URL_DOCKER}/api/${entityName}/get/${ctx.params.id}`,
+            `${process.env.API_URL_DOCKER}/api/${entityName}/${ctx.params.id}`,
             config
         )
         .then((res) => res.data)

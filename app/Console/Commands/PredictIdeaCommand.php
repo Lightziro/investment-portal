@@ -85,8 +85,10 @@ class PredictIdeaCommand extends Command
                 }
                 $idea_model->status_id = $status_model->status_id;
                 $idea_model->save();
+                $message->ack();
             }
         } catch (Throwable $e) {
+            $message->nack(true);
             Log::error('Predict idea consumer error', [$e->getMessage(), $e->getFile(), $e->getLine()]);
         }
     }

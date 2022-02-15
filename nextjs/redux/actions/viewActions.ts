@@ -17,14 +17,6 @@ export const createEntityComment = (
     text,
 });
 
-export const setUserIdeaRating = (score: number) => ({
-    type: "SET_USER_IDEA_RATING",
-    score,
-});
-export const fetchUserIdeaRating = (ideaId: number) => ({
-    type: "FETCH_USER_IDEA_RATING",
-    ideaId,
-});
 export const setIdeaRatingStats = (data: DtoIdeaRatingStats) => ({
     type: "CREATE_IDEA_RATING",
     data,

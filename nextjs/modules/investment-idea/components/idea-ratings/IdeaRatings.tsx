@@ -1,30 +1,40 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useRootSelector } from "../../../../hooks/useTypeSelector";
-import { Card, Divider, Grid, Rating, Stack, Typography } from "@mui/material";
+import {
+    Card,
+    Divider,
+    Grid,
+    Rating,
+    Skeleton,
+    Stack,
+    Typography,
+} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Button, Progress } from "antd";
 import { getPercentScore } from "../../utils/ratings-score";
 import classes from "../../InvestmentIdea.module.scss";
 import { SetRatingForm } from "../set-rating-form/SetRatingForm";
 import { useDispatch } from "react-redux";
-import { fetchUserIdeaRating } from "../../../../redux/actions/viewActions";
 import { IdeaUserRating } from "../idea-user-rating/IdeaUserRating";
+import { fetchUserIdeaRating } from "../../../../redux/actions/investmentIdeaActions";
 
-export const IdeaRatings: React.FC = () => {
+interface IdeaRatings {
+    ideaId: number;
+}
+
+export const IdeaRatings: React.FC<IdeaRatings> = ({ ideaId }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [open, setOpen] = useState();
     const user = useRootSelector((state) => state.user);
-    const { ratings, ideaId, userRating } = useRootSelector(
-        (state) => state.view.idea
-    );
+    const { ratings, userRating } = useRootSelector((state) => state.view.idea);
     useEffect(() => {
         if (ideaId) {
             dispatch(fetchUserIdeaRating(ideaId));
         }
     }, [ideaId]);
     if (!ratings) {
-        return null;
+        return <Skeleton variant="rectangular" height={229} />; // TODO: добавить скелетон
     }
     return (
         <Card sx={{ bgcolor: "white", p: 2 }} className="shadow-wrapper">

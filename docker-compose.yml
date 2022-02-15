@@ -70,6 +70,7 @@ services:
             - "5000:5000"
     rabbitmq:
         image: "rabbitmq:3-management"
+        restart: unless-stopped
         hostname: "rabbit"
         ports:
             - "15672:15672"

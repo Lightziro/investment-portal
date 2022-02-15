@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-    GetServerSidePropsContext,
-    GetStaticPropsContext,
-    NextPage,
-} from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
 import getTitleIdea from "../../modules/investment-idea/utils/get-title-idea";
@@ -11,20 +7,22 @@ import { InvestmentIdeaPage } from "../../modules/investment-idea/InvestmentIdea
 import { getViewEntity } from "../../utils/api/get-data";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { useRouter } from "next/router";
-import { InvestmentIdeaView } from "../../redux/ts/types/view/view-store.types";
+import { ServerIdeaData } from "../../redux/ts/types/view/view-store.types";
+
 interface InvestmentIdea {
-    idea: InvestmentIdeaView;
+    ideaData: ServerIdeaData;
 }
-const InvestmentIdea: NextPage<InvestmentIdea> = ({ idea }) => {
+
+const InvestmentIdea: NextPage<InvestmentIdea> = ({ ideaData }) => {
     const { t } = useTranslation();
     const router = useRouter();
-    // const [idea, setIdea] = useState(idea);
+    const [idea, setIdea] = useState<ServerIdeaData>(ideaData);
     useEffect(() => {
-        if (!idea) {
+        if (!ideaData) {
             router.push("/404");
         }
-    }, [idea]);
-    if (!idea) {
+    }, [ideaData]);
+    if (!ideaData) {
         return null;
     }
     return (
@@ -34,7 +32,7 @@ const InvestmentIdea: NextPage<InvestmentIdea> = ({ idea }) => {
             )}`}
         >
             <PortalLayout>
-                <InvestmentIdeaPage ideaData={idea} />
+                <InvestmentIdeaPage ideaData={idea} onChange={setIdea} />
             </PortalLayout>
         </MainLayout>
     );
@@ -44,10 +42,10 @@ export default InvestmentIdea;
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
 ) => {
-    const idea = await getViewEntity("idea", context);
+    const ideaData = await getViewEntity("idea", context);
     return {
         props: {
-            idea,
+            ideaData,
         },
     };
 };

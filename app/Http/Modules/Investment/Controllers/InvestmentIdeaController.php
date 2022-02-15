@@ -3,17 +3,14 @@
 namespace App\Http\Modules\Investment\Controllers;
 
 use App\Http\Classes\StockMarket;
-use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
 use App\Models\Investment\InvestmentIdeaRatings;
-use App\Models\Investment\InvestmentIdeaStatuses;
 use App\Models\User\User;
 use Finnhub\Model\BasicFinancials;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Cache;
 
 class InvestmentIdeaController extends Controller
 {
@@ -34,36 +31,85 @@ class InvestmentIdeaController extends Controller
         $comment->user_id = $user->user_id;
         $comment->idea_id = $idea_model->idea_id;
         $comment->save();
-        return response()->json($comment->getFrontendComment());
+        return response()->json(array_merge($comment->toArray(), [
+            'user' => $comment->user->toArray()
+        ]));
     }
 
-    public function setRating(Request $request): JsonResponse
+    public function setRating(InvestmentIdea $idea): JsonResponse
     {
         // TODO: Переписать проверку на существование идеи в middleware
-        $post_data = $request->post();
-        /** @var InvestmentIdea $idea_model */
-        if (!$idea_model = InvestmentIdea::query()->find($post_data['ideaId'])) {
-            return response()->json(['message' => 'Not found investment idea'], 404);
-        }
+        $post_data = request()->post();
+
         /** @var InvestmentIdeaRatings $rating_model */
-        $rating_model = $idea_model->ratings()->create(['score' => $post_data['score'], 'user_id' => $request->user()->user_id]);
+        $rating_model = $idea->ratings()->create(['score' => $post_data['score'], 'user_id' => request()->user()->user_id]);
         return response()->json([
-            'ratings' => $idea_model->getRatingStats(),
+            'ratings' => $idea->getRatingStats(),
             'userRating' => ['score' => $rating_model->score, 'created_at' => $rating_model->created_at]
         ]);
     }
 
-    public function getUserRating(Request $request): JsonResponse
+    public function getUserRating(InvestmentIdea $idea): JsonResponse
     {
-        $idea_id = $request->route()->parameters()['id'];
         /** @var User $user */
-        if (!$user = $request->user()) {
+        if (!$user = request()->user()) {
             return response()->json([], 204);
         }
         /** @var InvestmentIdeaRatings $rating_model */
-        if(!$rating_model = InvestmentIdeaRatings::query()->where(['idea_id' => $idea_id, 'user_id' => $user->user_id])->first()) {
+        if (!$rating_model = InvestmentIdeaRatings::query()->where(['idea_id' => $idea->idea_id, 'user_id' => $user->user_id])->first()) {
             return response()->json([], 204);
         }
         return response()->json(['score' => $rating_model->score, 'created_at' => $rating_model->created_at]);
+    }
+
+    public function getComments(InvestmentIdea $idea): JsonResponse
+    {
+        $comments = $idea->comments()->with('user')->get()->toArray();
+        return response()->json($comments);
+    }
+
+    public function getRating(InvestmentIdea $idea): JsonResponse
+    {
+        $ratings = $idea->getRatingStats();
+        return response()->json($ratings);
+    }
+
+    public function getCompanyStats(InvestmentIdea $idea): JsonResponse
+    {
+        // TODO: переписать на сервисы
+        $market = new StockMarket();
+        $ticker = $idea->company->ticker;
+
+        $company_stats = $market->getFinancialsStats($ticker);
+
+        if ($company_stats instanceof BasicFinancials) {
+            if (($series = $company_stats->getSeries()['annual']) && !empty($series->eps)) {
+                foreach ($series->eps as $eps_year_stats) {
+                    $ar_eps[] = [
+                        'date' => $eps_year_stats->period,
+                        'value' => round($eps_year_stats->v, 2),
+                    ];
+                }
+            }
+            if (!empty($ar_eps)) {
+                $ar_eps = array_reverse($ar_eps);
+            }
+
+        }
+        $analytics_stats = $market->getRecommendationAnalytics($ticker);
+        if (is_array($analytics_stats)) {
+            foreach ($analytics_stats as $stats) {
+                $ar_stats[] = [
+                    'buy' => $stats['buy'],
+                    'period' => $stats['period'],
+                    'sell' => $stats['sell'],
+                    'hold' => $stats['hold']
+                ];
+            }
+        }
+        return response()->json([
+            'epsStats' => $ar_eps ?? [],
+            'analyticsStats' => $ar_stats ?? []
+        ]);
     }
 }

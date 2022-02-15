@@ -8,11 +8,13 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { MENU_LANGUAGE } from "../../../../../config/menu-items";
+
 interface LanguageMenu {
     open: boolean;
     onClose: () => void;
     onOpen: () => void;
 }
+
 export const LanguageMenu: React.FC<LanguageMenu> = ({
     open,
     onClose,

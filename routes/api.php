@@ -23,10 +23,13 @@ Route::group(['prefix' => 'init'], function () {
 
 Route::group(['prefix' => 'idea'], function () {
     Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
+    Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])->name('get-comments');
     Route::get('/all-key', [InitialDataController::class, 'getIdeasKey']);
-    Route::post('/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum');
-    Route::get('/user-rating/{id}', [InvestmentIdeaController::class, 'getUserRating'])->middleware('');
-    Route::get('/get/{id}', [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
+    Route::post('/{idea}/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
+    Route::get('/{idea}/user-rating', [InvestmentIdeaController::class, 'getUserRating']);
+    Route::get('/{idea}/company-stats', [InvestmentIdeaController::class, 'getCompanyStats'])->name('company-stats');
+    Route::get('/{idea}/rating', [InvestmentIdeaController::class, 'getRating'])->name('get-rating');
+    Route::get('/{idea}', [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
 });
 Route::group(['prefix' => 'article'], function () {
     Route::get('/all-key', [InitialDataController::class, 'getArticlesKey']);

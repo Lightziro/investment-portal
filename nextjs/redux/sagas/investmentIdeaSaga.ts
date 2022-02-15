@@ -14,6 +14,7 @@ function* createComment(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+
 function* fetchIdeaData(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -26,9 +27,10 @@ function* fetchIdeaData(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
-function* fetchIdeaRating(action: AnyAction): Generator {
+
+function* fetchUserRating(action: AnyAction): Generator {
     const data = yield axios
-        .get(`${process.env.API_URL}/api/idea/user-rating/${action.ideaId}`)
+        .get(`${process.env.API_URL}/api/idea/${action.ideaId}/user-rating`)
         .then((res) => {
             switch (res.status) {
                 case 204:
@@ -44,8 +46,49 @@ function* fetchIdeaRating(action: AnyAction): Generator {
     });
 }
 
+function* fetchComments(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/idea/${action.ideaId}/comments`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_IDEA_COMMENTS",
+            data,
+        });
+    } catch (e) {}
+}
+
+function* fetchRating(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/idea/${action.ideaId}/rating`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_IDEA_RATING",
+            data,
+        });
+    } catch (e) {}
+}
+
+function* fetchCompanyStats(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(
+                `${process.env.API_URL}/api/idea/${action.ideaId}/company-stats`
+            )
+            .then((res) => res.data);
+        yield put({
+            type: "SET_IDEA_COMPANY_STATS",
+            data,
+        });
+    } catch (e) {}
+}
+
 export function* actionInvestmentIdea(): SagaIterator {
     yield takeLatest("CREATE_IDEA_COMMENT", createComment);
     yield takeLatest("FETCH_INVESTMENT_IDEA", fetchIdeaData);
-    yield takeLatest("FETCH_USER_IDEA_RATING", fetchIdeaRating);
+    yield takeLatest("FETCH_USER_IDEA_RATING", fetchUserRating);
+    yield takeLatest("FETCH_IDEA_COMMENTS", fetchComments);
+    yield takeLatest("FETCH_IDEA_RATING", fetchRating);
+    yield takeLatest("FETCH_COMPANY_STATS", fetchCompanyStats);
 }

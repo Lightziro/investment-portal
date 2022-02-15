@@ -8,12 +8,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property int comment_id
- * @property User user
- * @property string comment
- * @property int user_id
- * @property int idea_id
- * @property Carbon created_at
+ * @property int $comment_id
+ * @property User $user
+ * @property string $comment
+ * @property int $user_id
+ * @property int $idea_id
  */
 class InvestmentIdeaComments extends CustomModel
 {

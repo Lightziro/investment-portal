@@ -17,26 +17,26 @@ import {
     alertInfo,
     alertSuccess,
 } from "../../../../redux/actions/alertActions";
-import { axios   } from "../../../../utils/axios";
-import {
-    setIdeaRatingStats,
-} from "../../../../redux/actions/viewActions";
-import {useTranslation} from "react-i18next";
+import { axios } from "../../../../utils/axios";
+import { setIdeaRatingStats } from "../../../../redux/actions/viewActions";
+import { useTranslation } from "react-i18next";
+
 interface SetRatingForm {
     open: boolean;
     handleClose: () => void;
     ideaId: number;
 }
+
 export const SetRatingForm: React.FC<SetRatingForm> = ({
     open,
     handleClose,
     ideaId,
 }) => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const handleSubmit = async (form: FormRating) => {
         axios
-            .post(`${process.env.API_URL}/api/idea/set-rating`, {
+            .post(`${process.env.API_URL}/api/idea/${ideaId}/set-rating`, {
                 ...form,
                 ideaId,
             })
@@ -80,7 +80,7 @@ export const SetRatingForm: React.FC<SetRatingForm> = ({
                     <Button type="submit" onClick={handleValidSubmit}>
                         {t("Set a rating")}
                     </Button>
-                    <Button onClick={handleClose}>{t('Cancel')}</Button>
+                    <Button onClick={handleClose}>{t("Cancel")}</Button>
                 </DialogActions>
             </form>
         </Dialog>

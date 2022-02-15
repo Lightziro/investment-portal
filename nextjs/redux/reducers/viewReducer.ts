@@ -4,6 +4,9 @@ import {
     addCommentEntity,
     createIdeaRating,
     initialByEntity,
+    setEntityComments,
+    setIdeaCompanyStats,
+    setIdeaRating,
     setIdeaUserRating,
 } from "../utils/view.utils";
 import { ViewStore } from "../ts/types/view/view-store.types";
@@ -28,6 +31,12 @@ const viewReducer = (
             };
         case "SET_USER_IDEA_RATING":
             return setIdeaUserRating(state, action.data);
+        case "SET_IDEA_RATING":
+            return setIdeaRating(state, action.data);
+        case "SET_IDEA_COMMENTS":
+            return setEntityComments(state, "idea", action.data);
+        case "SET_IDEA_COMPANY_STATS":
+            return setIdeaCompanyStats(state, action.data);
         case "CREATE_IDEA_RATING":
             return createIdeaRating(state, action.data);
         default:

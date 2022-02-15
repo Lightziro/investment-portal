@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Card, Divider, Stack, Typography } from "@mui/material";
+import { Card, Divider, Skeleton, Stack, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { CommentItem } from "./comment-item/CommentItem";
@@ -9,6 +9,7 @@ import { NoComments } from "./no-comments/NoComments";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
 import { Comment, EntityName } from "../../../ts/types/other/view.types";
 import { createEntityComment } from "../../../redux/actions/viewActions";
+import { axios } from "../../../utils/axios";
 interface CommentsWrapper {
     entityId: number;
     entityName: EntityName;
@@ -30,7 +31,7 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
         }
     };
     if (!comments) {
-        return null;
+        return <Skeleton variant="rectangular" height={400} />;
     }
     return (
         <Card sx={{ bgcolor: "white", p: 2 }} className="shadow-wrapper">
