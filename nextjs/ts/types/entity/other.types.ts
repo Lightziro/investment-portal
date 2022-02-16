@@ -9,4 +9,5 @@ export interface CompanyModel {
     ticker: string;
     name: string;
     logo: string | null;
+    date_ipo: string;
 }

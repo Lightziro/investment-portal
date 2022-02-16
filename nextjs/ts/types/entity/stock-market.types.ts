@@ -9,20 +9,12 @@ export interface News {
     summary: string;
     url: string;
 }
+
 export interface EpsCompanyStats {
     date: string;
     value: number;
 }
-export interface CompanyIdeaInfo {
-    companyName: string;
-    ticker: string;
-    logoPath: string;
-    dateIPO: string;
-    industry: string;
-    lastQuote: number;
-    percentChangeToday: number;
-    changeToday: number;
-}
+
 export interface IdeaInfo {
     isShort: boolean;
     priceBuy: number;
@@ -30,12 +22,14 @@ export interface IdeaInfo {
     dateStart: string;
     dateEnd: string;
 }
+
 export interface AnalyticsStats {
     period: string;
     buy: number;
     hold: number;
     sell: number;
 }
+
 export interface InvestmentIdea {
     id: number;
     possibleProfit: number;

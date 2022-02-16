@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Custom\CustomModel;
 use App\Models\Other\Company;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -22,5 +23,10 @@ class UserPredictions extends CustomModel
     public function company(): HasOne
     {
         return $this->hasOne(Company::class, 'company_id', 'company_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

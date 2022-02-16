@@ -18,5 +18,6 @@ Route::post('/recovery-password', [UserActionController::class, 'recoveryPasswor
 
 Route::group(['prefix' => 'predictions', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/list', [PredictionController::class, 'getList']);
+    Route::post('/create', [PredictionController::class, 'create'])->name('create-prediction');
     Route::delete('/{predict}', [PredictionController::class, 'deletePredict']);
 });

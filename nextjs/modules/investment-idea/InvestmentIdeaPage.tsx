@@ -11,15 +11,15 @@ import { IdeaDescription } from "./components/idea-description/IdeaDescription";
 import { useDispatch } from "react-redux";
 import { useRootSelector } from "../../hooks/useTypeSelector";
 import { IdeaRatings } from "./components/idea-ratings/IdeaRatings";
-import { ServerIdeaData } from "../../redux/ts/types/view/view-store.types";
 import {
     fetchCompanyStats,
     fetchIdeaComments,
     fetchIdeaRating,
 } from "../../redux/actions/investmentIdeaActions";
+import { IdeaView } from "../../ts/types/entity/idea.types";
 
 interface InvestmentIdeaPage {
-    ideaData: ServerIdeaData;
+    ideaData: IdeaView;
     onChange: (state) => void;
 }
 
@@ -48,14 +48,14 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                     direction="column"
                 >
                     <Grid item>
-                        <IdeaHeader companyInfo={ideaData.companyInfo} />
+                        <IdeaHeader companyInfo={ideaData.company} />
                     </Grid>
                     <Grid item>
-                        <CompanyDescription company={ideaData.companyInfo} />
+                        <CompanyDescription company={ideaData.company} />
                     </Grid>
                 </Grid>
                 <Grid xs={12} sm={4} md={4} item xl={3} lg={3}>
-                    <IdeaAuthor data={ideaData.authorInfo} />
+                    <IdeaAuthor data={ideaData.author} />
                 </Grid>
                 <Grid xs={12} sm={8} item md={5} xl={4} lg={4}>
                     <ChartStatsEPS />
@@ -64,7 +64,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                     <IdeaDescription description={ideaData.description} />
                 </Grid>
                 <Grid item lg={3} md={4} xs={12} sm={5} xl={3}>
-                    <IdeaInformation ideaInfo={ideaData.ideaInfo} />
+                    <IdeaInformation ideaInfo={ideaData} />
                 </Grid>
                 <Grid xs={12} md={4} sm={6} item xl={4} lg={4}>
                     <ChartStatsAnalytics />

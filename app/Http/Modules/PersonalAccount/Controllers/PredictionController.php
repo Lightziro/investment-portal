@@ -30,6 +30,7 @@ class PredictionController extends Controller
         }
         return response()->json($ar_predict ?? []);
     }
+
     public function deletePredict(UserPredictions $predict): JsonResponse
     {
         try {
@@ -39,6 +40,18 @@ class PredictionController extends Controller
                 return response()->json([], 404);
             }
             $predict->delete();
+            return response()->json([]);
+        } catch (Throwable $e) {
+            return response()->json([], 400);
+        }
+    }
+
+    public function create(Request $request): JsonResponse
+    {
+        try {
+            /** @var User $user */
+            $user = $request->user();
+            $user->predictions()->create($request->only(['company_id', 'predict_price']));
             return response()->json([]);
         } catch (Throwable $e) {
             return response()->json([], 400);

@@ -3,14 +3,13 @@ import {
     Card,
     Grid,
     Stack,
-    Avatar,
     Skeleton,
     Divider,
     Typography,
 } from "@mui/material";
-import { CompanyIdeaInfo } from "../../../../ts/types/entity/stock-market.types";
+import { CompanyModel } from "../../../../ts/types/entity/other.types";
 interface CompanyIdeaHeader {
-    companyInfo: CompanyIdeaInfo;
+    companyInfo: CompanyModel;
 }
 export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
     if (!companyInfo) {
@@ -29,35 +28,35 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
                     {/*<Avatar*/}
                     {/*    src={`/image/picture/company-logo/${companyInfo.logoPath}`}*/}
                     {/*/>*/}
-                    <span>{`${companyInfo.companyName}(${companyInfo.ticker})`}</span>
+                    <span>{`${companyInfo.name}(${companyInfo.ticker})`}</span>
                     <Divider
                         className="hr-separator"
                         orientation="vertical"
                         flexItem
                     />
                     <Typography variant="h6" gutterBottom component="div">
-                        ${companyInfo.lastQuote}
+                        {/*${companyInfo.lastQuote}*/}
                     </Typography>
-                    <span
-                        className="quote-change"
-                        style={{
-                            color: getColorQuote(companyInfo.changeToday),
-                        }}
-                    >
-                        {companyInfo.changeToday}
-                    </span>
-                    <span
-                        className="quote-change-percent"
-                        style={{
-                            color: getColorQuote(companyInfo.changeToday),
-                        }}
-                    >
-                        (
-                        {`${getSymbolQuote(
-                            companyInfo.changeToday
-                        )}${companyInfo.percentChangeToday.toFixed(2)}`}
-                        %)
-                    </span>
+                    {/*<span*/}
+                    {/*    className="quote-change"*/}
+                    {/*    style={{*/}
+                    {/*        color: getColorQuote(companyInfo.changeToday),*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    {companyInfo.changeToday}*/}
+                    {/*</span>*/}
+                    {/*<span*/}
+                    {/*    className="quote-change-percent"*/}
+                    {/*    style={{*/}
+                    {/*        color: getColorQuote(companyInfo.changeToday),*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    (*/}
+                    {/*    {`${getSymbolQuote(*/}
+                    {/*        companyInfo.changeToday*/}
+                    {/*    )}${companyInfo.percentChangeToday.toFixed(2)}`}*/}
+                    {/*    %)*/}
+                    {/*</span>*/}
                 </Stack>
             </Grid>
         </Card>

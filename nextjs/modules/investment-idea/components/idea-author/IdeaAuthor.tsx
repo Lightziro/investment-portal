@@ -1,12 +1,12 @@
 import React from "react";
-import { Avatar, Card, Grid, Stack, Skeleton, Typography } from "@mui/material";
-import { AuthorInfo } from "../../../../ts/types/entity/user.types";
+import { Card, Stack, Skeleton, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { UserAvatar } from "../../../../components/simple/user-avatar/UserAvatar";
 import classes from "../../InvestmentIdea.module.scss";
+import { AuthorIdea } from "../../../../ts/types/entity/idea.types";
 interface IdeaAuthor {
-    data: AuthorInfo;
+    data: AuthorIdea;
 }
 export const IdeaAuthor: React.FC<IdeaAuthor> = ({ data }) => {
     if (!data) {
@@ -19,30 +19,30 @@ export const IdeaAuthor: React.FC<IdeaAuthor> = ({ data }) => {
             className="shadow-wrapper"
         >
             <div className={classes.authorInfo}>
-                <Link href={`/profile/[id]`} as={`/profile/${data.userId}`}>
+                <Link href={`/profile/[id]`} as={`/profile/${data.user_id}`}>
                     <a>
                         <UserAvatar
-                            avatar={data.avatar}
+                            avatar={data.avatar_path}
                             height={56}
                             width={56}
                         />
                     </a>
                 </Link>
                 <Typography variant="h6" align="center">
-                    {data.fullName}
+                    {data.full_name}
                 </Typography>
             </div>
             <Stack spacing={1}>
                 <Typography variant="body2" component="p">
-                    {t("Total ideas", { amount: data.totalIdeas })}
+                    {t("Total ideas", { amount: data.total_ideas })}
                 </Typography>
                 <Typography variant="body2" gutterBottom component="p">
                     {t("Successful ideas", {
-                        amount: data.amountSuccessfulIdeas,
+                        amount: data.amount_success_ideas,
                     })}
                 </Typography>
                 <Typography variant="body2" gutterBottom component="p">
-                    {t("Fail ideas", { amount: data.amountFailIdeas })}
+                    {t("Fail ideas", { amount: data.amount_fail_ideas })}
                 </Typography>
             </Stack>
         </Card>

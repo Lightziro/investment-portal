@@ -1,11 +1,13 @@
 import React from "react";
 import { Card, Typography } from "@mui/material";
-import { CompanyIdeaInfo } from "../../../../ts/types/entity/stock-market.types";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
+import { CompanyModel } from "../../../../ts/types/entity/other.types";
+
 interface CompanyDescription {
-    company: CompanyIdeaInfo;
+    company: CompanyModel;
 }
+
 export const CompanyDescription: React.FC<CompanyDescription> = ({
     company,
 }) => {
@@ -17,8 +19,8 @@ export const CompanyDescription: React.FC<CompanyDescription> = ({
         <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
             <Typography variant="body2" gutterBottom>
                 {t("Company description", {
-                    companyName: company.companyName,
-                    dateIPO: moment(company.dateIPO).format("MMMM Do YYYY"),
+                    companyName: company.name,
+                    dateIPO: moment(company.date_ipo).format("MMMM Do YYYY"),
                     ticker: company.ticker,
                 })}
             </Typography>
