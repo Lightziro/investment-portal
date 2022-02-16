@@ -5,19 +5,18 @@ import Link from "next/link";
 import { UserAvatar } from "../../../../components/simple/user-avatar/UserAvatar";
 import classes from "../../InvestmentIdea.module.scss";
 import { AuthorIdea } from "../../../../ts/types/entity/idea.types";
+
 interface IdeaAuthor {
     data: AuthorIdea;
 }
+
 export const IdeaAuthor: React.FC<IdeaAuthor> = ({ data }) => {
     if (!data) {
         return <Skeleton variant="rectangular" height={208} />;
     }
     const { t } = useTranslation();
     return (
-        <Card
-            sx={{ bgcolor: "rgba(144, 202, 249, 0.85)", p: 1 }}
-            className="shadow-wrapper"
-        >
+        <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
             <div className={classes.authorInfo}>
                 <Link href={`/profile/[id]`} as={`/profile/${data.user_id}`}>
                     <a>

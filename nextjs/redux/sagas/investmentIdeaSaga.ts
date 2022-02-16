@@ -83,7 +83,17 @@ function* fetchCompanyStats(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
-
+function* fetchQuote(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/company/${action.companyId}/quote`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_IDEA_QUOTE",
+            data,
+        });
+    } catch (e) {}
+}
 export function* actionInvestmentIdea(): SagaIterator {
     yield takeLatest("CREATE_IDEA_COMMENT", createComment);
     yield takeLatest("FETCH_INVESTMENT_IDEA", fetchIdeaData);
@@ -91,4 +101,5 @@ export function* actionInvestmentIdea(): SagaIterator {
     yield takeLatest("FETCH_IDEA_COMMENTS", fetchComments);
     yield takeLatest("FETCH_IDEA_RATING", fetchRating);
     yield takeLatest("FETCH_COMPANY_STATS", fetchCompanyStats);
+    yield takeLatest("FETCH_COMPANY_QUOTE", fetchQuote);
 }

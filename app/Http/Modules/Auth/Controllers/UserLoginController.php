@@ -5,17 +5,13 @@ namespace App\Http\Modules\Auth\Controllers;
 use App\Models\User\User;
 use App\Models\User\UsersRole;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
 use Throwable;
-use function cookie;
 
 class UserLoginController extends Controller
 {

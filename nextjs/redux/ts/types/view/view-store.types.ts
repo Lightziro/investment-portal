@@ -10,6 +10,7 @@ import {
     IdeaInfo,
 } from "../../../../ts/types/entity/stock-market.types";
 import { AuthorInfo, UserModel } from "../../../../ts/types/entity/user.types";
+import { CompanyQuote } from "../../../../ts/types/entity/other.types";
 
 export interface ViewStore {
     profile: UserModel;
@@ -22,13 +23,6 @@ export interface ArticleView extends ArticleModel {
     content: string;
     comments: Comment[];
 }
-export interface ServerIdeaData {
-    idea_id: number;
-    companyInfo: CompanyIdeaInfo;
-    authorInfo: AuthorInfo;
-    ideaInfo: IdeaInfo;
-    description: string;
-}
 
 export interface InvestmentIdeaView {
     epsStats: EpsCompanyStats[];
@@ -36,6 +30,7 @@ export interface InvestmentIdeaView {
     comments: Comment[];
     ratings: IdeaRatingStats;
     userRating?: UserIdeaRating;
+    quote: CompanyQuote;
 }
 
 export interface IdeaRatingStats {

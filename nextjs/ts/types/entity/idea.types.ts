@@ -3,6 +3,7 @@ import { UserModel } from "./user.types";
 
 export interface IdeaModel {
     idea_id: number;
+    company_id: number;
     description: string;
     company: CompanyModel;
     price_buy: number;

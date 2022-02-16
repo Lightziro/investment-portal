@@ -110,21 +110,6 @@ class InvestmentIdea extends CustomModel
         return $this->questions()->where(['result' => true])->sum('score');
     }
 
-    public function getFrontendAuthor(): array
-    {
-        $author_model = $this->author;
-        return [
-            'userId' => $author_model->user_id,
-            'avatar' => $author_model->avatar_path,
-            'totalIdeas' => $author_model->investment_ideas->count(),
-            'amountSuccessfulIdeas' => $author_model->investment_ideas()->with('status', fn($query) => $query
-                ->where(['status' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count(),
-            'amountFailIdeas' => $author_model->investment_ideas()->with('status', fn($query) => $query
-                ->where(['status' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
-            'fullName' => (string)$author_model,
-        ];
-    }
-
     public static function mostPopular(): Builder|CustomQueryBuilder
     {
         return self::query()

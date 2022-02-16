@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { useRootSelector } from "../../hooks/useTypeSelector";
 import { IdeaRatings } from "./components/idea-ratings/IdeaRatings";
 import {
+    fetchCompanyQuote,
     fetchCompanyStats,
     fetchIdeaComments,
     fetchIdeaRating,
@@ -33,6 +34,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
         dispatch(fetchIdeaComments(ideaData.idea_id));
         dispatch(fetchIdeaRating(ideaData.idea_id));
         dispatch(fetchCompanyStats(ideaData.idea_id));
+        dispatch(fetchCompanyQuote(ideaData.company_id));
     }, []);
     const comments = useRootSelector((store) => store.view.idea.comments);
     return (

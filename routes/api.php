@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Modules\Article\Controllers\ArticleController;
+use App\Http\Modules\Company\Controllers\CompanyController;
 use App\Http\Modules\Core\Controllers\InitialDataController;
 use App\Http\Modules\Core\Controllers\OtherController;
 use App\Http\Modules\Investment\Controllers\InvestmentIdeaController;
@@ -57,6 +58,10 @@ Route::group(['prefix' => 'other'], function () {
 });
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/{user}', [ViewController::class, 'getViewProfile']);
+});
+
+Route::group(['prefix' => 'company'], function() {
+   Route::get('/{company}/quote', [CompanyController::class, 'getQuote']);
 });
 //Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
 //    Route::get('/get', [OtherController::class, 'basick']);

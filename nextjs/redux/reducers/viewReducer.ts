@@ -7,6 +7,7 @@ import {
     setArticleLabels,
     setEntityComments,
     setIdeaCompanyStats,
+    setIdeaQuote,
     setIdeaRating,
     setIdeaUserRating,
 } from "../utils/view.utils";
@@ -44,6 +45,8 @@ const viewReducer = (
             return createIdeaRating(state, action.data);
         case "SET_ARTICLE_LABELS":
             return setArticleLabels(state, action.data);
+        case "SET_IDEA_QUOTE":
+            return setIdeaQuote(state, action.data);
         default:
             return state;
     }

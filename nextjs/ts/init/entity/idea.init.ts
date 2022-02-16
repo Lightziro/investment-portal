@@ -2,12 +2,9 @@ import { InvestmentIdeaView } from "../../../redux/ts/types/view/view-store.type
 
 export const initialIdeaView: InvestmentIdeaView = {
     epsStats: null,
-    ideaInfo: null,
     analyticsStats: null,
-    companyInfo: null,
-    authorInfo: null,
-    description: null,
     comments: null,
-    ideaId: null,
     ratings: null,
+    userRating: null,
+    quote: null,
 };

@@ -18,3 +18,7 @@ export const fetchCompanyStats = (ideaId: number) => ({
     type: "FETCH_COMPANY_STATS",
     ideaId,
 });
+export const fetchCompanyQuote = (companyId: number) => ({
+    type: "FETCH_COMPANY_QUOTE",
+    companyId,
+});

@@ -11,3 +11,9 @@ export interface CompanyModel {
     logo: string | null;
     date_ipo: string;
 }
+
+export interface CompanyQuote {
+    value_change: number;
+    value_change_percent: number;
+    value_last: number;
+}
