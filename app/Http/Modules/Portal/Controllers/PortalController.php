@@ -7,6 +7,8 @@ use App\Http\Modules\Article\Helpers\ArticleHelper;
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
+use App\Models\Other\Company;
+use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
@@ -60,5 +62,20 @@ class PortalController extends BaseController
             Cache::put("last-news", $news, now()->addHour());
         }
         return response()->json($news ?? []);
+    }
+
+    public function searchData(string $search): JsonResponse
+    {
+        $companies = Company::query()->where('name', 'LIKE', "%{$search}%");
+        if ($companies->count()) {
+            $ar_search[] = ['label' => 'Companies', 'items' => $companies->limit(5)->get(['name'])->toArray()];
+        }
+
+        $profiles = User::query()->where('first_name', 'LIKE', "%{$search}%")
+            ->orWhere('last_name', 'LIKE', "%{$search}%");
+        if ($profiles->count()) {
+            $ar_search[] = ['label' => 'Profiles', 'items' => $profiles->limit(5)->get(['first_name', 'last_name'])->toArray()];
+        }
+        return response()->json($ar_search ?? []);
     }
 }

@@ -39,3 +39,14 @@ export const getPhoto = (photo) => {
         ? `${process.env.API_URL}/storage/${photo}`
         : URL.createObjectURL(photo);
 };
+// TODO: перенести
+export const getSearchContent = (entity, item) => {
+    switch (entity) {
+        case "Profiles":
+            return `${item.first_name} ${item.last_name}`;
+        case "Companies":
+            return item.name;
+        default:
+            return "";
+    }
+};

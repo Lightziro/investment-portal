@@ -63,6 +63,5 @@ Route::group(['prefix' => 'profile'], function () {
 Route::group(['prefix' => 'company'], function() {
    Route::get('/{company}/quote', [CompanyController::class, 'getQuote']);
 });
-//Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
-//    Route::get('/get', [OtherController::class, 'basick']);
-//});
+
+Route::get('/search/{search}', [PortalController::class, 'searchData'])->name('portal-search');

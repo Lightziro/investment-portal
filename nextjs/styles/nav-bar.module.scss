@@ -11,8 +11,8 @@
     transition: none 0s ease 0s;
 
     .logoWrapper {
-        width: 228px;
         display: flex;
+        margin-right: 20px;
 
         img {
             height: 32px;
@@ -67,6 +67,25 @@
     //    }
     //}
 }
+
 .emptyBlock {
     flex-grow: 1;
+}
+
+.backdropSearch {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: #000;
+    opacity: .3;
+}
+
+.inputSearch {
+    z-index: 100;
+}
+.dropDownSearch{
+    top: 60px !important;
+    z-index: 1101;
 }
