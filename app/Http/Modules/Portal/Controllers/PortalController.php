@@ -9,6 +9,7 @@ use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
 use App\Models\Other\Company;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
@@ -66,16 +67,35 @@ class PortalController extends BaseController
 
     public function searchData(string $search): JsonResponse
     {
-        $companies = Company::query()->where('name', 'LIKE', "%{$search}%");
+        $companies = Company::query()->where('name', 'LIKE', "%{$search}%")->limit(5);
         if ($companies->count()) {
-            $ar_search[] = ['label' => 'Companies', 'items' => $companies->limit(5)->get(['name'])->toArray()];
+            $ar_search[] = ['label' => 'Companies', 'items' => $this->convertToSearchFormat($companies, Company::class)];
         }
 
         $profiles = User::query()->where('first_name', 'LIKE', "%{$search}%")
-            ->orWhere('last_name', 'LIKE', "%{$search}%");
+            ->orWhere('last_name', 'LIKE', "%{$search}%")->limit(5);
         if ($profiles->count()) {
-            $ar_search[] = ['label' => 'Profiles', 'items' => $profiles->limit(5)->get(['first_name', 'last_name'])->toArray()];
+            $ar_search[] = ['label' => 'Profiles', 'items' => $this->convertToSearchFormat($profiles, User::class)];
+        }
+
+        $articles = Article::query()->where('title', 'LIKE', "%{$search}%")->limit(5);
+        if ($articles->count()) {
+            $ar_search[] = ['label' => 'Articles', 'items' => $this->convertToSearchFormat($articles, Article::class)];
         }
         return response()->json($ar_search ?? []);
+    }
+
+    private function convertToSearchFormat(Builder $query, $entity): array
+    {
+        switch ($entity) {
+            case Company::class:
+                $data = $query->get(['company_id', 'name'])->all();
+                return array_map(fn(Company $item) => ['entity_id' => $item->company_id, 'name' => $item->name], $data);
+            case User::class:
+                $data = $query->get()->all();
+                return array_map(fn(User $item) => ['entity_id' => $item->user_id, 'name' => (string)$item], $data);
+            default:
+                return [];
+        }
     }
 }

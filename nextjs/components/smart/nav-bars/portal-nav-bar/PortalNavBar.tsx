@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { LanguageMenu } from "./language-menu/LanguageMenu";
 import { NoticeMenu } from "./notice-menu/NoticeMenu";

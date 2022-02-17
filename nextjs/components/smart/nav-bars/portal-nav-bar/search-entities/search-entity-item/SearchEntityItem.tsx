@@ -1,21 +1,28 @@
 import React from "react";
-import { getSearchContent } from "../../../../../../utils/other";
+import { SearchItem } from "../../../../../../ts/types/other/other.types";
+import Link from "next/link";
+import { TypeSearchEntity } from "../../../../../../ts/enums/other.enums";
+
 interface SearchEntityItem {
-    nameEntity: string;
-    item: any;
+    label: TypeSearchEntity;
+    option: SearchItem;
 }
+
 export const SearchEntityItem: React.FC<SearchEntityItem> = ({
-    nameEntity,
-    item,
+    option,
+    label,
 }) => {
+    const getLinkByEntity = () => {
+        switch (label) {
+            case TypeSearchEntity.companies:
+                return `/company/${option.entity_id}`;
+            case TypeSearchEntity.profiles:
+                return `/profile/${option.entity_id}`;
+        }
+    };
     return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-            }}
-        >
-            {getSearchContent(nameEntity, item)}
-        </div>
+        <Link href={getLinkByEntity()}>
+            <div className="d-flex justify-content-between">{option.name}</div>
+        </Link>
     );
 };

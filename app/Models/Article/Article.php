@@ -2,11 +2,11 @@
 
 namespace App\Models\Article;
 
+use App\Custom\CustomModel;
 use App\Custom\Query\CustomQueryBuilder;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
@@ -25,7 +25,7 @@ use JetBrains\PhpStorm\Pure;
  * @property Collection|ArticleViewing[] viewing
  * @property Collection|ArticleComments[] comments
  */
-class Article extends Model
+class Article extends CustomModel
 {
     protected $table = 'articles';
     protected $primaryKey = 'article_id';

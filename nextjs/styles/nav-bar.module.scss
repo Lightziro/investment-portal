@@ -85,7 +85,8 @@
 .inputSearch {
     z-index: 100;
 }
-.dropDownSearch{
-    top: 60px !important;
-    z-index: 1101;
+
+.dropDownSearch {
+    z-index: 1101 !important;
+    position: fixed !important;
 }

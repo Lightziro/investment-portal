@@ -1,4 +1,5 @@
 import SetOptions from "suneditor-react/dist/types/SetOptions";
+import { TypeSearchEntity } from "../ts/enums/other.enums";
 
 export const settingsSunEditor: SetOptions = {
     showPathLabel: false,
@@ -40,13 +41,11 @@ export const getPhoto = (photo) => {
         : URL.createObjectURL(photo);
 };
 // TODO: перенести
-export const getSearchContent = (entity, item) => {
+export const getSearchContent = (entity: TypeSearchEntity, item: any) => {
     switch (entity) {
-        case "Profiles":
+        case TypeSearchEntity.profiles:
             return `${item.first_name} ${item.last_name}`;
-        case "Companies":
+        case TypeSearchEntity.companies:
             return item.name;
-        default:
-            return "";
     }
 };
