@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Cache;
 
 class PortalController extends BaseController
 {
+    private const TYPE_ENTITY_COMPANIES = 'Companies';
+    private const TYPE_ENTITY_ARTICLES = 'Articles';
+    private const TYPE_ENTITY_PROFILES = 'Profiles';
+
+
     public function getPortalData(): JsonResponse
     {
         $count_success_ideas = InvestmentIdea::query()->with('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count();
@@ -67,33 +72,40 @@ class PortalController extends BaseController
 
     public function searchData(string $search): JsonResponse
     {
-        $companies = Company::query()->where('name', 'LIKE', "%{$search}%")->limit(5);
-        if ($companies->count()) {
-            $ar_search[] = ['label' => 'Companies', 'items' => $this->convertToSearchFormat($companies, Company::class)];
+        $ar_query = [
+            self::TYPE_ENTITY_COMPANIES => Company::query()->where('name', 'LIKE', "%{$search}%")->limit(5),
+            self::TYPE_ENTITY_ARTICLES => Article::query()->where('title', 'LIKE', "%{$search}%")->limit(5),
+            self::TYPE_ENTITY_PROFILES => User::query()->where('first_name', 'LIKE', "%{$search}%")
+                ->orWhere('last_name', 'LIKE', "%{$search}%")->limit(5)
+        ];
+        foreach ($ar_query as $entity_name => $query) {
+            $ar_search[] = ['entity' => $entity_name, 'items' => $this->convertToSearchFormat($query, $entity_name)];
         }
-
-        $profiles = User::query()->where('first_name', 'LIKE', "%{$search}%")
-            ->orWhere('last_name', 'LIKE', "%{$search}%")->limit(5);
-        if ($profiles->count()) {
-            $ar_search[] = ['label' => 'Profiles', 'items' => $this->convertToSearchFormat($profiles, User::class)];
-        }
-
-        $articles = Article::query()->where('title', 'LIKE', "%{$search}%")->limit(5);
-        if ($articles->count()) {
-            $ar_search[] = ['label' => 'Articles', 'items' => $this->convertToSearchFormat($articles, Article::class)];
-        }
-        return response()->json($ar_search ?? []);
+        return response()->json($ar_search);
     }
 
     private function convertToSearchFormat(Builder $query, $entity): array
     {
+        $data = $query->get()->all();
         switch ($entity) {
-            case Company::class:
-                $data = $query->get(['company_id', 'name'])->all();
-                return array_map(fn(Company $item) => ['entity_id' => $item->company_id, 'name' => $item->name], $data);
-            case User::class:
-                $data = $query->get()->all();
-                return array_map(fn(User $item) => ['entity_id' => $item->user_id, 'name' => (string)$item], $data);
+            case self::TYPE_ENTITY_COMPANIES:
+                return array_map(fn(Company $item) => [
+                    'entity_id' => $item->company_id,
+                    'name' => $item->name,
+                    'img_path' => $item
+                ], $data);
+            case self::TYPE_ENTITY_PROFILES:
+                return array_map(fn(User $item) => [
+                    'entity_id' => $item->user_id,
+                    'name' => (string)$item,
+                    'img_path' => $item->avatar_path,
+                ], $data);
+            case self::TYPE_ENTITY_ARTICLES:
+                return array_map(fn(Article $item) => [
+                    'entity_id' => $item->article_id,
+                    'name' => $item->title,
+                    'img_path' => $item->preview_path,
+                ], $data);
             default:
                 return [];
         }

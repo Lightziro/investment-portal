@@ -4,7 +4,6 @@ numpy
 transformers
 pandas
 yfinance
-tensorflow
 matplotlib
 keras
 scipy

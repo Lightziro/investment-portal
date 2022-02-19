@@ -7,11 +7,12 @@ export interface Sex {
 
 // TODO: Interface перенести
 export interface SearchOption {
-    label: TypeSearchEntity;
+    entity: TypeSearchEntity;
     items: SearchItem[];
 }
 
 export interface SearchItem {
     entity_id: number;
     name: string;
+    img_path: string;
 }

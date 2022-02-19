@@ -119,4 +119,6 @@ export const ruLanguage = {
     "My stock": "Мои акции",
     Main: "Главная",
     "My predictions": "Мои прогнозы",
+    Search: "Поиск",
+    Profiles: "Профили",
 };

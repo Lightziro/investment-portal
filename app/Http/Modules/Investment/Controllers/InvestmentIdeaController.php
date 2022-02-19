@@ -3,6 +3,7 @@
 namespace App\Http\Modules\Investment\Controllers;
 
 use App\Http\Classes\StockMarket;
+use App\Http\Modules\Investment\Helpers\InvestmentIdeaHelper;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
 use App\Models\Investment\InvestmentIdeaRatings;
@@ -65,7 +66,7 @@ class InvestmentIdeaController extends Controller
     public function getComments(InvestmentIdea $idea): JsonResponse
     {
         $comments = $idea->comments()->with('user')->orderByDesc('created_at')->get()->toArray();
-        return response()->json($comments);
+        return response()->json(InvestmentIdeaHelper::filterDeletedUser($comments));
     }
 
     public function getRating(InvestmentIdea $idea): JsonResponse

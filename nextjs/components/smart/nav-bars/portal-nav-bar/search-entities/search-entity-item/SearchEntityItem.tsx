@@ -4,7 +4,7 @@ import Link from "next/link";
 import { TypeSearchEntity } from "../../../../../../ts/enums/other.enums";
 
 interface SearchEntityItem {
-    label: TypeSearchEntity;
+    label: string;
     option: SearchItem;
 }
 
@@ -18,6 +18,8 @@ export const SearchEntityItem: React.FC<SearchEntityItem> = ({
                 return `/company/${option.entity_id}`;
             case TypeSearchEntity.profiles:
                 return `/profile/${option.entity_id}`;
+            default:
+                return "";
         }
     };
     return (

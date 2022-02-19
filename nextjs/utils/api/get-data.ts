@@ -63,3 +63,8 @@ export const getEntityAdmin = async (
         .then((res) => res.data)
         .catch(() => null);
 };
+export const getSearchData = async (value: string) =>
+    await axios
+        .get(`${process.env.API_URL}/api/search/${value}`)
+        .then((res) => res.data)
+        .catch((e) => []);

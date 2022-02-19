@@ -6,6 +6,7 @@ import { SearchOption } from "../../../../../ts/types/other/other.types";
 import { SearchEntityItem } from "./search-entity-item/SearchEntityItem";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
+import { getSearchData } from "../../../../../utils/api/get-data";
 
 export const SearchEntities: React.FC = () => {
     const [options, setOptions] = useState<SearchOption[]>([]);
@@ -16,10 +17,9 @@ export const SearchEntities: React.FC = () => {
         if (!value) {
             return;
         }
-        const data = await axios
-            .get(`${process.env.API_URL}/api/search/${value}`)
-            .then((res) => res.data);
-        setOptions(data);
+        const data = await getSearchData(value);
+        console.log(data);
+        setOptions((prev) => data);
     };
     const handleClickSearch = (value) => {
         if (!value) {
@@ -35,15 +35,20 @@ export const SearchEntities: React.FC = () => {
             onSearch={handleSearch}
             defaultActiveFirstOption={false}
             style={{ width: 450 }}
-            options={options.map((item, i) => ({
-                label: item.label,
-                options: item.items.map((option) => ({
-                    value: option.name,
-                    label: (
-                        <SearchEntityItem label={item.label} option={option} />
-                    ),
-                })),
-            }))}
+            options={options
+                .filter((section) => section.items.length)
+                .map((section) => ({
+                    label: t(section.entity),
+                    options: section.items.map((option) => ({
+                        value: option.name,
+                        label: (
+                            <SearchEntityItem
+                                label={section.entity}
+                                option={option}
+                            />
+                        ),
+                    })),
+                }))}
         >
             <Input.Search
                 onSearch={handleClickSearch}
