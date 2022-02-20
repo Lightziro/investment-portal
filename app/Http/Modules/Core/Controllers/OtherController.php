@@ -48,7 +48,7 @@ class OtherController extends Controller
     {
         // TODO: Добавить кэширование
         $stocks = Company::query()->whereIn('ticker', ['AAPL', 'V', 'MDB', 'BAC', 'TSLA', 'NFLX'])
-            ->orderBy('name')->get(['name', 'ticker']);
+            ->orderBy('name')->get(['name', 'ticker', 'company_id']);
         $market = new StockMarket();
 
         /** @var Company $company_model */
@@ -56,6 +56,7 @@ class OtherController extends Controller
             $quote_info = $market->getLastQuote($company_model->ticker);
             if ($quote_info) {
                 $ar_stock[] = [
+                    'company_id' => $company_model->getKey(),
                     'name' => $company_model->name,
                     'last_price' => $quote_info->getC(),
                     'percent_change_today' => $quote_info->getDp(),

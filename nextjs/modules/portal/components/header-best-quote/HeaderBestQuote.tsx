@@ -5,6 +5,7 @@ import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import * as classnames from "classnames";
 import classes from "../../Portal.module.scss";
 import { axios } from "../../../../utils/axios";
+import { LinkWrapper } from "../../../../components/simple/link/Link";
 
 export const HeaderBestQuote: React.FC = () => {
     const [quotes, setQuotes] = useState<DtoQuoteItem[]>(null);
@@ -44,9 +45,11 @@ export const HeaderBestQuote: React.FC = () => {
                         alignItems="center"
                         item
                     >
-                        <span className={classes.quoteHeaderName}>
-                            {quote.name}
-                        </span>
+                        <LinkWrapper href={`/company/${quote.company_id}`}>
+                            <span className={classes.quoteHeaderName}>
+                                {quote.name}
+                            </span>
+                        </LinkWrapper>
                         <Stack
                             className={classes.wrapperQuoteInfo}
                             alignItems="center"

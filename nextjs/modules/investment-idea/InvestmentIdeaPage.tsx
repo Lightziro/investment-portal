@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { IdeaHeader } from "./components/idea-header/IdeaHeader";
 import { CompanyDescription } from "./components/company-description/CompanyDescription";
 import { IdeaAuthor } from "./components/idea-author/IdeaAuthor";
-import { ChartStatsEPS } from "../../components/ordinary/charts/ChartStatsEPS";
+import { ChartStats } from "../../components/ordinary/charts/ChartStats";
 import { IdeaInformation } from "./components/idea-information/IdeaInformation";
 import { ChartStatsAnalytics } from "../../components/ordinary/charts/ChartStatsAnalytics";
 import { CommentsList } from "../../components/smart/comments-list/CommentsList";
@@ -18,6 +18,7 @@ import {
     fetchIdeaRating,
 } from "../../redux/actions/investmentIdeaActions";
 import { IdeaView } from "../../ts/types/entity/idea.types";
+import { clearView } from "../../redux/actions/viewActions";
 
 interface InvestmentIdeaPage {
     ideaData: IdeaView;
@@ -30,6 +31,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
 }) => {
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(clearView("idea"));
         dispatch(fetchIdeaComments(ideaData.idea_id));
         dispatch(fetchIdeaRating(ideaData.idea_id));
         dispatch(fetchCompanyStats(ideaData.company_id, "idea"));
@@ -63,7 +65,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                     <IdeaAuthor data={ideaData.author} />
                 </Grid>
                 <Grid xs={12} sm={8} item md={5} xl={4} lg={4}>
-                    <ChartStatsEPS epsData={epsStats} />
+                    <ChartStats statsData={epsStats} title="EPS" />
                 </Grid>
                 <Grid xs={12} item lg={5} sm={7} md={7} xl={5}>
                     <IdeaDescription description={ideaData.description} />

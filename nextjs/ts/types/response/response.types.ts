@@ -17,6 +17,7 @@ export interface DtoPortal {
     };
 }
 export interface DtoQuoteItem {
+    company_id: number;
     name: string;
     last_price: number;
     percent_change_today: number;

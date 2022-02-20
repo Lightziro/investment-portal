@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Chip, Divider, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { CompanyModel } from "../../../ts/types/entity/other.types";
-import { ChartStatsEPS } from "../../../components/ordinary/charts/ChartStatsEPS";
 import { useDispatch } from "react-redux";
 import { fetchCompanyStats } from "../../../redux/actions/investmentIdeaActions";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
@@ -9,6 +8,7 @@ import { clearView } from "../../../redux/actions/viewActions";
 import { CompanyHeader } from "../components/company-header/CompanyHeader";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
+import { ChartStats } from "../../../components/ordinary/charts/ChartStats";
 
 interface CompanyPage {
     company: CompanyModel;
@@ -17,8 +17,9 @@ interface CompanyPage {
 export const CompanyPage: React.FC<CompanyPage> = ({ company }) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-
-    const { epsStats } = useRootSelector((state) => state.view.company);
+    const { epsStats, netMarginStats } = useRootSelector(
+        (state) => state.view.company
+    );
 
     useEffect(() => {
         dispatch(clearView("company"));
@@ -30,13 +31,20 @@ export const CompanyPage: React.FC<CompanyPage> = ({ company }) => {
                 <CompanyHeader
                     ticker={company.ticker}
                     name={company.name}
-                    activity={company.activity.name}
+                    activity={company?.activity?.name}
                     currency={company.currency}
                 />
             </Grid>
             <Grid item sm={5} spacing={2} container direction="row">
                 <Grid item sm={12}>
-                    <ChartStatsEPS epsData={epsStats} />
+                    <ChartStats statsData={epsStats} title="EPS Stats" />
+                </Grid>
+                <Grid item sm={12}>
+                    <ChartStats
+                        statsData={netMarginStats}
+                        type="bar"
+                        title="Net margins stats"
+                    />
                 </Grid>
                 <Grid item sm={12}>
                     <a href="http://localhost:3000/company/1">

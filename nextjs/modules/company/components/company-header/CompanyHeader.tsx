@@ -40,7 +40,7 @@ export const CompanyHeader: React.FC<CompanyHeader> = ({
                     {name} ({ticker})
                 </Typography>
                 <Divider orientation="vertical" />
-                <Chip label={activity} />
+                {activity && <Chip label={activity} />}
                 <Chip label={currency} />
             </Stack>
             <IconButton onClick={handleShare}>

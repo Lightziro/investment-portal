@@ -1,33 +1,39 @@
 import React from "react";
 import { Card, Divider, Skeleton, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
-import { EpsCompanyStats } from "../../../ts/types/entity/stock-market.types";
+import { BaseCompanyStat } from "../../../ts/types/entity/stock-market.types";
 import { useTranslation } from "react-i18next";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-interface ChartStatsEPS {
-    epsData: EpsCompanyStats[];
+
+interface ChartStats {
+    statsData: BaseCompanyStat[];
     height?: number;
+    type?: string;
+    title: string;
 }
-export const ChartStatsEPS: React.FC<ChartStatsEPS> = ({
-    epsData,
+
+export const ChartStats: React.FC<ChartStats> = ({
+    statsData,
     height = 180,
+    type = "area",
+    title,
 }) => {
     const { t } = useTranslation();
-    if (!epsData) {
+    if (!statsData) {
         return <Skeleton variant="rectangular" height={height} />;
     }
 
     return (
         <Card className="shadow-wrapper" sx={{ bgcolor: "white", pt: 1 }}>
             <Typography px={1} variant="h5">
-                Earnings per share(EPS)
+                {t(title)}
             </Typography>
             <Divider />
-            {epsData.length ? (
+            {statsData.length ? (
                 <Chart
                     {...{
-                        type: "area",
+                        type,
                         height,
                         options: {
                             chart: {
@@ -56,7 +62,7 @@ export const ChartStatsEPS: React.FC<ChartStatsEPS> = ({
                         series: [
                             {
                                 name: "EPS",
-                                data: epsData.map((item) => ({
+                                data: statsData.map((item) => ({
                                     y: item.value,
                                     x: new Date(item.date).getFullYear(),
                                 })),

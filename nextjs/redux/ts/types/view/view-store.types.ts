@@ -5,7 +5,7 @@ import {
 import { Comment, RatingScore } from "../../../../ts/types/other/view.types";
 import {
     AnalyticsStats,
-    EpsCompanyStats,
+    BaseCompanyStat,
 } from "../../../../ts/types/entity/stock-market.types";
 import { UserModel } from "../../../../ts/types/entity/user.types";
 import { CompanyQuote } from "../../../../ts/types/entity/other.types";
@@ -17,8 +17,9 @@ export interface ViewStore {
     company: CompanyView;
 }
 export interface CompanyView {
-    epsStats: EpsCompanyStats[];
+    epsStats: BaseCompanyStat[];
     analyticsStats: AnalyticsStats[];
+    netMarginStats: BaseCompanyStat[];
 }
 
 export interface ArticleView extends ArticleModel {
@@ -28,7 +29,7 @@ export interface ArticleView extends ArticleModel {
 }
 
 export interface InvestmentIdeaView {
-    epsStats: EpsCompanyStats[];
+    epsStats: BaseCompanyStat[];
     analyticsStats: AnalyticsStats[];
     comments: Comment[];
     ratings: IdeaRatingStats;

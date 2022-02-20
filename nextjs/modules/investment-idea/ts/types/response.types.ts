@@ -4,7 +4,7 @@ import {
 } from "../../../../redux/ts/types/view/view-store.types";
 import {
     AnalyticsStats,
-    EpsCompanyStats,
+    BaseCompanyStat,
 } from "../../../../ts/types/entity/stock-market.types";
 
 export interface DtoIdeaRatingStats {
@@ -13,6 +13,6 @@ export interface DtoIdeaRatingStats {
 }
 
 export interface DtoCompanyStats {
-    analyticsStats: EpsCompanyStats[] | null;
+    analyticsStats: BaseCompanyStat[] | null;
     epsStats: AnalyticsStats[] | null;
 }

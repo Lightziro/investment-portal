@@ -32,7 +32,7 @@ class CompanyController extends Controller
 
         $company_stats = $market->getFinancialsStats($company->ticker);
 
-        if ($company_stats instanceof BasicFinancials) {
+        if ($company_stats) {
             if (($series = $company_stats->getSeries()['annual']) && !empty($series->eps)) {
                 foreach ($series->eps as $eps_year_stats) {
                     $ar_eps[] = [
@@ -40,10 +40,15 @@ class CompanyController extends Controller
                         'value' => round($eps_year_stats->v, 2),
                     ];
                 }
+                foreach ($series->netMargin as $margin_stat) {
+                    $ar_net_margin[] = [
+                        'date' => $margin_stat->period,
+                        'value' => round($margin_stat->v, 2),
+                    ];
+                }
             }
-            if (!empty($ar_eps)) {
-                $ar_eps = array_reverse($ar_eps);
-            }
+            $ar_eps = array_reverse($ar_eps ?? []);
+            $ar_net_margin = array_reverse($ar_net_margin ?? []);
 
         }
         $analytics_stats = $market->getRecommendationAnalytics($company->ticker);
@@ -60,7 +65,8 @@ class CompanyController extends Controller
 
         return response()->json([
             'epsStats' => $ar_eps ?? [],
-            'analyticsStats' => $ar_stats ?? []
+            'analyticsStats' => $ar_stats ?? [],
+            'netMarginStats' => $ar_net_margin ?? []
         ]);
     }
 }

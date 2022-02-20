@@ -10,7 +10,7 @@ export interface News {
     url: string;
 }
 
-export interface EpsCompanyStats {
+export interface BaseCompanyStat {
     date: string;
     value: number;
 }
