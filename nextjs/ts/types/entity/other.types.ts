@@ -9,7 +9,13 @@ export interface CompanyModel {
     ticker: string;
     name: string;
     logo: string | null;
+    currency: string;
     date_ipo: string;
+    activity?: CompanyActivityModel | null;
+}
+export interface CompanyActivityModel {
+    activity_id: number;
+    name: string;
 }
 
 export interface CompanyQuote {

@@ -122,4 +122,5 @@ export const ruLanguage = {
     Search: "Поиск",
     Profiles: "Профили",
     Company: "Компания",
+    "Data could not be extracted": "Не удалось получить данные",
 };

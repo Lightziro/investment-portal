@@ -22,6 +22,7 @@ class Company extends Model
     protected $primaryKey = 'company_id';
 
     protected $table = 'companies';
+    protected $with = ['activity'];
 
     public function __toString()
     {

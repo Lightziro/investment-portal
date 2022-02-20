@@ -2,7 +2,6 @@
 
 namespace App\Http\Modules\Portal\Controllers;
 
-use App\Http\Classes\StockMarket;
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;

@@ -55,6 +55,8 @@ export const getLinkByEntity = (label: TypeSearchEntity, entityId: number) => {
             return `/company/${entityId}`;
         case TypeSearchEntity.profiles:
             return `/profile/${entityId}`;
+        case TypeSearchEntity.articles:
+            return `/article/${entityId}`;
         default:
             return "";
     }

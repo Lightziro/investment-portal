@@ -3,9 +3,7 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { ProfilePage } from "../../modules/profile/pages/ProfilePage";
 import { useTranslation } from "react-i18next";
 import { getViewEntity } from "../../utils/api/get-data";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setViewEntity } from "../../redux/actions/viewActions";
+import { useState } from "react";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { ProfileUser } from "../../ts/types/other/view.types";
 import { ProfileContext } from "../../modules/profile/contexts/ProfileContext";
@@ -17,7 +15,6 @@ interface Profile {
 const Profile: NextPage<Profile> = ({ profileEntity }) => {
     const { t } = useTranslation();
     const [profile, setProfile] = useState<ProfileUser>(profileEntity);
-
     return (
         <MainLayout title={`${t("Profile")} ${profile.full_name}`}>
             <PortalLayout>

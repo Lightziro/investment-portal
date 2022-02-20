@@ -1,24 +1,34 @@
 import React from "react";
-import { Card, Skeleton } from "@mui/material";
+import { Card, Divider, Skeleton, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import { EpsCompanyStats } from "../../../ts/types/entity/stock-market.types";
+import { useTranslation } from "react-i18next";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 interface ChartStatsEPS {
     epsData: EpsCompanyStats[];
+    height?: number;
 }
-export const ChartStatsEPS: React.FC<ChartStatsEPS> = ({ epsData }) => {
+export const ChartStatsEPS: React.FC<ChartStatsEPS> = ({
+    epsData,
+    height = 180,
+}) => {
+    const { t } = useTranslation();
     if (!epsData) {
-        return <Skeleton variant="rectangular" height={180} />;
+        return <Skeleton variant="rectangular" height={height} />;
     }
 
     return (
-        <Card className="shadow-wrapper" sx={{ bgcolor: "white" }}>
+        <Card className="shadow-wrapper" sx={{ bgcolor: "white", pt: 1 }}>
+            <Typography px={1} variant="h5">
+                Earnings per share(EPS)
+            </Typography>
+            <Divider />
             {epsData.length ? (
                 <Chart
                     {...{
                         type: "area",
-                        height: 180,
+                        height,
                         options: {
                             chart: {
                                 sparkline: {
@@ -55,7 +65,13 @@ export const ChartStatsEPS: React.FC<ChartStatsEPS> = ({ epsData }) => {
                     }}
                 />
             ) : (
-                <div>Не удалось</div>
+                <Stack
+                    justifyContent="center"
+                    height={height}
+                    alignItems="center"
+                >
+                    {t("Data could not be extracted")}
+                </Stack>
             )}
         </Card>
     );
