@@ -1,23 +1,23 @@
 import React from "react";
 import { Card, Skeleton } from "@mui/material";
+import { AnalyticsStats } from "../../../ts/types/entity/stock-market.types";
 import dynamic from "next/dynamic";
-import { useRootSelector } from "../../../../hooks/useTypeSelector";
+import { useRootSelector } from "../../../hooks/useTypeSelector";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export const ChartStatsEPS: React.FC = () => {
-    const epsData = useRootSelector((state) => state.view.idea.epsStats);
-    if (!epsData) {
-        return <Skeleton variant="rectangular" height={180} />;
+export const ChartStatsAnalytics: React.FC = () => {
+    const stats = useRootSelector((state) => state.view.idea.analyticsStats);
+    if (!stats) {
+        return <Skeleton height={180} variant="rectangular" />;
     }
-
     return (
         <Card className="shadow-wrapper" sx={{ bgcolor: "white" }}>
-            {epsData.length ? (
+            {stats.length ? (
                 <Chart
                     {...{
                         type: "area",
-                        height: 180,
+                        height: 225,
                         options: {
                             chart: {
                                 sparkline: {
@@ -44,13 +44,29 @@ export const ChartStatsEPS: React.FC = () => {
                         },
                         series: [
                             {
-                                name: "EPS",
-                                data: epsData.map((item) => ({
-                                    y: item.value,
-                                    x: new Date(item.date).getFullYear(),
-                                })),
+                                name: "Buy",
+                                data: stats.map(
+                                    (item: AnalyticsStats) => item.buy
+                                ),
+                            },
+                            {
+                                name: "Short",
+                                data: stats.map(
+                                    (item: AnalyticsStats) => item.sell
+                                ),
+                            },
+                            {
+                                name: "Hold",
+                                data: stats.map(
+                                    (item: AnalyticsStats) => item.hold
+                                ),
                             },
                         ],
+                        xaxis: {
+                            categories: stats.map((item: AnalyticsStats) =>
+                                new Date(item.period).getDay()
+                            ),
+                        },
                     }}
                 />
             ) : (

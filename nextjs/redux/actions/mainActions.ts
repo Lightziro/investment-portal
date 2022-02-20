@@ -19,10 +19,6 @@ export const registerUser = (form: FormRegister) => ({
 export const fetchCountries = () => ({
     type: "FETCH_COUNTRIES",
 });
-export const clearView = (entity: string) => ({
-    type: "CLEAR_VIEW",
-    entity,
-});
 
 export const subscribeToNews = (email: string) => ({
     type: "SUBSCRIBE_TO_NEWS",

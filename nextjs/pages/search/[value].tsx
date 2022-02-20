@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { getSearchData } from "../../utils/api/get-data";
 import { Tabs } from "antd";
-import { Container } from "@mui/material";
+import { Container, Paper } from "@mui/material";
 import { SearchOption } from "../../ts/types/other/other.types";
 import { TabEntity } from "../../modules/search/components/tab-entity/TabEntity";
 
@@ -29,16 +29,18 @@ const Search: NextPage = () => {
         <MainLayout title={t("Search")}>
             <PortalLayout>
                 <Container maxWidth="sm">
-                    <Tabs defaultActiveKey="1" centered>
-                        {searchData.map((section, tabNumber) => (
-                            <TabPane
-                                tab={t(section.entity)}
-                                key={String(tabNumber + 1)}
-                            >
-                                <TabEntity entityData={section} />
-                            </TabPane>
-                        ))}
-                    </Tabs>
+                    <Paper sx={{ px: 2, py: 1 }}>
+                        <Tabs defaultActiveKey="1" centered>
+                            {searchData.map((section, tabNumber) => (
+                                <TabPane
+                                    tab={t(section.entity)}
+                                    key={String(tabNumber + 1)}
+                                >
+                                    <TabEntity entityData={section} />
+                                </TabPane>
+                            ))}
+                        </Tabs>
+                    </Paper>
                 </Container>
             </PortalLayout>
         </MainLayout>

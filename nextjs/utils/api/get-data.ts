@@ -68,3 +68,8 @@ export const getSearchData = async (value: string) =>
         .get(`${process.env.API_URL}/api/search/${value}`)
         .then((res) => res.data)
         .catch((e) => []);
+export const getCompanyStats = async (companyId: number) =>
+    await axios
+        .get(`${process.env.API_URL}/api/company/${companyId}/stats`)
+        .then((res) => res.data)
+        .catch((e) => []);

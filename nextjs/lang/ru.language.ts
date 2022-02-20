@@ -121,4 +121,5 @@ export const ruLanguage = {
     "My predictions": "Мои прогнозы",
     Search: "Поиск",
     Profiles: "Профили",
+    Company: "Компания",
 };

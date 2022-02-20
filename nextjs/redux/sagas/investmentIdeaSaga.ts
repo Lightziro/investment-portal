@@ -2,6 +2,7 @@ import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { axios } from "../../utils/axios";
+import { getCompanyStats } from "../../utils/api/get-data";
 
 function* createComment(action: AnyAction): Generator {
     try {
@@ -71,15 +72,13 @@ function* fetchRating(action: AnyAction): Generator {
 }
 
 function* fetchCompanyStats(action: AnyAction): Generator {
+    const { entity, companyId } = action;
     try {
-        const data = yield axios
-            .get(
-                `${process.env.API_URL}/api/idea/${action.ideaId}/company-stats`
-            )
-            .then((res) => res.data);
+        const data = yield getCompanyStats(companyId);
         yield put({
-            type: "SET_IDEA_COMPANY_STATS",
+            type: "SET_COMPANY_STATS",
             data,
+            entity,
         });
     } catch (e) {}
 }

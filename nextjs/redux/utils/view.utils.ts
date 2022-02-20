@@ -13,6 +13,7 @@ import {
 } from "../../modules/investment-idea/ts/types/response.types";
 import { ArticleLabel } from "../../ts/types/entity/article.types";
 import { CompanyQuote } from "../../ts/types/entity/other.types";
+import { initialCompanyView } from "../../ts/init/entity/company.init";
 
 export const addCommentEntity = (state: any, comment: Comment): typeView => {
     const newState = {
@@ -48,6 +49,7 @@ export const initialByEntity = {
     profile: initialProfile,
     article: initialArticleView,
     idea: initialIdeaView,
+    company: initialCompanyView,
 };
 export const setEntityComments = (
     state: ViewStore,
@@ -61,15 +63,16 @@ export const setIdeaRating = (
     state: ViewStore,
     ratings: RatingScore
 ): ViewStore => ({
-    state,
+    ...state,
     idea: { ...state.idea, ratings },
 });
-export const setIdeaCompanyStats = (
+export const setCompanyStats = (
     state: ViewStore,
-    data: DtoCompanyStats
+    data: DtoCompanyStats,
+    entity: "company" | "idea"
 ): ViewStore => ({
     ...state,
-    idea: { ...state.idea, ...data },
+    [entity]: { ...state.idea, ...data },
 });
 export const setArticleLabels = (
     state: ViewStore,

@@ -18,7 +18,6 @@ export const SearchEntities: React.FC = () => {
             return;
         }
         const data = await getSearchData(value);
-        console.log(data);
         setOptions((prev) => data);
     };
     const handleClickSearch = (value) => {

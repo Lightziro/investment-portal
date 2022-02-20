@@ -5,12 +5,14 @@ import { NoticeMenu } from "./notice-menu/NoticeMenu";
 import classes from "../../../../styles/nav-bar.module.scss";
 import { ProfileMenu } from "./profile-menu/ProfileMenu";
 import { SearchEntities } from "./search-entities/SearchEntities";
+import { ExchangeTimeMenu } from "./exchange-tim-menu/ExchangeTimeMenu";
 
 export const PortalNavBar: React.FC = () => {
     const [open, setOpen] = useState({
         language: false,
         notice: false,
         profile: false,
+        time: false,
     });
     const handleOpen = (state: boolean, name: string) => {
         setOpen({ ...open, [name]: state });
@@ -37,6 +39,11 @@ export const PortalNavBar: React.FC = () => {
                     onOpen={() => handleOpen(true, "notice")}
                     open={open.notice}
                 />
+                {/*<ExchangeTimeMenu*/}
+                {/*    open={open.time}*/}
+                {/*    onClose={() => handleOpen(false, "time")}*/}
+                {/*    onOpen={() => handleOpen(true, "time")}*/}
+                {/*/>*/}
                 <ProfileMenu
                     open={open.profile}
                     onOpen={() => handleOpen(true, "profile")}

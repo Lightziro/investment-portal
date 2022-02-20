@@ -31,7 +31,6 @@ Route::group(
 //        Route::get('/all-key', [InitialDataController::class, 'getIdeasKey']);
         Route::post('/{idea}/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
         Route::get('/{idea}/user-rating', [InvestmentIdeaController::class, 'getUserRating']);
-        Route::get('/{idea}/company-stats', [InvestmentIdeaController::class, 'getCompanyStats'])->name('company-stats');
         Route::get('/{idea}/rating', [InvestmentIdeaController::class, 'getRating'])->name('get-rating');
         Route::get('/{idea}', [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
     });
@@ -60,8 +59,10 @@ Route::group(['prefix' => 'profile'], function () {
     Route::get('/{user}', [ViewController::class, 'getViewProfile']);
 });
 
-Route::group(['prefix' => 'company'], function() {
-   Route::get('/{company}/quote', [CompanyController::class, 'getQuote']);
+Route::group(['prefix' => 'company'], function () {
+    Route::get('/{company}', [ViewController::class, 'getViewCompany']);
+    Route::get('/{company}/quote', [CompanyController::class, 'getQuote']);
+    Route::get('/{company}/stats', [CompanyController::class, 'getStats']);
 });
 
 Route::get('/search/{search}', [PortalController::class, 'searchData'])->name('portal-search');

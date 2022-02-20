@@ -40,10 +40,10 @@ class StockMarket
         }
     }
 
-    public function getFinancialsStats(string $tiker): ?BasicFinancials
+    public function getFinancialsStats(string $ticker): ?BasicFinancials
     {
         try {
-            return $this->client->companyBasicFinancials($tiker, 'all');
+            return $this->client->companyBasicFinancials($ticker, 'all');
         } catch (ApiException $e) {
             return null;
         }

@@ -5,17 +5,20 @@ import {
 import { Comment, RatingScore } from "../../../../ts/types/other/view.types";
 import {
     AnalyticsStats,
-    CompanyIdeaInfo,
     EpsCompanyStats,
-    IdeaInfo,
 } from "../../../../ts/types/entity/stock-market.types";
-import { AuthorInfo, UserModel } from "../../../../ts/types/entity/user.types";
+import { UserModel } from "../../../../ts/types/entity/user.types";
 import { CompanyQuote } from "../../../../ts/types/entity/other.types";
 
 export interface ViewStore {
     profile: UserModel;
     idea: InvestmentIdeaView;
     article: ArticleView;
+    company: CompanyView;
+}
+export interface CompanyView {
+    epsStats: EpsCompanyStats[];
+    analyticsStats: AnalyticsStats[];
 }
 
 export interface ArticleView extends ArticleModel {

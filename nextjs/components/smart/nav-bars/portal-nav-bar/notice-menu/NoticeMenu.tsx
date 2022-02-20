@@ -15,12 +15,15 @@ import { useTranslation } from "react-i18next";
 import { viewNotice } from "../../../../../redux/actions/mainActions";
 import classes from "../../NavBars.module.scss";
 import { NoticeItem } from "../notice-item/NoticeItem";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Badge } from "antd";
+
 interface NoticeMenu {
     onOpen: () => void;
     open: boolean;
     onClose: () => void;
 }
+
 export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -44,11 +47,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                         onClick={onOpen}
                     >
                         <Badge color="blue" count={countNotView()}>
-                            <Icon
-                                icon="ant-design:bell-outlined"
-                                width={24}
-                                height={24}
-                            />
+                            <NotificationsNoneIcon width={24} height={24} />
                         </Badge>
                     </IconButton>
                     <MenuPopover

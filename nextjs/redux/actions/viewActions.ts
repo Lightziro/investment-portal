@@ -21,3 +21,7 @@ export const setIdeaRatingStats = (data: DtoIdeaRatingStats) => ({
     type: "CREATE_IDEA_RATING",
     data,
 });
+export const clearView = (entity: EntityName) => ({
+    type: "CLEAR_VIEW",
+    entity,
+});

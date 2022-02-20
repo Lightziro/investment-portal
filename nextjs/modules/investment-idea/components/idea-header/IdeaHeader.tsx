@@ -7,10 +7,14 @@ import {
     Divider,
     Typography,
     Avatar,
+    Tooltip,
+    IconButton,
 } from "@mui/material";
 import { CompanyModel } from "../../../../ts/types/entity/other.types";
 import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { formatQuote } from "../../utils/format-quote";
+import { FileAddOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 interface CompanyIdeaHeader {
     companyInfo: CompanyModel;
@@ -18,6 +22,7 @@ interface CompanyIdeaHeader {
 
 export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
     const quoteData = useRootSelector((state) => state.view.idea.quote);
+    const { t } = useTranslation();
     if (!companyInfo) {
         return <Skeleton variant="rectangular" height={56} />;
     }
@@ -26,7 +31,7 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
     };
     return (
         <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
-            <Grid direction="column">
+            <Grid container direction="row" justifyContent="space-between">
                 <Stack alignItems="center" direction="row" spacing={2}>
                     <Avatar
                         src={`${process.env.API_URL}/storage/${companyInfo.logo}`}
@@ -73,6 +78,15 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
                         <Skeleton variant="rectangular" width="100%" />
                     )}
                 </Stack>
+                <Tooltip title={t("Create prediction")}>
+                    <IconButton
+                        onClick={() => console.log("test")}
+                        aria-label="upload picture"
+                        component="span"
+                    >
+                        <FileAddOutlined />
+                    </IconButton>
+                </Tooltip>
             </Grid>
         </Card>
     );

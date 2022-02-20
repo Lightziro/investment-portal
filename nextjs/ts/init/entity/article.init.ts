@@ -1,5 +1,5 @@
-import { ArticleView } from "../../types/entity/article.types";
 import { FormArticle } from "../../types/forms/form.types";
+import { ArticleView } from "../../../redux/ts/types/view/view-store.types";
 
 export const initialArticleView: ArticleView = {
     articleId: null,

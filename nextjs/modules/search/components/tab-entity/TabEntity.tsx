@@ -5,6 +5,8 @@ import {
 } from "../../../../ts/types/other/other.types";
 import { List } from "antd";
 import { Avatar } from "@mui/material";
+import { LinkWrapper } from "../../../../components/simple/link/Link";
+import { getLinkByEntity } from "../../../../utils/other";
 
 interface TabEntity {
     entityData: SearchOption;
@@ -19,12 +21,27 @@ export const TabEntity: React.FC<TabEntity> = ({ entityData }) => {
                 <List.Item>
                     <List.Item.Meta
                         avatar={
-                            <Avatar
-                                src={`${process.env.API_URL}/storage/${item.img_path}`}
-                            />
+                            <LinkWrapper
+                                href={getLinkByEntity(
+                                    entityData.entity,
+                                    item.entity_id
+                                )}
+                            >
+                                <Avatar
+                                    src={`${process.env.API_URL}/storage/${item.img_path}`}
+                                />
+                            </LinkWrapper>
                         }
-                        title={<a href="https://ant.design">{item.name}</a>}
-                        // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                        title={
+                            <LinkWrapper
+                                href={getLinkByEntity(
+                                    entityData.entity,
+                                    item.entity_id
+                                )}
+                            >
+                                {item.name}
+                            </LinkWrapper>
+                        }
                     />
                 </List.Item>
             )}

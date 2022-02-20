@@ -74,43 +74,4 @@ class InvestmentIdeaController extends Controller
         $ratings = $idea->getRatingStats();
         return response()->json($ratings);
     }
-
-    public function getCompanyStats(InvestmentIdea $idea): JsonResponse
-    {
-        // TODO: переписать на сервисы
-        $market = new StockMarket();
-        $ticker = $idea->company->ticker;
-
-        $company_stats = $market->getFinancialsStats($ticker);
-
-        if ($company_stats instanceof BasicFinancials) {
-            if (($series = $company_stats->getSeries()['annual']) && !empty($series->eps)) {
-                foreach ($series->eps as $eps_year_stats) {
-                    $ar_eps[] = [
-                        'date' => $eps_year_stats->period,
-                        'value' => round($eps_year_stats->v, 2),
-                    ];
-                }
-            }
-            if (!empty($ar_eps)) {
-                $ar_eps = array_reverse($ar_eps);
-            }
-
-        }
-        $analytics_stats = $market->getRecommendationAnalytics($ticker);
-        if (is_array($analytics_stats)) {
-            foreach ($analytics_stats as $stats) {
-                $ar_stats[] = [
-                    'buy' => $stats['buy'],
-                    'period' => $stats['period'],
-                    'sell' => $stats['sell'],
-                    'hold' => $stats['hold']
-                ];
-            }
-        }
-        return response()->json([
-            'epsStats' => $ar_eps ?? [],
-            'analyticsStats' => $ar_stats ?? []
-        ]);
-    }
 }

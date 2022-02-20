@@ -49,3 +49,13 @@ export const getSearchContent = (entity: TypeSearchEntity, item: any) => {
             return item.name;
     }
 };
+export const getLinkByEntity = (label: TypeSearchEntity, entityId: number) => {
+    switch (label) {
+        case TypeSearchEntity.companies:
+            return `/company/${entityId}`;
+        case TypeSearchEntity.profiles:
+            return `/profile/${entityId}`;
+        default:
+            return "";
+    }
+};

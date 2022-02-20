@@ -6,6 +6,7 @@ use App\Http\Classes\StockMarket;
 use App\Models\Article\Article;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
+use App\Models\Other\Company;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -39,6 +40,11 @@ class ViewController extends Controller
             'author' => $author_data
         ]);
         return response()->json($company_info);
+    }
+
+    public function getViewCompany(Company $company): JsonResponse
+    {
+        return response()->json($company->toArray());
     }
 
     public function getCacheIdeaData(int $idea_id, string $ticker)

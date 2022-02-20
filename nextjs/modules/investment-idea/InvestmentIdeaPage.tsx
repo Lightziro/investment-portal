@@ -3,9 +3,9 @@ import { Grid } from "@mui/material";
 import { IdeaHeader } from "./components/idea-header/IdeaHeader";
 import { CompanyDescription } from "./components/company-description/CompanyDescription";
 import { IdeaAuthor } from "./components/idea-author/IdeaAuthor";
-import { ChartStatsEPS } from "./components/charts-company-data/ChartStatsEPS";
+import { ChartStatsEPS } from "../../components/ordinary/charts/ChartStatsEPS";
 import { IdeaInformation } from "./components/idea-information/IdeaInformation";
-import { ChartStatsAnalytics } from "./components/charts-company-data/ChartStatsAnalytics";
+import { ChartStatsAnalytics } from "../../components/ordinary/charts/ChartStatsAnalytics";
 import { CommentsList } from "../../components/smart/comments-list/CommentsList";
 import { IdeaDescription } from "./components/idea-description/IdeaDescription";
 import { useDispatch } from "react-redux";
@@ -29,14 +29,17 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
     onChange,
 }) => {
     const dispatch = useDispatch();
-    console.log(ideaData);
     useEffect(() => {
         dispatch(fetchIdeaComments(ideaData.idea_id));
         dispatch(fetchIdeaRating(ideaData.idea_id));
-        dispatch(fetchCompanyStats(ideaData.idea_id));
+        dispatch(fetchCompanyStats(ideaData.company_id, "idea"));
         dispatch(fetchCompanyQuote(ideaData.company_id));
     }, []);
     const comments = useRootSelector((store) => store.view.idea.comments);
+    const { epsStats, analyticsStats } = useRootSelector(
+        (state) => state.view.idea
+    );
+
     return (
         <Fragment>
             <Grid justifyContent="center" container spacing={2}>
@@ -60,7 +63,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                     <IdeaAuthor data={ideaData.author} />
                 </Grid>
                 <Grid xs={12} sm={8} item md={5} xl={4} lg={4}>
-                    <ChartStatsEPS />
+                    <ChartStatsEPS epsData={epsStats} />
                 </Grid>
                 <Grid xs={12} item lg={5} sm={7} md={7} xl={5}>
                     <IdeaDescription description={ideaData.description} />
