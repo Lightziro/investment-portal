@@ -2,9 +2,11 @@ import React, { Fragment, useState, MouseEvent } from "react";
 import { Divider, IconButton, Popover, Stack } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useTranslation } from "react-i18next";
+import classes from "../../PersonalAccount.module.scss";
 
 interface HeaderPage {
     title: string;
+    children: string;
 }
 export const HeaderPage: React.FC<HeaderPage> = ({ title, children }) => {
     const { t } = useTranslation();
@@ -20,8 +22,13 @@ export const HeaderPage: React.FC<HeaderPage> = ({ title, children }) => {
         <Fragment>
             <Stack direction="row" justifyContent="space-between">
                 <h3>{t(title)}</h3>
-                <IconButton color="primary" size="large" component="span">
-                    <InfoOutlinedIcon onClick={handleOpen} />
+                <IconButton
+                    color="primary"
+                    component="span"
+                    size="large"
+                    onClick={(e) => handleOpen(e)}
+                >
+                    <InfoOutlinedIcon />
                 </IconButton>
             </Stack>
             <Divider />
@@ -38,7 +45,9 @@ export const HeaderPage: React.FC<HeaderPage> = ({ title, children }) => {
                     horizontal: "right",
                 }}
             >
-                <div className="p-2">{children}</div>
+                <div className={`p-2 ${classes.headerContent}`}>
+                    {t(children)}
+                </div>
             </Popover>
         </Fragment>
     );

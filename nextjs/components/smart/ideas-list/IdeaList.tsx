@@ -1,12 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IdeaListItem } from "./idea-list-item/IdeaListItem";
-import { Box, Card, Divider, Typography } from "@mui/material";
+import { Card, Divider, Stack, Typography } from "@mui/material";
 import { InvestmentIdea } from "../../../ts/types/entity/stock-market.types";
-import { List } from "antd";
+import { List, Button } from "antd";
+import Link from "next/link";
+
 interface IdeaList {
     items: InvestmentIdea[];
 }
+
 export const IdeaList: React.FC<IdeaList> = ({ items }) => {
     const { t } = useTranslation();
 
@@ -29,6 +32,13 @@ export const IdeaList: React.FC<IdeaList> = ({ items }) => {
                         <IdeaListItem key={item.id} idea={item} />
                     )}
                 />
+                <Stack direction="column" alignItems="center">
+                    <Link href="/ideas-list">
+                        <Button type="primary" block>
+                            {t("View all")}
+                        </Button>
+                    </Link>
+                </Stack>
             </Card>
         </div>
     );

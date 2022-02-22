@@ -10,7 +10,6 @@ import {
     Typography,
 } from "@mui/material";
 import { MenuPopover } from "../menu-popover/MenuPopover";
-import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
 import { viewNotice } from "../../../../../redux/actions/mainActions";
 import classes from "../../NavBars.module.scss";
