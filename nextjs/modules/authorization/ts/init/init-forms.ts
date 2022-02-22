@@ -1,4 +1,4 @@
-import { FormAuth, FormRegister } from "../../../../ts/types/forms/form.types";
+import { FormAuth, FormRegister } from "../types/forms.types";
 
 export const initRegisterForm: FormRegister = {
     email: "",

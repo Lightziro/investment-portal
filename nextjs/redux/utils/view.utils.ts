@@ -1,12 +1,11 @@
 import { initialArticleView } from "../../ts/init/entity/article.init";
 import { initialIdeaView } from "../../ts/init/entity/idea.init";
-import { initialProfile } from "../../ts/init/entity/user.init";
+import { Comment, typeView } from "../../ts/types/other/view.types";
 import {
-    Comment,
-    RatingScore,
-    typeView,
-} from "../../ts/types/other/view.types";
-import { UserIdeaRating, ViewStore } from "../ts/types/view/view-store.types";
+    IdeaRatingStats,
+    UserIdeaRating,
+    ViewStore,
+} from "../ts/types/view/view-store.types";
 import {
     DtoCompanyStats,
     DtoIdeaRatingStats,
@@ -20,7 +19,6 @@ export const addCommentEntity = (state: any, comment: Comment): typeView => {
         ...state,
         comments: [comment, ...state.comments],
     };
-    console.log(newState);
     if (state.hasOwnProperty("labels")) {
         newState.labels = state.labels.map((label) => {
             if (label.icon === "bx:bxs-comment-detail") {
@@ -46,7 +44,6 @@ export const createIdeaRating = (
     idea: { ...state.idea, ...data },
 });
 export const initialByEntity = {
-    profile: initialProfile,
     article: initialArticleView,
     idea: initialIdeaView,
     company: initialCompanyView,
@@ -61,7 +58,7 @@ export const setEntityComments = (
 });
 export const setIdeaRating = (
     state: ViewStore,
-    ratings: RatingScore
+    ratings: IdeaRatingStats
 ): ViewStore => ({
     ...state,
     idea: { ...state.idea, ratings },

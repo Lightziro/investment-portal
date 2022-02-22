@@ -25,7 +25,7 @@ interface IdeaRatings {
 export const IdeaRatings: React.FC<IdeaRatings> = ({ ideaId }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState<boolean>(false);
     const user = useRootSelector((state) => state.user);
     const { ratings, userRating } = useRootSelector((state) => state.view.idea);
     useEffect(() => {

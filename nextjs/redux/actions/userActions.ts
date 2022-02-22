@@ -1,4 +1,4 @@
-import { FormAuth } from "../../ts/types/forms/form.types";
+import { FormAuth } from "../../modules/authorization/ts/types/forms.types";
 
 export const getUser = () => ({
     type: "FETCH_USER",

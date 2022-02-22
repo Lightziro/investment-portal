@@ -1,4 +1,4 @@
-import { FormAuth, FormRegister } from "../../ts/types/forms/form.types";
+import { FormRegister } from "../../modules/authorization/ts/types/forms.types";
 
 export const fetchInvestmentData = () => ({
     type: "FETCH_INVESTMENT_DATA",
@@ -26,8 +26,4 @@ export const subscribeToNews = (email: string) => ({
 });
 export const fetchNews = () => ({
     type: "FETCH_NEWS",
-});
-export const setPortalData = (data) => ({
-    type: "SET_PORTAL_DATA",
-    data,
 });

@@ -10,13 +10,3 @@ export const getInitUser = async function (req: any) {
         .then((res) => res.data)
         .catch((e) => initStore.user);
 };
-export const getInitPortal = async () => {
-    const initData = await axios
-        .get(`${process.env.API_URL_DOCKER}/api/init/portal-data`)
-        .then((res) => res.data)
-        .catch((e) => {
-            console.log("ERROR GET BASE DATA", e);
-            return initStore.main;
-        });
-    return initData;
-};

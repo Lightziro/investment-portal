@@ -1,2 +1,2 @@
-export const formatQuote = (quoteValue: number) =>
+export const formatQuote = (quoteValue: number | string) =>
     quoteValue > 0 ? `+${quoteValue}` : quoteValue;

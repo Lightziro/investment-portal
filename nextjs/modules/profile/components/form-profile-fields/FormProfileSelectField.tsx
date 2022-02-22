@@ -1,13 +1,15 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { CountryItem } from "../../../../ts/types/other/other.types";
+import { CountryModel } from "../../../../ts/types/entity/other.types";
+
 interface FormProfileSelectField {
-    items: CountryItem[];
+    items: CountryModel[];
     value: string | number;
     handleChange: (e) => void;
     name: string;
 }
+
 export const FormProfileSelectField: React.FC<FormProfileSelectField> = ({
     items,
     value,

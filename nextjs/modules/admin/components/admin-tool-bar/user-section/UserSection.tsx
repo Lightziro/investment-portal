@@ -13,7 +13,7 @@ export const UserSection: React.FC = () => {
             {user ? (
                 <Link
                     href="/profile/[id]"
-                    as={`/profile/${user.userId}`}
+                    as={`/profile/${user.user_id}`}
                     passHref
                 >
                     <div className={classes.userWrapper}>

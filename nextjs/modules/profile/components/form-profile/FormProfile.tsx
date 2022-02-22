@@ -23,6 +23,7 @@ interface FormProfile {
     handleEdit: () => void;
     countries: CountryModel[];
 }
+
 export const FormProfile: React.FC<FormProfile> = ({
     edit,
     handleEdit,

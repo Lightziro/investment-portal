@@ -9,7 +9,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 interface ChartStats {
     statsData: BaseCompanyStat[];
     height?: number;
-    type?: string;
+    type?: any;
     title: string;
 }
 

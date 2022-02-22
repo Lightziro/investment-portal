@@ -18,7 +18,7 @@ export const ProfilePage: React.FC = () => {
                 </Grid>
                 <Grid item lg={6} xl={6} xs={12} sm={12} md={6}>
                     {profile.user_id ? (
-                        <ProfileUserInfo profile={profile} />
+                        <ProfileUserInfo />
                     ) : (
                         <Skeleton variant={"rectangular"} height={500} />
                     )}

@@ -2,9 +2,10 @@ import React from "react";
 import { SearchItem } from "../../../../../../ts/types/other/other.types";
 import Link from "next/link";
 import { getLinkByEntity } from "../../../../../../utils/other";
+import { TypeSearchEntity } from "../../../../../../ts/enums/other.enums";
 
 interface SearchEntityItem {
-    label: string;
+    label: TypeSearchEntity;
     option: SearchItem;
 }
 

@@ -11,7 +11,6 @@ import { UserModel } from "../../../../ts/types/entity/user.types";
 import { CompanyQuote } from "../../../../ts/types/entity/other.types";
 
 export interface ViewStore {
-    profile: UserModel;
     idea: InvestmentIdeaView;
     article: ArticleView;
     company: CompanyView;
@@ -22,7 +21,7 @@ export interface CompanyView {
     netMarginStats: BaseCompanyStat[];
 }
 
-export interface ArticleView extends ArticleModel {
+export interface ArticleView {
     labels: ArticleLabel[];
     content: string;
     comments: Comment[];

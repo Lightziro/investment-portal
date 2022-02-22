@@ -1,5 +1,5 @@
-import { Article } from "../entity/article.types";
 import { InvestmentIdea } from "../entity/stock-market.types";
+import { ArticleModel } from "../entity/article.types";
 
 export interface ResponseRetrainClassifier {
     message: string;
@@ -7,8 +7,8 @@ export interface ResponseRetrainClassifier {
 }
 export interface DtoPortal {
     articles: {
-        popular: Article[];
-        simple: Article[];
+        popular: ArticleModel[];
+        simple: ArticleModel[];
     };
     ideas: InvestmentIdea[];
     stats: {

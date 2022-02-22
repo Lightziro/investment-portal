@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DtoQuoteItem } from "../../../../ts/types/response/response.types";
 import { Grid, Stack, Paper, Skeleton } from "@mui/material";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
-import * as classnames from "classnames";
+import classnames from "classnames";
 import classes from "../../Portal.module.scss";
 import { axios } from "../../../../utils/axios";
 import { LinkWrapper } from "../../../../components/simple/link/Link";
