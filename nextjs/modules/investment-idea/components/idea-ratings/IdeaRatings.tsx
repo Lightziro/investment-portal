@@ -34,7 +34,7 @@ export const IdeaRatings: React.FC<IdeaRatings> = ({ ideaId }) => {
         }
     }, [ideaId]);
     if (!ratings) {
-        return <Skeleton variant="rectangular" height={229} />; // TODO: добавить скелетон
+        return <Skeleton variant="rectangular" height={229} />;
     }
     return (
         <Card sx={{ bgcolor: "white", p: 2 }} className="shadow-wrapper">

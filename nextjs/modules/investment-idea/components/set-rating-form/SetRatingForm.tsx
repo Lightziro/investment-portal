@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { RatingSchema } from "../../../../ts/validation/rating.validation";
 import { FormRating } from "../../ts/types/forms.types";
 import {
+    alertError,
     alertInfo,
     alertSuccess,
 } from "../../../../redux/actions/alertActions";
@@ -45,7 +46,7 @@ export const SetRatingForm: React.FC<SetRatingForm> = ({
                 handleClose();
                 dispatch(alertSuccess("Your rating successfully posted"));
             })
-            .catch((e) => console.log(e)); // TODO: Добавить обработку событий
+            .catch((e) => dispatch(alertError("An error has occurred")));
     };
     const formik = useFormik({
         initialValues: initRatingForm,

@@ -5,7 +5,6 @@ export interface Sex {
     label: string;
 }
 
-// TODO: Interface перенести
 export interface SearchOption {
     entity: TypeSearchEntity;
     items: SearchItem[];

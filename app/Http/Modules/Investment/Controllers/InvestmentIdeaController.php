@@ -39,7 +39,6 @@ class InvestmentIdeaController extends Controller
 
     public function setRating(InvestmentIdea $idea): JsonResponse
     {
-        // TODO: Переписать проверку на существование идеи в middleware
         $post_data = request()->post();
 
         /** @var InvestmentIdeaRatings $rating_model */

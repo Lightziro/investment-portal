@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Throwable;
 
 class OtherController extends Controller
@@ -44,9 +45,13 @@ class OtherController extends Controller
         }
     }
 
-    public function getQuote(Request $request): JsonResponse
+    public function getQuote(): JsonResponse
     {
-        // TODO: Добавить кэширование
+        if (Cache::has('quote')) {
+            $ar_stock = Cache::get('quote');
+            return response()->json($ar_stock);
+        }
+
         $stocks = Company::query()->whereIn('ticker', ['AAPL', 'V', 'MDB', 'BAC', 'TSLA', 'NFLX'])
             ->orderBy('name')->get(['name', 'ticker', 'company_id']);
         $market = new StockMarket();
@@ -62,6 +67,9 @@ class OtherController extends Controller
                     'percent_change_today' => $quote_info->getDp(),
                 ];
             }
+        }
+        if (!empty($ar_stock)) {
+            Cache::put('quote', $ar_stock, now()->addMinute());
         }
         return response()->json($ar_stock ?? []);
     }

@@ -19,7 +19,7 @@ export const menuAuth = (userId: number): MenuItems[] => {
         {
             text: "Profile",
             link: `/profile/${userId}`,
-            icon: "eva:clipboard-fill",
+            icon: "twemoji:blue-book",
         },
         {
             text: "Personal account",
