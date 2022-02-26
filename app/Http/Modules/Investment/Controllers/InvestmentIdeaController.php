@@ -73,4 +73,10 @@ class InvestmentIdeaController extends Controller
         $ratings = $idea->getRatingStats();
         return response()->json($ratings);
     }
+
+    public function all(string $sort_by = 'idea_id', string $direction = 'desc'): JsonResponse
+    {
+        $ideas = InvestmentIdea::query()->orderBy($sort_by, $direction)->get()->toArray();
+        return response()->json(InvestmentIdeaHelper::filterDeletedUser($ideas));
+    }
 }

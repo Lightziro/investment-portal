@@ -27,7 +27,12 @@ Route::group(
     ],
     function () {
         Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
-        Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])->name('get-idea-comments');
+        Route::get('/all/{sort_by?}/{direction?}', [InvestmentIdeaController::class, 'all']);
+        Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])
+            ->name('get-idea-comments')
+            ->where([
+                'id' => '[0-9]+'
+            ]);
 //        Route::get('/all-key', [InitialDataController::class, 'getIdeasKey']);
         Route::post('/{idea}/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
         Route::get('/{idea}/user-rating', [InvestmentIdeaController::class, 'getUserRating']);

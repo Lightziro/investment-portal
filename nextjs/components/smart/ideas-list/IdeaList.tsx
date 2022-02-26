@@ -33,7 +33,7 @@ export const IdeaList: React.FC<IdeaList> = ({ items }) => {
                     )}
                 />
                 <Stack direction="column" alignItems="center">
-                    <Link href="/ideas-list">
+                    <Link href="/investment-idea/all">
                         <Button type="primary" block>
                             {t("View all")}
                         </Button>
