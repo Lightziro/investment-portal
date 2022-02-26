@@ -41,7 +41,7 @@ class InvestmentIdea extends CustomModel
     protected $table = 'investment_ideas';
     protected $primaryKey = 'idea_id';
     protected $fillable = ['price_buy', 'description', 'price_sell', 'is_short', 'status_id', 'date_end'];
-    protected $with = ['author'];
+    protected $with = ['author', 'company'];
 
     public function views(): HasMany
     {

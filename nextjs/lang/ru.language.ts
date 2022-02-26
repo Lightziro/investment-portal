@@ -126,4 +126,10 @@ export const ruLanguage = {
     "View all": "Смотреть все",
     "In this section you can get acquainted with your stock forecasts. To delete the forecast, click on the cross":
         "В этом разделе вы можете ознакомиться со своими прогнозами по акциям. Для удаления прогноза нажмите на крестик",
+    "Invest idea": "Инвестидея",
+    Sorting: "Сортировка",
+    "By name": "По наименованию",
+    "Possible profit": "Возможный доход",
+    "High income": "Сначала высокий доход",
+    "Low income": "Сначала низкий доход",
 };

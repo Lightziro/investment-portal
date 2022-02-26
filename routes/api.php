@@ -27,7 +27,7 @@ Route::group(
     ],
     function () {
         Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
-        Route::get('/all/{sort_by?}/{direction?}', [InvestmentIdeaController::class, 'all']);
+        Route::get('/all/{sort_by?}', [InvestmentIdeaController::class, 'all']);
         Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])
             ->name('get-idea-comments')
             ->where([

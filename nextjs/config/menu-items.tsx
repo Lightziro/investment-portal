@@ -111,3 +111,21 @@ export const OPTIONS_NEWS_ANALYZE = [
         value: 12,
     },
 ];
+export const SORT_IDEAS = [
+    {
+        label: "По умолчанию",
+        value: "idea_id",
+    },
+    {
+        label: "By name",
+        value: "company__name",
+    },
+    {
+        label: "High income",
+        value: "possible_profit__desc",
+    },
+    {
+        label: "Low income",
+        value: "possible_profit__asc",
+    },
+];
