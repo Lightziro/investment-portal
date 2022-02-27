@@ -15,7 +15,8 @@ import { viewNotice } from "../../../../../redux/actions/mainActions";
 import classes from "../../NavBars.module.scss";
 import { NoticeItem } from "../notice-item/NoticeItem";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { Badge } from "antd";
+import { Badge, Button } from "antd";
+import { LinkWrapper } from "../../../../simple/link/Link";
 
 interface NoticeMenu {
     onOpen: () => void;
@@ -87,9 +88,13 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                                 />
                             ))}
                         </Grid>
-                        <button className={classes.btnAllNotices}>
-                            <span>Show all</span>
-                        </button>
+                        <LinkWrapper href="/personal-account/notices">
+                            <Stack sx={{ my: 1 }} alignItems="center">
+                                <Button block type="primary">
+                                    {t("Show all")}
+                                </Button>
+                            </Stack>
+                        </LinkWrapper>
                     </MenuPopover>
                 </Fragment>
             )}

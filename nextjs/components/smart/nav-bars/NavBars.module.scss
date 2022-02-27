@@ -35,26 +35,3 @@
 .linkNotice {
     cursor: pointer;
 }
-
-.btnAllNotices {
-    border: none;
-    background: transparent;
-
-    span {
-        width: 100%;
-
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        background-color: #eff3f6;
-        color: #005bff;
-        line-height: 1.29;
-        padding: 0 12px;
-        font-family: GTEestiPro, arial, sans-serif;
-        font-weight: 700;
-        min-height: 32px;
-        min-width: 96px;
-        border-radius: 6px;
-    }
-}

@@ -59,6 +59,10 @@ export const MENU_PERSONAL_ACCOUNT = [
         label: "My predictions",
         url: "/personal-account/predictions",
     },
+    {
+        label: "Notices",
+        url: "/personal-account/notices",
+    },
 ];
 export const MENU_ADMIN = [
     {

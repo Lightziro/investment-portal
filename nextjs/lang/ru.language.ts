@@ -132,4 +132,6 @@ export const ruLanguage = {
     "Possible profit": "Возможный доход",
     "High income": "Сначала высокий доход",
     "Low income": "Сначала низкий доход",
+    "Show all": "Смотреть все",
+    Notices: "Уведомления",
 };
