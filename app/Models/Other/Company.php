@@ -3,19 +3,20 @@
 namespace App\Models\Other;
 
 use App\Models\Company\CompanyActivity;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property int company_id
- * @property string name
- * @property string ticker
- * @property string logo
- * @property string industry_work
- * @property string date_ipo
- * @property string currency
- * @property int activity_id;
- * @property CompanyActivity activity
+ * @property int $company_id
+ * @property string $name
+ * @property string $ticker
+ * @property string $logo
+ * @property string $industry_work
+ * @property Carbon|null $date_ipo
+ * @property string $currency
+ * @property int $activity_id;
+ * @property CompanyActivity $activity
  */
 class Company extends Model
 {
@@ -23,6 +24,10 @@ class Company extends Model
 
     protected $table = 'companies';
     protected $with = ['activity'];
+
+    protected $casts = [
+        'date_ipo' => 'date'
+    ];
 
     public function __toString()
     {

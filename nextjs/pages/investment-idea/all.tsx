@@ -28,7 +28,6 @@ export default AllIdeas;
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
 ) => {
-    const config: any = { headers: context.req.headers };
     const ideas = await axios(`${process.env.API_URL_DOCKER}/api/idea/all`)
         .then((res) => res.data)
         .catch((e) => []);

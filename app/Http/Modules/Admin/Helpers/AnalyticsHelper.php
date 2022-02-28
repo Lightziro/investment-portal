@@ -62,4 +62,13 @@ class AnalyticsHelper
     {
         return $this->totalNews['positive'] > $this->totalNews['negative'];
     }
+
+    public function analyticCHECKING_DATE_IPO(): bool
+    {
+        if ($date = $this->company->date_ipo) {
+            $current_year = now()->year;
+            return $current_year - 2 > $date;
+        }
+        return true; // Скорее всего компания давно на бирже, раз дата не определенна
+    }
 }

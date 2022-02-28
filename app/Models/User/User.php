@@ -2,11 +2,10 @@
 
 namespace App\Models\User;
 
-use App\Custom\CustomModel;
-use App\Custom\Relations\CustomHasMany;
 use App\Models\Article\ArticleComments;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
+use App\Models\Investment\InvestmentIdeaRatings;
 use App\Models\Other\Country;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -70,21 +69,14 @@ class User extends Authenticatable
         return Auth::attempt($params, true);
     }
 
-    #[Pure] public function getFrontendData(): array
+    public function getFrontendData(): array
     {
-        foreach ($this->notices()->orderByDesc('created_at')->get() as $notice_model) {
-            $ar_notice[] = [
-                'id' => $notice_model->notice_id,
-                'description' => $notice_model->description,
-                'viewed' => $notice_model->viewed,
-                'title' => $notice_model->title,
-                'created' => $notice_model->created_at->format('Y-m-d H:i:s'),
-            ];
-        }
+        $notices = $this->notices()->orderByDesc('created_at')->get()->toArray();
+
         return array_merge($this->only(['user_id', 'first_name', 'last_name']), [
             'full_name' => $this->getFullName(),
             'role' => $this->role->name,
-            'notices' => $ar_notice ?? [],
+            'notices' => $notices ?? [],
             'avatar' => $this->avatar_path,
         ]);
     }
@@ -94,7 +86,7 @@ class User extends Authenticatable
         return $this->hasOne(UsersRole::class, 'role_id', 'role_id');
     }
 
-    public function investment_ideas(): HasMany
+    public function investmentIdeas(): HasMany
     {
         return $this->hasMany(InvestmentIdea::class, 'author_id', 'user_id');
     }
