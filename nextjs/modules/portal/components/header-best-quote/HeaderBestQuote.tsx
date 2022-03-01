@@ -40,6 +40,7 @@ export const HeaderBestQuote: React.FC = () => {
                         md={3}
                         sm={4}
                         xs={6}
+                        key={quote.company_id}
                         container
                         direction="column"
                         alignItems="center"

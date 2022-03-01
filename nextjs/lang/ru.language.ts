@@ -134,4 +134,6 @@ export const ruLanguage = {
     "Low income": "Сначала низкий доход",
     "Show all": "Смотреть все",
     Notices: "Уведомления",
+    "In this section you can view your notices":
+        "В этом разделе вы можете просмотреть свои уведомления",
 };

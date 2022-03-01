@@ -83,7 +83,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                         >
                             {user.notices.map((notice) => (
                                 <NoticeItem
-                                    key={notice.id}
+                                    key={notice.notice_id}
                                     onViewNotice={() => onViewNotice(notice)}
                                     notice={notice}
                                 />
