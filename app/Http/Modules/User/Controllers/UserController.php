@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request as RequestApi;
 use Throwable;
@@ -31,6 +32,15 @@ class UserController extends Controller
         /** @var User $user */
         if ($user = $request->user()) {
             return response()->json($user->getFrontendData());
+        }
+        return response()->json([], 400);
+    }
+
+    public function getNotices(RequestApi $request): JsonResponse
+    {
+        /** @var User $user */
+        if ($user = $request->user()) {
+            return response()->json($user->notices->toArray());
         }
         return response()->json([], 400);
     }

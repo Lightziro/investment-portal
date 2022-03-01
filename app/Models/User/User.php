@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function getFrontendData(): array
     {
-        $notices = $this->notices()->orderByDesc('created_at')->get()->toArray();
+        $notices = $this->notices()->orderByDesc('created_at')->limit(5)->get()->toArray();
 
         return array_merge($this->only(['user_id', 'first_name', 'last_name']), [
             'full_name' => $this->getFullName(),

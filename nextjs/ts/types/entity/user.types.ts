@@ -37,3 +37,13 @@ export interface UserPredict {
     current_price: number | null;
     company_id: number;
 }
+export interface UserNoticeModel {
+    notice_id: number;
+    created_at: string;
+    description: string;
+    title: string;
+    updated_at: string;
+    user_id: number;
+    user?: UserModel;
+    viewed: boolean;
+}

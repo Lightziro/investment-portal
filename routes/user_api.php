@@ -15,6 +15,7 @@ Route::post('/register', [UserLoginController::class, 'register'])->middleware(B
 Route::put('/{user}', [UserController::class, 'update'])->middleware('auth:sanctum')->name('update');
 Route::post('/forgot-password', [UserActionController::class, 'forgotPassword']);
 Route::post('/recovery-password', [UserActionController::class, 'recoveryPassword']);
+Route::get('/notices', [UserController::class, 'getNotices']);
 
 Route::group(['prefix' => 'predictions', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/list', [PredictionController::class, 'getList']);

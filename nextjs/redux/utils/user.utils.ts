@@ -7,7 +7,7 @@ export const setNoticeView = (
     return {
         ...state,
         notices: state.notices.map((notice) => {
-            if (notice.id === updateId && !notice.viewed) {
+            if (notice.notice_id === updateId && !notice.viewed) {
                 notice.viewed = true;
             }
             return notice;

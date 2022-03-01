@@ -1,10 +1,10 @@
 import React from "react";
-import { Notice } from "../../../../../ts/types/redux/store.types";
 import { Divider, Typography } from "@mui/material";
 import classes from "../../NavBars.module.scss";
 import moment from "moment";
+import { UserNoticeModel } from "../../../../../ts/types/entity/user.types";
 interface NoticeItem {
-    notice: Notice;
+    notice: UserNoticeModel;
     onViewNotice: () => void;
 }
 
@@ -12,7 +12,7 @@ export const NoticeItem: React.FC<NoticeItem> = ({ notice, onViewNotice }) => {
     return (
         <div className={classes.noticeItem} onMouseEnter={onViewNotice}>
             <Typography variant="caption">
-                {moment(notice.created).fromNow()}
+                {moment(notice.created_at).fromNow()}
             </Typography>
             <div
                 className={`${classes.noticeHeader} ${

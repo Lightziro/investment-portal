@@ -5,17 +5,30 @@
 .toolBarItem {
     color: #1a1e21;
     padding: 4px 8px;
+
     &:hover {
         text-decoration: underline;
     }
+
     &.active {
         background: #e5efff;
         border-radius: 3px;
     }
 }
+
 .headerContent {
     max-width: 450px;
 }
+
 .predictPrices {
     font-weight: bold;
+}
+
+.wrapperNotices {
+    &.notView {
+        cursor: pointer;
+    }
+    .date {
+        font-weight: initial;
+    }
 }

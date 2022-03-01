@@ -30,8 +30,20 @@ function* deletePredict(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* fetchNotices(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/user/notices`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_USER_NOTICES",
+            data,
+        });
+    } catch (e) {}
+}
 
 export function* actionAccountWatcher(): SagaIterator {
     yield takeLatest("FETCH_USER_PREDICTION", userPrediction);
     yield takeLatest("SEND_DELETE_PREDICT", deletePredict);
+    yield takeLatest("FETCH_USER_NOTICES", fetchNotices);
 }

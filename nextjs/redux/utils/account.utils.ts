@@ -13,3 +13,11 @@ export const removePredict = (
         loading: false,
     },
 });
+export const setDataAccount = (
+    state: PersonalAccountStore,
+    section: string,
+    data: any
+): PersonalAccountStore => ({
+    ...state,
+    [section]: { list: data, loading: false },
+});

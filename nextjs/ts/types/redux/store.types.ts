@@ -4,6 +4,7 @@ import { AdminStore } from "../../../redux/ts/types/admin/admin-store.types";
 import { CreateIdeaStage } from "../../enums/investment-idea.enum";
 import { ViewStore } from "../../../redux/ts/types/view/view-store.types";
 import { PersonalAccountStore } from "../../../redux/ts/types/personal-account/personal-account-store.type";
+import { UserNoticeModel } from "../entity/user.types";
 
 export interface AlertStore {
     message: string;
@@ -27,23 +28,15 @@ export interface NewsPrediction {
     title: string;
     prediction: string;
 }
-
+// TODO: СДЕЛАТЬ ОБЫЧНЫМ
 export interface UserStore {
     user_id: number;
     first_name: string;
     last_name: string;
     full_name: string;
     role: string;
-    notices: Notice[];
+    notices: UserNoticeModel[];
     avatar: string;
-}
-
-export interface Notice {
-    id: number;
-    title: string;
-    description: string;
-    viewed: boolean;
-    created: string;
 }
 
 export interface StoreData {

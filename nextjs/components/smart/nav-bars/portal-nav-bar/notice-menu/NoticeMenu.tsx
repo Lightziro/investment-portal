@@ -1,6 +1,6 @@
 import React, { Fragment, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Notice, StoreData } from "../../../../../ts/types/redux/store.types";
+import { StoreData } from "../../../../../ts/types/redux/store.types";
 import {
     Box,
     Divider,
@@ -17,6 +17,7 @@ import { NoticeItem } from "../notice-item/NoticeItem";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Badge, Button } from "antd";
 import { LinkWrapper } from "../../../../simple/link/Link";
+import { UserNoticeModel } from "../../../../../ts/types/entity/user.types";
 
 interface NoticeMenu {
     onOpen: () => void;
@@ -29,9 +30,9 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
     const dispatch = useDispatch();
     const anchorRef = useRef(null);
     const user = useSelector((state: StoreData) => state.user);
-    const onViewNotice = (notice: Notice) => {
+    const onViewNotice = (notice: UserNoticeModel) => {
         if (!notice.viewed) {
-            dispatch(viewNotice(notice.id));
+            dispatch(viewNotice(notice.notice_id));
         }
     };
     const countNotView = (): number => {
