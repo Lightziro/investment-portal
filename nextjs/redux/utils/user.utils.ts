@@ -1,16 +1,12 @@
 import { UserStore } from "../../ts/types/redux/store.types";
+import { changeViewNotice } from "../../utils/user/user-actions";
 
 export const setNoticeView = (
     state: UserStore,
-    updateId: number
+    noticeId: number
 ): UserStore => {
     return {
         ...state,
-        notices: state.notices.map((notice) => {
-            if (notice.notice_id === updateId && !notice.viewed) {
-                notice.viewed = true;
-            }
-            return notice;
-        }),
+        notices: changeViewNotice(state.notices, noticeId),
     };
 };

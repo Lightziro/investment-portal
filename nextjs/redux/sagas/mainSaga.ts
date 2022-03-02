@@ -2,6 +2,7 @@ import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { axios } from "../../utils/axios";
+import { requestViewNotice } from "../../utils/api/user-api";
 
 function* fetchInvestmentData(action: AnyAction): Generator {
     try {
@@ -18,14 +19,10 @@ function* fetchInvestmentData(action: AnyAction): Generator {
 }
 function* viewNotice(action: AnyAction): Generator {
     try {
-        yield axios
-            .post(`${process.env.API_URL}/api/user/notice/view`, {
-                id: action.id,
-            })
-            .then((response) => response.data);
+        yield requestViewNotice(action.id);
         yield put({
             type: "SET_NOTICE_VIEW",
-            noticeId: action.id,
+            id: action.id,
         });
     } catch (error) {}
 }

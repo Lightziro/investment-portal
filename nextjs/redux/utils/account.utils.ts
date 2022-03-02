@@ -1,4 +1,5 @@
 import { PersonalAccountStore } from "../ts/types/personal-account/personal-account-store.type";
+import { changeViewNotice } from "../../utils/user/user-actions";
 
 export const removePredict = (
     state: PersonalAccountStore,
@@ -20,4 +21,14 @@ export const setDataAccount = (
 ): PersonalAccountStore => ({
     ...state,
     [section]: { list: data, loading: false },
+});
+export const setViewNotice = (
+    state: PersonalAccountStore,
+    noticeId: number
+): PersonalAccountStore => ({
+    ...state,
+    notices: {
+        ...state.notices,
+        list: changeViewNotice(state.notices.list, noticeId),
+    },
 });

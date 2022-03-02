@@ -1,6 +1,10 @@
 import { AnyAction } from "redux";
 import { PersonalAccountStore } from "../ts/types/personal-account/personal-account-store.type";
-import { removePredict, setDataAccount } from "../utils/account.utils";
+import {
+    removePredict,
+    setDataAccount,
+    setViewNotice,
+} from "../utils/account.utils";
 
 const accountReducer = (
     state: PersonalAccountStore = null,
@@ -18,6 +22,8 @@ const accountReducer = (
             return removePredict(state, action.predictId);
         case "SET_USER_NOTICES":
             return setDataAccount(state, "notices", action.data);
+        case "SET_NOTICE_VIEW":
+            return setViewNotice(state, action.id);
         default:
             return state;
     }

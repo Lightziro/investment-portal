@@ -2,6 +2,7 @@ import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { axios } from "../../utils/axios";
+import { requestViewNotice } from "../../utils/api/user-api";
 
 function* userPrediction(action: AnyAction): Generator {
     try {
@@ -41,9 +42,19 @@ function* fetchNotices(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* viewNotice(action: AnyAction): Generator {
+    try {
+        yield requestViewNotice(action.id);
+        yield put({
+            type: "SET_NOTICE_VIEW",
+            id: action.id,
+        });
+    } catch (e) {}
+}
 
 export function* actionAccountWatcher(): SagaIterator {
     yield takeLatest("FETCH_USER_PREDICTION", userPrediction);
     yield takeLatest("SEND_DELETE_PREDICT", deletePredict);
     yield takeLatest("FETCH_USER_NOTICES", fetchNotices);
+    yield takeLatest("SEND_VIEW_NOTICE", viewNotice);
 }

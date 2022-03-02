@@ -7,7 +7,7 @@ const userReducer = (state: UserStore = null, action: AnyAction): UserStore => {
         case "SET_USER":
             return action.user;
         case "SET_NOTICE_VIEW":
-            return setNoticeView(state, action.noticeId);
+            return setNoticeView(state, action.id);
         default:
             return state;
     }
