@@ -3,7 +3,7 @@
 namespace App\Http\Modules\Core\Controllers;
 
 use App\Http\Classes\StockMarket;
-use App\Models\Other\Company;
+use App\Models\Company\Company;
 use App\Models\Other\Country;
 use App\Models\Other\EmailSubscription;
 use App\Models\User\UsersRole;
@@ -56,7 +56,7 @@ class OtherController extends Controller
             ->orderBy('name')->get(['name', 'ticker', 'company_id']);
         $market = new StockMarket();
 
-        /** @var Company $company_model */
+        /** @var \App\Models\Company\Company $company_model */
         foreach ($stocks as $company_model) {
             $quote_info = $market->getLastQuote($company_model->ticker);
             if ($quote_info) {

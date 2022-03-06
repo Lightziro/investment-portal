@@ -4,9 +4,9 @@ namespace App\Http\Modules\Admin\Controllers;
 
 use App\Http\Classes\QueueRabbit;
 use App\Http\Classes\StockMarket;
+use App\Models\Company\Company;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
-use App\Models\Other\Company;
 use App\Models\User\User;
 use DateInterval;
 use DateTime;

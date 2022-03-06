@@ -3,6 +3,7 @@ namespace App\Models\Company;
 use App\Custom\CustomModel;
 
 /**
+ * @property int working_season_id
  * @property string season
  * @property bool all_year
  */

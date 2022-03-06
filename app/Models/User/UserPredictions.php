@@ -3,7 +3,7 @@
 namespace App\Models\User;
 
 use App\Custom\CustomModel;
-use App\Models\Other\Company;
+use App\Models\Company\Company;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

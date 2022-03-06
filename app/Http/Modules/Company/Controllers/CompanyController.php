@@ -3,8 +3,7 @@
 namespace App\Http\Modules\Company\Controllers;
 
 use App\Http\Classes\StockMarket;
-use App\Models\Other\Company;
-use Finnhub\Model\BasicFinancials;
+use App\Models\Company\Company;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 

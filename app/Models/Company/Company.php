@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models\Other;
+namespace App\Models\Company;
 
-use App\Models\Company\CompanyActivity;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;

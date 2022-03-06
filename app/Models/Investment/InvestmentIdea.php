@@ -6,7 +6,7 @@ use App\Custom\CustomCollection;
 use App\Custom\CustomModel;
 use App\Custom\Query\CustomQueryBuilder;
 use App\Custom\Relations\CustomHasMany;
-use App\Models\Other\Company;
+use App\Models\Company\Company;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property float price_sell
  * @property bool is_short
  * @property string stock_name
- * @property Company company
+ * @property \App\Models\Company\Company company
  * @property int company_id
  * @property InvestmentIdeaComments[]|Collection comments
  * @property InvestmentIdeaViewing[]|Collection views

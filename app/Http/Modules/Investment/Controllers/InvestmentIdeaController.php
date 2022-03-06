@@ -2,15 +2,11 @@
 
 namespace App\Http\Modules\Investment\Controllers;
 
-use App\Http\Classes\StockMarket;
 use App\Http\Modules\Investment\Helpers\InvestmentIdeaHelper;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
 use App\Models\Investment\InvestmentIdeaRatings;
-use App\Models\Other\Company;
 use App\Models\User\User;
-use Finnhub\Model\BasicFinancials;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

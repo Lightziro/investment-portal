@@ -4,8 +4,7 @@
 namespace App\Http\Modules\Admin\Controllers;
 
 
-use App\Models\Article\Article;
-use App\Models\Other\Company;
+use App\Models\Company\Company;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;

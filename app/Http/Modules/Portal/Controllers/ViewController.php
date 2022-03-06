@@ -3,9 +3,9 @@
 namespace App\Http\Modules\Portal\Controllers;
 
 use App\Models\Article\Article;
+use App\Models\Company\Company;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
-use App\Models\Other\Company;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
