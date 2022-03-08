@@ -136,4 +136,6 @@ export const ruLanguage = {
     Notices: "Уведомления",
     "In this section you can view your notices":
         "В этом разделе вы можете просмотреть свои уведомления",
+    "Good ideas": "Удачных идей",
+    "Watch all": "Смотреть все",
 };

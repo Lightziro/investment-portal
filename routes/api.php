@@ -28,12 +28,7 @@ Route::group(
     function () {
         Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
         Route::get('/all/{sort_by?}', [InvestmentIdeaController::class, 'all']);
-        Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])
-            ->name('get-idea-comments')
-            ->where([
-                'id' => '[0-9]+'
-            ]);
-//        Route::get('/all-key', [InitialDataController::class, 'getIdeasKey']);
+        Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])->name('get-idea-comments');
         Route::post('/{idea}/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
         Route::get('/{idea}/user-rating', [InvestmentIdeaController::class, 'getUserRating']);
         Route::get('/{idea}/rating', [InvestmentIdeaController::class, 'getRating'])->name('get-rating');
@@ -45,7 +40,7 @@ Route::group(
         'prefix' => 'article',
     ],
     function () {
-//        Route::get('/all-key', [InitialDataController::class, 'getArticlesKey']);
+        Route::get('/all/{sort_by?}', [ArticleController::class, 'all'])->name('all');
         Route::get('/{article}', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
         Route::get('/{article}/comments', [ArticleController::class, 'getComments'])->name('get-article-comments');
         Route::get('/{article}/labels', [ArticleController::class, 'getLabels'])->name('get-labels');

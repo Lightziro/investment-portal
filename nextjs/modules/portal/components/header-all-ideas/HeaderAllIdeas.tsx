@@ -8,6 +8,7 @@ import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import ViewStreamIcon from "@mui/icons-material/ViewStream";
 import { ViewMode } from "../../ts/types/other.types";
 import { viewModeColor } from "../../utils/view-mode.utils";
+import { SelectField } from "../../../../components/ordinary/fields-form/select-field/SelectField";
 const { Option } = Select;
 
 interface HeaderAllIdeas {
@@ -31,16 +32,16 @@ export const HeaderAllIdeas: React.FC<HeaderAllIdeas> = ({
             >
                 <Stack direction="row" spacing={1} alignItems="center">
                     <Typography>{t("Sorting")}:</Typography>
-                    <Select
-                        defaultValue="idea_id"
+                    <SelectField
+                        items={SORT_IDEAS.map((item) => {
+                            item.label = t(item.label);
+                            return item;
+                        })}
+                        handleChange={handleChange}
                         size="large"
-                        className={classes.headerSelect}
-                        onChange={handleChange}
-                    >
-                        {SORT_IDEAS.map((item) => (
-                            <Option value={item.value}>{t(item.label)}</Option>
-                        ))}
-                    </Select>
+                        type="ant"
+                        defaultValue="idea_id"
+                    />
                 </Stack>
                 <Stack direction="row" alignItems="center">
                     <IconButton

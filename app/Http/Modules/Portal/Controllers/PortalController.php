@@ -32,7 +32,7 @@ class PortalController extends BaseController
 
         $articles_simple = Article::query()->whereNotIn('article_id', $pk_list)
             ->orderByDesc('created_at')
-            ->limit(10)->with('author')->get()->toArray();
+            ->limit(5)->with('author')->get()->toArray();
         $articles_simple = ArticleHelper::filterDeletedAuthors($articles_simple);
 
         $investment_ideas = InvestmentIdea::mostPopular()->limit(5)->get();

@@ -5,8 +5,8 @@ import { fetchEntityList } from "../../../../../redux/actions/adminActions";
 import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
 import { Pagination, Skeleton, Stack } from "@mui/material";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
-import { DtoCompanyItem } from "../../../ts/types/response/admin-response-item.types";
 import moment from "moment";
+import { CompanyModel } from "../../../../../ts/types/entity/other.types";
 
 export const AdminCompaniesList: React.FC = () => {
     const [page, setPage] = useState(0);
@@ -20,6 +20,8 @@ export const AdminCompaniesList: React.FC = () => {
         dispatch(fetchEntityList(AdminEntity.Company, page));
     };
 
+    console.log(list);
+
     return (
         <Fragment>
             {loading ? (
@@ -27,30 +29,11 @@ export const AdminCompaniesList: React.FC = () => {
             ) : (
                 <EntityTable
                     columns={["ID", "Name", "Date IPO", "Activity"]}
-                    row={list.map((company: DtoCompanyItem) => [
+                    row={list.map((company: CompanyModel) => [
                         company.company_id,
                         company.name,
-                        // <Stack direction="row" alignItems="center">
-                        //     <UserAvatar avatar={article.author.avatar_path} />
-                        //     <span className="ms-2">
-                        //         {article.author.full_name}
-                        //     </span>
-                        // </Stack>,
                         moment(company.date_ipo).format("ll"),
-                        company.activity,
-                        // <IconButton
-                        //     color="primary"
-                        //     aria-label="upload picture"
-                        //     component="span"
-                        // >
-                        //     <EditIcon
-                        //         onClick={() =>
-                        //             router.push(
-                        //                 `/admin/articles/${article.article_id}`
-                        //             )
-                        //         }
-                        //     />
-                        // </IconButton>,
+                        company?.activity.name,
                     ])}
                 />
             )}

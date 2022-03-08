@@ -1,6 +1,6 @@
 import { AdminSectionBase } from "../admin-store.types";
-import { DtoCompanyItem } from "../../../../../modules/admin/ts/types/response/admin-response-item.types";
+import { CompanyModel } from "../../../../../ts/types/entity/other.types";
 
 export interface AdminCompanies extends AdminSectionBase {
-    list: DtoCompanyItem[];
+    list: CompanyModel[];
 }

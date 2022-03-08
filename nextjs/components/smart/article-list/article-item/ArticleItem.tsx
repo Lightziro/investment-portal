@@ -5,6 +5,7 @@ import moment from "moment";
 import { LinkWrapper } from "../../../simple/link/Link";
 import { Card } from "antd";
 import { useTranslation } from "react-i18next";
+import classes from "../../Smart.module.scss";
 
 const { Meta } = Card;
 
@@ -16,7 +17,7 @@ export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
     const { t } = useTranslation();
     return (
         <Card
-            style={{ width: "100%" }}
+            className={classes.articleCard}
             cover={
                 <img
                     alt={`${t("Preview article")}`}

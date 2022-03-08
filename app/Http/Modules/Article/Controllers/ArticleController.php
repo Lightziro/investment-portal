@@ -2,8 +2,10 @@
 
 namespace App\Http\Modules\Article\Controllers;
 
+use App\Http\Modules\Article\Helpers\ArticleHelper;
 use App\Models\Article\Article;
 use App\Models\Article\ArticleComments;
+use App\Models\Investment\InvestmentIdea;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -51,5 +53,14 @@ class ArticleController extends Controller
     public function getLabels(Article $article): JsonResponse
     {
         return response()->json($article->getLabels());
+    }
+
+    public function all(string $sort_by = 'article_id'): JsonResponse
+    {
+        $direction = 'asc';
+        $query_ideas = InvestmentIdea::query();
+
+        $query_ideas->orderBy($sort_by, $direction);
+        return response()->json(ArticleHelper::filterDeletedAuthors($query_ideas->get()->toArray()));
     }
 }

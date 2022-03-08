@@ -27,7 +27,7 @@ export const IdeaStatistics: React.FC<IdeaStatistics> = ({ stats }) => {
                     >
                         <div className={classes.wrapperStatsIdea}>
                             <span className={classes.labelStatsIdeas}>
-                                {t("Successful ideas")}
+                                {t("Good ideas")}
                             </span>
                             <div className={classes.valueStatsIdeas}>
                                 {stats.success}

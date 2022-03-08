@@ -7,11 +7,11 @@ import { AdminArticle } from "./articles/admin-articles.types";
 import { AdminIdeas } from "./investment-ideas/admin-ideas.types";
 import {
     DtoArticleItem,
-    DtoCompanyItem,
     DtoIdeaItem,
 } from "../../../../modules/admin/ts/types/response/admin-response-item.types";
 import { AdminCompanies } from "./companies/admin-companies.types";
 import { UserModel } from "../../../../ts/types/entity/user.types";
+import { CompanyModel } from "../../../../ts/types/entity/other.types";
 
 export interface AdminStore {
     investmentIdeas: AdminIdeas;
@@ -42,7 +42,7 @@ export type AdminItems =
     | DtoArticleItem[]
     | DtoIdeaItem[]
     | UserModel[]
-    | DtoCompanyItem[];
+    | CompanyModel[];
 
 export type AdminSection =
     | AdminUsers
