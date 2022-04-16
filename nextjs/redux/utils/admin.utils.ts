@@ -3,10 +3,7 @@ import {
     AdminUsers,
     AdminUsersStats,
 } from "../ts/types/admin/users/admin-users.types";
-import {
-    AdminEntity,
-    AdminSection as SectionEnum,
-} from "../ts/enums/admin/admin.enum";
+import { Entity, Section } from "../../ts/enums/other.enums";
 
 export const setUsersStats = (
     state: AdminUsers,
@@ -21,15 +18,15 @@ export const setEntityList = (state: AdminSection, data: DtoItems): any => ({
     lastPage: data.lastPage,
     loading: false,
 });
-export const getSectionByEntity = (entity: AdminEntity): SectionEnum => {
+export const getSectionByEntity = (entity: Entity): Section => {
     switch (entity) {
-        case AdminEntity.User:
-            return SectionEnum.Users;
-        case AdminEntity.Article:
-            return SectionEnum.Articles;
-        case AdminEntity.InvestmentIdea:
-            return SectionEnum.InvestmentIdeas;
-        case AdminEntity.Company:
-            return SectionEnum.Companies;
+        case Entity.User:
+            return Section.Users;
+        case Entity.Article:
+            return Section.Articles;
+        case Entity.InvestmentIdea:
+            return Section.InvestmentIdeas;
+        case Entity.Company:
+            return Section.Companies;
     }
 };

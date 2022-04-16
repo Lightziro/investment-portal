@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
 import { axios } from "../axios";
-import { AdminEntity } from "../../redux/ts/enums/admin/admin.enum";
+import { Entity } from "../../ts/enums/other.enums";
 
 export const getListNews = async () => {
     const response = await fetch(
@@ -11,13 +11,6 @@ export const getListNews = async () => {
 export const getBasePortal = async () => {
     const response = await fetch(
         `${process.env.API_URL_DOCKER}/api/investment-data/get`
-    );
-    return await response.json();
-};
-
-export const getQuotePortal = async () => {
-    const response = await fetch(
-        `${process.env.API_URL_DOCKER}/api/other/quotes`
     );
     return await response.json();
 };
@@ -51,7 +44,7 @@ export const getCountries = async () =>
         .catch(() => []);
 export const getEntityAdmin = async (
     id: number,
-    entity: AdminEntity,
+    entity: Entity,
     ctx: GetServerSidePropsContext
 ) => {
     const config: any = { headers: ctx.req.headers };
@@ -71,5 +64,17 @@ export const getSearchData = async (value: string) =>
 export const getCompanyStats = async (companyId: number) =>
     await axios
         .get(`${process.env.API_URL}/api/company/${companyId}/stats`)
+        .then((res) => res.data)
+        .catch((e) => []);
+
+export const sortBy = async (entity: Entity, field) =>
+    await axios
+        .get(`${process.env.API_URL}/api/${entity}/all/${field}`)
+        .then((res) => res.data)
+        .catch((e) => []);
+
+export const getAll = async (entity: Entity) =>
+    await axios
+        .get(`${process.env.API_URL_DOCKER}/api/${entity}/all`)
         .then((res) => res.data)
         .catch((e) => []);

@@ -6,6 +6,8 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { AllIdeasPage } from "../../modules/portal/pages/AllIdeasPage";
 import { useTranslation } from "react-i18next";
+import { getAll } from "../../utils/api/get-data";
+import { Entity } from "../../ts/enums/other.enums";
 
 interface AllIdeas {
     ideas: IdeaModel[];
@@ -25,12 +27,8 @@ const AllIdeas: NextPage<AllIdeas> = ({ ideas }) => {
 };
 export default AllIdeas;
 
-export const getServerSideProps = async (
-    context: GetServerSidePropsContext
-) => {
-    const ideas = await axios(`${process.env.API_URL_DOCKER}/api/idea/all`)
-        .then((res) => res.data)
-        .catch((e) => []);
+export const getServerSideProps = async () => {
+    const ideas = await getAll(Entity.InvestmentIdea);
     return {
         props: {
             ideas,

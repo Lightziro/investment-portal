@@ -117,7 +117,7 @@ export const OPTIONS_NEWS_ANALYZE = [
 ];
 export const SORT_IDEAS = [
     {
-        label: "По умолчанию",
+        label: "By default",
         value: "idea_id",
     },
     {
@@ -131,5 +131,15 @@ export const SORT_IDEAS = [
     {
         label: "Low income",
         value: "possible_profit__asc",
+    },
+];
+export const SORT_ARTICLES = [
+    {
+        label: "По умолчанию",
+        value: "article_id",
+    },
+    {
+        label: "By name",
+        value: "title",
     },
 ];

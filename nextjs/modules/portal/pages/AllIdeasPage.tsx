@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { IdeaModel } from "../../../ts/types/entity/idea.types";
 import { Grid } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { axios } from "../../../utils/axios";
-import { HeaderAllIdeas } from "../components/header-all-ideas/HeaderAllIdeas";
+import { HeaderAllIdeas } from "../components/header-entity-panel/HeaderEntityPanel";
 import { ViewMode } from "../ts/types/other.types";
 import classes from "../Portal.module.scss";
 import { IdeasList } from "../components/ideas-list/IdeasList";
+import { sortBy } from "../../../utils/api/get-data";
+import { Entity } from "../../../ts/enums/other.enums";
+import { SORT_IDEAS } from "../../../config/menu-items";
 
 interface AllIdeasPage {
     ideas: IdeaModel[];
@@ -14,14 +15,11 @@ interface AllIdeasPage {
 }
 
 export const AllIdeasPage: React.FC<AllIdeasPage> = ({ ideas, setIdeas }) => {
-    const { t } = useTranslation();
     const [viewMode, setViewMode] = useState<ViewMode>("tile");
 
     const handleChangeSortBy = async (value) => {
         setIdeas(null);
-        const data = await axios
-            .get(`${process.env.API_URL}/api/idea/all/${value}`)
-            .then((res) => res.data);
+        const data = await sortBy(Entity.InvestmentIdea, value);
         setIdeas(data);
     };
 
@@ -31,6 +29,9 @@ export const AllIdeasPage: React.FC<AllIdeasPage> = ({ ideas, setIdeas }) => {
                 handleChange={handleChangeSortBy}
                 setMode={setViewMode}
                 viewMode={viewMode}
+                defaultSelectValue="idea_id"
+                selectItems={SORT_IDEAS}
+                entity={Entity.InvestmentIdea}
             />
             <Grid
                 container
