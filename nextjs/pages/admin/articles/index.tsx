@@ -6,14 +6,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { HeaderSection } from "../../../modules/admin/components/header-section/HeaderSection";
 import { fetchEntityList } from "../../../redux/actions/adminActions";
-import { AdminEntity } from "../../../redux/ts/enums/admin/admin.enum";
 import { AdminArticlesList } from "../../../modules/admin/sections/articles/admin-articles-list/AdminArticlesList";
+import { Entity } from "../../../ts/enums/other.enums";
 
 const ArticlesAdminPage = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchEntityList(AdminEntity.Article, 0));
+        dispatch(fetchEntityList(Entity.Article, 0));
     }, []);
     return (
         <MainLayout title={t("Investment ideas")}>

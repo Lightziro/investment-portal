@@ -1,8 +1,7 @@
 import React from "react";
-import { Grid, Skeleton, Stack, Typography } from "@mui/material";
+import { Grid, Skeleton, Stack } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { ArticleLabel } from "../../../../ts/types/entity/article.types";
-import { Col, Row } from "react-bootstrap";
 interface LabelList {
     labels: ArticleLabel[];
 }

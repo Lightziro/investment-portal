@@ -7,14 +7,14 @@ import { HeaderSection } from "../../../modules/admin/components/header-section/
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchEntityList } from "../../../redux/actions/adminActions";
-import { AdminEntity } from "../../../redux/ts/enums/admin/admin.enum";
 import { AdminIdeasList } from "../../../modules/admin/sections/investment-ideas/admin-ideas-list/AdminIdeasList";
+import { Entity } from "../../../ts/enums/other.enums";
 
 const InvestmentIdeas: NextPage = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchEntityList(AdminEntity.InvestmentIdea, 0));
+        dispatch(fetchEntityList(Entity.InvestmentIdea, 0));
     }, []);
     return (
         <MainLayout title={t("Investment ideas")}>

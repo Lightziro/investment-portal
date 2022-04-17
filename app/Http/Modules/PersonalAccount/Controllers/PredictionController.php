@@ -8,7 +8,7 @@ use App\Models\User\UserPredictions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use \Illuminate\Support\Facades\Request as RequestHelper;
+use Illuminate\Support\Facades\Request as RequestHelper;
 use Throwable;
 
 class PredictionController extends Controller
@@ -56,5 +56,17 @@ class PredictionController extends Controller
         } catch (Throwable $e) {
             return response()->json([], 400);
         }
+    }
+
+    public function updatePredict(UserPredictions $predict, Request $request): JsonResponse
+    {
+        /** @var User $user */
+        $user = $request->user();
+        if ($predict->user_id !== $user->getKey()) {
+            return response()->json([], 403);
+        }
+
+        $predict->update($request->post());
+        return response()->json([]);
     }
 }

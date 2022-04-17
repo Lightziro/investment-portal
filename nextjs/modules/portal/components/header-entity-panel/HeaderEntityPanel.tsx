@@ -19,7 +19,7 @@ interface HeaderEntityPanel {
     defaultSelectValue: string;
 }
 
-export const HeaderAllIdeas: React.FC<HeaderEntityPanel> = ({
+export const HeaderEntityPanel: React.FC<HeaderEntityPanel> = ({
     handleChange,
     entity,
     showButtonMode = true,

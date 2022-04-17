@@ -20,24 +20,25 @@ const MainPage: NextPage<Index> = ({ news, baseData }) => {
     return (
         <MainLayout title="Главная страница">
             <PortalLayout>
-                <Grid container spacing={3}>
+                <Grid container direction="row" spacing={3}>
                     <Grid
                         display={{ xs: "none", sm: "none", md: "block" }}
                         item
                         md={3}
+                        direction="row"
                     >
                         <NewsList items={news} />
                     </Grid>
-                    <Grid item md={9}>
+                    <Grid item direction="row" md={9}>
                         <HeaderBestQuote />
-                        <Grid container spacing={3}>
+                        <Grid container direction="row" spacing={3}>
                             <Grid direction="column" item md={9} sm={12}>
                                 <ArticleList
                                     popular={baseData.articles.popular}
                                     simple={baseData.articles.simple}
                                 />
                             </Grid>
-                            <Grid item sm={12} md={3}>
+                            <Grid direction="column" item sm={12} md={3}>
                                 <PortalAd />
                                 <IdeaStatistics stats={baseData.stats} />
                                 <IdeaList items={baseData.ideas} />

@@ -4,7 +4,7 @@ import { ArticleModel } from "../../../ts/types/entity/article.types";
 import { sortBy } from "../../../utils/api/get-data";
 import { Entity } from "../../../ts/enums/other.enums";
 import classes from "../Portal.module.scss";
-import { HeaderAllIdeas } from "../components/header-entity-panel/HeaderEntityPanel";
+import { HeaderEntityPanel } from "../components/header-entity-panel/HeaderEntityPanel";
 import { SORT_ARTICLES } from "../../../config/menu-items";
 import ArticleList from "../components/article-list/ArticleList";
 
@@ -24,7 +24,7 @@ export const AllArticlePage: React.FC<AllArticlePage> = ({
 
     return (
         <Grid container direction="column" justifyContent="center">
-            <HeaderAllIdeas
+            <HeaderEntityPanel
                 handleChange={handleSortBy}
                 defaultSelectValue="article_id"
                 selectItems={SORT_ARTICLES}

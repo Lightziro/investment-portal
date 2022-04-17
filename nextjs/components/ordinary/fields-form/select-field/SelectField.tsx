@@ -46,7 +46,6 @@ export const SelectField: React.FC<SelectField> = ({
                 </FormControl>
             );
         case "ant":
-            console.log(items);
             return (
                 <SelectAnt
                     defaultValue={defaultValue}
@@ -55,7 +54,9 @@ export const SelectField: React.FC<SelectField> = ({
                     onChange={handleChange}
                 >
                     {items.map((item) => (
-                        <Option value={item.value}>{item.label}</Option>
+                        <Option key={item.value} value={item.value}>
+                            {item.label}
+                        </Option>
                     ))}
                 </SelectAnt>
             );

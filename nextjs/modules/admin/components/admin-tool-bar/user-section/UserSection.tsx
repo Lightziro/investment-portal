@@ -22,7 +22,7 @@ export const UserSection: React.FC = () => {
                         </div>
                         <div className={classes.nameWrapper}>
                             <span className={classes.fullName}>
-                                {user.first_name}
+                                {user.full_name}
                             </span>
                             <span className={classes.role}>{user.role}</span>
                         </div>

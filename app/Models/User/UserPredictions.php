@@ -9,20 +9,27 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $prediction_id
- * @property User $user
+ * @property-read User $user
  * @property int $user_id
- * @property Company $company
+ * @property-read  Company $company
  * @property int $company_id
  * @property float $predict_price
+ * @property bool $visible
  */
 class UserPredictions extends CustomModel
 {
     protected $table = 'user_predictions';
     protected $primaryKey = 'prediction_id';
+    protected $fillable = ['visible'];
+    protected $with = ['company'];
 
-    public function company(): HasOne
+    protected $casts = [
+        'visible' => 'boolean',
+    ];
+
+    public function company(): BelongsTo
     {
-        return $this->hasOne(Company::class, 'company_id', 'company_id');
+        return $this->belongsTo(Company::class, 'company_id', 'company_id');
     }
 
     public function user(): BelongsTo

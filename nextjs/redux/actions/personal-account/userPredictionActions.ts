@@ -6,5 +6,10 @@ export const deletePredict = (predictId: number) => ({
     predictId,
 });
 export const fetchUserNotices = () => ({
-    type: 'FETCH_USER_NOTICES'
-})
+    type: "FETCH_USER_NOTICES",
+});
+export const setVisiblePredict = (visible: boolean, predictId: number) => ({
+    type: "SEND_UPDATE_VISIBLE_PREDICT",
+    visible,
+    predictId,
+});

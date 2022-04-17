@@ -2,7 +2,7 @@
 
 namespace App\Http\Modules\Admin\Controllers;
 
-use App\Http\Modules\Admin\Helpers\ArticleHelper;
+use App\Http\Modules\Article\Helpers\ArticleHelper;
 use App\Models\Article\Article;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;

@@ -85,7 +85,7 @@ export const ruLanguage = {
     "Investment idea": "Инвестиционная идея",
     Profile: "Профиль",
     "Save profile": "Сохранить профиль",
-    "Admin panel": "Панель администратора",
+    "Admin panel": "Адм.панель",
     users: "пользователи",
     "Users today": "Пользователей за сегодня",
     "Users week": "Пользователей за неделю",
@@ -138,4 +138,11 @@ export const ruLanguage = {
         "В этом разделе вы можете просмотреть свои уведомления",
     "Good ideas": "Удачных идей",
     "Watch all": "Смотреть все",
+    "Prediction user": "Прогнозы пользователя",
+    "Your predict is visible to all users":
+        "Ваш прогноз виден всем пользователям",
+    "Your predict is hidden to all users":
+        "Ваш прогноз скрыт от всех пользователей",
+    "This user has no open predictions":
+        "У пользователя нет открытых прогнозов",
 };

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import {
     deletePredict,
     fetchUserPrediction,
+    setVisiblePredict,
 } from "../../../redux/actions/personal-account/userPredictionActions";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
 import { List } from "antd";
@@ -12,6 +13,8 @@ import { UserPredict } from "../../../ts/types/entity/user.types";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import classes from "../PersonalAccount.module.scss";
 import { getResultPredict } from "../components/utils/get-result-predict";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export const MyStockPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -21,9 +24,12 @@ export const MyStockPage: React.FC = () => {
     const { list, loading } = useRootSelector(
         (state) => state.account.predictions
     );
-    const handleDelete = (predictId: number) => {
+    const handleDelete = (predictId: number) =>
         dispatch(deletePredict(predictId));
-    };
+
+    const handleVisible = (visible: boolean, predictId: number) =>
+        dispatch(setVisiblePredict(visible, predictId));
+
     return (
         <Paper sx={{ p: 2 }}>
             <HeaderPage title="My predictions">
@@ -57,6 +63,28 @@ export const MyStockPage: React.FC = () => {
                                 </Stack>
                             }
                         />
+                        <IconButton
+                            component="span"
+                            onClick={
+                                item.visible
+                                    ? () =>
+                                          handleVisible(
+                                              false,
+                                              item.prediction_id
+                                          )
+                                    : () =>
+                                          handleVisible(
+                                              true,
+                                              item.prediction_id
+                                          )
+                            }
+                        >
+                            {item.visible ? (
+                                <VisibilityIcon />
+                            ) : (
+                                <VisibilityOffIcon />
+                            )}
+                        </IconButton>
                         <IconButton component="span">
                             <RemoveCircleOutlineIcon
                                 onClick={() => handleDelete(item.prediction_id)}

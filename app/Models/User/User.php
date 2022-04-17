@@ -25,7 +25,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string password
  * @property string first_name
  * @property string last_name
- * @property string remember_token
  * @property UsersRole|null role
  * @property null|int role_id
  * @property InvestmentIdea|Collection|null investment_ideas
@@ -141,6 +140,7 @@ class User extends Authenticatable
         return array_merge($this->toArray(), [
             'count_comments' => $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
             'country' => $this->country->toArray(),
+            'predictions' => $this->predictions()->where('visible', true)->get()->toArray(),
         ]);
     }
 }

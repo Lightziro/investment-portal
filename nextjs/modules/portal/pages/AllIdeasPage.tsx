@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { IdeaModel } from "../../../ts/types/entity/idea.types";
 import { Grid } from "@mui/material";
-import { HeaderAllIdeas } from "../components/header-entity-panel/HeaderEntityPanel";
+import {
+    HeaderAllIdeas,
+    HeaderEntityPanel,
+} from "../components/header-entity-panel/HeaderEntityPanel";
 import { ViewMode } from "../ts/types/other.types";
 import classes from "../Portal.module.scss";
 import { IdeasList } from "../components/ideas-list/IdeasList";
@@ -25,7 +28,7 @@ export const AllIdeasPage: React.FC<AllIdeasPage> = ({ ideas, setIdeas }) => {
 
     return (
         <Grid container direction="column" justifyContent="center">
-            <HeaderAllIdeas
+            <HeaderEntityPanel
                 handleChange={handleChangeSortBy}
                 setMode={setViewMode}
                 viewMode={viewMode}

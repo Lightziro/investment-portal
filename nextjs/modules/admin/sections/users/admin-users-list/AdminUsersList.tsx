@@ -6,10 +6,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useRouter } from "next/router";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import { fetchEntityList } from "../../../../../redux/actions/adminActions";
-import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import { RoleUserChip } from "../../../../../components/simple/role-user-chip/RoleUserChip";
 import { UserModel } from "../../../../../ts/types/entity/user.types";
+import { Entity } from "../../../../../ts/enums/other.enums";
 
 export const AdminUsersList: React.FC = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export const AdminUsersList: React.FC = () => {
     );
     const handleChangePage = (e: React.ChangeEvent, page) => {
         setPage(page);
-        dispatch(fetchEntityList(AdminEntity.User, page));
+        dispatch(fetchEntityList(Entity.User, page));
     };
     return (
         <Fragment>

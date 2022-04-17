@@ -8,14 +8,14 @@ import { useDispatch } from "react-redux";
 import { fetchUsersStats } from "../../../redux/actions/admin/adminUsersActions";
 import { UsersStats } from "../../../modules/admin/components/users-stats/UsersStats";
 import { fetchEntityList } from "../../../redux/actions/adminActions";
-import { AdminEntity } from "../../../redux/ts/enums/admin/admin.enum";
 import { AdminUsersList } from "../../../modules/admin/sections/users/admin-users-list/AdminUsersList";
+import { Entity } from "../../../ts/enums/other.enums";
 
 const Users: NextPage = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchEntityList(AdminEntity.User, 0));
+        dispatch(fetchEntityList(Entity.User, 0));
         dispatch(fetchUsersStats());
     }, []);
     return (

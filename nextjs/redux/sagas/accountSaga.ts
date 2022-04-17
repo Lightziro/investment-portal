@@ -51,10 +51,44 @@ function* viewNotice(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* fetchStats(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/user/stats`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_MAIN_STATS",
+            data,
+        });
+    } catch (e) {}
+}
+function* setVisiblePredict(action: AnyAction): Generator {
+    try {
+        const { predictId, visible } = action;
+        yield axios
+            .put(`${process.env.API_URL}/api/user/predictions/${predictId}`, {
+                visible,
+            })
+            .then((res) => res.data);
+        yield put({
+            type: "SET_VISIBLE_PREDICTION",
+            predictId,
+            visible,
+        });
+        yield put({
+            type: "SET_ALERT_SUCCESS",
+            message: `Your predict is ${
+                visible ? "visible" : "hidden"
+            } to all users`,
+        });
+    } catch (e) {}
+}
 
 export function* actionAccountWatcher(): SagaIterator {
     yield takeLatest("FETCH_USER_PREDICTION", userPrediction);
     yield takeLatest("SEND_DELETE_PREDICT", deletePredict);
     yield takeLatest("FETCH_USER_NOTICES", fetchNotices);
     yield takeLatest("SEND_VIEW_NOTICE", viewNotice);
+    yield takeLatest("FETCH_USER_STATS", fetchStats);
+    yield takeLatest("SEND_UPDATE_VISIBLE_PREDICT", setVisiblePredict);
 }

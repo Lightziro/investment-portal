@@ -5,11 +5,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { fetchEntityList } from "../../../../../redux/actions/adminActions";
-import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import { UserAvatar } from "../../../../../components/simple/user-avatar/UserAvatar";
 import { DtoArticleItem } from "../../../ts/types/response/admin-response-item.types";
+import { Entity } from "../../../../../ts/enums/other.enums";
 
 export const AdminArticlesList: React.FC = () => {
     const router = useRouter();
@@ -21,7 +21,7 @@ export const AdminArticlesList: React.FC = () => {
 
     const handleChangePage = (e: React.ChangeEvent, page) => {
         setPage(page);
-        dispatch(fetchEntityList(AdminEntity.Article, page));
+        dispatch(fetchEntityList(Entity.Article, page));
     };
 
     return (

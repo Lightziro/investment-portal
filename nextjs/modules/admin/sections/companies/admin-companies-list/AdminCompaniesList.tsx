@@ -2,11 +2,11 @@ import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import { fetchEntityList } from "../../../../../redux/actions/adminActions";
-import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
 import { Pagination, Skeleton, Stack } from "@mui/material";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import moment from "moment";
 import { CompanyModel } from "../../../../../ts/types/entity/other.types";
+import { Entity } from "../../../../../ts/enums/other.enums";
 
 export const AdminCompaniesList: React.FC = () => {
     const [page, setPage] = useState(0);
@@ -17,15 +17,13 @@ export const AdminCompaniesList: React.FC = () => {
 
     const handleChangePage = (e: React.ChangeEvent, page) => {
         setPage(page);
-        dispatch(fetchEntityList(AdminEntity.Company, page));
+        dispatch(fetchEntityList(Entity.Company, page));
     };
-
-    console.log(list);
 
     return (
         <Fragment>
             {loading ? (
-                <Skeleton height={240} sx={{ my: 1 }} variant="rectangular" />
+                <Skeleton height={478} sx={{ my: 1 }} variant="rectangular" />
             ) : (
                 <EntityTable
                     columns={["ID", "Name", "Date IPO", "Activity"]}
@@ -33,7 +31,7 @@ export const AdminCompaniesList: React.FC = () => {
                         company.company_id,
                         company.name,
                         moment(company.date_ipo).format("ll"),
-                        company?.activity.name,
+                        company?.activity?.name,
                     ])}
                 />
             )}

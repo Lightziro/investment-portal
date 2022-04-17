@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Container, Grid, Skeleton } from "@mui/material";
+import { Container, Grid, Skeleton, Paper } from "@mui/material";
 import { ProfileUserInfo } from "../components/profile-user-info/ProfileUserInfo";
 import { ProfileAvatar } from "../components/profile-avatar/ProfileAvatar";
 import { ProfileStats } from "../components/profile-stats/ProfileStats";
 import { ProfileContext } from "../contexts/ProfileContext";
+import { ProfilePredictions } from "../components/profile-predictions/ProfilePredictions";
 
 export const ProfilePage: React.FC = () => {
     const { profile } = useContext(ProfileContext);
@@ -23,6 +24,9 @@ export const ProfilePage: React.FC = () => {
                         <Skeleton variant={"rectangular"} height={500} />
                     )}
                 </Grid>
+            </Grid>
+            <Grid sx={{ my: 3 }} justifyContent="center" alignItems="center">
+                <ProfilePredictions />
             </Grid>
         </Container>
     );

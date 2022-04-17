@@ -21,10 +21,6 @@ class InvestmentDataController extends Controller
 
     public function getInvestmentData(): Application|RedirectResponse|Redirector|JsonResponse
     {
-        $cookie = Cookie::get();
-        if (empty($cookie['token'])) {
-            return redirect('/');
-        }
         $ar_response['viewToday'] = InvestmentIdeaViewing::query()->whereDate('created_at', Carbon::today())->count() ?? null;
         $ar_response['commentsToday'] = InvestmentIdeaComments::query()->whereDate('created_at', Carbon::today())->count() ?? null;
         return response()->json($ar_response);
@@ -44,9 +40,6 @@ class InvestmentDataController extends Controller
                 'status' => (string)$idea_model->status,
                 'score' => $idea_model->getScoreAnalyze(),
             ]);
-//            $ar_articles[] = array_merge($idea_model->getFrontend(), [
-//                'content' => $article_model->content
-//            ]);
         }
         return response()->json(['items' => $ar_items ?? [], 'lastPage' => $ideas->lastPage()]);
     }
@@ -55,7 +48,7 @@ class InvestmentDataController extends Controller
     {
         $companies = Company::query()->where('name', 'LIKE', "%{$query}%");
         if ($companies->count() > 0) { // Поиск по базе
-            /** @var \App\Models\Company\Company $company */
+            /** @var Company $company */
             foreach ($companies->limit(5)->get() as $company) {
                 $ar_company[] = (string)$company;
             }

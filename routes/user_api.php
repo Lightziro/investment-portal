@@ -3,6 +3,7 @@
 
 use App\Http\Modules\Auth\Controllers\UserLoginController;
 use App\Http\Modules\Core\Middleware\BeforeClearAuthUser;
+use App\Http\Modules\PersonalAccount\Controllers\MainStatsController;
 use App\Http\Modules\PersonalAccount\Controllers\PredictionController;
 use App\Http\Modules\User\Controllers\UserActionController;
 use App\Http\Modules\User\Controllers\UserController;
@@ -16,9 +17,11 @@ Route::put('/{user}', [UserController::class, 'update'])->middleware('auth:sanct
 Route::post('/forgot-password', [UserActionController::class, 'forgotPassword']);
 Route::post('/recovery-password', [UserActionController::class, 'recoveryPassword']);
 Route::get('/notices', [UserController::class, 'getNotices']);
+Route::get('/stats', MainStatsController::class);
 
 Route::group(['prefix' => 'predictions', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/list', [PredictionController::class, 'getList']);
     Route::post('/create', [PredictionController::class, 'create'])->name('create-prediction');
     Route::delete('/{predict}', [PredictionController::class, 'deletePredict']);
+    Route::put('/{predict}', [PredictionController::class, 'updatePredict'])->name('update-predict');
 });

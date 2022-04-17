@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Request;
 use Throwable;
 
-class UserAdminController extends Controller
+class UserController extends Controller
 {
     private const USERS_PAGE_SIZE = 5;
 

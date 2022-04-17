@@ -14,6 +14,25 @@ export const removePredict = (
         loading: false,
     },
 });
+
+export const setVisiblePrediction = (
+    state: PersonalAccountStore,
+    predictId: number,
+    visible: boolean
+): PersonalAccountStore => ({
+    ...state,
+    predictions: {
+        ...state.predictions,
+        list: state.predictions.list.map((predict) => {
+            if (predict.prediction_id === predictId) {
+                predict.visible = visible;
+            }
+            return predict;
+        }),
+        loading: false,
+    },
+});
+
 export const setDataAccount = (
     state: PersonalAccountStore,
     section: string,

@@ -2,16 +2,14 @@ import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import { fetchEntityList } from "../../../../../redux/actions/adminActions";
-import { AdminEntity } from "../../../../../redux/ts/enums/admin/admin.enum";
-import { IconButton, Pagination, Skeleton, Stack } from "@mui/material";
+import { Pagination, Skeleton, Stack } from "@mui/material";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
-import { InvestmentIdeaItemAdmin } from "../../../../../redux/ts/types/admin/investment-ideas/admin-ideas.types";
 import { IdeaStatus } from "../../../../../ts/enums/investment-idea.enum";
 import { getIdeaStatsText } from "../../../utils/entity-list";
-import PublishIcon from "@mui/icons-material/Publish";
 import { useRouter } from "next/router";
 import { IdeaActionItem } from "../idea-action-item/IdeaActionItem";
 import { DtoIdeaItem } from "../../../ts/types/response/admin-response-item.types";
+import { Entity } from "../../../../../ts/enums/other.enums";
 
 export const AdminIdeasList: React.FC = () => {
     const router = useRouter();
@@ -22,7 +20,7 @@ export const AdminIdeasList: React.FC = () => {
 
     const handleChangePage = (e: React.ChangeEvent, page) => {
         setPage(page);
-        dispatch(fetchEntityList(AdminEntity.InvestmentIdea, page));
+        dispatch(fetchEntityList(Entity.InvestmentIdea, page));
     };
 
     const [page, setPage] = useState(0);
