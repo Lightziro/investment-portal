@@ -21,7 +21,7 @@ Route::get('/stats', MainStatsController::class);
 
 Route::group(['prefix' => 'predictions', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/list', [PredictionController::class, 'getList']);
-    Route::post('/create', [PredictionController::class, 'create'])->name('create-prediction');
+    Route::post('/', [PredictionController::class, 'create'])->name('create-prediction');
     Route::delete('/{predict}', [PredictionController::class, 'deletePredict']);
     Route::put('/{predict}', [PredictionController::class, 'updatePredict'])->name('update-predict');
 });

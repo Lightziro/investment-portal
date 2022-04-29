@@ -83,8 +83,8 @@ export const MENU_ADMIN = [
         logo: {
             name: "bi:clipboard-data",
         },
-        text: "Smart Analytics",
-        url: "/admin/smart-analytic",
+        text: "Stats",
+        url: "/admin/stats",
     },
     {
         logo: {
@@ -135,7 +135,7 @@ export const SORT_IDEAS = [
 ];
 export const SORT_ARTICLES = [
     {
-        label: "По умолчанию",
+        label: "By default",
         value: "article_id",
     },
     {

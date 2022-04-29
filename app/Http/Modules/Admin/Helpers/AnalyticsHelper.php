@@ -6,6 +6,7 @@ use App\Custom\GlobalHelpers\ToolHelper;
 use App\Models\Company\Company;
 use App\Models\Company\WorkingSeasonsActivity;
 use App\Models\Investment\InvestmentIdea;
+use App\Models\Other\Season;
 
 class AnalyticsHelper
 {
@@ -32,14 +33,16 @@ class AnalyticsHelper
 
     public function analyticCHECKING_WORKING_IN_SEASONS(): bool
     {
-        $activity_company = $this->company->activity;
+        $activityCompany = $this->company->activity;
+        $workAllYear = $activityCompany->workingSeasons()->firstWhere('code', Season::CODE_WHOLE_YEAR);
+        if ($workAllYear) {
+            return true;
+        }
         $season = ToolHelper::getSeasonsByMonth();
 
-        $activity_season = WorkingSeasonsActivity::query()->where([
-            'activity_id' => $activity_company->activity_id,
-            'season' => $season
-        ])->orWhere(['all_year' => true, 'activity_id' => $activity_company->activity_id])->first();
-        if ($activity_season) {
+        $workSeason = $activityCompany->workingSeasons()->firstWhere('code', $season);
+
+        if ($workSeason) {
             return true;
         }
         return false;

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
     Card,
     Grid,
@@ -15,6 +15,7 @@ import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { formatQuote } from "../../utils/format-quote";
 import { FileAddOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import { CreatePrediction } from "../../../../components/smart/create-prediction/CreatePrediction";
 
 interface CompanyIdeaHeader {
     companyInfo: CompanyModel;
@@ -22,6 +23,7 @@ interface CompanyIdeaHeader {
 
 export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
     const quoteData = useRootSelector((state) => state.view.idea.quote);
+    const [open, setOpen] = useState(false);
     const { t } = useTranslation();
     if (!companyInfo) {
         return <Skeleton variant="rectangular" height={56} />;
@@ -80,13 +82,18 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
                 </Stack>
                 <Tooltip title={t("Create prediction")}>
                     <IconButton
-                        onClick={() => console.log("test")}
+                        onClick={() => setOpen(true)}
                         aria-label="upload picture"
                         component="span"
                     >
                         <FileAddOutlined />
                     </IconButton>
                 </Tooltip>
+                <CreatePrediction
+                    companyId={companyInfo.company_id}
+                    open={open}
+                    setOpen={setOpen}
+                />
             </Grid>
         </Card>
     );

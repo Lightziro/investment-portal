@@ -47,6 +47,7 @@ export const ruLanguage = {
         "Средняя точность предсказания типа новости",
     "Retrain classifier news": "Переобучить классификатор новостей",
     "Smart Analytics": "Умный аналитик",
+    Stats: "Статистика",
     Comments: "Комментарии",
     "We offer best ideas": "Мы предлагаем лучшие идеи",
     "Must contain max %amount% symbol":
@@ -145,4 +146,12 @@ export const ruLanguage = {
         "Ваш прогноз скрыт от всех пользователей",
     "This user has no open predictions":
         "У пользователя нет открытых прогнозов",
+    Author: "Автор",
+    "Search on site": "Поиск на сайте..",
+    "By default": "По умолчанию",
+    "Create prediction": "Создать прогноз",
+    "Creating prediction for a stock": "Создание прогноза по акции",
+    Create: "Создать",
+    "Price prediction": "Цена прогноза",
+    "Prediction successfully created": "Прогноз успешно создан",
 };
