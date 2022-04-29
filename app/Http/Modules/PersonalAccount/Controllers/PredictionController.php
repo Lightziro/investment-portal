@@ -51,6 +51,11 @@ class PredictionController extends Controller
         try {
             /** @var User $user */
             $user = $request->user();
+
+            if ($user->predictions()->firstWhere('company_id', $request->get('company_id'))) {
+                return response()->json([], 400);
+            }
+
             $user->predictions()->create($request->only(['company_id', 'predict_price']));
             return response()->json([]);
         } catch (Throwable $e) {

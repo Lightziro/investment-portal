@@ -10,7 +10,10 @@ import {
     DtoCompanyStats,
     DtoIdeaRatingStats,
 } from "../../modules/investment-idea/ts/types/response.types";
-import { ArticleLabel } from "../../ts/types/entity/article.types";
+import {
+    ArticleEmotion,
+    ArticleLabel,
+} from "../../ts/types/entity/article.types";
 import { CompanyQuote } from "../../ts/types/entity/other.types";
 import { initialCompanyView } from "../../ts/init/entity/company.init";
 
@@ -84,4 +87,11 @@ export const setIdeaQuote = (
 ): ViewStore => ({
     ...state,
     idea: { ...state.idea, quote: data },
+});
+export const setArticleEmotions = (
+    state: ViewStore,
+    data: ArticleEmotion[]
+): ViewStore => ({
+    ...state,
+    article: { ...state.article, emotions: data },
 });

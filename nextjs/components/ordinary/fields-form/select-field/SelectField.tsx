@@ -50,6 +50,7 @@ export const SelectField: React.FC<SelectField> = ({
                 <SelectAnt
                     defaultValue={defaultValue}
                     size={size}
+                    dropdownClassName="w-auto"
                     className={classesSelect}
                     onChange={handleChange}
                 >

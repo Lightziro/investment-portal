@@ -12,8 +12,10 @@ import { useRootSelector } from "../../../hooks/useTypeSelector";
 import { ArticleModel } from "../../../ts/types/entity/article.types";
 import {
     fetchArticleComments,
+    fetchArticleEmotions,
     fetchArticleLabels,
 } from "../../../redux/actions/articleArtions";
+import { ArticleEmotion } from "../components/article-emotion/ArticleEmotion";
 
 interface ArticlePage {
     article: ArticleModel;
@@ -26,6 +28,7 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
         dispatch(setViewEntity(article, "article"));
         dispatch(fetchArticleComments(article.article_id));
         dispatch(fetchArticleLabels(article.article_id));
+        dispatch(fetchArticleEmotions(article.article_id));
     }, []);
     const { comments, labels } = useRootSelector((store) => store.view.article);
     return (
@@ -46,6 +49,7 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                             preview={article.preview_path}
                             content={article.content}
                         />
+                        <ArticleEmotion articleId={article.article_id} />
                         <AboutAuthor author={article.author} />
                     </Paper>
                 </Grid>

@@ -2,6 +2,7 @@ import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { axios } from "../../utils/axios";
+
 function* createArticle(action: AnyAction): Generator {
     try {
         const articleData = yield axios
@@ -14,6 +15,7 @@ function* createArticle(action: AnyAction): Generator {
         });
     }
 }
+
 function* updateArticle(action: AnyAction): Generator {
     try {
         const articleData = yield axios
@@ -39,6 +41,7 @@ function* fetchArticleView(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+
 function* createArticleComment(action: AnyAction): Generator {
     try {
         const comment = yield axios
@@ -58,6 +61,7 @@ function* createArticleComment(action: AnyAction): Generator {
         });
     }
 }
+
 function* deleteArticle(action: AnyAction): Generator {
     try {
         const articlesData = yield axios
@@ -76,6 +80,7 @@ function* deleteArticle(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+
 function* fetchComments(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -89,6 +94,7 @@ function* fetchComments(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+
 function* fetchLabels(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -102,6 +108,35 @@ function* fetchLabels(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+
+function* fetchEmotions(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .get(
+                `${process.env.API_URL}/api/article/${action.articleId}/emotions`
+            )
+            .then((res) => res.data);
+        yield put({
+            type: "SET_ARTICLE_EMOTIONS",
+            data,
+        });
+    } catch (e) {}
+}
+function* createEmotion(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .post(
+                `${process.env.API_URL}/api/article/${action.articleId}/emotions`,
+                { emotion: action.emotionCode }
+            )
+            .then((res) => res.data);
+        yield put({
+            type: "SET_ARTICLE_EMOTIONS",
+            data,
+        });
+    } catch (e) {}
+}
+
 export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("CREATE_ARTICLE", createArticle);
     yield takeLatest("FETCH_ARTICLE_VIEW", fetchArticleView);
@@ -110,4 +145,6 @@ export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("DELETE_ARTICLE", deleteArticle);
     yield takeLatest("FETCH_ARTICLE_COMMENTS", fetchComments);
     yield takeLatest("FETCH_ARTICLE_LABELS", fetchLabels);
+    yield takeLatest("FETCH_ARTICLE_EMOTIONS", fetchEmotions);
+    yield takeLatest("SEND_CREATE_EMOTION", createEmotion);
 }

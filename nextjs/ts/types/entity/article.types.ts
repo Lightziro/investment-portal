@@ -16,3 +16,12 @@ export interface ArticleLabel {
     icon: string;
     text: string | number;
 }
+export interface ArticleEmotion {
+    emotion_id: number;
+    user_id: number;
+    article_id: number;
+    emotion_code: string;
+    user?: UserModel;
+    article?: ArticleModel;
+    created_at: string;
+}

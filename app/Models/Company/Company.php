@@ -2,8 +2,11 @@
 
 namespace App\Models\Company;
 
+use App\Models\Other\Activity;
+use App\Models\Other\ActivityWorkingSeason;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -15,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Carbon|null $date_ipo
  * @property string $currency
  * @property int $activity_id;
- * @property CompanyActivity $activity
+ * @property Activity $activity
  */
 class Company extends Model
 {
@@ -35,6 +38,6 @@ class Company extends Model
 
     public function activity(): HasOne
     {
-        return $this->hasOne(CompanyActivity::class, 'activity_id', 'activity_id');
+        return $this->hasOne(Activity::class, 'activity_id', 'activity_id');
     }
 }

@@ -8,3 +8,6 @@ export const sexList: Sex[] = [
 export const initialParamsAnalyze: FormParamsAnalyze = {
     monthPeriod: 3,
 };
+export const initCreatePrediction = {
+    predict_price: 0,
+};

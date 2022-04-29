@@ -66,7 +66,9 @@ export const SetRatingForm: React.FC<SetRatingForm> = ({
             aria-describedby="alert-dialog-slide-description"
         >
             <form onSubmit={formik.handleSubmit}>
-                <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                <DialogTitle>
+                    {"Укажите вашу оценку инвестиционной идеи"}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         <Rating

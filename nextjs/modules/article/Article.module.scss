@@ -14,6 +14,7 @@
         text-transform: uppercase;
     }
 }
+
 .articleTitle {
     font: 600 62px/75px "Oswald", sans-serif;
     color: #282331;
@@ -22,11 +23,13 @@
         line-height: normal;
     }
 }
+
 .wrapperArticlePreview {
     margin: 24px 0;
+    width: 100%;
 
     .preview {
-        width: 100%;
+        width: inherit;
     }
 }
 
@@ -51,5 +54,18 @@
             font: 600 22px/1 "Oswald", sans-serif;
             color: #282331;
         }
+    }
+}
+
+.emotionIcon {
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+
+    &.exist {
+        cursor: default;
     }
 }

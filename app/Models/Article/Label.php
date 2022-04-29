@@ -9,8 +9,8 @@ use App\Custom\CustomModel;
  * @property string code
  * @property string icon
  */
-class ArticleLabel extends CustomModel
+class Label extends CustomModel
 {
-    protected $table = 'article_labels';
+    protected $table = 'labels';
     protected $primaryKey = 'label_id';
 }

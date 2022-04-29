@@ -4,6 +4,7 @@ import {
     addCommentEntity,
     createIdeaRating,
     initialByEntity,
+    setArticleEmotions,
     setArticleLabels,
     setCompanyStats,
     setEntityComments,
@@ -47,6 +48,8 @@ const viewReducer = (
             return setArticleLabels(state, action.data);
         case "SET_IDEA_QUOTE":
             return setIdeaQuote(state, action.data);
+        case "SET_ARTICLE_EMOTIONS":
+            return setArticleEmotions(state, action.data);
         default:
             return state;
     }

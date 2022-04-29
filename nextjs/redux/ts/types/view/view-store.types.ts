@@ -1,4 +1,5 @@
 import {
+    ArticleEmotion,
     ArticleLabel,
     ArticleModel,
 } from "../../../../ts/types/entity/article.types";
@@ -25,6 +26,7 @@ export interface ArticleView {
     labels: ArticleLabel[];
     content: string;
     comments: Comment[];
+    emotions: ArticleEmotion[];
 }
 
 export interface InvestmentIdeaView {

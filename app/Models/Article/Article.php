@@ -4,6 +4,7 @@ namespace App\Models\Article;
 
 use App\Custom\CustomModel;
 use App\Custom\Query\CustomQueryBuilder;
+use App\Custom\Relations\CustomHasMany;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,17 +14,18 @@ use Illuminate\Support\Carbon;
 use JetBrains\PhpStorm\Pure;
 
 /** Article - статьи
- * @property int article_id
- * @property string title
- * @property string content
- * @property Carbon created_at
- * @property Carbon updated_at
- * @property string preview_path
- * @property User author
- * @property int author_id
- * @property Collection|ArticleLabels[] labels
- * @property Collection|ArticleViewing[] viewing
- * @property Collection|ArticleComments[] comments
+ * @property int $article_id
+ * @property string $title
+ * @property string $content
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property string $preview_path
+ * @property User $author
+ * @property int $author_id
+ * @property Collection|ArticleLabels[] $labels
+ * @property Collection|ArticleViewing[] $viewing
+ * @property Collection|ArticleComments[] $comments
+ * @property Collection|ArticleEmotion[] $emotions
  */
 class Article extends CustomModel
 {
@@ -54,6 +56,11 @@ class Article extends CustomModel
     public function labels(): HasMany
     {
         return $this->hasMany(ArticleLabels::class, 'article_id', 'article_id');
+    }
+
+    public function emotions(): CustomHasMany
+    {
+        return $this->hasMany(ArticleEmotion::class, 'article_id', 'article_id');
     }
 
     public function comments(): HasMany

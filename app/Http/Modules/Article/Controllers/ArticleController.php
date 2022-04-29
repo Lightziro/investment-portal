@@ -5,6 +5,7 @@ namespace App\Http\Modules\Article\Controllers;
 use App\Http\Modules\Article\Helpers\ArticleHelper;
 use App\Models\Article\Article;
 use App\Models\Article\ArticleComments;
+use App\Models\Article\ArticleEmotion;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -62,5 +63,25 @@ class ArticleController extends Controller
         $query_articles->orderBy($sort_by, $direction);
 
         return response()->json(ArticleHelper::filterDeletedAuthors($query_articles->get()->toArray()));
+    }
+
+    public function getEmotions(Article $article): JsonResponse
+    {
+        return response()->json($article->emotions->toArray());
+    }
+
+    public function createEmotion(Article $article, Request $request): JsonResponse
+    {
+        /** @var User $user */
+        $user = $request->user();
+
+        $emotion = new ArticleEmotion([
+            'user_id' => $user->getKey(),
+            'article_id' => $article->getKey(),
+            'emotion_code' => $request->get('emotion'),
+        ]);
+        $emotion->save();
+
+        return response()->json($article->emotions->toArray());
     }
 }

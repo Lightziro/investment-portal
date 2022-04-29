@@ -20,7 +20,7 @@ class UserPredictions extends CustomModel
 {
     protected $table = 'user_predictions';
     protected $primaryKey = 'prediction_id';
-    protected $fillable = ['visible'];
+    protected $fillable = ['visible', 'company_id', 'predict_price'];
     protected $with = ['company'];
 
     protected $casts = [
