@@ -84,4 +84,18 @@ class ArticleController extends Controller
 
         return response()->json($article->emotions->toArray());
     }
+
+    public function changeEmotion(Article $article, ArticleEmotion $emotion, Request $request): JsonResponse
+    {
+        /** @var User $user */
+        $user = $request->user();
+
+        if ($emotion->user_id !== $user->getKey()) {
+            return response()->json(['message' => 'Test'], 403);
+        }
+        $emotion->emotion_code = $request->get('emotion');
+        $emotion->save();
+
+        return response()->json($emotion->toArray());
+    }
 }

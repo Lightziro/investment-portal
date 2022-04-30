@@ -15,3 +15,7 @@ export interface SearchItem {
     name: string;
     img_path: string;
 }
+export interface EmotionItem {
+    name: string;
+    color: string;
+}

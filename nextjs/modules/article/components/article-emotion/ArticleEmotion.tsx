@@ -1,11 +1,14 @@
 import React from "react";
-import { Icon } from "@iconify/react";
-import { Badge, Stack } from "@mui/material";
+import { Grid, Paper, Stack } from "@mui/material";
 import { useRootSelector } from "../../../../hooks/useTypeSelector";
-import classes from "../../Article.module.scss";
-import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { createEmotion } from "../../../../redux/actions/articleArtions";
+import {
+    changeEmotion,
+    createEmotion,
+} from "../../../../redux/actions/articleArtions";
+import { useTranslation } from "react-i18next";
+import { EmotionItem } from "./emotion-item/EmotionItem";
+import { ARTICLE_EMOTIONS } from "../../ts/consts/emotions";
 
 interface ArticleEmotion {
     articleId: number;
@@ -26,43 +29,32 @@ export const ArticleEmotion: React.FC<ArticleEmotion> = ({ articleId }) => {
     );
     const handleSetEmotion = (code) => {
         if (existEmotion) {
+            if (existEmotion.emotion_code === code) {
+                return;
+            }
+            dispatch(changeEmotion(articleId, existEmotion.emotion_id, code));
             return;
         }
         dispatch(createEmotion(articleId, code));
     };
 
     return (
-        <Stack spacing={2} direction="row">
-            {[
-                "twemoji:astonished-face",
-                "twemoji:beaming-face-with-smiling-eyes",
-                "twemoji:face-with-diagonal-mouth",
-                "twemoji:fire",
-            ].map((emotion) => (
-                <Badge
-                    badgeContent={getCountEmotions(emotion)}
-                    color={
-                        existEmotion?.emotion_code === emotion
-                            ? "secondary"
-                            : "primary"
-                    }
-                    anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                    }}
-                >
-                    <Icon
-                        className={classNames(
-                            classes.emotionIcon,
-                            existEmotion ? classes.exist : ""
-                        )}
-                        onClick={() => handleSetEmotion(emotion)}
-                        icon={emotion}
-                        width="50"
-                        height="50"
+        <Paper
+            elevation={3}
+            sx={{
+                py: 1,
+                px: 2,
+            }}
+        >
+            <Grid container justifyContent="center">
+                {ARTICLE_EMOTIONS.map((emotion) => (
+                    <EmotionItem
+                        handleSetEmotion={handleSetEmotion}
+                        emotion={emotion}
+                        getCountEmotions={getCountEmotions}
                     />
-                </Badge>
-            ))}
-        </Stack>
+                ))}
+            </Grid>
+        </Paper>
     );
 };

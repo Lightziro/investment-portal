@@ -136,6 +136,20 @@ function* createEmotion(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+function* changeEmotion(action: AnyAction): Generator {
+    try {
+        const data = yield axios
+            .put(
+                `${process.env.API_URL}/api/article/${action.articleId}/emotions/${action.emotionId}`,
+                { emotion: action.emotionCode }
+            )
+            .then((res) => res.data);
+        yield put({
+            type: "CHANGE_EMOTION",
+            data,
+        });
+    } catch (e) {}
+}
 
 export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("CREATE_ARTICLE", createArticle);
@@ -147,4 +161,5 @@ export function* actionArticleWatcher(): SagaIterator {
     yield takeLatest("FETCH_ARTICLE_LABELS", fetchLabels);
     yield takeLatest("FETCH_ARTICLE_EMOTIONS", fetchEmotions);
     yield takeLatest("SEND_CREATE_EMOTION", createEmotion);
+    yield takeLatest("SEND_CHANGE_EMOTION", changeEmotion);
 }

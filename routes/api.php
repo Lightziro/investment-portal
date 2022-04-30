@@ -44,19 +44,28 @@ Route::group(
     ],
     function () {
         Route::group(
-        [
-            'prefix' => '{article}',
-            'where' => [
-                'article' => '\d+',
+            [
+                'prefix' => '{article}',
+                'where' => [
+                    'article' => '\d+',
+                ],
             ],
-        ],
-        function () {
-            Route::get('/', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
-            Route::get('/comments', [ArticleController::class, 'getComments'])->name('get-article-comments');
-            Route::get('/labels', [ArticleController::class, 'getLabels'])->name('get-labels');
-            Route::get('/emotions', [ArticleController::class, 'getEmotions'])->name('get-emotions');
-            Route::post('/emotions', [ArticleController::class, 'createEmotion'])->name('create-emotion');
-        });
+            function () {
+                Route::get('/', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
+                Route::get('/comments', [ArticleController::class, 'getComments'])->name('get-article-comments');
+                Route::get('/labels', [ArticleController::class, 'getLabels'])->name('get-labels');
+                Route::group(
+                    [
+                        'prefix' => 'emotions'
+                    ],
+                    function () {
+                        Route::get('/', [ArticleController::class, 'getEmotions'])->name('get-emotions');
+                        Route::post('/', [ArticleController::class, 'createEmotion'])->name('create-emotion');
+                        Route::put('/{emotion}', [ArticleController::class, 'changeEmotion'])->name('change-emotion');
+                    }
+                );
+            }
+        );
         Route::get('/all/{sort_by?}', [ArticleController::class, 'all'])->name('all');
         Route::post('/create-comment', [ArticleController::class, 'createComment'])->middleware('auth:sanctum');
     }

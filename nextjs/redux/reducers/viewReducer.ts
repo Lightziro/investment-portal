@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { initialViewStore } from "../../ts/init/redux/reducer.initial";
 import {
     addCommentEntity,
+    changeArticleEmotion,
     createIdeaRating,
     initialByEntity,
     setArticleEmotions,
@@ -50,6 +51,8 @@ const viewReducer = (
             return setIdeaQuote(state, action.data);
         case "SET_ARTICLE_EMOTIONS":
             return setArticleEmotions(state, action.data);
+        case "CHANGE_EMOTION":
+            return changeArticleEmotion(state, action.data);
         default:
             return state;
     }

@@ -49,9 +49,15 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                             preview={article.preview_path}
                             content={article.content}
                         />
-                        <ArticleEmotion articleId={article.article_id} />
-                        <AboutAuthor author={article.author} />
                     </Paper>
+                    <Grid spacing={3} container>
+                        <Grid sm={12} xs={12} md={6} item lg={6}>
+                            <AboutAuthor author={article.author} />
+                        </Grid>
+                        <Grid sm={12} md={6} xs={12} item lg={6}>
+                            <ArticleEmotion articleId={article.article_id} />
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Grid
                     container

@@ -34,9 +34,9 @@
 }
 
 .authorWrapper {
-    background-color: #f5eeff;
-    box-shadow: 0px 0px 20px 0px rgb(192 192 192 / 35%);
-    padding: 30px 40px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
     @media(max-width: 600px) {
         justify-content: center;
         align-items: center;
@@ -48,7 +48,7 @@
             padding: 0;
             margin-top: 20px;
         }
-        padding-left: 45px;
+        padding-left: 10px;
 
         .name {
             font: 600 22px/1 "Oswald", sans-serif;
@@ -57,15 +57,12 @@
     }
 }
 
-.emotionIcon {
-    transition: 0.5s;
+.emotionWrapper {
+    padding: 5px;
+    border-radius: 3px;
     cursor: pointer;
-
+    transition: 0.5s;
     &:hover {
-        transform: scale(1.2);
-    }
-
-    &.exist {
-        cursor: default;
+        transform: scale(1.05);
     }
 }

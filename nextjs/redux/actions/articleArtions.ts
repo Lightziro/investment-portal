@@ -42,3 +42,13 @@ export const createEmotion = (articleId: number, emotionCode: string) => ({
     articleId,
     emotionCode,
 });
+export const changeEmotion = (
+    articleId: number,
+    emotionId: number,
+    emotionCode: string
+) => ({
+    type: "SEND_CHANGE_EMOTION",
+    articleId,
+    emotionId,
+    emotionCode,
+});

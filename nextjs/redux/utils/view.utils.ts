@@ -95,3 +95,18 @@ export const setArticleEmotions = (
     ...state,
     article: { ...state.article, emotions: data },
 });
+export const changeArticleEmotion = (
+    state: ViewStore,
+    data: ArticleEmotion
+): ViewStore => ({
+    ...state,
+    article: {
+        ...state.article,
+        emotions: state.article.emotions.map((emotion) => {
+            if (emotion.emotion_id === data.emotion_id) {
+                emotion = data;
+            }
+            return emotion;
+        }),
+    },
+});
