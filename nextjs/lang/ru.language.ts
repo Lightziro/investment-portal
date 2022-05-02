@@ -154,4 +154,5 @@ export const ruLanguage = {
     Create: "Создать",
     "Price prediction": "Цена прогноза",
     "Prediction successfully created": "Прогноз успешно создан",
+    "You successfully logged": "Вы успешно вошли в систему"
 };

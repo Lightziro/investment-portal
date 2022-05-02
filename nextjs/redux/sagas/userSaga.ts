@@ -29,10 +29,10 @@ function* login(action: AnyAction): Generator {
         });
         yield put({
             type: "SET_ALERT_SUCCESS",
-            message: "SUCCESS AUTH!",
+            message: "You successfully logged",
         });
     } catch (e) {
-        console.log(e);
+        console.log(e.message);
     }
 }
 function* logout(): Generator {
