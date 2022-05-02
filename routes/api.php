@@ -18,6 +18,7 @@ Route::group(['prefix' => 'investment-data'], function () {
         [InvestmentIdeaController::class, 'getInvestmentIdeaData'])->middleware(AfterViewIdeaMiddleware::class);
 
 });
+
 Route::group(['prefix' => 'init'], function () {
     Route::get('/portal-data', [InitialDataController::class, 'getPortalInit']);
 });
@@ -29,12 +30,23 @@ Route::group(
     function () {
         Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
         Route::get('/all/{sort_by?}', [InvestmentIdeaController::class, 'all']);
-        Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])->name('get-idea-comments');
-        Route::post('/{idea}/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
-        Route::get('/{idea}/user-rating', [InvestmentIdeaController::class, 'getUserRating']);
-        Route::get('/{idea}/rating', [InvestmentIdeaController::class, 'getRating'])->name('get-rating');
-        Route::get('/{idea}', [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
-    });
+        Route::group(
+            [
+                'prefix' => '{idea}',
+                'where' => [
+                    'idea' => '\d+',
+                ],
+            ],
+            function () {
+                Route::get('/', [ViewController::class, 'getViewIdea'])->middleware(AfterViewIdeaMiddleware::class);
+                Route::get('/comments', [InvestmentIdeaController::class, 'getComments'])->name('get-idea-comments');
+                Route::get('/rating', [InvestmentIdeaController::class, 'getRating'])->name('get-rating');
+                Route::get('/user-rating', [InvestmentIdeaController::class, 'getUserRating']);
+                Route::post('/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
+            }
+        );
+    }
+);
 
 Route::group(
     [
@@ -76,6 +88,7 @@ Route::group(['prefix' => 'other'], function () {
     Route::get('/roles', [OtherController::class, 'getRoles']);
     Route::get('/quotes', [OtherController::class, 'getQuote']);
 });
+
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/{user}', [ViewController::class, 'getViewProfile']);
 });
