@@ -5,12 +5,12 @@ import { Icon } from "@iconify/react";
 export const MENU_NO_AUTH: MenuItems[] = [
     {
         text: "Log in",
-        icon: "eva:corner-up-right-fill",
+        icon: "twemoji:rocket",
         link: "/auth",
     },
     {
         text: "Sign in",
-        icon: "eva:person-add-fill",
+        icon: "twemoji:globe-showing-europe-africa",
         link: "/register",
     },
 ];

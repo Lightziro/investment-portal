@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property float price_sell
  * @property bool is_short
  * @property string stock_name
- * @property \App\Models\Company\Company company
+ * @property Company company
  * @property int company_id
  * @property InvestmentIdeaComments[]|Collection comments
  * @property InvestmentIdeaViewing[]|Collection views

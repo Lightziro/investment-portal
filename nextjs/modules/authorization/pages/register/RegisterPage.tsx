@@ -17,14 +17,17 @@ import { initRegisterForm } from "../../ts/init/init-forms";
 import { axios } from "../../../../utils/axios";
 import { useRouter } from "next/router";
 import { FormRegister } from "../../ts/types/forms.types";
+import {useDispatch} from "react-redux";
+import {alertError} from "../../../../redux/actions/alertActions";
 
 export const RegisterPage: React.FC = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const router = useRouter();
     const handleSubmit = async (formData: FormRegister) => {
         await axios
             .post(`${process.env.API_URL}/api/user/register`, formData)
-            .then(() => router.push("/auth"));
+            .then(() => router.push("/auth")).catch(e => dispatch(alertError(e.response.data.error)));
     };
     // TODO: Переписать на useFormik
     return (
