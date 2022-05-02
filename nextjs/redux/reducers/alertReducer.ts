@@ -13,7 +13,7 @@ const alertReducer = (
         case "SET_ALERT_ERROR":
             return setAlert(action.message, "error");
         case "CLEAR_ALERT":
-            return { message: null, status: "success", state: false };
+            return { ...state, state: false };
         case "SET_ALERT_INFO":
             return setAlert(action.message, "info");
         default:

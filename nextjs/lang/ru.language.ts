@@ -160,4 +160,6 @@ export const ruLanguage = {
     Yes: "Да",
     No: "Нет",
     "Article successfully updated": "Статья успешно обновлена",
+    "Date start": "Дата начала: %date%",
+    "You have prediction by this stock": "У вас есть прогноз по этой акции",
 };

@@ -41,9 +41,11 @@ export const IdeaInformation: React.FC<IdeaInformation> = ({ ideaInfo }) => {
                     {t("Sale price", { amount: ideaInfo.price_sell })}
                 </Typography>
                 <Typography gutterBottom variant="body2">
-                    {`Date start: ${moment(ideaInfo.date_start).format(
-                        "Do MMMM YYYY"
-                    )}`}
+                    {t("Date start", {
+                        date: moment(ideaInfo.date_start).format(
+                            "Do MMMM YYYY"
+                        ),
+                    })}
                 </Typography>
             </Stack>
             <Divider />

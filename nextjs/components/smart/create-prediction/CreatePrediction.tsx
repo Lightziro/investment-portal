@@ -39,7 +39,19 @@ export const CreatePrediction: React.FC<CreatePrediction> = ({
                 setOpen(false);
                 dispatch(alertSuccess("Prediction successfully created"));
             })
-            .catch((e) => dispatch(alertError("An error has occurred")));
+            .catch((e) => {
+                switch (e?.response?.status) {
+                    case 405:
+                        dispatch(
+                            alertError("You have prediction by this stock")
+                        );
+                        setOpen(false);
+                        break;
+                    default:
+                        dispatch(alertError("An error has occurred"));
+                        break;
+                }
+            });
     };
 
     const formik = useFormik({
