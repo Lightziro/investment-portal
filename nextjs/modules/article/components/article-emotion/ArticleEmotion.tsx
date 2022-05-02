@@ -1,12 +1,11 @@
 import React from "react";
-import { Grid, Paper, Stack } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { useDispatch } from "react-redux";
 import {
     changeEmotion,
     createEmotion,
 } from "../../../../redux/actions/articleArtions";
-import { useTranslation } from "react-i18next";
 import { EmotionItem } from "./emotion-item/EmotionItem";
 import { ARTICLE_EMOTIONS } from "../../ts/consts/emotions";
 
