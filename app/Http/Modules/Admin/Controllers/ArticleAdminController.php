@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use JetBrains\PhpStorm\ArrayShape;
 use Throwable;
@@ -21,46 +22,46 @@ class ArticleAdminController extends Controller
     public function createArticle(Request $request): JsonResponse
     {
         try {
-            if (!$this->validateRequest($request)) {
-                return response()->json(['message' => 'Incorrectly filled in data'], 400);
-            }
             /** @var User $author */
             $author = $request->user();
-            $preview_path = $request->file('preview')->store('article-preview', 'public');
+            if ($file = $request->file('preview_path')) {
+                $preview_path = $file->store('article-preview', 'public');
+            }
 
             $post = $request->post();
             $article_model = new Article();
             $article_model->title = $post['title'];
             $article_model->content = $post['content'];
             $article_model->author_id = $author->user_id;
-            $article_model->preview_path = $preview_path;
+            $article_model->preview_path = $preview_path ?? null;
             $article_model->save();
 
-            return response()->json(['status' => true]);
+            return response()->json([]);
         } catch (Throwable $e) {
             return response()->json(['message' => 'Failed to create article'], 400);
         }
-
     }
 
-    public function updateArticle(Request $request): JsonResponse
+    public function updateArticle(Article $article, Request $request): JsonResponse
     {
         try {
-            if (!$this->validateRequest($request)) {
-                return response()->json(['message' => 'Incorrectly filled in data'], 400);
-            }
             $post = $request->post();
-            /** @var Article $article_model */
-            if (!$article_model = Article::query()->find($post['articleId'])) {
-                return response()->json(['message' => 'Could not find an updated article'], 400);
+
+            if ($file = $request->file('preview_path')) {
+                if ($past_preview = $article->preview_path) {
+                    Storage::delete($past_preview);
+                }
+                $preview_path = $file->store('article-preview', 'public');
+                $article->preview_path = $preview_path;
             }
 
-            ArticleHelper::replaceUpdateField($article_model, $request->all());
-            $article_model->save();
+            $article->fill($request->only(['content', 'title']));
+            $article->save();
+
             if ($post['sendNotice']) {
-                ArticleHelper::sendNotices($article_model, 'update');
+                ArticleHelper::sendNotices($article, 'update');
             }
-            return response()->json(['status' => true]);
+            return response()->json([]);
         } catch (Throwable $e) {
             Log::error('Error when updating article', [$e->getMessage(), $e->getFile(), $e->getLine()]);
             return response()->json(['message' => 'Error update'], 400);
@@ -90,30 +91,21 @@ class ArticleAdminController extends Controller
         return ['items' => $ar_articles ?? [], 'lastPage' => $articles->lastPage()];
     }
 
-    public function deleteArticle(Request $request): JsonResponse
+    public function deleteArticle(Article $article, Request $request): JsonResponse
     {
         try {
             $post = $request->post();
             Paginator::currentPageResolver(fn() => $post['page']);
-            $article = Article::query()->where(['article_id' => $post['articleId']])->first();
-            if ($article && $article->delete()) {
-                return response()->json($this->articleListByPage($request['page']));
-            }
+            $article->delete();
         } catch (Throwable) {
             return response()->json(['message' => 'Not success'], 400);
         }
         return response()->json(['message' => 'Response']);
     }
 
-    public function getItemArticle(int $id): JsonResponse
+    public function getItemArticle(Article $article): JsonResponse
     {
-        try {
-            /** @var Article $article */
-            $article = Article::query()->findOrFail($id)->with('author')->first();
-            return response()->json($article->toArray());
-        } catch (Throwable $e) {
-            return response()->json([], 404);
-        }
+        return response()->json($article->toArray());
     }
 
     private function validateRequest(Request $request): bool

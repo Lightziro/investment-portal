@@ -42,6 +42,7 @@ export const getCountries = async () =>
         .get(`${process.env.API_URL}/api/other/countries`)
         .then((res) => res.data)
         .catch(() => []);
+
 export const getEntityAdmin = async (
     id: number,
     entity: Entity,
@@ -49,10 +50,7 @@ export const getEntityAdmin = async (
 ) => {
     const config: any = { headers: ctx.req.headers };
     return await axios
-        .get(
-            `${process.env.API_URL_DOCKER}/api/admin/${entity}/get-item/${id}`,
-            config
-        )
+        .get(`${process.env.API_URL_DOCKER}/api/admin/${entity}/${id}`, config)
         .then((res) => res.data)
         .catch(() => null);
 };

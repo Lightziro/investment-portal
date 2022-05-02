@@ -31,6 +31,7 @@ class Article extends CustomModel
 {
     protected $table = 'articles';
     protected $primaryKey = 'article_id';
+    protected $fillable = ['content', 'title'];
     protected $with = ['author'];
 
     public function __toString()

@@ -12,10 +12,15 @@ import { ArticleModel } from "../../../../ts/types/entity/article.types";
 interface ArticleForm {
     article?: ArticleModel;
     callback: (form) => void;
+    buttonText: string;
 }
 
 const SunEditor = dynamic(import("suneditor-react"), { ssr: false });
-export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
+export const ArticleForm: React.FC<ArticleForm> = ({
+    article,
+    callback,
+    buttonText,
+}) => {
     const { t } = useTranslation();
     const content = useRef<SunEditorCore>();
     const getSunEditorInstance = (sunEditor) => {
@@ -23,7 +28,9 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
     };
     return (
         <Formik
-            initialValues={article ? article : initialArticleForm}
+            initialValues={
+                article ? { ...article, sendNotice: false } : initialArticleForm
+            }
             onSubmit={(form) =>
                 callback({
                     ...form,
@@ -79,7 +86,7 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                             name="preview_path"
                             onChange={(e) =>
                                 setFieldValue(
-                                    "preview",
+                                    "preview_path",
                                     (e.target as HTMLInputElement).files[0]
                                 )
                             }
@@ -94,7 +101,7 @@ export const ArticleForm: React.FC<ArticleForm> = ({ article, callback }) => {
                         )}
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        Submit
+                        {t(buttonText)}
                     </Button>
                 </form>
             )}

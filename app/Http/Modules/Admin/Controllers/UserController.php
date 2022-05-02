@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request as RequestApi;
 use Throwable;
 
 class UserController extends Controller
@@ -33,10 +34,10 @@ class UserController extends Controller
         return response()->json(['newUsersToday' => $users_today, 'newUsersWeek' => $users_week]);
     }
 
-    public function update(User $user): JsonResponse
+    public function update(User $user, RequestApi $request): JsonResponse
     {
         try {
-            $user->updateOrFail(Request::toArray());
+            $user->updateOrFail($request->toArray());
             return response()->json([]);
         } catch (Throwable  $e) {
             return response()->json([], 400);

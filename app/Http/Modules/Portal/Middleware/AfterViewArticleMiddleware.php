@@ -2,6 +2,7 @@
 
 namespace App\Http\Modules\Portal\Middleware;
 
+use App\Models\Article\Article;
 use App\Models\Article\ArticleViewing;
 use App\Models\User\User;
 use Carbon\Carbon;
@@ -15,16 +16,20 @@ class AfterViewArticleMiddleware
         $response = $next($request);
         /** @var User $user */
         if ($response->getStatusCode() === 200 && ($user = $request->user())) {
-            if ($article_id = $request->route()->parameter('id')) {
 
-                $idea_view = ArticleViewing::query()->where(['article_id' => $article_id, 'user_id' => $user->user_id])
-                    ->whereDate('created_at', Carbon::today())->first();
-                if (!$idea_view) {
-                    $idea_view = new ArticleViewing();
-                    $idea_view->user_id = $user->user_id;
-                    $idea_view->article_id = $article_id;
-                    $idea_view->save();
-                }
+            /** @var Article $article */
+            $article = $request->route()->parameter('article');
+
+            $article_view = ArticleViewing::query()->where([
+                'article_id' => $article->getKey(),
+                'user_id' => $user->user_id
+            ])->whereDate('created_at', Carbon::today())->first();
+
+            if (!$article_view) {
+                $article_view = new ArticleViewing();
+                $article_view->user_id = $user->getKey();
+                $article_view->article_id = $article->getKey();
+                $article_view->save();
             }
         }
         return $response;

@@ -41,9 +41,9 @@ export const ConfirmAction: React.FC<ConfirmAction> = ({
                 </DialogContent>
             )}
             <DialogActions>
-                <Button onClick={onCancelClick}>Cancel</Button>
+                <Button onClick={onCancelClick}>{t("No")}</Button>
                 <Button onClick={() => onConfirmClick(id)} autoFocus>
-                    Submit
+                    {t("Yes")}
                 </Button>
             </DialogActions>
         </Dialog>

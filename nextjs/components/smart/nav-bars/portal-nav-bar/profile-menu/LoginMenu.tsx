@@ -31,7 +31,7 @@ export const LoginMenu: React.FC<LoginMenu> = ({ user, handleExit }) => {
                     <MenuItem sx={{ typography: "body2", py: 1, px: 2.5 }}>
                         <Box
                             component={Icon}
-                            icon={"eva:person-add-fill"}
+                            icon={"twemoji:bar-chart"}
                             sx={{
                                 mr: 2,
                                 width: 24,

@@ -30,12 +30,10 @@ Route::group(
         Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
         Route::get('/all/{sort_by?}', [InvestmentIdeaController::class, 'all']);
         Route::get('/{idea}/comments', [InvestmentIdeaController::class, 'getComments'])->name('get-idea-comments');
-        Route::post('/{idea}/set-rating',
-            [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
+        Route::post('/{idea}/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
         Route::get('/{idea}/user-rating', [InvestmentIdeaController::class, 'getUserRating']);
         Route::get('/{idea}/rating', [InvestmentIdeaController::class, 'getRating'])->name('get-rating');
-        Route::get('/{idea}',
-            [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
+        Route::get('/{idea}', [ViewController::class, 'getViewIdea']); //->middleware([AfterViewIdeaMiddleware::class, 'auth:sanctum']);
     });
 
 Route::group(

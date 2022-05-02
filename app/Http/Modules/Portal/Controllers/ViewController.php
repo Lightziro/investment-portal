@@ -8,12 +8,13 @@ use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 class ViewController extends Controller
 {
-    public function getViewArticle(Article $article): JsonResponse
+    public function getViewArticle(Article $article, Request $request): JsonResponse
     {
         return response()->json($article->toArray());
     }
