@@ -9,3 +9,5 @@ export const getPossibleProfit = (
     }
     return "";
 };
+export const isShort = (priceBuy: number, priceSell: number) =>
+    priceBuy > priceSell;

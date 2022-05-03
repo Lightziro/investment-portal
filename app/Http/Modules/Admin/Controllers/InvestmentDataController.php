@@ -13,7 +13,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Cookie;
 
 class InvestmentDataController extends Controller
 {
@@ -21,8 +20,10 @@ class InvestmentDataController extends Controller
 
     public function getInvestmentData(): Application|RedirectResponse|Redirector|JsonResponse
     {
-        $ar_response['viewToday'] = InvestmentIdeaViewing::query()->whereDate('created_at', Carbon::today())->count() ?? null;
-        $ar_response['commentsToday'] = InvestmentIdeaComments::query()->whereDate('created_at', Carbon::today())->count() ?? null;
+        $ar_response['viewToday'] = InvestmentIdeaViewing::query()->whereDate('created_at',
+                Carbon::today())->count() ?? null;
+        $ar_response['commentsToday'] = InvestmentIdeaComments::query()->whereDate('created_at',
+                Carbon::today())->count() ?? null;
         return response()->json($ar_response);
     }
 
@@ -54,5 +55,19 @@ class InvestmentDataController extends Controller
             }
         }
         return response()->json($ar_company ?? []);
+    }
+
+    public function getStats()
+    {
+        $week_date = Carbon::now()->subDays(7);
+
+        $response = [
+            'ideas_create_today' => InvestmentIdea::query()->whereDate('created_at', Carbon::today())->count(),
+            'ideas_create_week' => InvestmentIdea::query()->whereDate('created_at', '>=', $week_date)->count(),
+            'ideas_view_today' => InvestmentIdeaViewing::query()->whereDate('created_at', Carbon::today())->count(),
+            'ideas_view_week' => InvestmentIdeaViewing::query()->whereDate('created_at', '>=', $week_date)->count(),
+        ];
+
+        return response()->json($response);
     }
 }

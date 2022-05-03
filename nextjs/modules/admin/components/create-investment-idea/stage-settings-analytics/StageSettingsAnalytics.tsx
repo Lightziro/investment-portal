@@ -19,7 +19,11 @@ import { changeStageCreateIdea } from "../../../../../redux/actions/admin/adminI
 import { CreateIdeaStage } from "../../../../../ts/enums/investment-idea.enum";
 import { useRouter } from "next/router";
 import { axios } from "../../../../../utils/axios";
-import { alertSuccess } from "../../../../../redux/actions/alertActions";
+import {
+    alertError,
+    alertSuccess,
+} from "../../../../../redux/actions/alertActions";
+import { Entity } from "../../../../../ts/enums/other.enums";
 
 export const StageSettingsAnalytics: React.FC = () => {
     const dispatch = useDispatch();
@@ -39,16 +43,21 @@ export const StageSettingsAnalytics: React.FC = () => {
     }
     const handleSendToAnalyze = async () => {
         await axios
-            .post(`${process.env.API_URL}/api/admin/investment-idea/create`, {
-                ...params,
-                selectedCompany,
-            })
-            .then((response) => response.data);
-        dispatch(
-            alertSuccess(
-                "You successfully created an idea, when a smart analytical analyzes, you will receive an alert"
+            .post(
+                `${process.env.API_URL}/api/admin/${Entity.InvestmentIdea}/create`,
+                {
+                    ...params,
+                    selectedCompany,
+                }
             )
-        );
+            .then((response) => {
+                dispatch(
+                    alertSuccess(
+                        "You successfully created an idea, when a smart analytical analyzes, you will receive an alert"
+                    )
+                );
+            })
+            .catch((e) => dispatch(alertError(e.response.data.message)));
         await router.push("/admin/investment-ideas");
     };
     return (

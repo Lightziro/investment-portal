@@ -8,16 +8,20 @@ export const EntityTable: React.FC<EntityTable> = ({ columns, row }) => {
         <table className="table">
             <thead>
                 <tr>
-                    {columns.map((item) => (
-                        <th scope="col">{item}</th>
+                    {columns.map((item, i) => (
+                        <th key={i} scope="col">
+                            {item}
+                        </th>
                     ))}
                 </tr>
             </thead>
             <tbody>
-                {row.map((row) => (
-                    <tr>
-                        {row.map((item) => (
-                            <th scope="row">{item}</th>
+                {row.map((row, i) => (
+                    <tr key={i}>
+                        {row.map((item, i) => (
+                            <th key={i} scope="row">
+                                {item}
+                            </th>
                         ))}
                     </tr>
                 ))}

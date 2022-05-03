@@ -4,12 +4,15 @@ import { TabPanel } from "../../../../components/simple/tabl-panel/TabPanel";
 import { IdeaStatus } from "../../../../ts/enums/investment-idea.enum";
 import { PublishFormIdea } from "../../sections/investment-ideas/publish-form-idea/PublishFormIdea";
 import { DtoPersonalIdea } from "../../ts/types/response/admin-response-personal";
+import StatsIdea from "../../sections/investment-ideas/stats-idea/StatsIdea";
+import { useTranslation } from "react-i18next";
 
 interface AdminIdeaPage {
     idea: DtoPersonalIdea;
 }
 
 export const AdminIdeaPage: React.FC<AdminIdeaPage> = ({ idea }) => {
+    const { t } = useTranslation();
     const [tab, setTab] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -21,7 +24,7 @@ export const AdminIdeaPage: React.FC<AdminIdeaPage> = ({ idea }) => {
     });
 
     if (!idea) {
-        return;
+        return null;
     }
     return (
         <Box sx={{ bgcolor: "background.paper" }}>
@@ -34,21 +37,19 @@ export const AdminIdeaPage: React.FC<AdminIdeaPage> = ({ idea }) => {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="Stats idea" {...a11yProps(0)} />
-                    {idea.status === IdeaStatus.Analyzed && (
-                        <Tab label="Publish" {...a11yProps(1)} />
-                    )}
-                    <Tab label="Item Three" {...a11yProps(2)} />
+                    <Tab label={t("Stats")} {...a11yProps(0)} />
+                    <Tab
+                        disabled={idea.status !== IdeaStatus.Analyzed}
+                        label={t("Publish")}
+                        {...a11yProps(1)}
+                    />
                 </Tabs>
             </AppBar>
             <TabPanel value={tab} index={0}>
-                Item One
+                <StatsIdea />
             </TabPanel>
             <TabPanel value={tab} index={1}>
                 <PublishFormIdea idea={idea} />
-            </TabPanel>
-            <TabPanel value={tab} index={2}>
-                Item Three
             </TabPanel>
         </Box>
     );

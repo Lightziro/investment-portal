@@ -45,9 +45,9 @@ class CreateIdeaController extends Controller
             /** @var InvestmentIdeaStatuses $status_created */
             $status_created = InvestmentIdeaStatuses::query()->where(['name' => InvestmentIdeaStatuses::STATUS_CREATED])->first();
             $idea = new InvestmentIdea();
-            $idea->company_id = $company_model->company_id;
-            $idea->status_id = $status_created->status_id;
-            $idea->author_id = $author->user_id;
+            $idea->company_id = $company_model->getKey();
+            $idea->status_id = $status_created->getKey();
+            $idea->author_id = $author->getKey();
             $idea->save();
 
             $queue = new QueueRabbit();
@@ -56,23 +56,25 @@ class CreateIdeaController extends Controller
             return response()->json([]);
         } catch (Throwable $e) {
             Log::error('Error create idea', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            if (isset($idea)) {
+                $idea->delete();
+            }
+            return response()->json(['message' => 'Error while creating idea'], 400);
         }
     }
 
-    public function publishIdea(Request $request): JsonResponse
+    public function publishIdea(InvestmentIdea $idea, Request $request): JsonResponse
     {
-        $form = $request->post();
-        /** @var $idea InvestmentIdea */
-        if (!$idea = InvestmentIdea::query()->find($form['idea_id'])) {
-            return response()->json(['message' => 'Not found idea'], 404);
-        }
         try {
             /** @var InvestmentIdeaStatuses $status */
-            $status = InvestmentIdeaStatuses::query()->where(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED])->first();
+            $status = InvestmentIdeaStatuses::query()->firstWhere(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED]);
             $idea->update(array_merge($request->only(['price_buy', 'price_sell', 'date_end', 'is_short', 'description']), [
                 'status_id' => $status->status_id,
             ]));
-            return response()->json(['id' => $idea->idea_id]);
+            if ($request->get('send_email')) {
+                /** TODO: Дописать отправки клиентам на почту письма об идеи */
+            }
+            return response()->json([]);
         } catch (Throwable $e) {
             return response()->json([], 400);
         }

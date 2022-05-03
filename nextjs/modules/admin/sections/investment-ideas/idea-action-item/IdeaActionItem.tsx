@@ -4,6 +4,7 @@ import { IdeaStatus } from "../../../../../ts/enums/investment-idea.enum";
 import { IconButton } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 import { DtoIdeaItem } from "../../../ts/types/response/admin-response-item.types";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface IdeaActionItem {
     idea: DtoIdeaItem;
@@ -13,12 +14,20 @@ export const IdeaActionItem: React.FC<IdeaActionItem> = ({ idea }) => {
     switch (idea.status) {
         case IdeaStatus.Analyzed:
             return (
-                <IconButton
-                    color="primary"
-                    aria-label="upload picture"
-                    component="span"
-                >
+                <IconButton color="primary" component="span">
                     <PublishIcon
+                        onClick={() =>
+                            router.push(
+                                `/admin/investment-ideas/${idea.idea_id}`
+                            )
+                        }
+                    />
+                </IconButton>
+            );
+        case IdeaStatus.Published:
+            return (
+                <IconButton color="primary" component="span">
+                    <EditIcon
                         onClick={() =>
                             router.push(
                                 `/admin/investment-ideas/${idea.idea_id}`

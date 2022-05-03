@@ -162,4 +162,11 @@ export const ruLanguage = {
     "Article successfully updated": "Статья успешно обновлена",
     "Date start": "Дата начала: %date%",
     "You have prediction by this stock": "У вас есть прогноз по этой акции",
+    "Created ideas in day": "Создано идей за день",
+    "Created ideas in week": "Создано идей за неделю",
+    "Views of ideas per day": "Просмотров идей в сутки",
+    "Views of ideas per week": "Просмотров идей в неделю",
+    "Error while creating idea": "Ошибка при создании идеи",
+    "Idea published": "Идея опубликована",
+    Publish: "Публиковать",
 };

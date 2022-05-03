@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { Formik, FormikProps } from "formik";
-import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Formik } from "formik";
+import { Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { IdeaPublishForm } from "../../../ts/types/forms/admin-idea-forms";
 import { convertFormPublishIdea } from "../../../utils/convert-to-form";
@@ -10,7 +10,7 @@ import DateAdapter from "@mui/lab/AdapterMoment";
 import { Grid, TextField } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import { Moment } from "moment";
-import { getPossibleProfit } from "../../../utils/idea-publish";
+import { getPossibleProfit, isShort } from "../../../utils/idea-publish";
 import { SelectField } from "../../../../../components/ordinary/fields-form/select-field/SelectField";
 import { TYPES_IDEA } from "../../../ts/consts/additional/publish-idea.consts";
 import { CheckboxField } from "../../../../../components/ordinary/fields-form/checkbox-field/CheckboxField";
@@ -21,6 +21,8 @@ import { axios } from "../../../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { alertSuccess } from "../../../../../redux/actions/alertActions";
 import { useRouter } from "next/router";
+import { Entity } from "../../../../../ts/enums/other.enums";
+
 const SunEditor = dynamic(import("suneditor-react"), { ssr: false });
 
 interface PublishFormIdea {
@@ -37,14 +39,18 @@ export const PublishFormIdea: React.FC<PublishFormIdea> = ({ idea }) => {
 
     const handleSubmit = async (form: IdeaPublishForm) => {
         await axios
-            .post(`${process.env.API_URL}/api/admin/investment-idea/publish`, {
-                ...form,
-                idea_id: idea.idea_id,
-                description: description.current.getContents(true),
-            })
+            .post(
+                `${process.env.API_URL}/api/admin/${Entity.InvestmentIdea}/${idea.idea_id}`,
+                {
+                    ...form,
+                    idea_id: idea.idea_id,
+                    description: description.current.getContents(true),
+                    is_short: isShort(form.price_buy, form.price_sell),
+                }
+            )
             .then((res) => {
-                dispatch(alertSuccess("Idea publish"));
-                router.push(`/investment-idea/${res.data.id}`);
+                dispatch(alertSuccess("Idea published"));
+                router.push(`/investment-idea/${idea.idea_id}`);
             });
     };
 
@@ -54,16 +60,7 @@ export const PublishFormIdea: React.FC<PublishFormIdea> = ({ idea }) => {
             onSubmit={handleSubmit}
             // validationSchema={ProfileSchema}
         >
-            {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                setFieldValue,
-                handleSubmit,
-                isSubmitting,
-            }) => (
+            {({ values, handleChange, setFieldValue, handleSubmit }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                     <Grid mb={3} spacing={2} direction="row" container>
                         <Grid item md={4}>

@@ -21,8 +21,8 @@ export const AdminCardStats: React.FC<AdminCardInfo> = ({
     afterCountText = "",
 }) => {
     const { t } = useTranslation();
-    if (countStats === null) {
-        return <Skeleton variant="rectangular" width={226} height={245} />;
+    if (countStats === null || countStats === undefined) {
+        return <Skeleton variant="rectangular" width={182} height={189} />;
     }
     return (
         <div

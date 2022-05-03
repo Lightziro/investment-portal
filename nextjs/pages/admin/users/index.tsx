@@ -16,13 +16,12 @@ const Users: NextPage = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchEntityList(Entity.User, 0));
-        dispatch(fetchUsersStats());
+        // dispatch(fetchUsersStats()); TODO: убрать
     }, []);
     return (
         <MainLayout title={`${t("Admin panel")} - ${t("users")}`}>
             <AdminLayout>
                 <Container maxWidth="xl">
-                    <UsersStats />
                     <AdminUsersList />
                 </Container>
             </AdminLayout>

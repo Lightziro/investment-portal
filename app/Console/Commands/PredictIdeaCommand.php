@@ -70,7 +70,7 @@ class PredictIdeaCommand extends Command
                 $analytic_helper->prepareNews($data['news_predict']);
                 /** @var AnalyticalQuestion $question */
                 foreach (AnalyticalQuestion::all() as $question) {
-                    $method = "analytic$question";
+                    $method = "analytic{$question->code}";
                     $result = 0;
                     if (method_exists($analytic_helper, $method)) {
                         $result = $analytic_helper->$method();

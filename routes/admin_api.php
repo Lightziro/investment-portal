@@ -5,7 +5,6 @@ use App\Http\Modules\Admin\Controllers\CompanyAdminController;
 use App\Http\Modules\Admin\Controllers\CreateIdeaController;
 use App\Http\Modules\Admin\Controllers\InvestmentDataController;
 use App\Http\Modules\Admin\Controllers\InvestmentIdeaController;
-use App\Http\Modules\Admin\Controllers\SmartAnalyticController;
 use App\Http\Modules\Admin\Controllers\UserController as UserAdminController;
 use App\Http\Modules\Admin\Middleware\BeforeCheckRootAdmin;
 use Illuminate\Support\Facades\Route;
@@ -50,11 +49,11 @@ Route::group(
         ]
     ],
     function () {
-        Route::get('/get-item/{idea}', [InvestmentIdeaController::class, 'getItemIdea']);
+        Route::get('/{idea}', [InvestmentIdeaController::class, 'getItemIdea']);
         Route::post('/create', [CreateIdeaController::class, 'analyzeIdea']);
         Route::get('/list/{page}', [InvestmentDataController::class, 'getIdeasByPage']);
-        Route::post('/publish', [CreateIdeaController::class, 'publishIdea']);
-        Route::get('/get-stats', [InvestmentDataController::class, '']);
+        Route::post('/{idea}', [CreateIdeaController::class, 'publishIdea']);
+        Route::get('/get-stats', [InvestmentDataController::class, 'getStats']);
     }
 );
 

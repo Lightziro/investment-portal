@@ -20,7 +20,7 @@ class AnalyticsHelper
         $this->company = $idea->company;
     }
 
-    public function prepareNews(string $data_news)
+    public function prepareNews(string $data_news): void
     {
         $ar_news = json_decode($data_news, true);
         foreach ($ar_news as $news_item) {
