@@ -8,11 +8,11 @@ import { PersonalAccountPage } from "../../modules/personal-account/pages/Person
 import { PersonalAccountLayout } from "../../layouts/PersonalAccountLayout";
 
 export const PersonalAccount: NextPage = () => {
-    const user = useRootSelector((state) => state.user);
+    const { data } = useRootSelector((state) => state.user);
     return (
         <MainLayout title="Личный кабинет - Главная">
             <PortalLayout>
-                {user && (
+                {data && (
                     <Container maxWidth="md">
                         <PersonalAccountLayout>
                             <PersonalAccountPage />

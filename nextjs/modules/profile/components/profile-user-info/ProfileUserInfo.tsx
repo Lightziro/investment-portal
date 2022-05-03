@@ -19,7 +19,7 @@ export const ProfileUserInfo: React.FC = () => {
     const { profile } = useContext(ProfileContext);
     const [edit, setEdit] = useState(false);
     const [counties, setCountries] = useState<CountryModel[]>([]);
-    const user = useRootSelector((store) => store.user);
+    const { data } = useRootSelector((store) => store.user);
     useEffect(() => {
         fetchCountries();
     }, []);
@@ -40,7 +40,7 @@ export const ProfileUserInfo: React.FC = () => {
                     <Typography variant="h5">{profile.full_name}</Typography>
                     <RoleUserChip role={profile.role?.name} />
                 </Stack>
-                {user?.user_id === profile.user_id && (
+                {data?.user_id === profile.user_id && (
                     <Tooltip title="Edit">
                         <IconButton onClick={() => setEdit(!edit)}>
                             <EditIcon />

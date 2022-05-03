@@ -50,7 +50,10 @@ export const initialAdminStore: AdminStore = {
 };
 
 export const initStore: StoreData = {
-    user: null,
+    user: {
+        data: null,
+        fetch: false,
+    },
     admin: initialAdminStore,
     alert: initialAlertStore,
     view: initialViewStore,

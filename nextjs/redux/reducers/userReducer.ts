@@ -5,7 +5,9 @@ import { setNoticeView } from "../utils/user.utils";
 const userReducer = (state: UserStore = null, action: AnyAction): UserStore => {
     switch (action.type) {
         case "SET_USER":
-            return action.user;
+            return { data: action.user, fetch: true };
+        case "SET_FETCH":
+            return { ...state, fetch: action.state };
         case "SET_NOTICE_VIEW":
             return setNoticeView(state, action.id);
         default:

@@ -18,6 +18,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Badge, Button } from "antd";
 import { LinkWrapper } from "../../../../simple/link/Link";
 import { UserNoticeModel } from "../../../../../ts/types/entity/user.types";
+import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 
 interface NoticeMenu {
     onOpen: () => void;
@@ -29,18 +30,18 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const anchorRef = useRef(null);
-    const user = useSelector((state: StoreData) => state.user);
+    const { data } = useRootSelector((state: StoreData) => state.user);
     const onViewNotice = (notice: UserNoticeModel) => {
         if (!notice.viewed) {
             dispatch(viewNotice(notice.notice_id));
         }
     };
     const countNotView = (): number => {
-        return user.notices.filter((notice) => !notice.viewed).length;
+        return data.notices.filter((notice) => !notice.viewed).length;
     };
     return (
         <Fragment>
-            {user && (
+            {data && (
                 <Fragment>
                     <IconButton
                         ref={anchorRef}
@@ -81,7 +82,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
                             direction="column"
                             container
                         >
-                            {user.notices.map((notice) => (
+                            {data.notices.map((notice) => (
                                 <NoticeItem
                                     key={notice.notice_id}
                                     onViewNotice={() => onViewNotice(notice)}

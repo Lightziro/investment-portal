@@ -12,7 +12,10 @@ function* fetchUser(): Generator {
             user,
         });
     } catch (e) {
-        console.log(e, "ERROR API");
+        yield put({
+            type: "SET_FETCH",
+            state: true,
+        });
     }
 }
 function* login(action: AnyAction): Generator {

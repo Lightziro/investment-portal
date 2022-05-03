@@ -30,13 +30,16 @@ export interface NewsPrediction {
 }
 // TODO: СДЕЛАТЬ ОБЫЧНЫМ
 export interface UserStore {
-    user_id: number;
-    first_name: string;
-    last_name: string;
-    full_name: string;
-    role: string;
-    notices: UserNoticeModel[];
-    avatar: string;
+    data: {
+        user_id: number;
+        first_name: string;
+        last_name: string;
+        full_name: string;
+        role: string;
+        notices: UserNoticeModel[];
+        avatar: string;
+    };
+    fetch: boolean;
 }
 
 export interface StoreData {

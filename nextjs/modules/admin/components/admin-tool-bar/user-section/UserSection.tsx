@@ -6,25 +6,25 @@ import classes from "../AdminToolBar.module.scss";
 import { UserAvatar } from "../../../../../components/simple/user-avatar/UserAvatar";
 
 export const UserSection: React.FC = () => {
-    const user = useRootSelector((store) => store.user);
+    const { data } = useRootSelector((store) => store.user);
     // TODO: Перевести Link по блокам
     return (
         <div className={classes.barSectionUser}>
-            {user ? (
+            {data ? (
                 <Link
                     href="/profile/[id]"
-                    as={`/profile/${user.user_id}`}
+                    as={`/profile/${data.user_id}`}
                     passHref
                 >
                     <div className={classes.userWrapper}>
                         <div className={classes.avatarWrapper}>
-                            <UserAvatar avatar={user.avatar} />
+                            <UserAvatar avatar={data.avatar} />
                         </div>
                         <div className={classes.nameWrapper}>
                             <span className={classes.fullName}>
-                                {user.full_name}
+                                {data.full_name}
                             </span>
-                            <span className={classes.role}>{user.role}</span>
+                            <span className={classes.role}>{data.role}</span>
                         </div>
                     </div>
                 </Link>

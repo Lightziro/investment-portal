@@ -19,7 +19,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
     onClose,
 }) => {
     const anchorRef = useRef(null);
-    const user = useRootSelector((store) => store.user);
+    const { data } = useRootSelector((store) => store.user);
     const dispatch = useDispatch();
     const handleExit = () => {
         dispatch(logoutUser());
@@ -32,7 +32,7 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 sx={{ p: 0, width: 44, height: 44 }}
                 onClick={onOpen}
             >
-                <UserAvatar avatar={user ? user.avatar : null} />
+                <UserAvatar avatar={data ? data.avatar : null} />
             </IconButton>
             <MenuPopover
                 open={open}
@@ -40,8 +40,8 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 anchorEl={anchorRef.current}
                 sx={{ width: 220 }}
             >
-                {user ? (
-                    <LoginMenu user={user} handleExit={handleExit} />
+                {data ? (
+                    <LoginMenu user={data} handleExit={handleExit} />
                 ) : (
                     <NoLoginMenu />
                 )}
