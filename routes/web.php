@@ -10,3 +10,10 @@ Route::get('/', function () {
 Route::post('login', [UserLoginController::class, 'login']);
 Route::get('get-user', [UserController::class, 'getUser']);
 Route::get('logout', [UserLoginController::class, 'logout']);
+Route::get('test', function () {
+    return view('email.new_idea', [
+        'name' => 'Apple Inc',
+        'ticker' => 'AAPL',
+        'date' => '12',
+    ]);
+});
