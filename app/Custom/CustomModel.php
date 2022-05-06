@@ -4,14 +4,14 @@ namespace App\Custom;
 
 use App\Custom\Query\CustomQueryBuilder;
 use App\Custom\Relations\CustomHasMany;
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\Pure;
 
 /**
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property CarbonInterface $created_at
+ * @property CarbonInterface $updated_at
  */
 abstract class CustomModel extends Model
 {

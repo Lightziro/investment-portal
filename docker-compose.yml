@@ -90,6 +90,27 @@ services:
         volumes:
             - ./:/var/www/
 #        command: npm run production
+#    redis:
+#        image: redis:alpine
+#        container_name: redis
+#        working_dir: /var/www/
+#        build:
+#            context: .
+#            dockerfile: Dockerfile-redis
+#        volumes:
+#            - ./data/redis:/var/www/data
+#        command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
+#        networks:
+#            - laravel
+#        ports:
+#            - "6379:6379"
+#
+#    queues:
+#        build: ./build
+#        container_name: queues
+#        command: php artisan horizon
+#        volumes:
+#            - ./code:/application
 
 networks:
     laravel:

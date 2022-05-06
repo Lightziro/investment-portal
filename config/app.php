@@ -124,6 +124,7 @@ return [
     */
 
     'key' => env('APP_KEY'),
+    'siteUrl' => env('SITE_URL'),
 
     'cipher' => 'AES-256-CBC',
     'Socialize' => 'Laravel\Socialite\Facades\Socialite',

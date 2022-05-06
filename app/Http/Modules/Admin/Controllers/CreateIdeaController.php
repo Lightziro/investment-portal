@@ -4,9 +4,11 @@ namespace App\Http\Modules\Admin\Controllers;
 
 use App\Http\Classes\QueueRabbit;
 use App\Http\Classes\StockMarket;
+use App\Mail\CreateIdea;
 use App\Models\Company\Company;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaStatuses;
+use App\Models\Other\EmailSubscription;
 use App\Models\User\User;
 use DateInterval;
 use DateTime;
@@ -14,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Throwable;
 
 class CreateIdeaController extends Controller
@@ -68,11 +71,23 @@ class CreateIdeaController extends Controller
         try {
             /** @var InvestmentIdeaStatuses $status */
             $status = InvestmentIdeaStatuses::query()->firstWhere(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED]);
-            $idea->update(array_merge($request->only(['price_buy', 'price_sell', 'date_end', 'is_short', 'description']), [
+            $idea->update(array_merge($request->only([
+                'price_buy',
+                'price_sell',
+                'date_end',
+                'is_short',
+                'description'
+            ]), [
                 'status_id' => $status->status_id,
             ]));
-            if ($request->get('send_email')) {
-                /** TODO: Дописать отправки клиентам на почту письма об идеи */
+
+            if ($request->boolean('send_email')) {
+                $message = (new CreateIdea($idea))
+                    ->onQueue('emails');
+
+                foreach (EmailSubscription::all() as $subscriber) {
+                    Mail::to($subscriber->email)->queue($message);
+                }
             }
             return response()->json([]);
         } catch (Throwable $e) {

@@ -8,6 +8,7 @@ use App\Custom\Query\CustomQueryBuilder;
 use App\Custom\Relations\CustomHasMany;
 use App\Models\Company\Company;
 use App\Models\User\User;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -28,7 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property InvestmentIdeaViewing[]|Collection views
  * @property InvestmentIdeaRatings[]|Collection ratings
  * @property string date_create
- * @property string date_end
+ * @property CarbonInterface date_end
  * @property string description
  * @property float possible_profit
  * @property int status_id
@@ -42,6 +43,7 @@ class InvestmentIdea extends CustomModel
     protected $primaryKey = 'idea_id';
     protected $fillable = ['price_buy', 'description', 'price_sell', 'is_short', 'status_id', 'date_end'];
     protected $with = ['author', 'company'];
+    protected $dates = ['date_end'];
 
     public function views(): HasMany
     {
@@ -68,7 +70,7 @@ class InvestmentIdea extends CustomModel
         if ($this->is_short) {
             return (($this->price_buy - $this->price_sell) / $this->price_sell) * 100;
         }
-        return (($this->price_sell - $this->price_buy) / $this->price_buy) * 100;
+        return round((($this->price_sell - $this->price_buy) / $this->price_buy) * 100, 1);
     }
 
     public function company(): HasOne
