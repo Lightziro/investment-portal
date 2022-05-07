@@ -1,4 +1,104 @@
-.footerWrapper {
-    background-color: rgb(215 223 253);
-    width: 100%;
+.footerMain {
+    border-top: 1px solid #efefef;
+    background-color: #fff;
+    font-family: "Poppins", sans-serif;
+    padding: 4rem 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+    .siteLogo > a {
+        font-size: 30px;
+        color: #3e64ff;
+        font-weight: 900;
+    }
+
+    .navLinks > li {
+        display: inline-block;
+
+        a {
+            color: #777 !important;
+            padding: 10px;
+
+            &:hover {
+                color: #3e64ff !important;
+            }
+        }
+    }
+
+    .copyright {
+        border-top: 1px solid #efefef;
+        padding-top: 50px;
+        text-align: center;
+        color: #777;
+    }
+
+    .subscribe {
+        .formGroup {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            position: relative;
+
+            input[type="email"] {
+                height: 45px;
+                border: none;
+                background: #e6e6e6;
+
+                &:focus, &:active {
+                    outline: none;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                }
+
+                &::-webkit-input-placeholder, &:-moz-placeholder, &:-ms-input-placeholder {
+                    color: #b3b3b3;
+                    font-size: 14px;
+                }
+            }
+            button {
+                position: absolute;
+                border: none;
+                background: none;
+                font-size: 1.5rem;
+                top: .5rem;
+                right: .3rem;
+                line-height: 0;
+                &:active, &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+}
+
+.footer-59391 .nav-links.nav-left li:first-child {
+    padding-left: 0;
+}
+
+.footer-59391 .nav-links.nav-right li:last-child {
+    padding-right: 0;
+}
+
+.footer-59391 .subscribe .form-group button {
+
+}
+
+.footer-59391 .subscribe .form-group button:focus, .footer-59391 .subscribe .form-group button:active {
+}
+
+.footer-59391 .social li {
+    display: inline-block;
+    position: relative;
+}
+
+.footer-59391 .social li a {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background-color: #e6e6e6;
+    color: #333333;
 }

@@ -169,4 +169,7 @@ export const ruLanguage = {
     "Error while creating idea": "Ошибка при создании идеи",
     "Idea published": "Идея опубликована",
     Publish: "Публиковать",
+    "All Rights Reserved": "Все права защищены",
+    "Enter your email": "Укажите вашу почту",
+    "Home page": "Главная страница",
 };

@@ -143,3 +143,17 @@ export const SORT_ARTICLES = [
         value: "title",
     },
 ];
+export const FOOTER_MENU = [
+    {
+        label: "Home page",
+        value: "/",
+    },
+    {
+        label: "Investment ideas",
+        value: "/investment-idea/all",
+    },
+    {
+        label: "Articles",
+        value: "/article/all",
+    },
+];

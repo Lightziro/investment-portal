@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { SnackbarAlert } from "../components/smart/snackbar-alert/SnackbarAlert";
 import { clientStore } from "../redux/store/Store";
 import "suneditor/dist/css/suneditor.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const MyApp = ({ Component, pageProps }) => {
     return (

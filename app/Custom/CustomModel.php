@@ -53,7 +53,7 @@ abstract class CustomModel extends Model
 
     public function beforeInstanceSave(): void { }
 
-    public function save(array $options = [])
+    public function save(array $options = []): bool
     {
         $this->beforeInstanceSave();
         $save = parent::save($options);
