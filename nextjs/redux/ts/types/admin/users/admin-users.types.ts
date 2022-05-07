@@ -3,10 +3,4 @@ import { UserModel } from "../../../../../ts/types/entity/user.types";
 
 export interface AdminUsers extends AdminSectionBase {
     list: UserModel[];
-    stats: AdminUsersStats;
-}
-
-export interface AdminUsersStats {
-    newUsersToday: number;
-    newUsersWeek: number;
 }

@@ -5,8 +5,6 @@ import { AdminLayout } from "../../../layouts/AdminLayout";
 import { Container } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchUsersStats } from "../../../redux/actions/admin/adminUsersActions";
-import { UsersStats } from "../../../modules/admin/components/users-stats/UsersStats";
 import { fetchEntityList } from "../../../redux/actions/adminActions";
 import { AdminUsersList } from "../../../modules/admin/sections/users/admin-users-list/AdminUsersList";
 import { Entity } from "../../../ts/enums/other.enums";
