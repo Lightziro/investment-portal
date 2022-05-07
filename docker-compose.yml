@@ -24,7 +24,6 @@ services:
     db:
         image: mysql:latest
         container_name: mysql
-        platform: linux/amd64
         restart: unless-stopped
         tty: true
         ports:
@@ -56,18 +55,18 @@ services:
         networks:
             - laravel
 
-    python:
-        container_name: python
-        working_dir: /var/www/
-        volumes:
-            - .:/var/www/
-        environment:
-            FLASK_ENV: development
-        build:
-            context: .
-            dockerfile: Dockerfile-python
-        ports:
-            - "5000:5000"
+#    python:
+#        container_name: python
+#        working_dir: /var/www/
+#        volumes:
+#            - .:/var/www/
+#        environment:
+#            FLASK_ENV: development
+#        build:
+#            context: .
+#            dockerfile: Dockerfile-python
+#        ports:
+#            - "5000:5000"
     rabbitmq:
         image: "rabbitmq:3-management"
         restart: unless-stopped
