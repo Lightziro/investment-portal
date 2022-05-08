@@ -23,8 +23,7 @@ function* login(action: AnyAction): Generator {
         yield axios.get(`${process.env.API_URL}/sanctum/csrf-cookie`);
         const user = yield axios
             .post(`${process.env.API_URL}/login`, action.userData)
-            .then((response) => response.data)
-            .catch((e) => null);
+            .then((response) => response.data);
 
         yield put({
             type: "SET_USER",
@@ -35,7 +34,10 @@ function* login(action: AnyAction): Generator {
             message: "You successfully logged",
         });
     } catch (e) {
-        console.log(e.message);
+        yield put({
+            type: "SET_ALERT_ERROR",
+            message: e.response.data.error,
+        });
     }
 }
 function* logout(): Generator {

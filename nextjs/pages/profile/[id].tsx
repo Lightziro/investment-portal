@@ -7,6 +7,7 @@ import { useState } from "react";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { ProfileUser } from "../../ts/types/other/view.types";
 import { ProfileContext } from "../../modules/profile/contexts/ProfileContext";
+import { Entity } from "../../ts/enums/other.enums";
 
 interface Profile {
     profileEntity: ProfileUser;
@@ -27,7 +28,7 @@ const Profile: NextPage<Profile> = ({ profileEntity }) => {
 };
 export default Profile;
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-    const profileEntity = await getViewEntity("profile", ctx);
+    const profileEntity = await getViewEntity(Entity.Profile, ctx);
     return {
         props: { profileEntity },
     };

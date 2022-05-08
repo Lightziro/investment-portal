@@ -26,10 +26,7 @@ export const getViewEntity = async (
             config
         )
         .then((res) => res.data)
-        .catch((e) => {
-            console.log(e);
-            return null;
-        });
+        .catch((e) => null);
 };
 // TODO переписать на тип сущности
 export const getRoles = async () =>

@@ -8,6 +8,7 @@ export enum Entity {
     Article = "article",
     User = "user",
     Company = "company",
+    Profile = "profile",
 }
 export enum Section {
     InvestmentIdeas = "investmentIdeas",

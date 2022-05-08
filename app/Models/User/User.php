@@ -5,38 +5,37 @@ namespace App\Models\User;
 use App\Models\Article\ArticleComments;
 use App\Models\Investment\InvestmentIdea;
 use App\Models\Investment\InvestmentIdeaComments;
-use App\Models\Investment\InvestmentIdeaRatings;
 use App\Models\Other\Country;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use JetBrains\PhpStorm\Pure;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
- * @property int user_id
- * @property string email
- * @property string password
- * @property string first_name
- * @property string last_name
- * @property UsersRole|null role
- * @property null|int role_id
- * @property InvestmentIdea|Collection|null investment_ideas
- * @property UserNotices[]|Collection notices
- * @property string avatar_path
- * @property Carbon created_at
- * @property Carbon updated_at
- * @property Country country
- * @property string sex
- * @property Collection|ArticleComments[] commentsArticles
- * @property Collection|UserSubscriptions[] subscriptions
- * @property Collection|UserPredictions[] predictions
+ * @property int $user_id
+ * @property string $email
+ * @property string $password
+ * @property string $first_name
+ * @property string $last_name
+ * @property UsersRole|null $role
+ * @property null|int $role_id
+ * @property InvestmentIdea|Collection|null $investment_ideas
+ * @property UserNotices[]|Collection $notices
+ * @property string $avatar_path
+ * @property CarbonInterface $created_at
+ * @property CarbonInterface $updated_at
+ * @property Country|null $country
+ * @property string $sex
+ * @property Collection|ArticleComments[] $commentsArticles
+ * @property Collection|UserSubscriptions[] $subscriptions
+ * @property Collection|UserPredictions[] $predictions
  */
 class User extends Authenticatable
 {
@@ -140,7 +139,7 @@ class User extends Authenticatable
         return array_merge($this->toArray(), [
             'count_comments' => $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
             'country' => $this->country->toArray(),
-            'predictions' => $this->predictions()->where('visible', true)->get()->toArray(),
+            'predictions' => $this->predictions()->where('visible', true)->get()->toArray() ?? [],
         ]);
     }
 }
