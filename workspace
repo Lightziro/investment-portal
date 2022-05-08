@@ -1,0 +1,33 @@
+#!/bin/bash
+
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cd "${__dir}" || exit 1
+
+# If we pass any arguments...
+if [ $# -gt 0 ];then
+    if [ "$1" == "up" ]; then
+        "${__dir}/up"
+        exit $?
+    fi
+
+    if [[ "$1" == "art" || "$1" == "artisan" ]]; then
+        shift 1
+        CMD='php artisan '"$*"
+    elif [[ "$1" == "composer" ]]; then
+        shift 1
+        CMD='composer '"$*"
+    elif [[ "$1" == "test" ]]; then
+        shift 1
+        CMD='composer test -- '"$*"
+    elif [[ "$1" == "yarn" ]]; then
+        shift 1
+        CMD='yarn '"$*"
+    else
+        CMD="$*"
+    fi
+
+    docker-compose exec app bash -c "${CMD}"
+else
+    docker-compose ps
+fi

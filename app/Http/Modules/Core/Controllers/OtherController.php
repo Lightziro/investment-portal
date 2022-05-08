@@ -56,7 +56,7 @@ class OtherController extends Controller
             ->orderBy('name')->get(['name', 'ticker', 'company_id']);
         $market = new StockMarket();
 
-        /** @var \App\Models\Company\Company $company_model */
+        /** @var Company $company_model */
         foreach ($stocks as $company_model) {
             $quote_info = $market->getLastQuote($company_model->ticker);
             if ($quote_info) {
