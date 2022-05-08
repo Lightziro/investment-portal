@@ -138,7 +138,7 @@ class User extends Authenticatable
     {
         return array_merge($this->toArray(), [
             'count_comments' => $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
-            'country' => $this->country->toArray(),
+            'country' => $this->country?->toArray(),
             'predictions' => $this->predictions()->where('visible', true)->get()->toArray() ?? [],
         ]);
     }

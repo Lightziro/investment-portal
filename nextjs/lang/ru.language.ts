@@ -172,4 +172,5 @@ export const ruLanguage = {
     "All Rights Reserved": "Все права защищены",
     "Enter your email": "Укажите вашу почту",
     "Home page": "Главная страница",
+    "Not specified": "Не указано",
 };

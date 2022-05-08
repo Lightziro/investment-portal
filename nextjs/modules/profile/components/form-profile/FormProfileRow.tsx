@@ -18,7 +18,13 @@ export const FormProfileRow: React.FC<FormProfileRow> = ({
             <Form.Label column="sm" lg={2}>
                 {label}:
             </Form.Label>
-            <Col>{edit ? children : <span>{t(textValue)}</span>}</Col>
+            <Col>
+                {edit ? (
+                    children
+                ) : (
+                    <span>{t(textValue ?? "Not specified")}</span>
+                )}
+            </Col>
         </Row>
     );
 };

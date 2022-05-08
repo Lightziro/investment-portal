@@ -18,12 +18,7 @@ export const FormProfileSelectField: React.FC<FormProfileSelectField> = ({
 }) => {
     const { t } = useTranslation();
     return (
-        <Form.Select
-            name={name}
-            onChange={handleChange}
-            value={value}
-            aria-label="Default select example"
-        >
+        <Form.Select name={name} onChange={handleChange} value={value}>
             {items.map((item) => (
                 <option value={item.country_id}>{t(item.name)}</option>
             ))}

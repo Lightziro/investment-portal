@@ -83,7 +83,7 @@ export const FormProfile: React.FC<FormProfile> = ({
                     />
                 </FormProfileRow>
                 <FormProfileRow
-                    textValue={profile.country.name}
+                    textValue={profile.country?.name}
                     label={`${t("Country")}`}
                     edit={edit}
                 >
