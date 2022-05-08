@@ -10,3 +10,10 @@ export interface FormAuth {
     password: string;
     remember: boolean;
 }
+export interface FormRecovery {
+    password: string;
+    confirm_password: string;
+}
+export interface FormForgot {
+    email: string;
+}

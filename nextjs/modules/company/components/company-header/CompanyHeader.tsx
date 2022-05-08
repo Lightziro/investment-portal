@@ -27,7 +27,7 @@ export const CompanyHeader: React.FC<CompanyHeader> = ({
 }) => {
     const dispatch = useDispatch();
     const handleShare = () => {
-        dispatch(alertInfo("Success copy")); // todo: заменить текст
+        dispatch(alertInfo("Link copied successfully"));
         navigator.clipboard.writeText(document.location.href);
     };
     return (

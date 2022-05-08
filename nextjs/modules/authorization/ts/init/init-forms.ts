@@ -1,4 +1,9 @@
-import { FormAuth, FormRegister } from "../types/forms.types";
+import {
+    FormAuth,
+    FormForgot,
+    FormRecovery,
+    FormRegister,
+} from "../types/forms.types";
 
 export const initRegisterForm: FormRegister = {
     email: "",
@@ -11,4 +16,11 @@ export const initialLoginForm: FormAuth = {
     email: "",
     password: "",
     remember: false,
+};
+export const initialRecoveryForm: FormRecovery = {
+    password: "",
+    confirm_password: "",
+};
+export const initialForgotForm: FormForgot = {
+    email: "",
 };

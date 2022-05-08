@@ -4,7 +4,7 @@
 use App\Models\Investment\InvestmentIdea;
 $company = $idea->company;
 $month = $idea->date_end->diffInMonths($idea->created_at);
-$site_url = config('app.siteUrl');
+$site_url = config('app.site_url');
 ?>
 
 <table bgcolor="#F4F4F6" border="0" cellpadding="0" cellspacing="0" width="100%"

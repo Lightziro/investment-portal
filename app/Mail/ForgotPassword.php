@@ -29,9 +29,10 @@ class ForgotPassword extends Mailable
      */
     public function build(): static
     {
-        return $this->view('emails.forgotPassword')->with([
-            'full_name' => (string)$this->recovery_model->user,
-            'key' => $this->recovery_model->key,
-        ]);
+        $site_name = config('app.site_name');
+
+        return $this->view('email.forgot_password')->with([
+            'recovery' => $this->recovery_model,
+        ])->subject("Восстановление пароля |  $site_name");
     }
 }

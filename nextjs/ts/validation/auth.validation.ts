@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-export const SignInSchema = Yup.object().shape({
+export const LogInSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Is required field"),
     password: Yup.string()
         .min(8, "Must contain min 8 symbol")

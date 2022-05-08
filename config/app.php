@@ -124,8 +124,8 @@ return [
     */
 
     'key' => env('APP_KEY'),
-    'siteUrl' => env('SITE_URL'),
-
+    'site_url' => env('SITE_URL'),
+    'site_name' => env('SITE_NAME', 'Investment-hub'),
     'cipher' => 'AES-256-CBC',
     'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 

@@ -26,16 +26,17 @@ class UserLoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:8|max:40',
         ], $messages);
+
         if ($validator->fails()) {
-            return response()->json($validator->errors()->all(), 400);
+            return response()->json([], 415);
         }
-        /** @var User $user */
+        /** @var User|null $user */
         $user = User::query()->where('email', $request->get('email'))->first();
         if (!$user) {
-            return response()->json(['error' => 'The user does not exist'], 400);
+            return response()->json([], 404);
         }
         if (!Hash::check($request->get('password'), $user->password)) {
-            return response()->json(['error' => 'Password is incorrect'], 400);
+            return response()->json([], 403);
         }
         if (!Auth::attempt($request->only(['email', 'password']))) {
             return response()->json([], 400);
@@ -55,11 +56,11 @@ class UserLoginController extends Controller
                 'consent' => 'boolean|accepted',
             ]);
             if ($validator->fails()) {
-                return response()->json([], 400);
+                return response()->json([], 415);
             }
             $user_search = User::query()->where(['email' => $fields['email']])->first();
             if ($user_search) {
-                return response()->json(['error' => 'User with such an email address exists'], 400);
+                return response()->json([], 406);
             }
             /** @var User $role_user */
             $role_user = UsersRole::query()->where(['name' => 'user'])->first();

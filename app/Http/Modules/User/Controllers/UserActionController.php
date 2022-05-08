@@ -6,7 +6,6 @@ use App\Mail\ForgotPassword;
 use App\Models\User\User;
 use App\Models\User\UserNotices;
 use App\Models\User\UserRecovery;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -20,50 +19,47 @@ class UserActionController extends Controller
     public function recoveryPassword(Request $request): JsonResponse
     {
         $post = $request->post();
-        $now = Carbon::now();
-        $error_message = 'Error occurred, try again later';
         try {
-            /** @var UserRecovery $recovery_model */
+            /** @var UserRecovery|null $recovery_model */
             $recovery_model = UserRecovery::query()->where(['key' => $post['key'], 'accept' => false])
-                ->whereBetween('created_at', [Carbon::now()->subHours(3), $now])->first();
-            if ($recovery_model) {
-                $recovery_model->user->password = Hash::make($post['password']);
-                $recovery_model->user->save();
-
-                $recovery_model->accept = true;
-                $recovery_model->accept_ip = $_SERVER['REMOTE_ADDR'];
-                $recovery_model->save();
-                return response()->json(['message' => 'You successfully changed your password']);
+                ->whereBetween('created_at', [now()->subHours(3), now()])->first();
+            if (!$recovery_model) {
+                return response()->json([], 404);
             }
-        } catch (Throwable $e) {
+            $recovery_model->user->password = Hash::make($post['password']);
+            $recovery_model->user->save();
 
+            $recovery_model->accept = true;
+            $recovery_model->accept_ip = $request->ip();
+            $recovery_model->save();
+            return response()->json([]);
+        } catch (Throwable $e) {
+            return response()->json([], 400);
         }
-        return response()->json(['message' => $error_message], 400);
     }
 
     public function forgotPassword(Request $request): JsonResponse
     {
         $post = $request->post();
-        /** @var User $user */
-        if (!$user = User::query()->where(['email' => $post['email']])->first()) {
-            return response()->json(['message' => "Couldn't find a user with this email address"], 400);
+        /** @var User|null $user */
+        $user = User::query()->where(['email' => $post['email']])->first();
+        if (!$user) {
+            return response()->json(['error' => "Couldn't find user"], 404);
         }
-        $key = md5($user->user_id);
-        $recovery_model = new UserRecovery();
-        $recovery_model->user_id = $user->user_id;
-        $recovery_model->recovery_ip = $_SERVER['REMOTE_ADDR'];
-        $recovery_model->key = $key;
-
         try {
-            $error_message = 'Error occurred, try again later';
-            if ($recovery_model->save()) {
-                Mail::to($user->email)->send(new ForgotPassword($recovery_model));
-                return response()->json(['message' => 'A confirmation message has been sent to your email']);
-            }
+            $key = md5($user->user_id);
+            $recovery_model = new UserRecovery();
+            $recovery_model->user_id = $user->user_id;
+            $recovery_model->recovery_ip = $request->ip();
+            $recovery_model->key = $key;
+            $recovery_model->save();
+
+            $message = (new ForgotPassword($recovery_model))->onQueue('emails');
+            Mail::to($user->email)->queue($message);
+            return response()->json([]);
         } catch (Throwable $e) {
-            $error_message = 'A confirmation message has been sent to your email';
+            return response()->json([], 400);
         }
-        return response()->json(['message' => $error_message], 400);
     }
 
     public function authentication(Request $request): JsonResponse

@@ -2,6 +2,8 @@ import { SagaIterator } from "redux-saga";
 import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { axios } from "../../utils/axios";
+import { ErrorsResponse } from "../../ts/enums/errors.enums";
+
 function* fetchUser(): Generator {
     try {
         const user = yield axios
@@ -34,9 +36,21 @@ function* login(action: AnyAction): Generator {
             message: "You successfully logged",
         });
     } catch (e) {
+        let textError = ErrorsResponse.Catch;
+        switch (e.response.status) {
+            case 403:
+                textError = ErrorsResponse.InvalidPassword;
+                break;
+            case 404:
+                textError = ErrorsResponse.NotFoundUser;
+                break;
+            case 415:
+                textError = ErrorsResponse.InvalidFields;
+                break;
+        }
         yield put({
             type: "SET_ALERT_ERROR",
-            message: e.response.data.error,
+            message: textError,
         });
     }
 }
