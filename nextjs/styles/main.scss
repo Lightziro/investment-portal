@@ -55,9 +55,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    overflow-x: hidden;
-    // FIX material
-    overflow: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    //// FIX material
+    //overflow: auto !important;
     padding: 0 !important;
 }
 

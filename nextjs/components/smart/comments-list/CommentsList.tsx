@@ -23,9 +23,9 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [value, setValue] = useState("");
-    const user = useRootSelector((state) => state.user);
+    const { data } = useRootSelector((state) => state.user);
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && value.trim() && user) {
+        if (e.key === "Enter" && value.trim() && data) {
             dispatch(createEntityComment(entityId, entityName, value));
             setValue("");
         }
@@ -36,15 +36,15 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
     return (
         <Card sx={{ bgcolor: "white", p: 2 }} className="shadow-wrapper">
             <Typography variant="h6">{t("Comments")}</Typography>
-            <Divider />
+            <Divider className="mb-2" />
             <Form.Control
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={
-                    !user ? "Log in and send comment" : "Enter comment"
+                    !data ? t("Log in and send comment") : t("Enter comment")
                 }
                 onKeyDown={handleKeyDown}
-                disabled={!user}
+                disabled={!data}
             />
             <Stack justifyContent="flex-start" className={classes.commentsArea}>
                 {comments.length ? (

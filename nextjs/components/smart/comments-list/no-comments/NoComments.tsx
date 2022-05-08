@@ -2,12 +2,12 @@ import React from "react";
 import { Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
 import { StoreData } from "../../../../ts/types/redux/store.types";
 import classes from "../CommentsList.module.scss";
+import { LinkWrapper } from "../../../simple/link/Link";
 
 export const NoComments = () => {
-    const user = useSelector((state: StoreData) => state.user);
+    const { data } = useSelector((state: StoreData) => state.user);
     const { t } = useTranslation();
     return (
         <Stack
@@ -20,11 +20,13 @@ export const NoComments = () => {
                 className={classes.noComments}
                 src="/images/picture/other/comments.svg"
             />
-            <Typography variant="h6" my={1}>
-                {user ? (
+            <Typography variant="h6" my={1} align="center">
+                {data ? (
                     t("No Comments")
                 ) : (
-                    <Link href="/auth">{t("Auth and send first comment")}</Link>
+                    <LinkWrapper href="/auth">
+                        {t("Log in and send first comment")}
+                    </LinkWrapper>
                 )}
             </Typography>
         </Stack>

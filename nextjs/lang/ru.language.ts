@@ -190,4 +190,8 @@ export const ruLanguage = {
     "Fields filled incorrectly": "Поля заполнены не правильно",
     "Such user already exists": "Такой пользователь уже существует",
     "Invalid password specified": "Указан не верный пароль",
+    "Log in and send comment": "Войдите и оставьте комментарий",
+    "No comments": "Нет комментариев",
+    "Log in and send first comment":
+        "Авторизуйтесь и отправьте первый комментарий",
 };
