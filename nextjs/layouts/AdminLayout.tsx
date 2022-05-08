@@ -3,13 +3,13 @@ import classes from "../styles/layouts.module.scss";
 import { AdminToolBar } from "../modules/admin/components/admin-tool-bar/AdminToolBar";
 import { useRootSelector } from "../hooks/useTypeSelector";
 import { useRouter } from "next/router";
-import { checkNoUserAuth } from "../utils/user/user-check-root";
+import { checkNoRootAdmin } from "../utils/user/user-check-root";
 
 export const AdminLayout: React.FC = ({ children }) => {
     const { fetch, data } = useRootSelector((state) => state.user);
     const router = useRouter();
     useEffect(() => {
-        if (!checkNoUserAuth(fetch, data)) {
+        if (checkNoRootAdmin(fetch, data)) {
             router.push("/");
         }
     }, [data, fetch]);

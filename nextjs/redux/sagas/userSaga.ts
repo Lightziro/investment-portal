@@ -58,10 +58,15 @@ function* logout(): Generator {
     try {
         yield axios.get(`${process.env.API_URL}/logout`);
         yield put({
-            type: "SET_USER",
-            user: null,
+            type: "SET_LOGOUT",
+            data: null,
         });
-    } catch (e) {}
+    } catch (e) {
+        yield put({
+            type: "SET_ALERT_ERROR",
+            message: ErrorsResponse.Catch,
+        });
+    }
 }
 export function* actionUserWatcher(): SagaIterator {
     yield takeLatest("FETCH_USER", fetchUser);

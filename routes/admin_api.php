@@ -49,11 +49,11 @@ Route::group(
         ]
     ],
     function () {
-        Route::get('/{idea}', [InvestmentIdeaController::class, 'getItemIdea']);
+        Route::get('/get-stats', [InvestmentDataController::class, 'getStats']);
         Route::post('/create', [CreateIdeaController::class, 'analyzeIdea']);
         Route::get('/list/{page}', [InvestmentDataController::class, 'getIdeasByPage']);
+        Route::get('/{idea}', [InvestmentIdeaController::class, 'getItemIdea']);
         Route::post('/{idea}', [CreateIdeaController::class, 'publishIdea']);
-        Route::get('/get-stats', [InvestmentDataController::class, 'getStats']);
     }
 );
 

@@ -67,14 +67,14 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                     lg={3}
                     spacing={2}
                 >
-                    <Grid item direction="column">
+                    <Grid item container>
                         <CommentsList
                             entityId={article.article_id}
                             entityName="article"
                             comments={comments}
                         />
                     </Grid>
-                    <Grid item direction="column">
+                    <Grid item container>
                         <NewsList items={news} />
                     </Grid>
                 </Grid>

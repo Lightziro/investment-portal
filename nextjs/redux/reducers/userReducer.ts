@@ -6,6 +6,8 @@ const userReducer = (state: UserStore = null, action: AnyAction): UserStore => {
     switch (action.type) {
         case "SET_USER":
             return { data: action.user, fetch: true };
+        case "SET_LOGOUT":
+            return { data: null, fetch: false };
         case "SET_FETCH":
             return { ...state, fetch: action.state };
         case "SET_NOTICE_VIEW":

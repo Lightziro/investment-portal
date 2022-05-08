@@ -14,18 +14,19 @@ export const SearchEntities: React.FC = () => {
     const router = useRouter();
 
     const handleSearch = async (value) => {
-        if (!value) {
+        if (isEmpty) {
             return;
         }
         const data = await getSearchData(value);
         setOptions((prev) => data);
     };
-    const handleClickSearch = (value) => {
-        if (!value) {
+    const handleClickSearch = (value: string) => {
+        if (isEmpty) {
             return;
         }
         router.push(`/search/${value}`);
     };
+    const isEmpty = (value: string) => !value.trim();
 
     return (
         <AutoComplete

@@ -9,7 +9,6 @@ import { NoComments } from "./no-comments/NoComments";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
 import { Comment, EntityName } from "../../../ts/types/other/view.types";
 import { createEntityComment } from "../../../redux/actions/viewActions";
-import { axios } from "../../../utils/axios";
 interface CommentsWrapper {
     entityId: number;
     entityName: EntityName;
@@ -38,6 +37,7 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
             <Typography variant="h6">{t("Comments")}</Typography>
             <Divider className="mb-2" />
             <Form.Control
+                type="textarea"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={

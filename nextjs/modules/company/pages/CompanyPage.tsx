@@ -46,13 +46,6 @@ export const CompanyPage: React.FC<CompanyPage> = ({ company }) => {
                         title="Net margins stats"
                     />
                 </Grid>
-                <Grid item sm={12}>
-                    <a href="http://localhost:3000/company/1">
-                        <Button type="primary" block>
-                            {t("Watch all")}
-                        </Button>
-                    </a>
-                </Grid>
             </Grid>
         </Grid>
     );

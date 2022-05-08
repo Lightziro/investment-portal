@@ -57,7 +57,7 @@ class InvestmentDataController extends Controller
         return response()->json($ar_company ?? []);
     }
 
-    public function getStats()
+    public function getStats(): JsonResponse
     {
         $week_date = Carbon::now()->subDays(7);
 

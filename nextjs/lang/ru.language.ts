@@ -194,4 +194,6 @@ export const ruLanguage = {
     "No comments": "Нет комментариев",
     "Log in and send first comment":
         "Авторизуйтесь и отправьте первый комментарий",
+    Ukraine: "Украина",
+    Russia: "Россия",
 };
