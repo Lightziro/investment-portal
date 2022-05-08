@@ -34,10 +34,6 @@ export const initialAdminStore: AdminStore = {
         edit: null,
     },
     users: {
-        stats: {
-            newUsersWeek: null,
-            newUsersToday: null,
-        },
         list: [],
         lastPage: null,
         loading: true,

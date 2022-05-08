@@ -15,7 +15,7 @@ interface ArticleEmotion {
 
 export const ArticleEmotion: React.FC<ArticleEmotion> = ({ articleId }) => {
     const emotions = useRootSelector((state) => state.view.article.emotions);
-    const user = useRootSelector((state) => state.user);
+    const { data } = useRootSelector((state) => state.user);
     const dispatch = useDispatch();
 
     const getCountEmotions = (codeEmotion: string) =>
@@ -24,7 +24,7 @@ export const ArticleEmotion: React.FC<ArticleEmotion> = ({ articleId }) => {
         ).length;
 
     const existEmotion = (emotions || []).find(
-        (emotion) => emotion.user_id === user?.user_id
+        (emotion) => emotion.user_id === data?.user_id
     );
     const handleSetEmotion = (code) => {
         if (existEmotion) {

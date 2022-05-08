@@ -3,11 +3,7 @@ import { initialAdminStore } from "../../ts/types/redux/store.init";
 import { replaceUpdateArticle, setEditArticle } from "../utils/article.utils";
 import createIdeaReducer from "./createIdeaReducer";
 import { AdminStore } from "../ts/types/admin/admin-store.types";
-import {
-    getSectionByEntity,
-    setEntityList,
-    setUsersStats,
-} from "../utils/admin.utils";
+import { getSectionByEntity, setEntityList } from "../utils/admin.utils";
 
 const adminReducer = (
     state: AdminStore = initialAdminStore,
@@ -22,11 +18,6 @@ const adminReducer = (
             };
         case "SET_ADMIN_INVESTMENT_DATA":
             return { ...state, investmentIdeas: action.data };
-        case "SET_USERS_STATS":
-            return {
-                ...state,
-                users: setUsersStats(state.users, action.stats),
-            };
         case "SET_SMART_ANALYTIC_DATA":
             return {
                 ...state,

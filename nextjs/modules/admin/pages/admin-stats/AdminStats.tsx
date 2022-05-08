@@ -8,10 +8,10 @@ import { IdeasStats } from "../../sections/stats/ideas-stats/IdeasStats";
 
 const AdminStats = () => {
     const { t } = useTranslation();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState<string>("0");
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
+        setValue(String(newValue));
     };
 
     return (
@@ -25,11 +25,11 @@ const AdminStats = () => {
                     <Tab label={t(item)} value={key} />
                 ))}
             </TabList>
-            <TabPanel value={0}>
+            <TabPanel value={"0"}>
                 <IdeasStats />
             </TabPanel>
-            <TabPanel value={1}>Item Two</TabPanel>
-            <TabPanel value={2}>Item Three</TabPanel>
+            <TabPanel value={"1"}>Item Two</TabPanel>
+            <TabPanel value={"2"}>Item Three</TabPanel>
         </TabContext>
     );
 };

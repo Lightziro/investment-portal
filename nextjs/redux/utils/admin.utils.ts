@@ -1,17 +1,7 @@
 import { AdminSection, DtoItems } from "../ts/types/admin/admin-store.types";
-import {
-    AdminUsers,
-    AdminUsersStats,
-} from "../ts/types/admin/users/admin-users.types";
+import { AdminUsers } from "../ts/types/admin/users/admin-users.types";
 import { Entity, Section } from "../../ts/enums/other.enums";
 
-export const setUsersStats = (
-    state: AdminUsers,
-    userStats: AdminUsersStats
-): AdminUsers => ({
-    ...state,
-    stats: userStats,
-});
 export const setEntityList = (state: AdminSection, data: DtoItems): any => ({
     ...state,
     list: data.items,

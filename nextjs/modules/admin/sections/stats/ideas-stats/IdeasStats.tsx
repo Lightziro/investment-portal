@@ -5,9 +5,10 @@ import { Grid } from "@mui/material";
 import { AdminCardStats } from "../../../components/admin-card-stats/AdminCardStats";
 import { DtoIdeasStats } from "../../../ts/types/response/response-stats";
 import { useTranslation } from "react-i18next";
+import { initIdeaStats } from "../../../ts/init/stats";
 
 export const IdeasStats: React.FC = () => {
-    const [stats, setStats] = useState<DtoIdeasStats>({});
+    const [stats, setStats] = useState<DtoIdeasStats>(initIdeaStats);
     const { t } = useTranslation();
     useEffect(() => {
         loadStats();

@@ -52,17 +52,6 @@ function* retrainClassifierNews(action: AnyAction): Generator {
         }
     } catch (e) {}
 }
-function* fetchUsersStats(action: AnyAction): Generator {
-    try {
-        const stats = yield axios
-            .get(`${process.env.API_URL}/api/admin/user/get-stats`)
-            .then((res) => res.data);
-        yield put({
-            type: "SET_USERS_STATS",
-            stats,
-        });
-    } catch (e) {}
-}
 function* fetchAdminIdeas(action: AnyAction): Generator {
     try {
         const data = yield axios
@@ -109,7 +98,6 @@ export function* actionAdminWatcher(): SagaIterator {
     yield takeLatest("FETCH_ARTICLE_ADMIN_LIST", fetchArticleForAdmin);
     yield takeLatest("FETCH_ANALYTIC_DATA", fetchAnalyticData);
     yield takeLatest("RETRAIN_NEWS_CLASSIFIER", retrainClassifierNews);
-    yield takeLatest("FETCH_USERS_STATS", fetchUsersStats);
     yield takeLatest("FETCH_ADMIN_IDEAS", fetchAdminIdeas);
     yield takeLatest("FETCH_ADMIN_ENTITY_LIST", fetchEntityList);
 }

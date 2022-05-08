@@ -19,7 +19,7 @@ import {
 interface CreatePrediction {
     open: boolean;
     setOpen: (state: boolean) => void;
-    companyId: boolean;
+    companyId: number;
 }
 export const CreatePrediction: React.FC<CreatePrediction> = ({
     open,

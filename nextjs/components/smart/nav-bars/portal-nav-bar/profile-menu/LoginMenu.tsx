@@ -10,10 +10,10 @@ import { MenuProfileItems } from "./MenuProfileItems";
 import { menuAuth } from "../../../../../config/menu-items";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
-import { UserStore } from "../../../../../ts/types/redux/store.types";
+import { UserData } from "../../../../../ts/types/redux/store.types";
 import Link from "next/link";
 interface LoginMenu {
-    user: UserStore;
+    user: UserData;
     handleExit: () => void;
 }
 export const LoginMenu: React.FC<LoginMenu> = ({ user, handleExit }) => {

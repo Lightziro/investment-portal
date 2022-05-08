@@ -9,7 +9,7 @@ interface SelectField {
     value?: string | number;
     type?: "material" | "bootstrap" | "ant";
     handleChange: (e: ChangeEvent<any>) => void;
-    size?: string;
+    size?: any;
     classesSelect?: string;
     defaultValue?: any;
     label?: string;
