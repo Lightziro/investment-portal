@@ -113,7 +113,7 @@ class StockMarket
     public function getCompanyNews(string $ticker, DateTime $from, DateTime $to): ?array
     {
         try {
-            return $this->client->companyNews($ticker, $from, $to);
+            return $this->client->companyNews($ticker, $from->format('Y-m-d'), $to->format('Y-m-d'));
         } catch (ApiException $e) {
             return null;
         }

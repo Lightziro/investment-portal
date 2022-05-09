@@ -62,7 +62,7 @@ class CreateIdeaController extends Controller
             }
             return response()->json([]);
         } catch (Throwable $e) {
-            Log::error('Error create idea', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            Log::error('Error create idea', [$e]);
             return response()->json([], 400);
         }
     }
