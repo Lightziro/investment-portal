@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { CountryModel } from "../../../../ts/types/entity/other.types";
 
 interface FormProfileSelectField {
-    items: CountryModel[];
+    items: CountryModel[] | any;
     value: string | number;
     handleChange: (e) => void;
     name: string;
