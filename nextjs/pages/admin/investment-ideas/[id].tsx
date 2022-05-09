@@ -14,7 +14,7 @@ interface InvestmentIdeaEdit {
 const InvestmentIdeaEdit: NextPage<InvestmentIdeaEdit> = ({ data }) => {
     const { t } = useTranslation();
     return (
-        <MainLayout title={t("Creating idea")}>
+        <MainLayout title={t("Edit idea")}>
             <AdminLayout>
                 <AdminIdeaPage idea={data} />
             </AdminLayout>

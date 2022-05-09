@@ -39,7 +39,11 @@ export const AdminIdeaPage: React.FC<AdminIdeaPage> = ({ idea }) => {
                 >
                     <Tab label={t("Stats")} {...a11yProps(0)} />
                     <Tab
-                        disabled={idea.status !== IdeaStatus.Analyzed}
+                        disabled={
+                            ![IdeaStatus.Created, IdeaStatus.Analyzed].includes(
+                                idea.status
+                            )
+                        }
                         label={t("Publish")}
                         {...a11yProps(1)}
                     />

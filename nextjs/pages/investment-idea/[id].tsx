@@ -7,6 +7,7 @@ import { getViewEntity } from "../../utils/api/get-data";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { useRouter } from "next/router";
 import { IdeaView } from "../../ts/types/entity/idea.types";
+import { Entity } from "../../ts/enums/other.enums";
 
 interface InvestmentIdea {
     ideaData: IdeaView;
@@ -37,24 +38,10 @@ export default InvestmentIdea;
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
 ) => {
-    const ideaData = await getViewEntity("idea", context);
+    const ideaData = await getViewEntity(Entity.InvestmentIdea, context);
     return {
         props: {
             ideaData,
         },
     };
 };
-//
-// export async function getStaticPaths() {
-//     const ideasKey: any = await axios
-//         .get(`${process.env.API_URL_DOCKER}/api/idea/all-key`)
-//         .then((res) => {
-//             console.log(res.data);
-//             return res.data;
-//         });
-//     const paths = ideasKey.map((idea) => ({
-//         params: { id: idea.idea_id.toString() },
-//     }));
-//
-//     return { paths, fallback: "blocking" };
-// }

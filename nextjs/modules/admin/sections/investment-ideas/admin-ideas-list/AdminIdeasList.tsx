@@ -2,14 +2,14 @@ import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import { fetchEntityList } from "../../../../../redux/actions/adminActions";
-import { Pagination, Skeleton, Stack } from "@mui/material";
+import { IconButton, Pagination, Skeleton, Stack } from "@mui/material";
 import { EntityTable } from "../../../../../components/simple/entity-table/EntityTable";
 import { IdeaStatus } from "../../../../../ts/enums/investment-idea.enum";
 import { getIdeaStatsText } from "../../../utils/entity-list";
 import { useRouter } from "next/router";
-import { IdeaActionItem } from "../idea-action-item/IdeaActionItem";
 import { DtoIdeaItem } from "../../../ts/types/response/admin-response-item.types";
 import { Entity } from "../../../../../ts/enums/other.enums";
+import EditIcon from "@mui/icons-material/Edit";
 
 export const AdminIdeasList: React.FC = () => {
     const router = useRouter();
@@ -49,7 +49,15 @@ export const AdminIdeasList: React.FC = () => {
                             ? "Wait analytic"
                             : idea.score,
                         idea.status,
-                        <IdeaActionItem idea={idea} />,
+                        <IconButton color="primary" component="span">
+                            <EditIcon
+                                onClick={() =>
+                                    router.push(
+                                        `/admin/investment-ideas/${idea.idea_id}`
+                                    )
+                                }
+                            />
+                        </IconButton>,
                     ])}
                 />
             )}

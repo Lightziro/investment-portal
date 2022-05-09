@@ -40,7 +40,6 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::prefix('admin')
-//                ->middleware(BeforeCheckRootAdmin::class)
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
@@ -71,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());

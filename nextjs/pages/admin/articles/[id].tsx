@@ -33,6 +33,9 @@ const UpdateArticle: NextPage<UpdateArticle> = ({ data }) => {
             })
             .catch((e) => dispatch(alertError("Failed update article")));
     };
+    if (!data) {
+        return router.push("/404");
+    }
 
     return (
         <MainLayout title={t("Update article")}>
@@ -46,7 +49,6 @@ const UpdateArticle: NextPage<UpdateArticle> = ({ data }) => {
         </MainLayout>
     );
 };
-export default UpdateArticle;
 
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
@@ -59,3 +61,4 @@ export const getServerSideProps = async (
         },
     };
 };
+export default UpdateArticle;

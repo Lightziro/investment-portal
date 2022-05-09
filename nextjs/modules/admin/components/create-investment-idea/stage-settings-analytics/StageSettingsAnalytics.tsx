@@ -24,6 +24,7 @@ import {
     alertSuccess,
 } from "../../../../../redux/actions/alertActions";
 import { Entity } from "../../../../../ts/enums/other.enums";
+import { ErrorsResponse } from "../../../../../ts/enums/errors.enums";
 
 export const StageSettingsAnalytics: React.FC = () => {
     const dispatch = useDispatch();
@@ -57,7 +58,7 @@ export const StageSettingsAnalytics: React.FC = () => {
                     )
                 );
             })
-            .catch((e) => dispatch(alertError(e.response.data.message)));
+            .catch((e) => dispatch(alertError(ErrorsResponse.Catch)));
         await router.push("/admin/investment-ideas");
     };
     return (
@@ -75,7 +76,6 @@ export const StageSettingsAnalytics: React.FC = () => {
                         </MenuItem>
                     ))}
                 </Select>
-                <FormHelperText>With label + helper text</FormHelperText>
             </FormControl>
             <Stack direction="row" justifyContent="space-between">
                 <Button

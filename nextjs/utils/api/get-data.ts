@@ -49,7 +49,7 @@ export const getEntityAdmin = async (
     return await axios
         .get(`${process.env.API_URL_DOCKER}/api/admin/${entity}/${id}`, config)
         .then((res) => res.data)
-        .catch(() => null);
+        .catch((e) => null);
 };
 export const getSearchData = async (value: string) =>
     await axios

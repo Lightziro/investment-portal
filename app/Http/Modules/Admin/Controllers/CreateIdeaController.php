@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use PhpAmqpLib\Exception\AMQPIOException;
 use Throwable;
 
 class CreateIdeaController extends Controller
@@ -52,17 +53,17 @@ class CreateIdeaController extends Controller
             $idea->status_id = $status_created->getKey();
             $idea->author_id = $author->getKey();
             $idea->save();
-
-            $queue = new QueueRabbit();
-            $params = ['news' => $ar_news ?? [], 'idea_id' => $idea->idea_id];
-            $queue->send('analyze-idea', json_encode($params));
+            try {
+                $queue = new QueueRabbit();
+                $params = ['news' => $ar_news ?? [], 'idea_id' => $idea->idea_id];
+                $queue->send('analyze-idea', json_encode($params));
+            } catch (AMQPIOException $e) {
+                Log::error('Error send to rabbit', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            }
             return response()->json([]);
         } catch (Throwable $e) {
             Log::error('Error create idea', [$e->getMessage(), $e->getFile(), $e->getLine()]);
-            if (isset($idea)) {
-                $idea->delete();
-            }
-            return response()->json(['message' => 'Error while creating idea'], 400);
+            return response()->json([], 400);
         }
     }
 

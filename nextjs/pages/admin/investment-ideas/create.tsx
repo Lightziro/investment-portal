@@ -9,7 +9,7 @@ import { StageSettingsAnalytics } from "../../../modules/admin/components/create
 
 const InvestmentIdeaCreate: NextPage = () => {
     const { t } = useTranslation();
-    console.log("RELOAD");
+
     return (
         <MainLayout title={t("Creating idea")}>
             <AdminLayout>

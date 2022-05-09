@@ -3,6 +3,7 @@ export const ruLanguage = {
     "Information about idea": "Информация об идеи",
     "Type position": "Тип позиции: %type%",
     Short: "Короткая",
+    "Position type": "Тип позиции",
     Long: "Долгосрочная",
     "Purchase price": "Цена покупки: %amount%$",
     "Sale price": "Цена продажи: %amount%$",
@@ -196,4 +197,12 @@ export const ruLanguage = {
         "Авторизуйтесь и отправьте первый комментарий",
     Ukraine: "Украина",
     Russia: "Россия",
+    Confirm: "Подтвердить",
+    "Investment idea was not analyzed by a smart system. Do you want to specify the data manually?":
+        "Инвестиционная идея не была проанализирована интеллектуальной системой. Вы хотите указать данные вручную?",
+    "Edit idea": "Редактирование идеи",
+    "Date end": "Дата окончания",
+    "Price buy": "Цена покупки",
+    "Price sell": "Цена продажи",
+    Description: "Описание",
 };
