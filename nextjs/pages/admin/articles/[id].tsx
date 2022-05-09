@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { alertError, alertSuccess } from "../../../redux/actions/alertActions";
 
 interface UpdateArticle {
-    data: ArticleModel;
+    data: ArticleModel | null;
 }
 const UpdateArticle: NextPage<UpdateArticle> = ({ data }) => {
     const { t } = useTranslation();
@@ -34,7 +34,7 @@ const UpdateArticle: NextPage<UpdateArticle> = ({ data }) => {
             .catch((e) => dispatch(alertError("Failed update article")));
     };
     if (!data) {
-        return router.push("/404");
+        router.push("/404");
     }
 
     return (
@@ -49,6 +49,7 @@ const UpdateArticle: NextPage<UpdateArticle> = ({ data }) => {
         </MainLayout>
     );
 };
+export default UpdateArticle;
 
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
@@ -61,4 +62,3 @@ export const getServerSideProps = async (
         },
     };
 };
-export default UpdateArticle;
