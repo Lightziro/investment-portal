@@ -5,7 +5,7 @@ export const initialArticleView: ArticleView = {
     content: null,
     labels: null,
     comments: null,
-    emotions: [],
+    emotions: null,
 };
 export const initialArticleForm: FormArticle = {
     title: "",

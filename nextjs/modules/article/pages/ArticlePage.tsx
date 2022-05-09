@@ -16,6 +16,7 @@ import {
     fetchArticleLabels,
 } from "../../../redux/actions/articleArtions";
 import { ArticleEmotion } from "../components/article-emotion/ArticleEmotion";
+import { Entity } from "../../../ts/enums/other.enums";
 
 interface ArticlePage {
     article: ArticleModel;
@@ -25,7 +26,7 @@ interface ArticlePage {
 export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setViewEntity(article, "article"));
+        dispatch(setViewEntity(article, Entity.Article));
         dispatch(fetchArticleComments(article.article_id));
         dispatch(fetchArticleLabels(article.article_id));
         dispatch(fetchArticleEmotions(article.article_id));

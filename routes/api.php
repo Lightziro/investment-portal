@@ -70,8 +70,8 @@ Route::group(
                     ],
                     function () {
                         Route::get('/', [ArticleController::class, 'getEmotions'])->name('get-emotions');
-                        Route::post('/', [ArticleController::class, 'createEmotion'])->name('create-emotion');
-                        Route::put('/{emotion}', [ArticleController::class, 'changeEmotion'])->name('change-emotion');
+                        Route::post('/', [ArticleController::class, 'createEmotion'])->name('create-emotion')->middleware('auth:sanctum');
+                        Route::put('/{emotion}', [ArticleController::class, 'changeEmotion'])->name('change-emotion')->middleware('auth:sanctum');
                     }
                 );
             }
