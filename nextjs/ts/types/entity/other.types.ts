@@ -1,5 +1,5 @@
 export interface CountryModel {
-    country_id: number;
+    country_id: number | string;
     code: string;
     name: string;
 }
