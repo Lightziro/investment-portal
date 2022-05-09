@@ -70,7 +70,7 @@ class InvestmentIdea extends CustomModel
         if ($this->is_short) {
             return (($this->price_buy - $this->price_sell) / $this->price_sell) * 100;
         }
-        return round((($this->price_sell - $this->price_buy) / $this->price_buy) * 100, 1);
+        return round((($this->price_sell - $this->price_buy) / $this->price_buy) * 100, 2);
     }
 
     public function company(): HasOne

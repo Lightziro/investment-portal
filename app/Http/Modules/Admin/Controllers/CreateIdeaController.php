@@ -82,6 +82,9 @@ class CreateIdeaController extends Controller
                 'status_id' => $status->status_id,
             ]));
 
+            $idea->possible_profit = $idea->calculatePossibleProfit();
+            $idea->save();
+
             if ($request->boolean('send_email')) {
                 $message = (new CreateIdea($idea))
                     ->onQueue('emails');

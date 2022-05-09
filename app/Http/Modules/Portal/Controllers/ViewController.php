@@ -26,20 +26,22 @@ class ViewController extends Controller
 
     public function getViewIdea(InvestmentIdea $idea): JsonResponse
     {
-        $author_ideas = InvestmentIdea::query()->where(['author_id' => $idea->author_id]);
+        $ideas = $idea->author->investmentIdeas();
+        $querySuccess = clone $ideas;
+        $queryFail = clone $ideas;
 
-        $author_data = array_merge($idea->author->toArray(), [
-            'amount_success_ideas' => $author_ideas->with('status', fn($query) => $query
-                ->where(['status' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count(),
-            'amount_fail_ideas' => $author_ideas->with('status', fn($query) => $query
-                ->where(['status' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
-            'total_ideas' => $author_ideas->count()
+        $authorData = array_merge($idea->author->toArray(), [
+            'amount_success_ideas' => $querySuccess->whereHas('status', fn($query) => $query
+                ->where(['name' => InvestmentIdeaStatuses::STATUS_SUCCESSFULLY]))->count(),
+            'amount_fail_ideas' => $queryFail->whereHas('status', fn($query) => $query
+                ->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
+            'total_ideas' => $ideas->count()
         ]);
-        $company_info = array_merge($idea->toArray(), [
+        $companyInfo = array_merge($idea->toArray(), [
             'company' => $idea->company->toArray(),
-            'author' => $author_data
+            'author' => $authorData
         ]);
-        return response()->json($company_info);
+        return response()->json($companyInfo);
     }
 
     public function getViewCompany(Company $company): JsonResponse

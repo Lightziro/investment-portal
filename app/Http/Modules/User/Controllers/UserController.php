@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request as RequestApi;
@@ -16,13 +17,14 @@ use Throwable;
 class UserController extends Controller
 {
 
-    public function update(User $user): JsonResponse
+    public function update(User $user, RequestApi $request): JsonResponse
     {
-        $form_data = Request::toArray();
+        $form_data = $request->toArray();
         try {
             $user->updateOrFail($form_data);
             return response()->json($user->getProfile());
         } catch (Throwable $e) {
+            Log::error('Error update profile', [$e]);
             return response()->json([], 400);
         }
     }

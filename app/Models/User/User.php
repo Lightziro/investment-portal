@@ -26,7 +26,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $last_name
  * @property UsersRole|null $role
  * @property null|int $role_id
- * @property InvestmentIdea|Collection|null $investment_ideas
+ * @property InvestmentIdea|Collection|null $investmentIdeas
  * @property UserNotices[]|Collection $notices
  * @property string $avatar_path
  * @property CarbonInterface $created_at

@@ -4,8 +4,10 @@ export const getPossibleProfit = (
     isShort = false
 ) => {
     if (priceBuy > 0 && priceSell > 0) {
-        const result = (100 - (100 * priceBuy) / priceSell).toFixed(2);
-        return isShort ? -result : result;
+        if (isShort) {
+            return (((priceBuy - priceSell) / priceSell) * 100).toFixed(2);
+        }
+        return (((priceSell - priceBuy) / priceBuy) * 100).toFixed(2);
     }
     return "";
 };

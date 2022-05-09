@@ -15,6 +15,7 @@ class InvestmentIdeaStatuses extends CustomModel
     public const STATUS_PUBLISHED = 'published';
     public const STATUS_FAILED = 'failed';
     public const STATUS_ANALYZED = 'analyzed';
+    public const STATUS_SUCCESSFULLY = 'successfully';
 
     public $timestamps = null;
     protected $table = 'investment_idea_statuses';

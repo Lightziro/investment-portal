@@ -90,7 +90,10 @@ export const FormProfile: React.FC<FormProfile> = ({
                     <FormProfileSelectField
                         value={formik.values.country_id}
                         handleChange={formik.handleChange}
-                        items={countries}
+                        items={[
+                            { country_id: "", name: "Not specified" },
+                            ...countries,
+                        ]}
                         name="country_id"
                     />
                 </FormProfileRow>

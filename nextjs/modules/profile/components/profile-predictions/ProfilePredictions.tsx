@@ -23,8 +23,9 @@ export const ProfilePredictions: React.FC = () => {
                 {profile.predictions.length ? (
                     profile.predictions.map((prediction) => (
                         <Grid
-                            md={2}
+                            md={3}
                             container
+                            justifyContent="center"
                             item
                             alignItems="center"
                             direction="row"
