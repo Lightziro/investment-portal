@@ -20,7 +20,7 @@ class DownloadCompanyLogo extends Command
         /** @var Company $companyModel */
         foreach (Company::all() as $companyModel) {
             $companyModel->logo_path = null;
-            if ($counter === 60) {
+            if ($counter % 60 === 0) {
                 sleep(40);
             }
             try {
