@@ -26,7 +26,7 @@ export const IdeaRatings: React.FC<IdeaRatings> = ({ ideaId }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [open, setOpen] = useState<boolean>(false);
-    const user = useRootSelector((state) => state.user);
+    const { data } = useRootSelector((state) => state.user);
     const { ratings, userRating } = useRootSelector((state) => state.view.idea);
     useEffect(() => {
         if (ideaId) {
@@ -69,7 +69,7 @@ export const IdeaRatings: React.FC<IdeaRatings> = ({ ideaId }) => {
                     <Button
                         onClick={() => setOpen(true)}
                         type="primary"
-                        disabled={!user}
+                        disabled={!data}
                         block
                         size="large"
                     >

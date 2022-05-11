@@ -4,8 +4,8 @@ import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 interface HeaderSection {
-    urlRedirect: string;
-    textButton: string;
+    urlRedirect?: string;
+    textButton?: string;
     previewText: string;
 }
 export const HeaderSection: React.FC<HeaderSection> = ({
@@ -25,14 +25,16 @@ export const HeaderSection: React.FC<HeaderSection> = ({
             <Typography variant="h4" gutterBottom>
                 {t(previewText)}
             </Typography>
-            <Button
-                variant="contained"
-                color="primary"
-                startIcon={<Icon icon="ant-design:plus-outlined" />}
-                onClick={() => router.push(urlRedirect)}
-            >
-                {t(textButton)}
-            </Button>
+            {textButton && (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<Icon icon="ant-design:plus-outlined" />}
+                    onClick={() => router.push(urlRedirect)}
+                >
+                    {t(textButton)}
+                </Button>
+            )}
         </Stack>
     );
 };

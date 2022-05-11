@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
                                 className={`list-unstyled ${classes.navLinks} nav-left mb-4 mb-lg-0`}
                             >
                                 {FOOTER_MENU.map((item) => (
-                                    <li>
+                                    <li key={item.value}>
                                         <LinkWrapper href={item.value}>
                                             {t(item.label)}
                                         </LinkWrapper>

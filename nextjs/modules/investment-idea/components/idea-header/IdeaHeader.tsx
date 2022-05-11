@@ -23,6 +23,7 @@ interface CompanyIdeaHeader {
 
 export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
     const quoteData = useRootSelector((state) => state.view.idea.quote);
+    const user = useRootSelector((state) => state.user.data);
     const [open, setOpen] = useState(false);
     const { t } = useTranslation();
     if (!companyInfo) {
@@ -83,7 +84,7 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
                 <Tooltip title={t("Create prediction")}>
                     <IconButton
                         onClick={() => setOpen(true)}
-                        aria-label="upload picture"
+                        disabled={!user}
                         component="span"
                     >
                         <FileAddOutlined />

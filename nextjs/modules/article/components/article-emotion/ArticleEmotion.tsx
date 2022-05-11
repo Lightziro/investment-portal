@@ -8,7 +8,6 @@ import {
 } from "../../../../redux/actions/articleArtions";
 import { EmotionItem } from "./emotion-item/EmotionItem";
 import { ARTICLE_EMOTIONS } from "../../ts/consts/emotions";
-import { Skeleton } from "@mui/lab";
 import { useTranslation } from "react-i18next";
 
 interface ArticleEmotion {
@@ -54,6 +53,7 @@ export const ArticleEmotion: React.FC<ArticleEmotion> = ({ articleId }) => {
             <Grid container justifyContent="center" direction="row">
                 {ARTICLE_EMOTIONS.map((emotion) => (
                     <EmotionItem
+                        key={emotion.name}
                         handleSetEmotion={handleSetEmotion}
                         emotion={emotion}
                         loadEmotion={!emotions}

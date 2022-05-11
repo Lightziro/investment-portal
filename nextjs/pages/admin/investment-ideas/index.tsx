@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { MainLayout } from "../../../layouts/MainLayout";
 import { AdminLayout } from "../../../layouts/AdminLayout";
 import { useTranslation } from "react-i18next";
-import { Container } from "@mui/material";
+import { Container, Divider } from "@mui/material";
 import { HeaderSection } from "../../../modules/admin/components/header-section/HeaderSection";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -25,6 +25,7 @@ const InvestmentIdeas: NextPage = () => {
                         textButton="Create idea"
                         previewText="Investment ideas"
                     />
+                    <Divider />
                     <AdminIdeasList />
                 </Container>
             </AdminLayout>

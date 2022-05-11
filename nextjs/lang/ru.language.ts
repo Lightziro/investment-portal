@@ -206,4 +206,5 @@ export const ruLanguage = {
     "Price sell": "Цена продажи",
     Description: "Описание",
     "Log in to create emotion": "Авторизуйтесь, чтобы создать эмоцию",
+    "Create idea": "Создать идею",
 };

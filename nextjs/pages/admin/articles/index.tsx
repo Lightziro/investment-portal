@@ -22,7 +22,7 @@ const ArticlesAdminPage = () => {
                     <HeaderSection
                         urlRedirect="/admin/articles/create-article"
                         textButton="Create article"
-                        previewText="Stats articles"
+                        previewText="Articles"
                     />
                     <Divider />
                     <AdminArticlesList />

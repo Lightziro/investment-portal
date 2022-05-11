@@ -21,7 +21,11 @@ export const ArticleItem: React.FC<ArticleItem> = ({ item }) => {
             cover={
                 <img
                     alt={`${t("Preview article")}`}
-                    src={`${process.env.API_URL}/storage/${item.preview_path}`}
+                    src={
+                        item.preview_path
+                            ? `${process.env.API_URL}/storage/${item.preview_path}`
+                            : "/images/picture/other/no-preview.svg"
+                    }
                 />
             }
         >

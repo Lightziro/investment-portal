@@ -1,30 +1,26 @@
 import React from "react";
 import { Grid, Skeleton } from "@mui/material";
+import classes from "../../Article.module.scss";
+
 interface ArticleContent {
     preview: string;
     content: string;
 }
-import classes from "../../Article.module.scss";
+
 export const ArticleContent: React.FC<ArticleContent> = ({
     preview,
     content,
 }) => {
     return (
         <Grid container direction="column">
-            <div className={classes.wrapperArticlePreview}>
-                {preview ? (
+            {preview && (
+                <div className={classes.wrapperArticlePreview}>
                     <img
                         src={`${process.env.API_URL}/storage/${preview}`}
                         className={classes.preview}
                     />
-                ) : (
-                    <Skeleton
-                        variant={"rectangular"}
-                        height={530}
-                        width="100%"
-                    />
-                )}
-            </div>
+                </div>
+            )}
             {content ? (
                 <div
                     className="article-content"
