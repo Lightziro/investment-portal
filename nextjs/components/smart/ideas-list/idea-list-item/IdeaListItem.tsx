@@ -9,7 +9,6 @@ interface IdeaListItem {
 }
 export const IdeaListItem: React.FC<IdeaListItem> = ({ idea }) => {
     const { t } = useTranslation();
-
     return (
         <List.Item>
             <List.Item.Meta

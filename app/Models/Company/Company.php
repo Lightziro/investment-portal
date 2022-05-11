@@ -3,22 +3,20 @@
 namespace App\Models\Company;
 
 use App\Models\Other\Activity;
-use App\Models\Other\ActivityWorkingSeason;
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $company_id
  * @property string $name
  * @property string $ticker
- * @property string $logo
+ * @property string $logo_path
  * @property string $industry_work
- * @property Carbon|null $date_ipo
+ * @property CarbonInterface|null $date_ipo
  * @property string $currency
  * @property int $activity_id;
- * @property Activity $activity
+ * @property-read Activity $activity
  */
 class Company extends Model
 {
@@ -26,6 +24,7 @@ class Company extends Model
 
     protected $table = 'companies';
     protected $with = ['activity'];
+    protected $fillable = ['logo_path'];
 
     protected $casts = [
         'date_ipo' => 'date'

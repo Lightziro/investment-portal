@@ -40,10 +40,10 @@ class PortalController extends BaseController
         foreach ($investment_ideas as $idea_model) {
             $company_info = $idea_model->company;
             $ar_ideas[] = [
-                'id' => $idea_model->idea_id,
+                'id' => $idea_model->getKey(),
                 'possibleProfit' => $idea_model->possible_profit,
                 'stock' => $company_info->name,
-                'logo' => $company_info->logo,
+                'logo' => $company_info->logo_path,
             ];
         }
 

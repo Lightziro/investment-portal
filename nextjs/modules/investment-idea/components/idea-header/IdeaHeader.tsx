@@ -37,7 +37,7 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
             <Grid container direction="row" justifyContent="space-between">
                 <Stack alignItems="center" direction="row" spacing={2}>
                     <Avatar
-                        src={`${process.env.API_URL}/storage/${companyInfo.logo}`}
+                        src={`${process.env.API_URL}/storage/${companyInfo.logo_path}`}
                     />
                     <span>{`${companyInfo.name}(${companyInfo.ticker})`}</span>
                     <Divider

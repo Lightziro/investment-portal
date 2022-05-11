@@ -8,7 +8,7 @@ export interface CompanyModel {
     company_id: number;
     ticker: string;
     name: string;
-    logo: string | null;
+    logo_path: string | null;
     currency: string;
     date_ipo: string;
     activity?: CompanyActivityModel | null;
