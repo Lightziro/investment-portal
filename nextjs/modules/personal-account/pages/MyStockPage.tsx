@@ -44,7 +44,7 @@ export const MyStockPage: React.FC = () => {
                         <List.Item.Meta
                             avatar={
                                 <Avatar
-                                    src={`${process.env.API_URL}/storage/${item.company.logo}`}
+                                    src={`${process.env.API_URL}/storage/${item.company.logo_path}`}
                                 />
                             }
                             title={item.company.name}

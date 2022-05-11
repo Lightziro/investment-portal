@@ -32,7 +32,7 @@ export const ProfilePredictions: React.FC = () => {
                         >
                             <Avatar
                                 sx={{ mr: 2 }}
-                                src={`${process.env.API_URL}/storage/${prediction.company.logo}`}
+                                src={`${process.env.API_URL}/storage/${prediction.company.logo_path}`}
                             />
                             <Chip
                                 sx={{ mr: 1 }}
