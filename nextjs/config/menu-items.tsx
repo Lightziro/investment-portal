@@ -103,15 +103,15 @@ export const MENU_ADMIN = [
 ];
 export const OPTIONS_NEWS_ANALYZE = [
     {
-        label: "3 Month",
+        label: "3 month",
         value: 3,
     },
     {
-        label: "6 Month",
+        label: "6 month",
         value: 6,
     },
     {
-        label: "12 Month",
+        label: "12 month",
         value: 12,
     },
 ];

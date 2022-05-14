@@ -52,8 +52,7 @@ export const EditUser = () => {
                 {editUser && (
                     <Fragment>
                         <Typography align="center" variant="h4">
-                            Edit user data -{" "}
-                            {`${editUser.full_name}[${editUser.user_id}]`}
+                            {`${t('Editing user')} - ${editUser.full_name}[${editUser.user_id}]`}
                         </Typography>
                         <UserEditForm
                             callback={handleSubmit}

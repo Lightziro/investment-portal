@@ -39,11 +39,8 @@ export const UserEditForm: React.FC<UserEditForm> = ({
         <Formik initialValues={userData} onSubmit={callback}>
             {({
                 values,
-                errors,
                 handleChange,
-                handleBlur,
                 handleSubmit,
-                isSubmitting,
             }: FormikProps<UserModel>) => (
                 <form onSubmit={handleSubmit}>
                     <Row className="mb-3">
@@ -80,7 +77,7 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                                         key={item.role_id}
                                         value={item.role_id}
                                     >
-                                        {item.name}
+                                        {t(item.name)}
                                     </option>
                                 ))}
                             </Form.Select>
@@ -98,7 +95,7 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                                         key={item.country_id}
                                         value={item.country_id}
                                     >
-                                        {item.name}
+                                        {t(item.name)}
                                     </option>
                                 ))}
                             </Form.Select>
@@ -125,10 +122,10 @@ export const UserEditForm: React.FC<UserEditForm> = ({
                         justifyContent="center"
                     >
                         <Button variant="primary" type="submit">
-                            Submit
+                            {t('Edit')}
                         </Button>
                         <Button onClick={handleDelete} variant="danger">
-                            Delete
+                            {t('Delete')}
                         </Button>
                     </Stack>
                 </form>

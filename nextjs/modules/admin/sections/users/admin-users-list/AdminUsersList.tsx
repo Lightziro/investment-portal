@@ -10,9 +10,11 @@ import { EntityTable } from "../../../../../components/simple/entity-table/Entit
 import { RoleUserChip } from "../../../../../components/simple/role-user-chip/RoleUserChip";
 import { UserModel } from "../../../../../ts/types/entity/user.types";
 import { Entity } from "../../../../../ts/enums/other.enums";
+import {useTranslation} from "react-i18next";
 
 export const AdminUsersList: React.FC = () => {
     const dispatch = useDispatch();
+    const {t} = useTranslation();
     const [page, setPage] = useState(1);
     const router = useRouter();
     const { list, lastPage, loading } = useRootSelector(
@@ -41,9 +43,9 @@ export const AdminUsersList: React.FC = () => {
                     row={list.map((user: UserModel) => [
                         user.user_id,
                         user.full_name,
-                        user.sex,
+                        t(user.sex),
                         <RoleUserChip role={user.role?.name} />,
-                        user.country?.name,
+                        t(user.country?.name),
                         moment(user.created_at).format("ll"),
                         moment(user.updated_at).format("ll"),
                         <IconButton

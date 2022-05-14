@@ -1,16 +1,18 @@
 import React from "react";
+import {useTranslation} from "react-i18next";
 interface EntityTable {
     columns: string[];
     row: any[][];
 }
 export const EntityTable: React.FC<EntityTable> = ({ columns, row }) => {
+    const {t} = useTranslation()
     return (
         <table className="table">
             <thead>
                 <tr>
                     {columns.map((item, i) => (
                         <th key={i} scope="col">
-                            {item}
+                            {t(item)}
                         </th>
                     ))}
                 </tr>

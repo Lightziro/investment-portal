@@ -44,7 +44,7 @@ Route::group(
     [
         'prefix' => 'idea',
         'middleware' => [
-//            BeforeCheckRootAdmin::class
+            BeforeCheckRootAdmin::class
         ]
     ],
     function () {

@@ -1,36 +1,42 @@
-import React from "react";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import Tab from "@mui/material/Tab";
-import TabPanel from "@mui/lab/TabPanel";
-import { useTranslation } from "react-i18next";
-import { IdeasStats } from "../../sections/stats/ideas-stats/IdeasStats";
+import React, {Fragment} from "react";
+import { TabPanel } from "../../../../components/simple/tabl-panel/TabPanel";
+import {useTranslation} from "react-i18next";
+import {IdeasStats} from "../../sections/stats/ideas-stats/IdeasStats";
+import {ArticlesStats} from "../../sections/stats/articles-stats/ArticlesStats";
+import {AppBar, Tab, Tabs} from "@mui/material";
+import {a11yProps} from "../../../../utils/other";
 
 const AdminStats = () => {
-    const { t } = useTranslation();
-    const [value, setValue] = React.useState<string>("0");
+    const {t} = useTranslation();
+    const [value, setValue] = React.useState<number>(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(String(newValue));
+        setValue(newValue);
     };
 
     return (
-        <TabContext value={value}>
-            <TabList
-                centered
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-            >
-                {["Investment ideas", "Articles", "Users"].map((item, key) => (
-                    <Tab label={t(item)} value={key} />
-                ))}
-            </TabList>
-            <TabPanel value={"0"}>
-                <IdeasStats />
+        <Fragment>
+            <AppBar position="static">
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    indicatorColor="secondary"
+                    textColor="inherit"
+                    variant="fullWidth"
+                    aria-label="full width tabs example"
+                >
+                    {["Investment ideas", "Articles"].map((item, key) => (
+                        <Tab label={t(item)} {...a11yProps(key)} />
+                    ))}
+                </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+                <IdeasStats/>
             </TabPanel>
-            <TabPanel value={"1"}>Item Two</TabPanel>
-            <TabPanel value={"2"}>Item Three</TabPanel>
-        </TabContext>
+            <TabPanel value={value} index={1}>
+                <ArticlesStats/>
+            </TabPanel>
+        </Fragment>
     );
 };
 export default AdminStats;

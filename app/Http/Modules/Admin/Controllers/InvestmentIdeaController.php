@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Http\Modules\Admin\Controllers;
-
 
 use App\Models\Investment\InvestmentIdea;
 use Illuminate\Http\JsonResponse;

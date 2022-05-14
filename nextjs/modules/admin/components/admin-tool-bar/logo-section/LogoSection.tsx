@@ -1,16 +1,16 @@
 import React from "react";
 import classes from "../AdminToolBar.module.scss";
-import Link from "next/link";
+import {LinkWrapper} from "../../../../../components/simple/link/Link";
 
 export const LogoSection: React.FC = () => {
     return (
         <div className={classes.headerBarLogo}>
-            <Link href="/" passHref>
+            <LinkWrapper href="/" passHref>
                 <img
                     className={classes.logoLink}
-                    src="/images/logo/logo-hub.png"
+                    src="/images/logo/logo-base.png"
                 />
-            </Link>
+            </LinkWrapper>
         </div>
     );
 };

@@ -4,10 +4,11 @@ import { useRootSelector } from "../../../../../hooks/useTypeSelector";
 import Link from "next/link";
 import classes from "../AdminToolBar.module.scss";
 import { UserAvatar } from "../../../../../components/simple/user-avatar/UserAvatar";
+import {useTranslation} from "react-i18next";
 
 export const UserSection: React.FC = () => {
     const { data } = useRootSelector((store) => store.user);
-    // TODO: Перевести Link по блокам
+    const {t} = useTranslation();
     return (
         <div className={classes.barSectionUser}>
             {data ? (
@@ -24,7 +25,7 @@ export const UserSection: React.FC = () => {
                             <span className={classes.fullName}>
                                 {data.full_name}
                             </span>
-                            <span className={classes.role}>{data.role}</span>
+                            <span className={classes.role}>{t(data.role)}</span>
                         </div>
                     </div>
                 </Link>

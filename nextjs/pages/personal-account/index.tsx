@@ -5,7 +5,6 @@ import { PortalLayout } from "../../layouts/PortalLayout";
 import { Container } from "@mui/material";
 import { PersonalAccountPage } from "../../modules/personal-account/pages/PersonalAccountPage";
 import { PersonalAccountLayout } from "../../layouts/PersonalAccountLayout";
-import Router from "next/router";
 
 export const PersonalAccount: NextPage = () => {
     return (

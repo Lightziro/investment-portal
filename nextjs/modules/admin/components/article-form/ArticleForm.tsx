@@ -51,7 +51,6 @@ export const ArticleForm: React.FC<ArticleForm> = ({
                             onChange={handleChange}
                             value={values.title}
                             name="title"
-                            placeholder="Enter title article"
                         />
                     </Form.Group>
                     <Row>

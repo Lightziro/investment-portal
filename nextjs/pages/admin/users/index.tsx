@@ -15,7 +15,6 @@ const Users: NextPage = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchEntityList(Entity.User, 0));
-        // dispatch(fetchUsersStats()); TODO: убрать
     }, []);
     return (
         <MainLayout title={`${t("Admin panel")} - ${t("users")}`}>

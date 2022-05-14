@@ -63,7 +63,7 @@ export const StageSettingsAnalytics: React.FC = () => {
     };
     return (
         <Stack sx={{ mt: 2 }} direction="column">
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ minWidth: 120, mb: 2 }}>
                 <InputLabel>{t("Period news analysis")}</InputLabel>
                 <Select
                     value={params.monthPeriod.toString()}
@@ -89,7 +89,7 @@ export const StageSettingsAnalytics: React.FC = () => {
                     {t("Prev stage")}
                 </Button>
                 <Button onClick={handleSendToAnalyze} variant="primary">
-                    {t("Send to analyze")}
+                    {t("Create idea")}
                 </Button>
             </Stack>
         </Stack>

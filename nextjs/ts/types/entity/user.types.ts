@@ -11,7 +11,7 @@ export interface UserModel {
     updated_at: string;
     created_at: string;
     avatar_path: string;
-    sex: string;
+    sex?: string;
     full_name: string;
     role?: RoleModel;
     country?: CountryModel;

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { GetServerSidePropsContext, NextPage } from "next";
-import { axios } from "../../utils/axios";
+import { NextPage } from "next";
 import { IdeaModel } from "../../ts/types/entity/idea.types";
 import { MainLayout } from "../../layouts/MainLayout";
 import { PortalLayout } from "../../layouts/PortalLayout";
