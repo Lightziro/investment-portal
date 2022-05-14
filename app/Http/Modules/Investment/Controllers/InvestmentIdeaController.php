@@ -13,26 +13,19 @@ use Illuminate\Routing\Controller;
 
 class InvestmentIdeaController extends Controller
 {
-    public function createComment(Request $request): JsonResponse
+    public function createComment(InvestmentIdea $idea, Request $request): JsonResponse
     {
-        $post_data = $request->post();
         /** @var User $user */
-        if (!$user = $request->user()) {
-            return response()->json(['Not found user'], 404);
-        }
-        /** @var InvestmentIdea $idea_model */
-        $idea_model = InvestmentIdea::query()->find($post_data['entityId']);
-        if (!$idea_model) {
-            return response()->json(['message' => 'Not found investment idea'], 404);
-        }
+        $user = $request->user();
+        $post_data = $request->post();
+
         $comment = new InvestmentIdeaComments();
         $comment->comment = $post_data['comment'];
-        $comment->user_id = $user->user_id;
-        $comment->idea_id = $idea_model->idea_id;
+        $comment->user_id = $user->getKey();
+        $comment->idea_id = $idea->getKey();
         $comment->save();
-        return response()->json(array_merge($comment->toArray(), [
-            'user' => $comment->user->toArray()
-        ]));
+
+        return response()->json($comment->load('user')->toArray());
     }
 
     public function setRating(InvestmentIdea $idea): JsonResponse
@@ -68,8 +61,12 @@ class InvestmentIdeaController extends Controller
 
     public function getComments(InvestmentIdea $idea): JsonResponse
     {
-        $comments = $idea->comments()->with('user')->orderByDesc('created_at')->get()->toArray();
-        return response()->json(InvestmentIdeaHelper::filterDeletedUser($comments));
+        $comments = $idea
+            ->comments()
+            ->orderByDesc('created_at')
+            ->get()->whereNotNull("user")->values();;
+
+        return response()->json($comments->toArray());
     }
 
     public function getRating(InvestmentIdea $idea): JsonResponse

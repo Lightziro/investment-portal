@@ -20,6 +20,7 @@ export interface CompanyView {
     epsStats: BaseCompanyStat[];
     analyticsStats: AnalyticsStats[];
     netMarginStats: BaseCompanyStat[];
+    salePerShare: BaseCompanyStat[];
 }
 
 export interface ArticleView {

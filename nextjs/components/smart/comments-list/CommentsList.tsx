@@ -9,9 +9,10 @@ import { NoComments } from "./no-comments/NoComments";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
 import { Comment, EntityName } from "../../../ts/types/other/view.types";
 import { createEntityComment } from "../../../redux/actions/viewActions";
+import {Entity} from "../../../ts/enums/other.enums";
 interface CommentsWrapper {
     entityId: number;
-    entityName: EntityName;
+    entityName: Entity;
     comments: Comment[];
 }
 export const CommentsList: React.FC<CommentsWrapper> = ({

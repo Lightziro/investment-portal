@@ -14,14 +14,15 @@ export const SearchEntities: React.FC = () => {
     const router = useRouter();
 
     const handleSearch = async (value) => {
-        if (isEmpty) {
+        console.log(value);
+        if (isEmpty(value)) {
             return;
         }
         const data = await getSearchData(value);
         setOptions((prev) => data);
     };
     const handleClickSearch = (value: string) => {
-        if (isEmpty) {
+        if (isEmpty(value)) {
             return;
         }
         router.push(`/search/${value}`);

@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
-import { Container, Divider, Grid, Paper } from "@mui/material";
-import { ArticleHeader } from "../components/article-header/ArticleHeader";
-import { CommentsList } from "../../../components/smart/comments-list/CommentsList";
-import { NewsList } from "../../../components/ordinary/news-list/NewsList";
-import { ArticleContent } from "../components/article-content/ArticleContent";
-import { AboutAuthor } from "../components/about-author/AboutAuthor";
-import { News } from "../../../ts/types/entity/stock-market.types";
-import { useDispatch } from "react-redux";
-import { setViewEntity } from "../../../redux/actions/viewActions";
-import { useRootSelector } from "../../../hooks/useTypeSelector";
-import { ArticleModel } from "../../../ts/types/entity/article.types";
-import {
-    fetchArticleComments,
-    fetchArticleEmotions,
-    fetchArticleLabels,
-} from "../../../redux/actions/articleArtions";
-import { ArticleEmotion } from "../components/article-emotion/ArticleEmotion";
-import { Entity } from "../../../ts/enums/other.enums";
+import React, {useEffect} from "react";
+import {Container, Divider, Grid, Paper} from "@mui/material";
+import {ArticleHeader} from "../components/article-header/ArticleHeader";
+import {CommentsList} from "../../../components/smart/comments-list/CommentsList";
+import {NewsList} from "../../../components/ordinary/news-list/NewsList";
+import {ArticleContent} from "../components/article-content/ArticleContent";
+import {AboutAuthor} from "../components/about-author/AboutAuthor";
+import {News} from "../../../ts/types/entity/stock-market.types";
+import {useDispatch} from "react-redux";
+import {setViewEntity} from "../../../redux/actions/viewActions";
+import {useRootSelector} from "../../../hooks/useTypeSelector";
+import {ArticleModel} from "../../../ts/types/entity/article.types";
+import {fetchArticleComments, fetchArticleEmotions, fetchArticleLabels,} from "../../../redux/actions/articleArtions";
+import {ArticleEmotion} from "../components/article-emotion/ArticleEmotion";
+import {Entity} from "../../../ts/enums/other.enums";
 
 interface ArticlePage {
     article: ArticleModel;
@@ -71,7 +67,7 @@ export const ArticlePage: React.FC<ArticlePage> = ({ article, news }) => {
                     <Grid item container>
                         <CommentsList
                             entityId={article.article_id}
-                            entityName="article"
+                            entityName={Entity.Article}
                             comments={comments}
                         />
                     </Grid>

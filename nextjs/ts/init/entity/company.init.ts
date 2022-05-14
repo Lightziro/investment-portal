@@ -4,4 +4,5 @@ export const initialCompanyView: CompanyView = {
     epsStats: null,
     analyticsStats: null,
     netMarginStats: null,
+    salePerShare: null
 };

@@ -1,5 +1,6 @@
 import { EntityName } from "../../ts/types/other/view.types";
 import { DtoIdeaRatingStats } from "../../modules/investment-idea/ts/types/response.types";
+import {Entity} from "../../ts/enums/other.enums";
 
 export const setViewEntity = (data: any, entity: EntityName) => ({
     type: "SET_VIEW_ENTITY",
@@ -8,7 +9,7 @@ export const setViewEntity = (data: any, entity: EntityName) => ({
 });
 export const createEntityComment = (
     entityId: number,
-    entityType: EntityName,
+    entityType: Entity,
     text: string
 ) => ({
     type: "CREATE_ENTITY_COMMENT",

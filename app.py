@@ -46,28 +46,10 @@ def callback(ch, method, properties, body):
     channel.basic_publish(exchange='',
                           routing_key='predict-idea',
                           body=predict_data)
-    # logger.info(data['idea_id'])
-    # logger.info(body)
-    # ch.basic_ack(delivery_tag=method.delivery_tag)
+    ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 channel.basic_consume(queue='analyze-idea',
                       auto_ack=False,
                       on_message_callback=callback)
 channel.start_consuming()
-
-
-@app.route('/classification-news', methods=['POST'])
-def predictRes():
-    news_list = request.get_json()
-    data_predict = []
-    for item in news_list:
-        result_text = transformer_text.processText(item)
-        if result_text != result_text:
-            continue
-        data_predict.append(result_text)
-    #     return jsonify(data_predict)
-    #     requests.get('http://host.docker.internal:8000/api/test')
-    str_predict = predict('. '.join(data_predict), model).to_json(orient='records')
-    data = json.loads(str_predict)
-    predict_data = {'idea_id'}

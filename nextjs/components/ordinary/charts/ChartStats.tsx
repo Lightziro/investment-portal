@@ -11,6 +11,7 @@ interface ChartStats {
     height?: number;
     type?: any;
     title: string;
+    hintName: string;
 }
 
 export const ChartStats: React.FC<ChartStats> = ({
@@ -18,6 +19,7 @@ export const ChartStats: React.FC<ChartStats> = ({
     height = 180,
     type = "area",
     title,
+    hintName,
 }) => {
     const { t } = useTranslation();
     if (!statsData) {
@@ -29,7 +31,7 @@ export const ChartStats: React.FC<ChartStats> = ({
             <Typography px={1} variant="h5">
                 {t(title)}
             </Typography>
-            <Divider />
+            <Divider className="mb-2" />
             {statsData.length ? (
                 <Chart
                     {...{
@@ -61,7 +63,7 @@ export const ChartStats: React.FC<ChartStats> = ({
                         },
                         series: [
                             {
-                                name: "EPS",
+                                name: t(hintName),
                                 data: statsData.map((item) => ({
                                     y: item.value,
                                     x: new Date(item.date).getFullYear(),

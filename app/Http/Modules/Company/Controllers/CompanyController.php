@@ -45,9 +45,16 @@ class CompanyController extends Controller
                         'value' => round($margin_stat->v, 2),
                     ];
                 }
+                foreach ($series->salesPerShare as $sale_stat) {
+                    $ar_sale[] = [
+                        'date' => $sale_stat->period,
+                        'value' => round($sale_stat->v, 2),
+                    ];
+                }
             }
             $ar_eps = array_reverse($ar_eps ?? []);
             $ar_net_margin = array_reverse($ar_net_margin ?? []);
+            $ar_sale = array_reverse($ar_sale ?? []);
 
         }
         $analytics_stats = $market->getRecommendationAnalytics($company->ticker);
@@ -65,7 +72,8 @@ class CompanyController extends Controller
         return response()->json([
             'epsStats' => $ar_eps ?? [],
             'analyticsStats' => $ar_stats ?? [],
-            'netMarginStats' => $ar_net_margin ?? []
+            'netMarginStats' => $ar_net_margin ?? [],
+            'salePerShare' => $ar_sale ?? []
         ]);
     }
 }

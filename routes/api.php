@@ -28,7 +28,6 @@ Route::group(
         'prefix' => 'idea',
     ],
     function () {
-        Route::post('/create-comment', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
         Route::get('/all/{sort_by?}', [InvestmentIdeaController::class, 'all']);
         Route::group(
             [
@@ -43,6 +42,16 @@ Route::group(
                 Route::get('/rating', [InvestmentIdeaController::class, 'getRating'])->name('get-rating');
                 Route::get('/user-rating', [InvestmentIdeaController::class, 'getUserRating']);
                 Route::post('/set-rating', [InvestmentIdeaController::class, 'setRating'])->middleware('auth:sanctum')->name('set-rating');
+
+                Route::group(
+                    [
+                        'prefix' => 'comments'
+                    ],
+                    function () {
+                        Route::get('/', [InvestmentIdeaController::class, 'getComments'])->name('get-idea-comments');
+                        Route::post('/', [InvestmentIdeaController::class, 'createComment'])->middleware('auth:sanctum');
+                    }
+                );
             }
         );
     }
@@ -62,7 +71,6 @@ Route::group(
             ],
             function () {
                 Route::get('/', [ViewController::class, 'getViewArticle'])->middleware(AfterViewArticleMiddleware::class);
-                Route::get('/comments', [ArticleController::class, 'getComments'])->name('get-article-comments');
                 Route::get('/labels', [ArticleController::class, 'getLabels'])->name('get-labels');
                 Route::group(
                     [
@@ -74,10 +82,18 @@ Route::group(
                         Route::put('/{emotion}', [ArticleController::class, 'changeEmotion'])->name('change-emotion')->middleware('auth:sanctum');
                     }
                 );
+                Route::group(
+                    [
+                        'prefix' => 'comments'
+                    ],
+                    function () {
+                        Route::get('/', [ArticleController::class, 'getComments'])->name('get-article-comments');
+                        Route::post('/', [ArticleController::class, 'createComment'])->middleware('auth:sanctum');
+                    }
+                );
             }
         );
         Route::get('/all/{sort_by?}', [ArticleController::class, 'all'])->name('all');
-        Route::post('/create-comment', [ArticleController::class, 'createComment'])->middleware('auth:sanctum');
     }
 );
 

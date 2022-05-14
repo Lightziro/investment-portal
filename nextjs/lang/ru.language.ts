@@ -207,4 +207,10 @@ export const ruLanguage = {
     Description: "Описание",
     "Log in to create emotion": "Авторизуйтесь, чтобы создать эмоцию",
     "Create idea": "Создать идею",
+    "EPS Stats": "Статистика чистой прибыли",
+    "Net margins stats": "Статистика чистой маржи",
+    Value: "Значение",
+    "Sales per share": "Статистика продажи на акцию",
+    Technology: "Технологии",
+    "Create company": "Создание компании",
 };

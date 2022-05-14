@@ -86,9 +86,8 @@ function* createEntityComment(action: AnyAction): Generator {
     const { entityType, entityId, text } = action;
     try {
         const comment = yield axios
-            .post(`${process.env.API_URL}/api/${entityType}/create-comment`, {
+            .post(`${process.env.API_URL}/api/${entityType}/${entityId}/comments`, {
                 comment: text,
-                entityId,
             })
             .then((response) => response.data);
         yield put({

@@ -4,18 +4,15 @@ namespace App\Models\Article;
 
 use App\Custom\CustomModel;
 use App\Models\User\User;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use JetBrains\PhpStorm\Pure;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int comment_id
- * @property int article_id
- * @property Article article
- * @property User user
- * @property int user_id
- * @property string comment
- * @property Carbon created_at
+ * @property int $comment_id
+ * @property int $article_id
+ * @property Article $article
+ * @property User $user
+ * @property int $user_id
+ * @property string $comment
  */
 class ArticleComments extends CustomModel
 {
@@ -25,13 +22,13 @@ class ArticleComments extends CustomModel
     const UPDATED_AT = null;
 
 
-    public function article(): HasOne
+    public function article(): BelongsTo
     {
-        return $this->hasOne(Article::class, 'article_id', 'article_id');
+        return $this->belongsTo(Article::class, 'article_id', 'article_id');
     }
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class, 'user_id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

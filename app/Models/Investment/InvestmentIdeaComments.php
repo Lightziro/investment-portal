@@ -4,6 +4,7 @@ namespace App\Models\Investment;
 
 use App\Custom\CustomModel;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -20,8 +21,8 @@ class InvestmentIdeaComments extends CustomModel
     protected $with = ['user'];
     const UPDATED_AT = null;
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class, 'user_id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

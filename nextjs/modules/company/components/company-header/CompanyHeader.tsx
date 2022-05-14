@@ -8,9 +8,9 @@ import {
     Typography,
 } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
-import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { alertInfo } from "../../../../redux/actions/alertActions";
+import { useTranslation } from "react-i18next";
 
 interface CompanyHeader {
     name: string;
@@ -25,6 +25,7 @@ export const CompanyHeader: React.FC<CompanyHeader> = ({
     currency,
     ticker,
 }) => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const handleShare = () => {
         dispatch(alertInfo("Link copied successfully"));
@@ -40,7 +41,7 @@ export const CompanyHeader: React.FC<CompanyHeader> = ({
                     {name} ({ticker})
                 </Typography>
                 <Divider orientation="vertical" />
-                {activity && <Chip label={activity} />}
+                {activity && <Chip label={t(activity)} />}
                 <Chip label={currency} />
             </Stack>
             <IconButton onClick={handleShare}>

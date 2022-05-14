@@ -19,7 +19,11 @@ const Companies = () => {
         <MainLayout title={t("Companies")}>
             <AdminLayout>
                 <Container maxWidth="xl">
-                    <HeaderSection previewText="Companies" />
+                    <HeaderSection
+                        previewText="Companies"
+                        urlRedirect="/admin/companies/create"
+                        textButton="Create company"
+                    />
                     <Divider />
                     <AdminCompaniesList />
                 </Container>

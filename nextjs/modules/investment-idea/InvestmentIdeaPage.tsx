@@ -1,24 +1,25 @@
-import React, { Fragment, useEffect } from "react";
-import { Grid } from "@mui/material";
-import { IdeaHeader } from "./components/idea-header/IdeaHeader";
-import { CompanyDescription } from "./components/company-description/CompanyDescription";
-import { IdeaAuthor } from "./components/idea-author/IdeaAuthor";
-import { ChartStats } from "../../components/ordinary/charts/ChartStats";
-import { IdeaInformation } from "./components/idea-information/IdeaInformation";
-import { ChartStatsAnalytics } from "../../components/ordinary/charts/ChartStatsAnalytics";
-import { CommentsList } from "../../components/smart/comments-list/CommentsList";
-import { IdeaDescription } from "./components/idea-description/IdeaDescription";
-import { useDispatch } from "react-redux";
-import { useRootSelector } from "../../hooks/useTypeSelector";
-import { IdeaRatings } from "./components/idea-ratings/IdeaRatings";
+import React, {Fragment, useEffect} from "react";
+import {Grid} from "@mui/material";
+import {IdeaHeader} from "./components/idea-header/IdeaHeader";
+import {CompanyDescription} from "./components/company-description/CompanyDescription";
+import {IdeaAuthor} from "./components/idea-author/IdeaAuthor";
+import {ChartStats} from "../../components/ordinary/charts/ChartStats";
+import {IdeaInformation} from "./components/idea-information/IdeaInformation";
+import {ChartStatsAnalytics} from "../../components/ordinary/charts/ChartStatsAnalytics";
+import {CommentsList} from "../../components/smart/comments-list/CommentsList";
+import {IdeaDescription} from "./components/idea-description/IdeaDescription";
+import {useDispatch} from "react-redux";
+import {useRootSelector} from "../../hooks/useTypeSelector";
+import {IdeaRatings} from "./components/idea-ratings/IdeaRatings";
 import {
     fetchCompanyQuote,
     fetchCompanyStats,
     fetchIdeaComments,
     fetchIdeaRating,
 } from "../../redux/actions/investmentIdeaActions";
-import { IdeaView } from "../../ts/types/entity/idea.types";
-import { clearView } from "../../redux/actions/viewActions";
+import {IdeaView} from "../../ts/types/entity/idea.types";
+import {clearView} from "../../redux/actions/viewActions";
+import {Entity} from "../../ts/enums/other.enums";
 
 interface InvestmentIdeaPage {
     ideaData: IdeaView;
@@ -65,7 +66,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                     <IdeaAuthor data={ideaData.author} />
                 </Grid>
                 <Grid xs={12} sm={8} item md={5} xl={4} lg={4}>
-                    <ChartStats statsData={epsStats} title="EPS" />
+                    <ChartStats hintName='value' statsData={epsStats} title="EPS" />
                 </Grid>
                 <Grid xs={12} item lg={5} sm={7} md={7} xl={5}>
                     <IdeaDescription description={ideaData.description} />
@@ -82,7 +83,7 @@ export const InvestmentIdeaPage: React.FC<InvestmentIdeaPage> = ({
                 <Grid sm={6} item xl={3} md={4}>
                     <CommentsList
                         entityId={ideaData.idea_id}
-                        entityName="idea"
+                        entityName={Entity.InvestmentIdea}
                         comments={comments}
                     />
                 </Grid>

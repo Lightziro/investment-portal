@@ -6,7 +6,7 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { PortalLayout } from "../../layouts/PortalLayout";
 import { CompanyModel } from "../../ts/types/entity/other.types";
 import { useRouter } from "next/router";
-import { Container, Grid, Paper } from "@mui/material";
+import { Container } from "@mui/material";
 import { CompanyPage } from "../../modules/company/pages/CompanyPage";
 
 interface Company {
