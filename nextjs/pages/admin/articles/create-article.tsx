@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { alertError, alertSuccess } from "../../../redux/actions/alertActions";
 import { useRouter } from "next/router";
 import { axios } from "../../../utils/axios";
+import { ErrorsResponse } from "../../../ts/enums/errors.enums";
 
 const CreateArticle: NextPage = () => {
     const router = useRouter();
@@ -25,7 +26,7 @@ const CreateArticle: NextPage = () => {
                 dispatch(alertSuccess("Article successfully posted"));
                 router.push("/admin/articles");
             })
-            .catch((e) => dispatch(alertError("Failed create article")));
+            .catch((e) => dispatch(alertError(ErrorsResponse.Catch)));
     };
     return (
         <MainLayout title={t("Create article")}>

@@ -34,7 +34,7 @@ export const CommentsList: React.FC<CommentsWrapper> = ({
         return <Skeleton variant="rectangular" height={400} />;
     }
     return (
-        <Card sx={{ bgcolor: "white", p: 2 }} className="shadow-wrapper">
+        <Card sx={{ bgcolor: "white", p: 2 }} className="shadow-wrapper w-100">
             <Typography variant="h6">{t("Comments")}</Typography>
             <Divider className="mb-2" />
             <Form.Control

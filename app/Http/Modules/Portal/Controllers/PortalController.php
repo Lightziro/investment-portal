@@ -23,8 +23,8 @@ class PortalController extends BaseController
 
     public function getPortalData(): JsonResponse
     {
-        $count_success_ideas = InvestmentIdea::query()->with('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED]))->count();
-        $count_fail_ideas = InvestmentIdea::query()->with('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count();
+        $count_success_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_SUCCESSFULLY]))->count();
+        $count_fail_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count();
 
         $articles_popular = Article::mostPopular()->limit(3)->with('author')->get()->toArray();
         $articles_popular = ArticleHelper::filterDeletedAuthors($articles_popular);

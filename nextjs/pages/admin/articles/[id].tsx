@@ -11,10 +11,12 @@ import { Entity } from "../../../ts/enums/other.enums";
 import { axios } from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { alertError, alertSuccess } from "../../../redux/actions/alertActions";
+import { ErrorsResponse } from "../../../ts/enums/errors.enums";
 
 interface UpdateArticle {
     data: ArticleModel | null;
 }
+
 const UpdateArticle: NextPage<UpdateArticle> = ({ data }) => {
     const { t } = useTranslation();
     const router = useRouter();
@@ -31,7 +33,7 @@ const UpdateArticle: NextPage<UpdateArticle> = ({ data }) => {
                 dispatch(alertSuccess("Article successfully updated"));
                 router.push("/admin/articles");
             })
-            .catch((e) => dispatch(alertError("Failed update article")));
+            .catch((e) => dispatch(alertError(ErrorsResponse.Catch)));
     };
     if (!data) {
         router.push("/404");

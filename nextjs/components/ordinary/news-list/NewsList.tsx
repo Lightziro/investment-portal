@@ -11,7 +11,7 @@ export const NewsList: React.FC<NewsList> = ({ items }) => {
     const { i18n, t } = useTranslation();
     moment.locale(i18n.language);
     return (
-        <Paper elevation={2} sx={{ px: 2, py: 1 }}>
+        <Paper elevation={2} sx={{ px: 2, py: 1 }} className='w-100'>
             <Typography variant="h5" gutterBottom>
                 {t("News")}
             </Typography>
