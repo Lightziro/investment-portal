@@ -1,0 +1,17 @@
+
+.article-meta-title {
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.article-meta-detail {
+    overflow: hidden;
+}
+
+.article-meta-avatar {
+    float: left;
+    padding-right: 16px;
+}

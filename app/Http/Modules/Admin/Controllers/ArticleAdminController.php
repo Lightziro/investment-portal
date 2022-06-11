@@ -3,13 +3,16 @@
 namespace App\Http\Modules\Admin\Controllers;
 
 use App\Http\Modules\Article\Helpers\ArticleHelper;
+use App\Mail\CreateArticle;
 use App\Models\Article\Article;
+use App\Models\Other\EmailSubscription;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use JetBrains\PhpStorm\ArrayShape;
@@ -28,17 +31,25 @@ class ArticleAdminController extends Controller
                 $preview_path = $file->store('article-preview', 'public');
             }
 
-            $post = $request->post();
             $article_model = new Article();
-            $article_model->title = $post['title'];
-            $article_model->content = $post['content'];
-            $article_model->author_id = $author->user_id;
+            $article_model->fill($request->only(['title', 'content']));
+            $article_model->author_id = $author->getKey();
             $article_model->preview_path = $preview_path ?? null;
             $article_model->save();
 
+            if ($request->boolean('sendNotice')) {
+
+                $message = (new CreateArticle($article_model))
+                    ->onQueue('emails');
+
+                /** @var EmailSubscription $subscriber */
+                foreach (EmailSubscription::all() as $subscriber) {
+                    Mail::to($subscriber->email)->queue($message);
+                }
+            }
             return response()->json([]);
         } catch (Throwable $e) {
-            return response()->json(['message' => 'Failed to create article'], 400);
+            return response()->json([], 400);
         }
     }
 
@@ -63,8 +74,7 @@ class ArticleAdminController extends Controller
             }
             return response()->json([]);
         } catch (Throwable $e) {
-            Log::error('Error when updating article', [$e->getMessage(), $e->getFile(), $e->getLine()]);
-            return response()->json(['message' => 'Error update'], 400);
+            return response()->json([], 400);
         }
     }
 
