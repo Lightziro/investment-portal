@@ -1,0 +1,25 @@
+FROM laravel:latest
+
+## Arguments defined in docker-compose.yml
+ARG user=sammy
+ARG uid=1000
+RUN apt-get clean
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    libfann-dev
+
+
+RUN docker-php-ext-install \
+        sockets
+
+WORKDIR /var/www
+
+EXPOSE 6001
+
+#CMD ["php", "artisan", "websockets:serve"]

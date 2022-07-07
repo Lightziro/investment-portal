@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('SITE_URL'), 'localhost:3000', 'localhost'],
+    'allowed_origins' => [env('SITE_URL'),env('MOBILE_URL') ,'localhost:3000', 'localhost'],
 
     'allowed_origins_patterns' => [],
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { MainLayout } from "../layouts/MainLayout";
 import { ArticleList } from "../components/smart/article-list/ArticleList";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
@@ -12,11 +12,25 @@ import { News } from "../ts/types/entity/stock-market.types";
 import { DtoPortal } from "../ts/types/response/response.types";
 import { PortalLayout } from "../layouts/PortalLayout";
 import { HeaderBestQuote } from "../modules/portal/components/header-best-quote/HeaderBestQuote";
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
 interface Index {
     news: News[];
     baseData: DtoPortal;
 }
 const MainPage: NextPage<Index> = ({ news, baseData }) => {
+    useEffect(() => {
+        window.Pusher = Pusher;
+        const echo = new Echo({
+            wsHost: 'localhost',
+            wsPort: '6001',
+            broadcaster: 'pusher',
+            enabledTransports: ['ws'],
+            key: '02022002',
+            cluster: 'mt1',
+            forceTLS: false
+        });
+    }, [])
     return (
         <MainLayout title="Главная страница">
             <PortalLayout>
