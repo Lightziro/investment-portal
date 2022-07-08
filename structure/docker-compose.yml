@@ -20,19 +20,19 @@ services:
             PHP_IDE_CONFIG: "serverName=Docker"
 
     mysql:
-        image: mysql
+        image: mysql:8.0
         container_name: mysql
-        platform: linux/x86_64
+#        platform: linux/x86_64
         restart: unless-stopped
-        build:
-            context: ./mysql
         tty: true
         environment:
-            MYSQL_DATABASE: example
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: portal
+            MYSQL_ROOT_PASSWORD: BasePortal
+            DB_USER: root
+            DB_PASSWORD: BasePortal
             SERVICE_NAME: mysql
-        volumes:
-            - ../structure/mysql/data:/var/lib/mysql
+#        volumes:
+#            - ../structure/mysql/data:/var/lib/mysql
 #            - ../structure/mysql/my_dev.cnf:/etc/my.cnf.d/my.cnf
         networks:
             - laravel
@@ -78,17 +78,17 @@ services:
 #        volumes:
 #            - ./docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
 
-#    node:
-#        container_name: node
-#        image: "node:14"
-#        restart: unless-stopped
-#        user: "node"
-#        working_dir: /var/www/nextjs
-#        tty: true
-#        ports:
-#            - "80:3000"
-#        volumes:
-#            - ./:/var/www/
+    node:
+        container_name: node
+        image: "node:14"
+        restart: unless-stopped
+        user: "node"
+        working_dir: /var/www/nextjs
+        tty: true
+        ports:
+            - "80:3000"
+        volumes:
+            - ../:/var/www/
 
 #    sockets:
 #        build:
