@@ -19,18 +19,18 @@ interface Index {
     baseData: DtoPortal;
 }
 const MainPage: NextPage<Index> = ({ news, baseData }) => {
-    useEffect(() => {
-        window.Pusher = Pusher;
-        const echo = new Echo({
-            wsHost: 'localhost',
-            wsPort: '6001',
-            broadcaster: 'pusher',
-            enabledTransports: ['ws'],
-            key: '02022002',
-            cluster: 'mt1',
-            forceTLS: false
-        });
-    }, [])
+    // useEffect(() => {
+    //     window.Pusher = Pusher;
+    //     const echo = new Echo({
+    //         wsHost: 'localhost',
+    //         wsPort: '6001',
+    //         broadcaster: 'pusher',
+    //         enabledTransports: ['ws'],
+    //         key: '02022002',
+    //         cluster: 'mt1',
+    //         forceTLS: false
+    //     });
+    // }, [])
     return (
         <MainLayout title="Главная страница">
             <PortalLayout>
@@ -48,14 +48,14 @@ const MainPage: NextPage<Index> = ({ news, baseData }) => {
                         <Grid container direction="row" spacing={3}>
                             <Grid direction="column" item md={9} sm={12}>
                                 <ArticleList
-                                    popular={baseData.articles.popular}
-                                    simple={baseData.articles.simple}
+                                    popular={baseData?.articles?.popular}
+                                    simple={baseData?.articles?.simple}
                                 />
                             </Grid>
                             <Grid direction="column" item sm={12} md={3}>
                                 <PortalAd />
-                                <IdeaStatistics stats={baseData.stats} />
-                                <IdeaList items={baseData.ideas} />
+                                <IdeaStatistics stats={baseData?.stats} />
+                                <IdeaList items={baseData?.ideas} />
                             </Grid>
                         </Grid>
                     </Grid>

@@ -12,7 +12,7 @@ export const PortalLayout: React.FC<PortalLayout> = ({
     return (
         <Fragment>
             {showNavBar && <PortalNavBar />}
-            <div className="wrapper-site">
+            <div className="wrapper-site container">
                 <div className="page-wrapper">{children}</div>
             </div>
             <Footer />

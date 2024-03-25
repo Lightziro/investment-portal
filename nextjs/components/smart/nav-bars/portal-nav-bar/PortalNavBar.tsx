@@ -6,6 +6,7 @@ import classes from "../../../../styles/nav-bar.module.scss";
 import { ProfileMenu } from "./profile-menu/ProfileMenu";
 import { SearchEntities } from "./search-entities/SearchEntities";
 import { ExchangeTimeMenu } from "./exchange-tim-menu/ExchangeTimeMenu";
+import classnames from "classnames";
 
 export const PortalNavBar: React.FC = () => {
     const [open, setOpen] = useState({
@@ -19,12 +20,11 @@ export const PortalNavBar: React.FC = () => {
     };
 
     return (
-        <header className={classes.portalNavBar}>
-            {/*{backdrop && <div className={classes.backdropSearch} />}*/}
+        <header className={classnames('container', classes.portalNavBar)}>
             <div className={classes.navBarWrapper}>
                 <div className={classes.logoWrapper}>
                     <Link href="/" passHref>
-                        <img src="/images/logo/logo-base.png" />
+                        <img src="/images/logo/logo-hub.png" />
                     </Link>
                 </div>
                 <SearchEntities />
@@ -39,11 +39,6 @@ export const PortalNavBar: React.FC = () => {
                     onOpen={() => handleOpen(true, "notice")}
                     open={open.notice}
                 />
-                {/*<ExchangeTimeMenu*/}
-                {/*    open={open.time}*/}
-                {/*    onClose={() => handleOpen(false, "time")}*/}
-                {/*    onOpen={() => handleOpen(true, "time")}*/}
-                {/*/>*/}
                 <ProfileMenu
                     open={open.profile}
                     onOpen={() => handleOpen(true, "profile")}

@@ -137,9 +137,9 @@ class User extends Authenticatable
     public function getProfile(): array
     {
         return array_merge($this->toArray(), [
-            'count_comments' => $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
+            'count_comments' => 0, //  $this->commentsIdeas()->count() + $this->commentsArticles()->count(),
             'country' => $this->country?->toArray(),
-            'predictions' => $this->predictions()->where('visible', true)->get()->toArray() ?? [],
+            'predictions' => [], // $this->predictions()->where('visible', true)->get()->toArray() ?? [],
         ]);
     }
 }

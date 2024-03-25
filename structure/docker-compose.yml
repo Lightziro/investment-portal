@@ -25,14 +25,16 @@ services:
 #        platform: linux/x86_64
         restart: unless-stopped
         tty: true
+        ports:
+            - 3306:3306
         environment:
             MYSQL_DATABASE: portal
             MYSQL_ROOT_PASSWORD: BasePortal
             DB_USER: root
             DB_PASSWORD: BasePortal
             SERVICE_NAME: mysql
-#        volumes:
-#            - ../structure/mysql/data:/var/lib/mysql
+        volumes:
+            - ../structure/mysql/data:/var/lib/mysql
 #            - ../structure/mysql/my_dev.cnf:/etc/my.cnf.d/my.cnf
         networks:
             - laravel

@@ -8,7 +8,7 @@ export const LogoSection: React.FC = () => {
             <LinkWrapper href="/" passHref>
                 <img
                     className={classes.logoLink}
-                    src="/images/logo/logo-base.png"
+                    src="/images/logo/logo-hub.png"
                 />
             </LinkWrapper>
         </div>
