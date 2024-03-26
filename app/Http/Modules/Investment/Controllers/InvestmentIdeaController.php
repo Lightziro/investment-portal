@@ -77,7 +77,7 @@ class InvestmentIdeaController extends Controller
 
     public function all(string $sort_by = 'idea_id'): JsonResponse
     {
-        $query_ideas = InvestmentIdea::query();
+        $query_ideas = InvestmentIdea::query()->with(['author', 'company']);
 
         switch ($sort_by) {
             case 'company__name':

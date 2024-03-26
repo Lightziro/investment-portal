@@ -23,11 +23,11 @@ class Company extends Model
     protected $primaryKey = 'company_id';
 
     protected $table = 'companies';
-    protected $with = ['activity'];
     protected $fillable = ['logo_path'];
 
     protected $casts = [
-        'date_ipo' => 'date'
+        'date_ipo' => 'date',
+        'show_top' => 'boolean',
     ];
 
     public function __toString()

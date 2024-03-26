@@ -95,6 +95,7 @@ class CreateIdeaController extends Controller
             }
             return response()->json([]);
         } catch (Throwable $e) {
+            Log::error('Error publish idea', [$e]);
             return response()->json([], 400);
         }
     }

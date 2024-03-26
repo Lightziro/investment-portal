@@ -26,12 +26,13 @@ export const AdminCompaniesList: React.FC = () => {
                 <Skeleton height={478} sx={{ my: 1 }} variant="rectangular" />
             ) : (
                 <EntityTable
-                    columns={["ID", "Name", "Date IPO", "Activity"]}
+                    columns={["ID", "Name", "Date IPO", "Activity", 'Show top']}
                     row={list.map((company: CompanyModel) => [
                         company.company_id,
                         company.name,
                         moment(company.date_ipo).format("ll"),
                         company?.activity?.name,
+                        company?.show_top ? 'Yes' : 'No',
                     ])}
                 />
             )}

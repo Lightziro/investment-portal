@@ -23,9 +23,9 @@ class PortalController extends BaseController
 
     public function getPortalData(): JsonResponse
     {
-//        $count_success_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_SUCCESSFULLY]))->count();
-//        $count_fail_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count();
-//
+        $count_success_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_SUCCESSFULLY]))->count();
+        $count_fail_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count();
+
         $articles_popular = Article::mostPopular()->limit(3)->with('author')->get()->toArray();
         $articles_popular = ArticleHelper::filterDeletedAuthors($articles_popular);
         $pk_list = array_column($articles_popular, 'article_id');
@@ -34,25 +34,25 @@ class PortalController extends BaseController
             ->orderByDesc('created_at')
             ->limit(5)->with('author')->get()->toArray();
         $articles_simple = ArticleHelper::filterDeletedAuthors($articles_simple);
-//
-//        $investment_ideas = InvestmentIdea::mostPopular()->limit(5)->get();
-//        /** @var InvestmentIdea $idea_model */
-//        foreach ($investment_ideas as $idea_model) {
-//            $company_info = $idea_model->company;
-//            $ar_ideas[] = [
-//                'id' => $idea_model->getKey(),
-//                'possibleProfit' => $idea_model->possible_profit,
-//                'stock' => $company_info->name,
-//                'logo' => $company_info->logo_path,
-//            ];
-//        }
+
+        $investment_ideas = InvestmentIdea::mostPopular()->limit(5)->get();
+        /** @var InvestmentIdea $idea_model */
+        foreach ($investment_ideas as $idea_model) {
+            $company_info = $idea_model->company;
+            $ar_ideas[] = [
+                'id' => $idea_model->getKey(),
+                'possibleProfit' => $idea_model->possible_profit,
+                'stock' => $company_info->name,
+                'logo' => $company_info->logo_path,
+            ];
+        }
 
         return response()->json([
             'stats' => [
-                'success' => 3, // $count_success_ideas,
-                'fail' => 2, // $count_fail_ideas,
+                'success' => $count_success_ideas,
+                'fail' => $count_fail_ideas,
             ],
-            'ideas' => [], // $ar_ideas ?? [],
+            'ideas' => $ar_ideas ?? [],
             'articles' => [
                 'popular' => $articles_popular ?? null,
                 'simple' => $articles_simple ?? null

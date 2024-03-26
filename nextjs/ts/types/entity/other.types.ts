@@ -11,6 +11,7 @@ export interface CompanyModel {
     logo_path: string | null;
     currency: string;
     date_ipo: string;
+    show_top: boolean;
     activity?: CompanyActivityModel | null;
 }
 export interface CompanyActivityModel {

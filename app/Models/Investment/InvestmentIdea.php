@@ -42,7 +42,6 @@ class InvestmentIdea extends CustomModel
     protected $table = 'investment_ideas';
     protected $primaryKey = 'idea_id';
     protected $fillable = ['price_buy', 'description', 'price_sell', 'is_short', 'status_id', 'date_end'];
-    protected $with = ['author', 'company'];
     protected $dates = ['date_end'];
 
     public function views(): HasMany
@@ -110,6 +109,7 @@ class InvestmentIdea extends CustomModel
      */
     public function getScoreAnalyze(): mixed
     {
+        return 0;
         return $this->questions()->where(['result' => true])->sum('score');
     }
 

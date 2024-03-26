@@ -52,7 +52,7 @@ class OtherController extends Controller
             return response()->json($ar_stock);
         }
 
-        $stocks = Company::query()->whereIn('ticker', ['AAPL', 'V', 'MDB', 'BAC', 'TSLA', 'NFLX'])
+        $stocks = Company::query()->where('show_top', true)->limit(6)
             ->orderBy('name')->get(['name', 'ticker', 'company_id']);
         $market = new StockMarket();
 
