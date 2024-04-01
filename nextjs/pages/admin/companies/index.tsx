@@ -21,8 +21,8 @@ const Companies = () => {
                 <Container maxWidth="xl">
                     <HeaderSection
                         previewText="Companies"
-                        // urlRedirect="/admin/companies/create"
-                        // textButton="Create company"
+                        urlRedirect="/admin/companies/create"
+                        textButton="Create company"
                     />
                     <Divider />
                     <AdminCompaniesList />

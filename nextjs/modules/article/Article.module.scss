@@ -1,3 +1,12 @@
+.pageWrapper {
+    display: flex;
+    gap: 30px;
+    .articleWrapper {
+        padding: 20px;
+        width: 100%;
+    }
+}
+
 .articleCreatedWrapper {
     background: #fff;
     text-align: center;
@@ -16,20 +25,29 @@
 }
 
 .articleTitle {
-    font: 600 62px/75px "Oswald", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
     color: #282331;
     @media (max-width: 600px) {
         font-size: 44px;
         line-height: normal;
     }
 }
+.headerInfoWrapper {
+    display: flex;
+    justify-content: space-between;
+}
 
 .wrapperArticlePreview {
     margin: 24px 0;
     width: 100%;
+    height: 200px;
 
     .preview {
-        width: inherit;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 }
 

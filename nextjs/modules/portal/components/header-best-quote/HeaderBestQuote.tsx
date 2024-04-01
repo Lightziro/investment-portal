@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { DtoQuoteItem } from "../../../../ts/types/response/response.types";
-import { Grid, Stack, Paper, Skeleton } from "@mui/material";
-import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
+import React, {useEffect, useState} from "react";
+import {DtoQuoteItem} from "../../../../ts/types/response/response.types";
+import {Paper, Skeleton} from "@mui/material";
+import {ArrowUpOutlined, ArrowDownOutlined} from "@ant-design/icons";
 import classnames from "classnames";
 import classes from "../../Portal.module.scss";
-import { axios } from "../../../../utils/axios";
-import { LinkWrapper } from "../../../../components/simple/link/Link";
+import {axios} from "../../../../utils/axios";
+import {LinkWrapper} from "../../../../components/simple/link/Link";
+import styles from './HeaderBestQuote.module.scss';
 
 export const HeaderBestQuote: React.FC = () => {
     const [quotes, setQuotes] = useState<DtoQuoteItem[]>(null);
@@ -15,72 +16,50 @@ export const HeaderBestQuote: React.FC = () => {
         });
     }, []);
     const getClassByChange = (change: number) => {
-        return change > 0 ? classes.changePositive : classes.changeNegative;
+        return change > 0 ? styles.changePositive : styles.changeNegative;
     };
     const getIconByChange = (change: number) => {
-        return change > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />;
+        return change > 0 ? <ArrowUpOutlined/> : <ArrowDownOutlined/>;
     };
     if (!quotes) {
-        return <Skeleton variant="rectangular" height={60} className="mb-3" />;
+        return <Skeleton variant="rectangular" height={60} className="mb-3"/>;
     }
     return (
         <Paper className="px-2 py-2 mb-3" elevation={2}>
-            <Grid
-                alignItems="center"
-                justifyContent="center"
-                px={2}
-                container
-                direction="row"
-                spacing={1}
-            >
-                {quotes.map((quote) => (
-                    <Grid
-                        lg={2}
-                        xl={2}
-                        md={3}
-                        sm={4}
-                        xs={6}
-                        key={quote.company_id}
-                        container
-                        direction="column"
-                        alignItems="center"
-                        item
-                    >
-                        <LinkWrapper href={`/company/${quote.company_id}`}>
-                            <span className={classes.quoteHeaderName}>
+            <div className={styles.headerQuoteWrapper}>
+                {quotes.filter(item => item.percent_change_today).map((quote) => (
+                    <LinkWrapper href={`/company/${quote.company_id}`}>
+                        <div className={styles.wrapperQuote}>
+                             <span className={styles.quoteHeaderName}>
                                 {quote.name}
                             </span>
-                        </LinkWrapper>
-                        <Stack
-                            className={classes.wrapperQuoteInfo}
-                            alignItems="center"
-                            direction="row"
-                        >
-                            <div
-                                className={classnames(
-                                    getClassByChange(
-                                        quote.percent_change_today
-                                    ),
-                                    classes.headerIconChange
-                                )}
-                            >
-                                {getIconByChange(quote.percent_change_today)}
-                            </div>
-                            <span className={classes.quoteLastPrice}>
+                            <div className={styles.wrapperQuoteInfo}>
+                                <div
+                                    className={classnames(
+                                        getClassByChange(
+                                            quote.percent_change_today
+                                        ),
+                                        classes.headerIconChange
+                                    )}
+                                >
+                                    {getIconByChange(quote.percent_change_today)}
+                                </div>
+                                <span>
                                 {quote.last_price}$
                             </span>
-                            <span
-                                className={classnames(
-                                    classes.quoteChangePercent,
-                                    getClassByChange(quote.percent_change_today)
-                                )}
-                            >
+                                <span
+                                    className={classnames(
+                                        styles.quoteChangePercent,
+                                        getClassByChange(quote.percent_change_today)
+                                    )}
+                                >
                                 {`(${quote.percent_change_today.toFixed(2)}%)`}
                             </span>
-                        </Stack>
-                    </Grid>
+                            </div>
+                        </div>
+                    </LinkWrapper>
                 ))}
-            </Grid>
+            </div>
         </Paper>
     );
 };

@@ -85,4 +85,18 @@ Route::group(
 
 Route::group(['prefix' => 'company', 'middleware' => ['auth:sanctum', BeforeCheckRootAdmin::class]], function () {
     Route::get('/list/{page}', [CompanyAdminController::class, 'getCompaniesByPage']);
+    Route::post('/', [CompanyAdminController::class, 'createCompany']);
+
+    Route::group(
+        [
+            'prefix' => '{company}',
+            'where' => [
+                'article' => '\d+',
+            ],
+        ],
+        function () {
+            Route::post('/', [CompanyAdminController::class, 'updateCompany']);
+            Route::get('/', [CompanyAdminController::class, 'getItem']);
+        }
+    );
 });

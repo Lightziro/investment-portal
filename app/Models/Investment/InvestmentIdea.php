@@ -113,12 +113,19 @@ class InvestmentIdea extends CustomModel
         return $this->questions()->where(['result' => true])->sum('score');
     }
 
+    public function scopeOnlyPublished(Builder $query)
+    {
+        $query->whereHas('status', function ($query) {
+            $query->whereIn('name', [InvestmentIdeaStatuses::STATUS_PUBLISHED]);
+        });
+    }
+
     public static function mostPopular(): Builder|CustomQueryBuilder
     {
         return self::query()
             ->withCount('views')
             ->orderBy('views_count', 'desc')
-            ->with('status', callback: fn($query) => $query->whereNotIn('name', [InvestmentIdeaStatuses::STATUS_FAILED]));
+            ->onlyPublished();
     }
 
     public function getRatingStats(): array

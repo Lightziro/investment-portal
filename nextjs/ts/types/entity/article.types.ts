@@ -8,8 +8,11 @@ export interface ArticleModel {
     updated_at: string;
     preview_path: string;
     author_id: number;
+    labels: [];
+    dateCreate: string;
     content: string;
     author?: UserModel;
+    comments?: [];
 }
 
 export interface ArticleLabel {

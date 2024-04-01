@@ -1,0 +1,40 @@
+.headerQuoteWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.wrapperQuote {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.wrapperQuoteInfo {
+    color: black;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+
+    .quoteHeaderName {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: black;
+    }
+
+    .headerIconChange {
+        margin-right: 5px;
+    }
+
+    // TODO: Перенести в переменные
+    .changePositive {
+        color: #0ea600;
+    }
+
+    .changeNegative {
+        color: red;
+    }
+}

@@ -19,6 +19,7 @@ export const ArticleList: React.FC<ArticleList> = ({popular, simple}) => {
     const {t} = useTranslation();
     return (
         <Fragment>
+            <div className={styles.articlesTitle}>{t('Popular articles')}</div>
             <div className={styles.popularWrapper}>
                 {popular ? (
                     popular.map((article) => (

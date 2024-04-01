@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('test:command')->everyTwoMinutes()->onOneServer();
         $schedule->command('telescope:prune')->everyMinute();
+//        $schedule->command('')->everyFiveMinutes();
     }
 
     protected function commands(): void

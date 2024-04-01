@@ -16,7 +16,10 @@ class ViewController extends Controller
 {
     public function getViewArticle(Article $article, Request $request): JsonResponse
     {
-        return response()->json($article->toArray());
+        return response()->json($article->load([
+            'comments' => function ($query) {
+                $query->orderByDesc('created_at');
+        }])->toArray());
     }
 
     public function getViewProfile(User $user): JsonResponse

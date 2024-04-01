@@ -1,35 +1,4 @@
-.quoteHeaderName {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: black;
-}
 
-.quoteChangePercent {
-    margin-left: 10px;
-}
-
-.quoteLastPrice {
-}
-
-.wrapperQuoteInfo {
-    color: black;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 700;
-
-    .headerIconChange {
-        margin-right: 5px;
-    }
-
-    // TODO: Перенести в переменные
-    .changePositive {
-        color: #0ea600;
-    }
-
-    .changeNegative {
-        color: red;
-    }
-}
 
 .wrapperHeader {
     padding: 10px 20px;

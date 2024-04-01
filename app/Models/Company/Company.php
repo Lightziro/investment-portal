@@ -23,7 +23,7 @@ class Company extends Model
     protected $primaryKey = 'company_id';
 
     protected $table = 'companies';
-    protected $fillable = ['logo_path'];
+    protected $fillable = ['logo_path', 'name', 'ticker', 'show_top'];
 
     protected $casts = [
         'date_ipo' => 'date',

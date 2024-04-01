@@ -13,3 +13,4 @@ export const initialArticleForm: FormArticle = {
     preview_path: null,
     sendNotice: false,
 };
+

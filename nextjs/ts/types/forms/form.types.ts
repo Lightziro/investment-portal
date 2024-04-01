@@ -11,6 +11,13 @@ export interface FormArticle {
     sendNotice: boolean;
     preview_path: File;
 }
+
+export interface FormCompany {
+    name: string;
+    ticker: string;
+    show_top: boolean;
+    autoFill: boolean;
+}
 export interface FormParamsAnalyze {
     monthPeriod: number;
 }

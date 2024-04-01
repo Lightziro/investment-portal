@@ -10,6 +10,11 @@ export const fetchArticleEmotions = (articleId: number) => ({
     type: "FETCH_ARTICLE_EMOTIONS",
     articleId,
 });
+
+export const setArticleComments = (data: []) => ({
+    type: "SET_ARTICLE_COMMENTS",
+    data,
+});
 export const createEmotion = (articleId: number, emotionCode: string) => ({
     type: "SEND_CREATE_EMOTION",
     articleId,

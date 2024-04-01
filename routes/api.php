@@ -87,7 +87,6 @@ Route::group(
                         'prefix' => 'comments'
                     ],
                     function () {
-                        Route::get('/', [ArticleController::class, 'getComments'])->name('get-article-comments');
                         Route::post('/', [ArticleController::class, 'createComment'])->middleware('auth:sanctum');
                     }
                 );
