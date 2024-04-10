@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
 
@@ -58,6 +59,7 @@ class UserActionController extends Controller
             Mail::to($user->email)->queue($message);
             return response()->json([]);
         } catch (Throwable $e) {
+            Log::error($e->getMessage(), [$e]);
             return response()->json([], 400);
         }
     }

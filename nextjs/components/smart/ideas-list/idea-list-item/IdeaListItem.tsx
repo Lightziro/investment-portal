@@ -32,7 +32,7 @@ export const IdeaListItem: React.FC<IdeaListItem> = ({ idea }) => {
                     </LinkWrapper>
                 }
                 description={t("Potential profit", {
-                    amount: idea.possibleProfit,
+                    amount: idea.possibleProfit.toFixed(0),
                 })}
             />
         </List.Item>

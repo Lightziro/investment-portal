@@ -63,14 +63,17 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
                     <div className={`col-lg-3 ${classes.siteLogo} `}>
-                        <Stack direction="column" alignItems="center">
+                        <LinkWrapper href='/'>
                             <img
                                 src="/images/logo/logo-hub.png"
                                 style={{width: 30}}
                                 alt={t("Logo company")}
                             />
-                            Investment Hub
-                        </Stack>
+                        </LinkWrapper>
+                        <LinkWrapper href='/'>
+                        <div className={classes.siteName}>
+                            Investment Hub</div>
+                        </LinkWrapper>
                     </div>
                 </div>
             </div>
@@ -78,7 +81,7 @@ export const Footer: React.FC = () => {
             <div className="container">
                 <div className="text-center ">
                     <p className="m-0 text-muted">
-                        <small>&copy; 2022. {t("All Rights Reserved")}.</small>
+                        <small>&copy; 2024. {t("All Rights Reserved")}.</small>
                     </p>
                 </div>
             </div>

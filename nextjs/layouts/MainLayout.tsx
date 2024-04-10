@@ -2,13 +2,17 @@ import React, { useEffect, Fragment } from "react";
 import Head from "next/head";
 import { useDispatch } from "react-redux";
 import { getUser } from "../redux/actions/userActions";
+import {useRootSelector} from "../hooks/useTypeSelector";
 interface MainLayout {
     title: string;
 }
 export const MainLayout: React.FC<MainLayout> = ({ title, children }) => {
     const dispatch = useDispatch();
+    const { fetch } = useRootSelector((state) => state.user);
     useEffect(() => {
-        dispatch(getUser());
+        if (!fetch) {
+            dispatch(getUser());
+        }
     }, []);
     return (
         <Fragment>

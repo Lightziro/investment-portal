@@ -8,6 +8,10 @@ export const setCompanyIdea = (company: string) => ({
     type: "SET_COMPANY_IDEA",
     company,
 });
+
+export const clearCompanyIdea = () => ({
+    type: "CLEAR_COMPANY_IDEA",
+});
 export const changeStageCreateIdea = (stage: CreateIdeaStage) => ({
     type: "SET_STAGE_CREATE_IDEA",
     stage,

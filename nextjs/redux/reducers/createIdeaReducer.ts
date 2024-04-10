@@ -16,6 +16,8 @@ const createIdeaReducer = (
                 ...state,
                 loadInput: true,
             };
+        case "CLEAR_COMPANY_IDEA":
+            return initialCreateIdeaStore;
         case "SET_LIST_COMPANIES":
             return {
                 ...state,
