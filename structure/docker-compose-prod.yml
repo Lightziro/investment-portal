@@ -48,17 +48,19 @@ services:
         tty: true
         depends_on:
             - php-base
-        environment:
-            - NGINX_PORT=8080
         ports:
           - "80:80"
           - "443:443"
         volumes:
           - ../:/var/www
-          - ./nginx/config/conf.d/nginx.conf:/etc/nginx/conf.d/default.conf
+          - ./nginx/nginx_dev.conf:/etc/nginx/nginx_dev.conf
+          - ./nginx/nginx_prod.conf:/etc/nginx/nginx_prod.conf
           - ./nginx/cert.pem:/etc/cert.pem
           - ./nginx/key.pem:/etc/key.pem
           - ./nginx/logs:/var/log/nginx
+        environment:
+          - APP_ENV=${APP_ENV:-dev}
+        command: /bin/sh -c "envsubst '$$APP_ENV' < /etc/nginx/nginx_$$APP_ENV.conf > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
         networks:
             - laravel
 
@@ -69,6 +71,8 @@ services:
         user: "node"
         working_dir: /var/www/nextjs
         tty: true
+        networks:
+          - laravel
         ports:
             - "3000:3000"
         volumes:
