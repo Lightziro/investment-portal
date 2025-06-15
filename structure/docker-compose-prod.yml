@@ -87,7 +87,7 @@ services:
 #        dockerfile: Dockerfile
 #        args:
 #          DOMAIN_EMAIL: ${DOMAIN_EMAIL}
-#          DOMAIN_URL: '${DOMAIN_URL}
+#          DOMAIN_URL: ${DOMAIN_URL}
 
 networks:
     laravel:
