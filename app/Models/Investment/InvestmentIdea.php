@@ -82,11 +82,6 @@ class InvestmentIdea extends CustomModel
         return $this->hasMany(InvestmentIdeaComments::class, 'idea_id', 'idea_id');
     }
 
-    public function status(): HasOne
-    {
-        return $this->hasOne(InvestmentIdeaStatuses::class, 'status_id', 'status_id');
-    }
-
     public function analyze(): CustomHasMany
     {
         return $this->hasMany(InvestmentIdeaAnalyze::class, 'idea_id', 'idea_id');
@@ -115,9 +110,7 @@ class InvestmentIdea extends CustomModel
 
     public function scopeOnlyPublished(Builder $query)
     {
-        $query->whereHas('status', function ($query) {
-            $query->whereIn('name', [InvestmentIdeaStatuses::STATUS_PUBLISHED]);
-        });
+        $query->where('status', InvestmentIdeaStatuses::STATUS_PUBLISHED);
     }
 
     public static function mostPopular(): Builder|CustomQueryBuilder

@@ -10,3 +10,8 @@
     justify-content: start;
     gap: 20px;
 }
+@media screen and (max-width: 440px) {
+    .popularWrapper {
+        flex-direction: column;
+    }
+}

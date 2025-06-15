@@ -6,8 +6,8 @@ use App\Custom\CustomModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int subscription_id
- * @property int user_id
+ * @property int $subscription_id
+ * @property int $user_id
  */
 class UserSubscriptions extends CustomModel
 {

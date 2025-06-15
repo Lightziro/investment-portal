@@ -6,6 +6,7 @@ use App\Http\Classes\StockMarket;
 use App\Models\Company\Company;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
@@ -16,9 +17,9 @@ class CompanyController extends Controller
         $quote_stats = $market->getLastQuote($company->ticker);
         if ($quote_stats) {
             return response()->json([
-                'value_change' => $quote_stats->getD(),
-                'value_change_percent' => $quote_stats->getDp(),
-                'value_last' => $quote_stats->getL(),
+                'value_change' => data_get($quote_stats, 'd'),
+                'value_change_percent' => data_get($quote_stats, 'dp'),
+                'value_last' => data_get($quote_stats, 'l'),
             ]);
         }
         return response()->json([], 404);
@@ -32,23 +33,23 @@ class CompanyController extends Controller
         $company_stats = $market->getFinancialsStats($company->ticker);
 
         if ($company_stats) {
-            if (($series = $company_stats->getSeries()['annual']) && !empty($series->eps)) {
-                foreach ($series->eps as $eps_year_stats) {
+            if (($series = data_get($company_stats, 'series.annual'))) {
+                foreach (data_get($series, 'eps', []) as $eps_year_stats) {
                     $ar_eps[] = [
-                        'date' => $eps_year_stats->period,
-                        'value' => round($eps_year_stats->v, 2),
+                        'date' => data_get($eps_year_stats, 'period'),
+                        'value' => round(data_get($eps_year_stats, 'v'), 2),
                     ];
                 }
-                foreach ($series->netMargin as $margin_stat) {
+                foreach (data_get($series, 'netMargin', []) as $margin_stat) {
                     $ar_net_margin[] = [
-                        'date' => $margin_stat->period,
-                        'value' => round($margin_stat->v, 2),
+                        'date' => data_get($margin_stat, 'period'),
+                        'value' => round(data_get($margin_stat, 'v'), 2),
                     ];
                 }
-                foreach ($series->salesPerShare as $sale_stat) {
+                foreach (data_get($series, 'salesPerShare', []) as $sale_stat) {
                     $ar_sale[] = [
-                        'date' => $sale_stat->period,
-                        'value' => round($sale_stat->v, 2),
+                        'date' => data_get($sale_stat, 'period'),
+                        'value' => round(data_get($sale_stat, 'v'), 2),
                     ];
                 }
             }

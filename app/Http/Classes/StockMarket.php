@@ -3,6 +3,7 @@
 namespace App\Http\Classes;
 
 use DateTime;
+use Exception;
 use Finnhub\Api\DefaultApi;
 use Finnhub\ApiException;
 use Finnhub\Configuration;
@@ -14,20 +15,23 @@ use Finnhub\Model\IPOCalendar;
 use Finnhub\Model\Quote;
 use Finnhub\Model\SymbolLookup;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class StockMarket
 {
     private string $api_key = 'c5pu62qad3ib146a39ng';
-    private Configuration $config;
-    private DefaultApi $client;
+    private Client $client;
 
     public function __construct()
     {
-        $this->config = Configuration::getDefaultConfiguration()->setApiKey('token', $this->api_key);
-        $this->client = new DefaultApi(
-            new Client(),
-            $this->config
-        );
+        $this->client = new Client([
+            'base_uri' => 'https://finnhub.io/api/v1/',
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'X-Finnhub-Token' => $this->api_key,
+            ],
+        ]);
     }
 
     public function getCompanyExecutives(string $ticker): CompanyExecutive|array
@@ -40,11 +44,12 @@ class StockMarket
         }
     }
 
-    public function getFinancialsStats(string $ticker): ?BasicFinancials
+    public function getFinancialsStats(string $ticker): ?array
     {
         try {
-            return $this->client->companyBasicFinancials($ticker, 'all');
-        } catch (ApiException $e) {
+            $data = $this->client->get("stock/metric?symbol=$ticker&metric=all");
+            return json_decode($data->getBody(), true);
+        } catch (Exception $e) {
             return null;
         }
     }
@@ -52,8 +57,9 @@ class StockMarket
     public function getRecommendationAnalytics(string $ticker): ?array
     {
         try {
-            return $this->client->recommendationTrends($ticker);
-        } catch (ApiException $e) {
+            $data = $this->client->get("stock/recommendation?symbol=$ticker");
+            return json_decode($data->getBody(), true);
+        } catch (Exception $e) {
             return null;
         }
     }
@@ -61,8 +67,12 @@ class StockMarket
     public function getMarketNews(string $market = 'general', int|bool $limit = false): array
     {
         try {
-            return $this->client->marketNews($market, 0) ?? [];
-        } catch (ApiException $e) {
+            $response =  $this->client->get("news?category=$market") ?? [];
+            $data = json_decode($response->getBody(), true);
+            Log::error('data', [$data]);
+            return $data;
+        } catch (Exception $e) {
+            Log::debug('exception', [$e]);
             return [];
         }
     }
@@ -76,11 +86,12 @@ class StockMarket
         }
     }
 
-    public function getCompanyProfile(string $company_name): ?CompanyProfile2
+    public function getCompanyProfile(string $companyName): ?array
     {
         try {
-            return $this->client->companyProfile2($company_name);
-        } catch (ApiException $e) {
+            $data = $this->client->get("stock/profile2?symbol=$companyName");
+            return json_decode($data->getBody(), true);
+        } catch (Exception $e) {
             return null;
         }
     }
@@ -94,27 +105,34 @@ class StockMarket
         }
     }
 
-    public function getLastQuote(string $ticker): ?Quote
+    public function getLastQuote(string $ticker): ?array
     {
         try {
-            return $this->client->quote($ticker);
-        } catch (ApiException $e) {
+            $data = $this->client->get("quote?symbol=$ticker");
+            return json_decode($data->getBody(), true);
+        } catch (Exception $e) {
             return null;
         }
     }
-    public function getStockByName(string $name): array|SymbolLookup
+    public function getStockByName(string $name): ?array
     {
         try {
-            return $this->client->symbolSearch($name);
-        }catch (ApiException $e) {
+            $data = $this->client->get("search?q=$name");
+            return json_decode($data->getBody(), true);
+        }catch (Exception $e) {
             return [];
         }
     }
     public function getCompanyNews(string $ticker, DateTime $from, DateTime $to): ?array
     {
         try {
-            return $this->client->companyNews($ticker, $from->format('Y-m-d'), $to->format('Y-m-d'));
-        } catch (ApiException $e) {
+            $from = $from->format('Y-m-d');
+            $to = $to->format('Y-m-d');
+            $data = $this->client->get("company-news?symbol=$ticker&from=$from&to=$to");
+            Log::error('debugCompany', [$data->getBody()]);
+            return json_decode($data->getBody(), true);
+        } catch (Exception $e) {
+            Log::error('ex', [$e]);
             return null;
         }
     }

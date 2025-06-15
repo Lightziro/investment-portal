@@ -34,10 +34,8 @@ class ViewController extends Controller
         $queryFail = clone $ideas;
 
         $authorData = array_merge($idea->author->toArray(), [
-            'amount_success_ideas' => $querySuccess->whereHas('status', fn($query) => $query
-                ->where(['name' => InvestmentIdeaStatuses::STATUS_SUCCESSFULLY]))->count(),
-            'amount_fail_ideas' => $queryFail->whereHas('status', fn($query) => $query
-                ->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count(),
+            'amount_success_ideas' => $querySuccess->where('status', InvestmentIdeaStatuses::STATUS_SUCCESSFULLY)->count(),
+            'amount_fail_ideas' => $queryFail->where('status', InvestmentIdeaStatuses::STATUS_FAILED)->count(),
             'total_ideas' => $ideas->count()
         ]);
         $companyInfo = array_merge($idea->toArray(), [

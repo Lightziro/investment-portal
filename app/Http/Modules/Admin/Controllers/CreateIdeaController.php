@@ -46,11 +46,11 @@ class CreateIdeaController extends Controller
                 $ar_news[] = $item['headline'];
             }
 
-            /** @var InvestmentIdeaStatuses $status_created */
-            $status_created = InvestmentIdeaStatuses::query()->where(['name' => InvestmentIdeaStatuses::STATUS_CREATED])->first();
+//            /** @var InvestmentIdeaStatuses $status_created */
+//            $status_created = InvestmentIdeaStatuses::query()->where(['name' => InvestmentIdeaStatuses::STATUS_CREATED])->first();
             $idea = new InvestmentIdea();
             $idea->company_id = $company_model->getKey();
-            $idea->status_id = $status_created->getKey();
+            $idea->status = InvestmentIdeaStatuses::STATUS_CREATED;
             $idea->author_id = $author->getKey();
             $idea->save();
             try {
@@ -70,8 +70,6 @@ class CreateIdeaController extends Controller
     public function publishIdea(InvestmentIdea $idea, Request $request): JsonResponse
     {
         try {
-            /** @var InvestmentIdeaStatuses $status */
-            $status = InvestmentIdeaStatuses::query()->firstWhere(['name' => InvestmentIdeaStatuses::STATUS_PUBLISHED]);
             $idea->update(array_merge($request->only([
                 'price_buy',
                 'price_sell',
@@ -79,7 +77,7 @@ class CreateIdeaController extends Controller
                 'is_short',
                 'description'
             ]), [
-                'status_id' => $status->status_id,
+                'status' => InvestmentIdeaStatuses::STATUS_PUBLISHED,
             ]));
 
             $idea->possible_profit = $idea->calculatePossibleProfit();

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { MainLayout } from "../layouts/MainLayout";
 import { ArticleList } from "../components/smart/article-list/ArticleList";
 import { PortalAd } from "../components/simple/portal-ad/PortalAd";
@@ -12,8 +12,8 @@ import { News } from "../ts/types/entity/stock-market.types";
 import { DtoPortal } from "../ts/types/response/response.types";
 import { PortalLayout } from "../layouts/PortalLayout";
 import { HeaderBestQuote } from "../modules/portal/components/header-best-quote/HeaderBestQuote";
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
 interface Index {
     news: News[];
     baseData: DtoPortal;
@@ -51,10 +51,12 @@ const MainPage: NextPage<Index> = ({ news, baseData }) => {
                                     popular={baseData?.articles?.popular}
                                     simple={baseData?.articles?.simple}
                                 />
+                                {/*<StockList />*/}
                             </Grid>
                             <Grid direction="column" item sm={12} md={3}>
                                 <PortalAd />
-                                <IdeaStatistics stats={baseData?.stats} />
+
+                                {/*<IdeaStatistics stats={baseData?.stats} />*/}
                                 <IdeaList items={baseData?.ideas} />
                             </Grid>
                         </Grid>

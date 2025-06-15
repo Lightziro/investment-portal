@@ -38,3 +38,8 @@
         color: red;
     }
 }
+@media (max-width: 768px) {
+    .headerQuoteWrapper {
+        flex-wrap: wrap;
+    }
+}

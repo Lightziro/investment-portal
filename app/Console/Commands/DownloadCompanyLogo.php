@@ -26,7 +26,7 @@ class DownloadCompanyLogo extends Command
             try {
                 $companyInfo = $market->getCompanyProfile($companyModel->ticker);
                 $counter++;
-                $logoPath = $companyInfo->getLogo();;
+                $logoPath = data_get($companyInfo, 'logo');
                 if (!$logoPath) {
                     continue;
                 }

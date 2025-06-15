@@ -2,17 +2,25 @@
 
 namespace App\Http\Modules\Core\Controllers;
 
+use App\Domain\Portal\Repository\CompanyRepository;
+use App\Domain\Portal\Response\QuoteListResponse;
+use App\Domain\Portal\Service\QuoteService;
+use App\Domain\Project\Entity\Task;
 use App\Http\Classes\StockMarket;
+use App\Http\Controllers\Api\Common\Project\Response\ListTaskResponse;
 use App\Models\Company\Company;
 use App\Models\Other\Country;
 use App\Models\Other\EmailSubscription;
 use App\Models\User\UsersRole;
 use Exception;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use JsonSerializable;
 use Throwable;
 
 class OtherController extends Controller
@@ -34,43 +42,22 @@ class OtherController extends Controller
     {
         try {
             $post = $request->post();
-            if (EmailSubscription::query()->where(['email' => $post['email']])->first()) {
+            if (EmailSubscription::query()->where(['email' => $post['email']])->exists()) {
                 throw new Exception('This email address has been signed');
             }
             $subscribe_model = new EmailSubscription(['email' => $post['email']]);
             $subscribe_model->save();
             return response()->json(['status' => true]);
         } catch (Throwable $e) {
+            Log::error('test', [$e]);
             return response()->json(['status' => false], 400);
         }
     }
 
-    public function getQuote(): JsonResponse
+    public function getQuote(QuoteService $quoteService): array|Arrayable|JsonSerializable
     {
-        if (Cache::has('quote')) {
-            $ar_stock = Cache::get('quote');
-            return response()->json($ar_stock);
-        }
+        $data = $quoteService->getQuoteList();
+        return QuoteListResponse::collection($data);
 
-        $stocks = Company::query()->where('show_top', true)->limit(6)
-            ->orderBy('name')->get(['name', 'ticker', 'company_id']);
-        $market = new StockMarket();
-
-        /** @var Company $company_model */
-        foreach ($stocks as $company_model) {
-            $quote_info = $market->getLastQuote($company_model->ticker);
-            if ($quote_info) {
-                $ar_stock[] = [
-                    'company_id' => $company_model->getKey(),
-                    'name' => $company_model->name,
-                    'last_price' => $quote_info->getC(),
-                    'percent_change_today' => $quote_info->getDp(),
-                ];
-            }
-        }
-        if (!empty($ar_stock)) {
-            Cache::put('quote', $ar_stock, now()->addMinute());
-        }
-        return response()->json($ar_stock ?? []);
     }
 }

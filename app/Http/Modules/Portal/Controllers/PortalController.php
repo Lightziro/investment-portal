@@ -2,6 +2,9 @@
 
 namespace App\Http\Modules\Portal\Controllers;
 
+use App\Domain\Portal\Repository\InvestmentIdeaRepository;
+use App\Domain\Portal\Response\NewsListResponse;
+use App\Domain\Portal\Service\NewsService;
 use App\Http\Classes\StockMarket;
 use App\Http\Modules\Article\Helpers\ArticleHelper;
 use App\Models\Article\Article;
@@ -11,8 +14,10 @@ use App\Models\Investment\InvestmentIdeaStatuses;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class PortalController extends BaseController
 {
@@ -23,8 +28,9 @@ class PortalController extends BaseController
 
     public function getPortalData(): JsonResponse
     {
-        $count_success_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_SUCCESSFULLY]))->count();
-        $count_fail_ideas = InvestmentIdea::query()->whereHas('status', fn($query) => $query->where(['name' => InvestmentIdeaStatuses::STATUS_FAILED]))->count();
+        $repository = new InvestmentIdeaRepository();
+        $countSuccess = $repository->getCountByStatus(InvestmentIdeaStatuses::STATUS_SUCCESSFULLY);
+        $countFail = $repository->getCountByStatus(InvestmentIdeaStatuses::STATUS_FAILED);
 
         $articles_popular = Article::mostPopular()->limit(3)->with('author')->get()->toArray();
         $articles_popular = ArticleHelper::filterDeletedAuthors($articles_popular);
@@ -49,8 +55,8 @@ class PortalController extends BaseController
 
         return response()->json([
             'stats' => [
-                'success' => $count_success_ideas,
-                'fail' => $count_fail_ideas,
+                'success' => $countSuccess,
+                'fail' => $countFail,
             ],
             'ideas' => $ar_ideas ?? [],
             'articles' => [
@@ -60,14 +66,9 @@ class PortalController extends BaseController
         ]);
     }
 
-    public function getNews(): JsonResponse
+    public function getNews(NewsService $newsService): AnonymousResourceCollection
     {
-        if (!$news = Cache::get("last-news")) {
-            $market = new StockMarket();
-            $news = array_slice($market->getMarketNews(), 0, 10);
-            Cache::put("last-news", $news, now()->addHour());
-        }
-        return response()->json($news ?? []);
+        return NewsListResponse::collection($newsService->getList());
     }
 
     public function searchData(string $search): JsonResponse

@@ -12,7 +12,7 @@ export const HeaderBestQuote: React.FC = () => {
     const [quotes, setQuotes] = useState<DtoQuoteItem[]>(null);
     useEffect(() => {
         axios.get(`${process.env.API_URL}/api/other/quotes`).then((res) => {
-            setQuotes(res.data);
+            setQuotes(res.data.data);
         });
     }, []);
     const getClassByChange = (change: number) => {

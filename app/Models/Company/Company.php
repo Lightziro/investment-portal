@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Common\Trait\Entity;
 use App\Models\Other\Activity;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Company extends Model
 {
+    use Entity;
+
     protected $primaryKey = 'company_id';
 
     protected $table = 'companies';
@@ -38,5 +41,10 @@ class Company extends Model
     public function activity(): HasOne
     {
         return $this->hasOne(Activity::class, 'activity_id', 'activity_id');
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

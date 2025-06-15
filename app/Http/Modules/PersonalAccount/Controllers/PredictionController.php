@@ -25,7 +25,7 @@ class PredictionController extends Controller
             $company = $predict->company;
             $quote_info = $market->getLastQuote($company->ticker);
             $ar_predict[] = array_merge($predict->toArray(), [
-                'current_price' => $quote_info->getC()
+                'current_price' => data_get($quote_info, 'c'),
             ]);
         }
         return response()->json($ar_predict ?? []);

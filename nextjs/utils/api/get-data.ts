@@ -5,8 +5,11 @@ import { Entity } from "../../ts/enums/other.enums";
 export const getListNews = async () => {
     const response = await fetch(
         `${process.env.API_URL_DOCKER}/api/investment-data/news`
-    );
-    return await response.json();
+    )
+        .then((res) => res.json())
+        .catch((e) => console.log(e));
+    console.log(response);
+    return response.data;
 };
 export const getBasePortal = async () => {
     const response = await fetch(

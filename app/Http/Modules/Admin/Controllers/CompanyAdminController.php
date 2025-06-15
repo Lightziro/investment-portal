@@ -79,15 +79,14 @@ class CompanyAdminController extends Controller
     {
         $market = new StockMarket();
         $quote_info = $market->getCompanyProfile($company->ticker);
-        if (empty($quote_info->getName())) {
+        if (empty(data_get($quote_info, 'name'))) {
             throw new AdminException("Не удалось найти компанию с тикетом: $company->ticker");
         }
         if (request()->boolean('autoFill')) {
-            Log::error('123', [$quote_info->getName()]);
-            $company->name = $quote_info->getName();
-            $company->date_ipo = $quote_info->getIpo();
-            $company->ticker = $quote_info->getTicker();
-            $company->currency = $quote_info->getCurrency();
+            $company->name = data_get($quote_info, 'name');
+            $company->date_ipo = data_get($quote_info, 'ipo');
+            $company->ticker = data_get($quote_info, 'ticker');
+            $company->currency = data_get($quote_info, 'currency');
         }
     }
 }

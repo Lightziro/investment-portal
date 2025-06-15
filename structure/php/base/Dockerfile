@@ -1,4 +1,4 @@
-FROM php:8.1.0-fpm
+FROM php:8.2.0-fpm
 
 ## Arguments defined in docker-compose.yml
 ARG user=sammy

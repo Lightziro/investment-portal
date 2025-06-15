@@ -69,7 +69,7 @@ class ArticleAdminController extends Controller
             $article->fill($request->only(['content', 'title']));
             $article->save();
 
-            if ($post['sendNotice']) {
+            if ($request->boolean('sendNotice')) {
                 ArticleHelper::sendNotices($article, 'update');
             }
             return response()->json([]);

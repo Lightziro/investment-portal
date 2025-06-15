@@ -11,12 +11,14 @@ import ShareIcon from "@mui/icons-material/Share";
 import { useDispatch } from "react-redux";
 import { alertInfo } from "../../../../redux/actions/alertActions";
 import { useTranslation } from "react-i18next";
+import styles from "./CompanyHeader.module.scss";
 
 interface CompanyHeader {
     name: string;
     activity: string | null;
     currency: string;
     ticker: string;
+    logoPath: string;
 }
 
 export const CompanyHeader: React.FC<CompanyHeader> = ({
@@ -24,6 +26,7 @@ export const CompanyHeader: React.FC<CompanyHeader> = ({
     activity,
     currency,
     ticker,
+    logoPath,
 }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -37,6 +40,10 @@ export const CompanyHeader: React.FC<CompanyHeader> = ({
             className="d-flex justify-content-between align-items-center"
         >
             <Stack justifyContent="space-between" direction="row" spacing={2}>
+                <img
+                    className={styles.logo}
+                    src={`${process.env.API_URL}/storage//${logoPath}`}
+                />
                 <Typography variant="h5">
                     {name} ({ticker})
                 </Typography>
