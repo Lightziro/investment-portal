@@ -5,17 +5,24 @@ interface CheckboxField {
     label: string;
     handleChange: (e: ChangeEvent<any>) => void;
     name: string;
+    disabled: boolean;
 }
 export const CheckboxField: React.FC<CheckboxField> = ({
     value,
     label,
     handleChange,
+    disabled,
     name,
 }) => {
     return (
         <FormControlLabel
             control={
-                <Checkbox onChange={handleChange} value={value} name={name} />
+                <Checkbox
+                    disabled={disabled}
+                    onChange={handleChange}
+                    value={value}
+                    name={name}
+                />
             }
             label={label}
         />

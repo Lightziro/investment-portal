@@ -12,19 +12,42 @@ import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
 import { UserData } from "../../../../../ts/types/redux/store.types";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setOpenSheet } from "../../../../../redux/actions/sheetActions";
 interface LoginMenu {
     user: UserData;
     handleExit: () => void;
 }
 export const LoginMenu: React.FC<LoginMenu> = ({ user, handleExit }) => {
+    const dispatch = useDispatch();
+
+    const handleUp = () => {
+        dispatch(setOpenSheet("upBalance", {}));
+    };
+
     const { t } = useTranslation();
     return (
         <Fragment>
             <Typography variant="body2" align="center">
-                {t(`Welcome, user`, { fullName: user.full_name })}
+                {user.full_name}
             </Typography>
             <Divider sx={{ my: 1 }} />
             <MenuProfileItems items={menuAuth(user.user_id)} />
+            <MenuItem
+                onClick={handleUp}
+                sx={{ typography: "body2", py: 1, px: 2.5 }}
+            >
+                <Box
+                    component={Icon}
+                    icon={"twemoji:chart-decreasing"}
+                    sx={{
+                        mr: 2,
+                        width: 24,
+                        height: 24,
+                    }}
+                />
+                <ListItemText>{t("Up balance")}</ListItemText>
+            </MenuItem>
             <Divider />
             {user.role === "admin" && (
                 <Link href="/admin">

@@ -20,6 +20,18 @@ function* fetchUser(): Generator {
         });
     }
 }
+
+function* fetchBalance(): Generator {
+    try {
+        const res = yield axios
+            .get(`${process.env.API_URL}/api/user/balance`)
+            .then((res) => res.data);
+        yield put({
+            type: "SET_USER_BALANCE",
+            payload: res.balance,
+        });
+    } catch (e) {}
+}
 function* login(action: AnyAction): Generator {
     try {
         yield axios.get(`${process.env.API_URL}/sanctum/csrf-cookie`);
@@ -72,4 +84,5 @@ export function* actionUserWatcher(): SagaIterator {
     yield takeLatest("FETCH_USER", fetchUser);
     yield takeLatest("LOGIN_USER", login);
     yield takeLatest("LOGOUT_USER", logout);
+    yield takeLatest("FETCH_BALANCE", fetchBalance);
 }

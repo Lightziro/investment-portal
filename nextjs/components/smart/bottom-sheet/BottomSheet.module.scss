@@ -1,0 +1,74 @@
+.itemsWrapper {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 200;
+  overflow-y: auto;
+}
+
+.notifySheetContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  color: #172133;
+}
+
+.cardNotifySheetContent {
+  padding: 0;
+  position: initial !important;
+}
+
+.operationsListSheetContent {
+  padding: 0;
+}
+
+.detailSheetContent {
+  padding: 0;
+}
+
+.paymentNotifySheetContent {
+  justify-content: center;
+  align-items: center;
+}
+
+.swipe {
+  background: #E8E8E8;
+  height: 5px;
+  width: 48px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 8px 8px 8px;
+
+  .cancelBtn {
+    color: #4482FF;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .spacer {
+    width: 60px;
+  }
+}
+
+.headerWrapper {
+  display: flex;
+  padding: 16px 0 8px 0;
+  justify-content: center;
+}
+.countrySheetWrapper {
+  gap: 10px;
+  padding: 16px 0 0 0;
+}

@@ -19,6 +19,7 @@ import { Badge, Button } from "antd";
 import { LinkWrapper } from "../../../../simple/link/Link";
 import { UserNoticeModel } from "../../../../../ts/types/entity/user.types";
 import { useRootSelector } from "../../../../../hooks/useTypeSelector";
+import styles from "./NoticeMenu.module.scss";
 
 interface NoticeMenu {
     onOpen: () => void;
@@ -44,6 +45,7 @@ export const NoticeMenu: React.FC<NoticeMenu> = ({ open, onOpen, onClose }) => {
             {data && (
                 <Fragment>
                     <IconButton
+                        className={styles.wrapper}
                         ref={anchorRef}
                         sx={{ p: 0, width: 44, height: 44 }}
                         onClick={onOpen}

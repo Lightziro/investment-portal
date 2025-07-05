@@ -7,9 +7,9 @@ import { CommentItem } from "./comment-item/CommentItem";
 import classes from "./CommentsList.module.scss";
 import { NoComments } from "./no-comments/NoComments";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
-import { Comment, EntityName } from "../../../ts/types/other/view.types";
+import { Comment } from "../../../ts/types/other/view.types";
 import { createEntityComment } from "../../../redux/actions/viewActions";
-import {Entity} from "../../../ts/enums/other.enums";
+import { Entity } from "../../../ts/enums/other.enums";
 interface CommentsWrapper {
     entityId: number;
     entityName: Entity;

@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -59,6 +60,9 @@ class CompanyAdminController extends Controller
         try {
             $company->fill($request->only(['name', 'ticker', 'show_top']));
             $this->fillCompany($company);
+            if ($company->isDirty('show_top')) {
+                Cache::forget('quote');
+            }
             $company->save();
 
             return response()->json([]);

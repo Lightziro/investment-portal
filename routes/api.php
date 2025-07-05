@@ -112,6 +112,7 @@ Route::group(['prefix' => 'company'], function () {
     Route::get('/{company}', [ViewController::class, 'getViewCompany']);
     Route::get('/{company}/quote', [CompanyController::class, 'getQuote']);
     Route::get('/{company}/stats', [CompanyController::class, 'getStats']);
+    Route::post('/{company}/comments', [CompanyController::class, 'createComment'])->middleware('auth:sanctum');
 });
 
 Route::get('/search/{search}', [PortalController::class, 'searchData'])->name('portal-search');

@@ -90,8 +90,10 @@ class StockMarket
     {
         try {
             $data = $this->client->get("stock/profile2?symbol=$companyName");
+            Log::error('data company', [$data]);
             return json_decode($data->getBody(), true);
         } catch (Exception $e) {
+            Log::error('exc', [$e]);
             return null;
         }
     }
@@ -111,6 +113,7 @@ class StockMarket
             $data = $this->client->get("quote?symbol=$ticker");
             return json_decode($data->getBody(), true);
         } catch (Exception $e) {
+            Log::error('ex', [$e]);
             return null;
         }
     }

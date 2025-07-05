@@ -11,6 +11,8 @@ export interface CompanyModel {
     logo_path: string | null;
     currency: string;
     date_ipo: string;
+    last_price: number;
+    change_percent_today: number;
     show_top: boolean;
     activity?: CompanyActivityModel | null;
 }

@@ -7,7 +7,7 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import ShareIcon from "@mui/icons-material/Share";
+import InfoIcon from "@mui/icons-material/Info";
 import { useDispatch } from "react-redux";
 import { alertInfo } from "../../../../redux/actions/alertActions";
 import { useTranslation } from "react-i18next";
@@ -52,7 +52,7 @@ export const CompanyHeader: React.FC<CompanyHeader> = ({
                 <Chip label={currency} />
             </Stack>
             <IconButton onClick={handleShare}>
-                <ShareIcon />
+                <InfoIcon />
             </IconButton>
         </Paper>
     );

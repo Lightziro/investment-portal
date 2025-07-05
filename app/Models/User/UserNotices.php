@@ -19,5 +19,5 @@ class UserNotices extends Model
 {
     protected $primaryKey = 'notice_id';
     protected $table = 'user_notices';
-    protected $fillable = ['viewed'];
+    protected $fillable = ['viewed', 'title', 'description'];
 }

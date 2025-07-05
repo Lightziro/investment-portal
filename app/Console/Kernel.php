@@ -13,9 +13,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('test:command')->everyTwoMinutes()->onOneServer();
-        $schedule->command('telescope:prune')->everyMinute();
-//        $schedule->command('')->everyFiveMinutes();
+        $schedule->command('command:predict-commission')->dailyAt('00:00');
     }
 
     protected function commands(): void

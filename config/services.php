@@ -34,5 +34,9 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => 'http://localhost:8000/sign-in/github/redirect',
     ],
+    'tinkoff' => [
+        'base_url' => env('TINKOFF_API_URL', ''),
+        'token' => env('TINKOFF_API_TOKEN')
+    ]
 
 ];

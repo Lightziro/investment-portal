@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.659938" y="0.659938" width="98.6801" height="98.6801" rx="49.3401" fill="#1890ff" stroke="#1890ff" stroke-width="1.31988"/>
+
+    <!-- Вертикальная палка I -->
+    <rect x="46" y="22" width="8" height="56" rx="2" fill="white"/>
+
+    <!-- Верхняя горизонтальная черта -->
+    <rect x="42" y="28" width="16" height="3" rx="1.5" fill="white"/>
+
+    <!-- Нижняя горизонтальная черта -->
+    <rect x="42" y="69" width="16" height="3" rx="1.5" fill="white"/>
+</svg>

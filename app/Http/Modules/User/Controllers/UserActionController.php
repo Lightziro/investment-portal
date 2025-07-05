@@ -6,6 +6,8 @@ use App\Mail\ForgotPassword;
 use App\Models\User\User;
 use App\Models\User\UserNotices;
 use App\Models\User\UserRecovery;
+use DefStudio\Telegraph\Facades\Telegraph;
+use DefStudio\Telegraph\Models\TelegraphBot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -84,5 +86,27 @@ class UserActionController extends Controller
         $notice_model->viewed = true;
         $notice_model->save();
         return response()->json([]);
+    }
+
+    public function getLinkUpBalance(Request $request)
+    {
+        $amount = $request->integer('value');
+        /** @var User $user */
+        $user = Auth::user();
+        $bot = TelegraphBot::fromToken(env('TELEGRAM_BOT_TOKEN'));
+        $response = Telegraph::bot($bot)->invoice("Пополнение баланса аккаунта #1")
+            ->link()
+            ->description('Пополнение баланса')
+            ->currency('XTR')
+            ->addItem('Пополнение баланса', 1)
+            ->payload($user->user_id)
+            ->send();
+        return response()->json(['data' => $response->json()]);
+    }
+
+    public function getBalance()
+    {
+        $user = Auth::user();
+        return response()->json(['balance' => $user->balance]);
     }
 }

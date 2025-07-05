@@ -20,6 +20,13 @@ const accountReducer = (
                 ...state,
                 predictions: { ...state.predictions, loading: true },
             };
+        case "SET_LOADING_TRANSACTIONS":
+            return {
+                ...state,
+                transactions: { ...state.transactions, loading: action.value },
+            };
+        case "SET_ACCOUNT_TRANSACTIONS":
+            return setDataAccount(state, "transactions", action.payload);
         case "REMOVE_PREDICT_ITEM":
             return removePredict(state, action.predictId);
         case "SET_VISIBLE_PREDICTION":

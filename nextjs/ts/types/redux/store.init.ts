@@ -1,4 +1,4 @@
-import { AlertStore, StoreData } from "./store.types";
+import { AlertStore, SheetStore, StoreData } from "./store.types";
 import {
     initialAccountStore,
     initialCreateIdeaStore,
@@ -44,6 +44,11 @@ export const initialAdminStore: AdminStore = {
         loading: true,
     },
 };
+export const initStoreSheet: SheetStore = {
+    propsSheet: {},
+    sheetType: null,
+    isOpenSheet: false,
+};
 
 export const initStore: StoreData = {
     user: {
@@ -53,5 +58,6 @@ export const initStore: StoreData = {
     admin: initialAdminStore,
     alert: initialAlertStore,
     view: initialViewStore,
+    sheet: initStoreSheet,
     account: initialAccountStore,
 };

@@ -6,6 +6,7 @@ use App\Http\Classes\StockMarket;
 use App\Models\Company\Company;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
@@ -76,5 +77,10 @@ class CompanyController extends Controller
             'netMarginStats' => $ar_net_margin ?? [],
             'salePerShare' => $ar_sale ?? []
         ]);
+    }
+
+    public function createComment(Company $company)
+    {
+        $user = Auth::user();
     }
 }

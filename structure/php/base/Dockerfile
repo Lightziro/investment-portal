@@ -19,8 +19,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli pdo sockets
 

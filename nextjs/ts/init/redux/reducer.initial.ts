@@ -26,4 +26,8 @@ export const initialAccountStore: PersonalAccountStore = {
         list: [],
         loading: true,
     },
+    transactions: {
+        list: [],
+        loading: true,
+    },
 };

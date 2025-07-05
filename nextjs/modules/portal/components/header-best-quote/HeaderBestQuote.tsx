@@ -31,38 +31,34 @@ export const HeaderBestQuote: React.FC = () => {
     return (
         <Paper className="px-2 py-2 mb-3" elevation={2}>
             <div className={styles.headerQuoteWrapper}>
-                {quotes
-                    .filter((item) => item.percent_change_today)
-                    .map((quote) => (
-                        <LinkWrapper href={`/company/${quote.company_id}`}>
-                            <div className={styles.wrapperQuote}>
-                                <span className={styles.quoteHeaderName}>
-                                    {quote.name}
-                                </span>
-                                <div className={styles.wrapperQuoteInfo}>
-                                    {getIconByChange(
-                                        quote.percent_change_today,
+                {quotes.map((quote) => (
+                    <LinkWrapper href={`/company/${quote.company_id}`}>
+                        <div className={styles.wrapperQuote}>
+                            <span className={styles.quoteHeaderName}>
+                                {quote.name}
+                            </span>
+                            <div className={styles.wrapperQuoteInfo}>
+                                {getIconByChange(
+                                    quote.percent_change_today,
+                                    getClassByChange(quote.percent_change_today)
+                                )}
+                                <span>{quote.last_price}$</span>
+                                <span
+                                    className={classnames(
+                                        styles.quoteChangePercent,
                                         getClassByChange(
                                             quote.percent_change_today
                                         )
                                     )}
-                                    <span>{quote.last_price}$</span>
-                                    <span
-                                        className={classnames(
-                                            styles.quoteChangePercent,
-                                            getClassByChange(
-                                                quote.percent_change_today
-                                            )
-                                        )}
-                                    >
-                                        {`(${quote.percent_change_today.toFixed(
-                                            2
-                                        )}%)`}
-                                    </span>
-                                </div>
+                                >
+                                    {`(${quote.percent_change_today.toFixed(
+                                        2
+                                    )}%)`}
+                                </span>
                             </div>
-                        </LinkWrapper>
-                    ))}
+                        </div>
+                    </LinkWrapper>
+                ))}
             </div>
         </Paper>
     );

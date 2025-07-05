@@ -32,11 +32,12 @@ export interface AuthorInfo {
 export interface UserPredict {
     prediction_id: number;
     company: CompanyModel;
-    predict_price: number;
     user_id: number;
-    current_price: number | null;
+    current_price?: number | null;
+    price: number;
+    is_top: boolean;
+    amount: number;
     company_id: number;
-    visible: boolean;
 }
 export interface UserNoticeModel {
     notice_id: number;

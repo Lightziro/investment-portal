@@ -6,11 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.2",
+        "defstudio/telegraph": "^1.59",
         "doctrine/dbal": "^3.1",
+        "guzzlehttp/guzzle": "7.8.0",
         "laravel/framework": "v11.0.0",
         "laravel/sanctum": "4.1.1",
         "laravel/socialite": "^5.2",
-        "guzzlehttp/guzzle": "7.8.0",
         "laravel/tinker": "^2.5",
         "league/csv": "^9.8",
         "php-ai/php-ml": "^0.4.1",

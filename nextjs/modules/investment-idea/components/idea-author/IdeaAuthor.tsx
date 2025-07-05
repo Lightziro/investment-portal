@@ -19,13 +19,11 @@ export const IdeaAuthor: React.FC<IdeaAuthor> = ({ data }) => {
         <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
             <div className={classes.authorInfo}>
                 <Link href={`/profile/[id]`} as={`/profile/${data.user_id}`}>
-                    <a>
-                        <UserAvatar
-                            avatar={data.avatar_path}
-                            height={56}
-                            width={56}
-                        />
-                    </a>
+                    <UserAvatar
+                        avatar={data.avatar_path}
+                        height={56}
+                        width={56}
+                    />
                 </Link>
                 <Typography variant="h6" align="center">
                     {data.full_name}

@@ -1,0 +1,40 @@
+.divider {
+
+}
+.priceWrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.currentPrice {
+    font-weight: 600;
+}
+.quoteChangeWrapper {
+    display: flex;
+    gap: 10px;
+}
+.infoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.headerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.leftWrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+@media screen and (max-width: 480px) {
+    .divider {
+        display: none;
+    }
+    .leftWrapper {
+        flex-direction: column;
+        gap: 10px;
+        align-items: start;
+    }
+}

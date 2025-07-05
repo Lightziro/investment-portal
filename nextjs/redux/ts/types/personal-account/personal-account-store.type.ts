@@ -6,6 +6,7 @@ import {
 export interface PersonalAccountStore {
     predictions: AccountUserPredict;
     notices: AccountUserNotice;
+    transactions: AccountUserTransactions;
 }
 export interface AccountUserPredict {
     list: UserPredict[];
@@ -13,5 +14,10 @@ export interface AccountUserPredict {
 }
 export interface AccountUserNotice {
     list: UserNoticeModel[];
+    loading: boolean;
+}
+
+export interface AccountUserTransactions {
+    list: any[];
     loading: boolean;
 }

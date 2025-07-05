@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { AutoComplete, Input } from "antd";
 import classes from "../../../../../styles/nav-bar.module.scss";
-import { axios } from "../../../../../utils/axios";
 import { SearchOption } from "../../../../../ts/types/other/other.types";
 import { SearchEntityItem } from "./search-entity-item/SearchEntityItem";
 import { useTranslation } from "react-i18next";
@@ -31,11 +30,12 @@ export const SearchEntities: React.FC = () => {
 
     return (
         <AutoComplete
-            dropdownMatchSelectWidth={500}
-            dropdownClassName={classes.dropDownSearch}
+            // dropdownMatchSelectWidth={500}
+            // dropdownClassName={classes.dropDownSearch}
             onSearch={handleSearch}
+            className={classes.search}
             defaultActiveFirstOption={false}
-            style={{ width: 450 }}
+            // style={{ width: 450 }}
             options={options
                 .filter((section) => section.items.length)
                 .map((section) => ({
@@ -51,11 +51,11 @@ export const SearchEntities: React.FC = () => {
                     })),
                 }))}
         >
-            <Input.Search
-                onSearch={handleClickSearch}
-                size="large"
-                placeholder={t("Search on site")}
-            />
+            {/*<Input.Search*/}
+            {/*    onSearch={handleClickSearch}*/}
+            {/*    size="large"*/}
+            {/*    placeholder={t("Search on site")}*/}
+            {/*/>*/}
         </AutoComplete>
     );
 };

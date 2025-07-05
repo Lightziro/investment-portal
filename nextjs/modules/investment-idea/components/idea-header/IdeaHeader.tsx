@@ -15,14 +15,16 @@ import { useRootSelector } from "../../../../hooks/useTypeSelector";
 import { formatQuote } from "../../utils/format-quote";
 import { FileAddOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import { CreatePrediction } from "../../../../components/smart/create-prediction/CreatePrediction";
+import { CreatePrediction } from "../../../../components/smart/create-prediction/PredictionModal";
+import cn from "classnames";
+import styles from "./IdeaHeader.module.scss";
+import { Button } from "react-bootstrap";
 
 interface CompanyIdeaHeader {
     companyInfo: CompanyModel;
 }
 
 export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
-    const quoteData = useRootSelector((state) => state.view.idea.quote);
     const user = useRootSelector((state) => state.user.data);
     const [open, setOpen] = useState(false);
     const { t } = useTranslation();
@@ -34,68 +36,62 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
     };
     return (
         <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
-            <Grid container direction="row" justifyContent="space-between">
-                <Stack alignItems="center" direction="row" spacing={2}>
-                    <Avatar
-                        src={`${process.env.API_URL}/storage/${companyInfo.logo_path}`}
-                    />
-                    <span>{`${companyInfo.name}(${companyInfo.ticker})`}</span>
+            <div className={styles.headerWrapper}>
+                <div className={styles.leftWrapper}>
+                    <div className={styles.infoWrapper}>
+                        <Avatar
+                            src={`${process.env.API_URL}/storage/${companyInfo.logo_path}`}
+                        />
+                        <span>{`${companyInfo.name}(${companyInfo.ticker})`}</span>
+                    </div>
                     <Divider
-                        className="hr-separator"
+                        className={cn("hr-separator", styles.divider)}
                         orientation="vertical"
                         flexItem
                     />
-                    {quoteData ? (
-                        <Fragment>
-                            <Typography
-                                variant="h6"
-                                gutterBottom
-                                component="div"
-                            >
-                                ${quoteData.value_last}
-                            </Typography>
+                    <div className={styles.priceWrapper}>
+                        <div className={styles.currentPrice}>
+                            ${companyInfo.last_price}
+                        </div>
+                        <div className={styles.quoteChangeWrapper}>
                             <span
                                 className="quote-change"
                                 style={{
                                     color: getColorQuote(
-                                        quoteData.value_change
+                                        companyInfo.last_price
                                     ),
                                 }}
                             >
-                                {formatQuote(quoteData.value_change)}
+                                {formatQuote(companyInfo.last_price)}
                             </span>
                             <span
                                 className="quote-change-percent"
                                 style={{
                                     color: getColorQuote(
-                                        quoteData.value_change
+                                        companyInfo.change_percent_today
                                     ),
                                 }}
                             >
                                 {`(${formatQuote(
-                                    quoteData.value_change_percent.toFixed(2)
+                                    companyInfo.change_percent_today.toFixed(2)
                                 )}%)`}
                             </span>
-                        </Fragment>
-                    ) : (
-                        <Skeleton variant="rectangular" width="100%" />
-                    )}
-                </Stack>
-                <Tooltip title={t("Create prediction")}>
-                    <IconButton
-                        onClick={() => setOpen(true)}
-                        disabled={!user}
-                        component="span"
-                    >
-                        <FileAddOutlined />
-                    </IconButton>
-                </Tooltip>
+                        </div>
+                    </div>
+                </div>
+                <Button
+                    onClick={() => setOpen(true)}
+                    variant="primary"
+                    type="submit"
+                >
+                    {t("Make predict")}
+                </Button>
                 <CreatePrediction
-                    companyId={companyInfo.company_id}
+                    company={companyInfo}
                     open={open}
                     setOpen={setOpen}
                 />
-            </Grid>
+            </div>
         </Card>
     );
 };

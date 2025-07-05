@@ -12,6 +12,33 @@ const userReducer = (state: UserStore = null, action: AnyAction): UserStore => {
             return { ...state, fetch: action.state };
         case "SET_NOTICE_VIEW":
             return setNoticeView(state, action.id);
+        case "ADD_USER_PREDICTION":
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    predictions: [...state.data.predictions, action.payload],
+                },
+            };
+        case "SET_USER_BALANCE":
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    balance: action.payload,
+                },
+            };
+        case "REMOVE_USER_PREDICTION":
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    predictions: state.data.predictions.filter(
+                        (pred) =>
+                            pred.prediction_id !== action.payload.prediction_id
+                    ),
+                },
+            };
         default:
             return state;
     }

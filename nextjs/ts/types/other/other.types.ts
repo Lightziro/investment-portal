@@ -19,3 +19,6 @@ export interface EmotionItem {
     name: string;
     color: string;
 }
+export interface FilterOperations {
+    event: string;
+}

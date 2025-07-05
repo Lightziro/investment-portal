@@ -60,6 +60,10 @@ export const MENU_PERSONAL_ACCOUNT = [
         url: "/personal-account/predictions",
     },
     {
+        label: "Операции баланса",
+        url: "/personal-account/transactions",
+    },
+    {
         label: "Notices",
         url: "/personal-account/notices",
     },

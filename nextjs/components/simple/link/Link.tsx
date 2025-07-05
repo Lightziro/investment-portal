@@ -3,6 +3,7 @@ import Link, { LinkProps } from "next/link";
 
 interface LinkWrapper extends LinkProps {
     className?: string;
+    children: React.ReactNode;
 }
 export const LinkWrapper: React.FC<LinkWrapper> = ({
     children,
@@ -10,8 +11,8 @@ export const LinkWrapper: React.FC<LinkWrapper> = ({
     ...other
 }) => {
     return (
-        <Link {...other}>
-            <a className={className}>{children}</a>
+        <Link className={className} {...other}>
+            {children}
         </Link>
     );
 };

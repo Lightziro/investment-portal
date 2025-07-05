@@ -1,5 +1,7 @@
 import * as Yup from "yup";
 
 export const CreatePredictionSchema = Yup.object().shape({
-    predict_price: Yup.number().required("Is required field"),
+    amount: Yup.number()
+        .required("Is required field")
+        .min(100, "Минимальная сумма ставки 100"),
 });

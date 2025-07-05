@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { Box, Button, Card, Typography } from "@mui/material";
+import { Box, Button, Card, Grid, Typography } from "@mui/material";
 
 export const PortalAd: React.FC = () => {
     const { t } = useTranslation();
     return (
-        <Card sx={{ bgcolor: "#b0deff", mb: 2 }}>
+        <Grid size={{ md: 6 }} sx={{ bgcolor: "#b0deff", mb: 2 }}>
             <img
                 className="main-picture-portal"
                 src="/images/picture/other/svg-editor-image.svg"
@@ -19,6 +19,6 @@ export const PortalAd: React.FC = () => {
                     <Button variant="outlined">Подробнее</Button>
                 </Link>
             </Box>
-        </Card>
+        </Grid>
     );
 };

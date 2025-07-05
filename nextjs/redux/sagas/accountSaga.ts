@@ -42,6 +42,22 @@ function* fetchNotices(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
+
+function* fetchTransactions(action): Generator {
+    try {
+        console.log(action);
+        const data = yield axios
+            .get(`${process.env.API_URL}/api/user/transactions`, {
+                params: action.filter,
+            })
+            .then((res) => res.data);
+        yield put({
+            type: "SET_ACCOUNT_TRANSACTIONS",
+            payload: data.data,
+        });
+    } catch (e) {}
+}
+
 function* viewNotice(action: AnyAction): Generator {
     try {
         yield requestViewNotice(action.id);
@@ -91,4 +107,5 @@ export function* actionAccountWatcher(): SagaIterator {
     yield takeLatest("SEND_VIEW_NOTICE", viewNotice);
     yield takeLatest("FETCH_USER_STATS", fetchStats);
     yield takeLatest("SEND_UPDATE_VISIBLE_PREDICT", setVisiblePredict);
+    yield takeLatest("FETCH_USER_TRANSACTIONS", fetchTransactions);
 }

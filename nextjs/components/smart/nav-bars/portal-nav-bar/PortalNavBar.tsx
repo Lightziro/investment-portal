@@ -7,8 +7,10 @@ import { ProfileMenu } from "./profile-menu/ProfileMenu";
 import { SearchEntities } from "./search-entities/SearchEntities";
 import { ExchangeTimeMenu } from "./exchange-tim-menu/ExchangeTimeMenu";
 import classnames from "classnames";
+import { useRootSelector } from "../../../../hooks/useTypeSelector";
 
 export const PortalNavBar: React.FC = () => {
+    const user = useRootSelector((state) => state.user.data);
     const [open, setOpen] = useState({
         language: false,
         notice: false,
@@ -20,15 +22,21 @@ export const PortalNavBar: React.FC = () => {
     };
 
     return (
-        <header className={classnames('container', classes.portalNavBar)}>
+        <header className={classnames("container", classes.portalNavBar)}>
             <div className={classes.navBarWrapper}>
                 <div className={classes.logoWrapper}>
                     <Link href="/" passHref>
                         <img src="/images/logo/logo-hub.png" />
                     </Link>
                 </div>
-                <SearchEntities />
+                {/*<SearchEntities />*/}
                 <div className={classes.emptyBlock} />
+                {user && (
+                    <div className={classes.balanceBlock}>
+                        <span>{user?.balance || 0}</span>
+                        <img src="/images/picture/tg-star.svg" />
+                    </div>
+                )}
                 <LanguageMenu
                     open={open.language}
                     onClose={() => handleOpen(false, "language")}

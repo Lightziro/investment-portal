@@ -2,6 +2,7 @@
 
 namespace App\Http\Modules\Portal\Controllers;
 
+use App\Domain\Portal\Service\QuoteService;
 use App\Models\Article\Article;
 use App\Models\Company\Company;
 use App\Models\Investment\InvestmentIdea;
@@ -45,9 +46,16 @@ class ViewController extends Controller
         return response()->json($companyInfo);
     }
 
-    public function getViewCompany(Company $company): JsonResponse
+    public function getViewCompany(Company $company, QuoteService $service): JsonResponse
     {
-        return response()->json($company->toArray());
+        $companyInfo = $company->toArray();
+        $quote = $service->getQuoteInfo($company);
+        $companyInfo = array_merge($companyInfo, [
+            'last_price' => $quote->getLastPrice(),
+            'change_percent_today' => $quote->getPercentChangeToday(),
+        ]);
+
+        return response()->json($companyInfo);
     }
 
     public function getCacheIdeaData(int $idea_id, string $ticker)

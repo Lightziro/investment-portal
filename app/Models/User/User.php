@@ -24,6 +24,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $password
  * @property string $first_name
  * @property string $last_name
+ * @property int $balance
  * @property UsersRole|null $role
  * @property null|int $role_id
  * @property InvestmentIdea|Collection|null $investmentIdeas
@@ -76,6 +77,8 @@ class User extends Authenticatable
             'role' => $this->role->name,
             'notices' => $notices ?? [],
             'avatar' => $this->avatar_path,
+            'balance' => $this->balance,
+            'predictions' => $this->predictions()->whereNull('end_at')->get()->toArray(),
         ]);
     }
 
@@ -118,7 +121,12 @@ class User extends Authenticatable
 
     public function predictions(): HasMany
     {
-        return $this->hasMany(UserPredictions::class, 'user_id', 'user_id');
+        return $this->hasMany(UserPrediction::class, 'user_id', 'user_id');
+    }
+
+    public function balanceTransfers(): HasMany
+    {
+        return $this->hasMany(UserBalanceTransfer::class, 'user_id', 'user_id');
     }
 
     public function subscriptions(): HasMany

@@ -2,29 +2,26 @@
 
 namespace App\Models\User;
 
-use App\Custom\CustomModel;
 use App\Models\Company\Company;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property int $prediction_id
  * @property-read User $user
- * @property int $user_id
- * @property-read  Company $company
- * @property int $company_id
- * @property float $predict_price
- * @property bool $visible
+ * @property-read Company $company
+ * @property float $price
+ * @property Carbon created_at
+ * @property Carbon updated_at
  */
-class UserPredictions extends CustomModel
+class UserPrediction extends Model
 {
+    protected $primaryKey = 'id';
     protected $table = 'user_predictions';
-    protected $primaryKey = 'prediction_id';
-    protected $fillable = ['visible', 'company_id', 'predict_price'];
-    protected $with = ['company'];
+    protected $fillable = ['user_id', 'amount', 'price', 'transfer_id', 'company_id', 'is_top'];
 
     protected $casts = [
-        'visible' => 'boolean',
+        'price' => 'float'
     ];
 
     public function company(): BelongsTo

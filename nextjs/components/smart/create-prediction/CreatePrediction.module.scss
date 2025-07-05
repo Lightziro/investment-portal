@@ -1,0 +1,46 @@
+.containerModal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.attention {
+    font-weight: 600;
+}
+
+.dialogContainer {
+    width: 800px;
+    //max-width: 800px;
+}
+
+.tariffWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .label {
+        max-width: 300px;
+    }
+
+    .infoWrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .amountBlock {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+}
+
+.infoCommission {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+
+    span {
+        white-space: nowrap;
+    }
+}

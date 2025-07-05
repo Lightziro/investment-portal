@@ -2,6 +2,7 @@
 
 namespace App\Http\Modules\User\Controllers;
 
+use App\Http\Resources\UserTransactionResource;
 use App\Models\User\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
@@ -45,5 +46,18 @@ class UserController extends Controller
             return response()->json($user->notices->toArray());
         }
         return response()->json([], 400);
+    }
+
+    public function getTransactions(RequestApi $request)
+    {
+        /** @var User $user */
+        $user = $request->user();
+        $event = $request->get('event') ?? null;
+        $query =  $user->balanceTransfers();
+        if (!empty($event)) {
+            $query->where('event', $event);
+        }
+        $list = $query->orderByDesc('created_at')->get();
+        return UserTransactionResource::collection($list);
     }
 }
