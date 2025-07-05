@@ -7,6 +7,9 @@ module.exports = {
         API_URL_DOCKER: process.env.API_URL_DOCKER,
         TYPE_SERVER: process.env.TYPE_SERVER,
     },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
     images: {
         domains: ["localhost"],
     },

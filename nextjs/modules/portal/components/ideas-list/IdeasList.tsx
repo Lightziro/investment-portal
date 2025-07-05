@@ -6,7 +6,7 @@ import { WrapperIdeaItem } from "./wrapper-idea-item/WrapperIdeaItem";
 import { LinkWrapper } from "../../../../components/simple/link/Link";
 import { Card } from "antd";
 import { useTranslation } from "react-i18next";
-import { Skeleton } from "@mui/lab";
+import { Skeleton } from "@mui/material";
 const { Meta } = Card;
 
 interface IdeasList {

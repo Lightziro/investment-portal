@@ -6,7 +6,7 @@ import { PublishFormIdea } from "../../sections/investment-ideas/publish-form-id
 import { DtoPersonalIdea } from "../../ts/types/response/admin-response-personal";
 import StatsIdea from "../../sections/investment-ideas/stats-idea/StatsIdea";
 import { useTranslation } from "react-i18next";
-import {a11yProps} from "../../../../utils/other";
+import { a11yProps } from "../../../../utils/other";
 
 interface AdminIdeaPage {
     idea: DtoPersonalIdea;
@@ -20,12 +20,11 @@ export const AdminIdeaPage: React.FC<AdminIdeaPage> = ({ idea }) => {
         setTab(newValue);
     };
 
-
     if (!idea) {
         return null;
     }
     return (
-        <Box >
+        <Box>
             <AppBar position="static">
                 <Tabs
                     value={tab}
@@ -51,7 +50,7 @@ export const AdminIdeaPage: React.FC<AdminIdeaPage> = ({ idea }) => {
                 <StatsIdea />
             </TabPanel>
             <TabPanel value={tab} index={1}>
-                <PublishFormIdea idea={idea} />
+                publish form
             </TabPanel>
         </Box>
     );

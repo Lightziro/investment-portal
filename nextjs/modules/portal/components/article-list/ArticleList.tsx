@@ -4,7 +4,7 @@ import { ArticleModel } from "../../../../ts/types/entity/article.types";
 import { LinkWrapper } from "../../../../components/simple/link/Link";
 import { Card } from "antd";
 import { Avatar, Grid } from "@mui/material";
-import { Skeleton } from "@mui/lab";
+import { Skeleton } from "@mui/material";
 const { Meta } = Card;
 
 interface ArticleList {
