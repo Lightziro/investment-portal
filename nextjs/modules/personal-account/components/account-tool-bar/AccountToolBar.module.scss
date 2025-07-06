@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+
     .blockMenu {
-        padding: 5px;
+        padding: 10px;
+
         &.active {
-            &.active {
-                background: #e5efff;
-                border-radius: 3px;
-            }
+            background: #e5efff;
+            border-radius: 8px;
+            font-weight: 500;
         }
 
     }

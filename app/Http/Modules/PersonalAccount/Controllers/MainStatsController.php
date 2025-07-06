@@ -2,6 +2,7 @@
 
 namespace App\Http\Modules\PersonalAccount\Controllers;
 
+use App\Enums\BalanceUp;
 use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -15,8 +16,8 @@ class MainStatsController extends Controller
         $user = $request->user();
 
         return response()->json([
-            'comments_count' => $user->commentsArticles()->count() + $user->commentsIdeas()->count(),
-            'notices_count' => $user->notices()->count(),
+            'upBalance' => $user->balanceTransfers()->where('event', BalanceUp::UP_PAYMENT)->sum('amount'),
+            'profit' => $user->predictions()->whereNotNull('end_at')->sum('profit_amount'),
         ]);
     }
 }

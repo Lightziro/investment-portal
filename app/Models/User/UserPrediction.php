@@ -18,7 +18,7 @@ class UserPrediction extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'user_predictions';
-    protected $fillable = ['user_id', 'amount', 'price', 'transfer_id', 'company_id', 'is_top'];
+    protected $fillable = ['user_id', 'profit_amount', 'close_transfer_id', 'end_at', 'amount', 'price', 'transfer_id', 'company_id', 'is_top'];
 
     protected $casts = [
         'price' => 'float'

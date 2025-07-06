@@ -10,7 +10,6 @@ enum BalanceUp: string
     case DEAL = 'deal';
     case DEAL_CLOSE = 'deal-close';
 
-    public const COMMISSION_DEAL_AMOUNT = 15;
 
     public function toName()
     {
@@ -18,6 +17,7 @@ enum BalanceUp: string
             self::UP_PAYMENT => 'Пополнение баланса',
             self::COMMISSION_DEAL => 'Комиссия за сделку',
             self::WELCOME_BONUS => 'Приветственный бонус',
+            self::COMMISSION_RETENTION => 'Комиссия за удержание позиции',
             default => '',
         };
     }

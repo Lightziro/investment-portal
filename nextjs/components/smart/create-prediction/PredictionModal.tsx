@@ -211,7 +211,7 @@ export const CreatePrediction: React.FC<PredictionModal> = ({
                             onClick={handleClosePosition}
                             autoFocus
                         >
-                            {t("Close position")}
+                            {t("Закрыть сделку")}
                         </Button>
                     ) : (
                         <Button

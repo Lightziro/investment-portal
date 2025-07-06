@@ -35,7 +35,7 @@ export const PortalNavBar: React.FC = () => {
         dispatch(setOpenSheet("upBalance", {}));
     };
 
-    const noticesWithoutView = user.notices.filter((t) => !t.viewed).length;
+    const noticesWithoutView = user.notices.length;
 
     return (
         <nav className={styles.bottomNav}>

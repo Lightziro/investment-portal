@@ -10,7 +10,7 @@ export const AccountToolBar: React.FC = () => {
     const router = useRouter();
     const { t } = useTranslation();
     return (
-        <div className="mt-3">
+        <div>
             <div className={styles.list}>
                 {MENU_PERSONAL_ACCOUNT.map((item) => (
                     <LinkWrapper

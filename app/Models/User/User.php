@@ -51,10 +51,12 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'role_id',
         'avatar_path',
         'country_id',
-        'sex'
+        'sex',
+        'telegram_id',
+        'user_name',
+        'balance'
     ];
     protected $hidden = ['password', 'deleted_at', 'email'];
     protected $primaryKey = 'user_id';
@@ -71,11 +73,11 @@ class User extends Authenticatable
 
     public function getFrontendData(): array
     {
-        $notices = $this->notices()->orderByDesc('created_at')->limit(5)->get()->toArray();
+        $notices = $this->notices()->where('viewed', false)->count();
 
         return array_merge($this->only(['user_id', 'first_name', 'last_name']), [
             'full_name' => $this->getFullName(),
-            'notices' => $notices ?? [],
+            'notices' => $notices,
             'avatar' => $this->avatar_path,
             'balance' => $this->balance,
             'predictions' => $this->predictions()->whereNull('end_at')->get()->toArray(),

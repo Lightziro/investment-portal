@@ -7,8 +7,9 @@ export const deletePredict = (predictId: number) => ({
     type: "SEND_DELETE_PREDICT",
     predictId,
 });
-export const fetchUserNotices = () => ({
+export const fetchUserNotices = (page) => ({
     type: "FETCH_USER_NOTICES",
+    page,
 });
 
 export const fetchUserTransactions = (filter: FilterOperations) => ({

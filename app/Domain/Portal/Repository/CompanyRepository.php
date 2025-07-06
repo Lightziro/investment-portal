@@ -14,6 +14,6 @@ class CompanyRepository extends Repository
     public function getTopList(): Collection|array
     {
         return $this->model::query()->where('show_top', true)->limit(6)
-            ->orderBy('name')->get(['name', 'ticker', 'company_id', 'type_market_parse', 'external_id']);
+            ->orderBy('name')->get(['name', 'ticker', 'company_id', 'logo_path', 'type_market_parse', 'external_id']);
     }
 }

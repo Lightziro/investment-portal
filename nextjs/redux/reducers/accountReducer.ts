@@ -3,6 +3,7 @@ import { PersonalAccountStore } from "../ts/types/personal-account/personal-acco
 import {
     removePredict,
     setDataAccount,
+    setDataAccountPagination,
     setViewNotice,
     setVisiblePrediction,
 } from "../utils/account.utils";
@@ -36,11 +37,17 @@ const accountReducer = (
                 action.visible
             );
         case "SET_USER_NOTICES":
-            return setDataAccount(state, "notices", action.data);
+            return setDataAccountPagination(state, "notices", action.data);
         case "SET_NOTICE_VIEW":
             return setViewNotice(state, action.id);
         case "SET_MAIN_STATS":
-            return setDataAccount(state, "main", action.data);
+            return {
+                ...state,
+                stats: {
+                    data: action.data,
+                    loading: false,
+                },
+            };
         default:
             return state;
     }

@@ -47,10 +47,7 @@ export const TransactionsPage: React.FC = () => {
     console.log(filter);
 
     return (
-        <Paper sx={{ p: 2 }}>
-            <HeaderPage title="Операции по балансу">
-                In this section you can view your notices
-            </HeaderPage>
+        <>
             <div>
                 <SelectField
                     label="Тип операции"
@@ -65,6 +62,9 @@ export const TransactionsPage: React.FC = () => {
                 itemLayout="horizontal"
                 dataSource={list}
                 loading={loading}
+                locale={{
+                    emptyText: "Нет операций по балансу",
+                }}
                 renderItem={(item) => (
                     <List.Item>
                         <List.Item.Meta
@@ -95,6 +95,6 @@ export const TransactionsPage: React.FC = () => {
                     </List.Item>
                 )}
             />
-        </Paper>
+        </>
     );
 };

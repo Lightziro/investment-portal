@@ -42,10 +42,13 @@ class UserController extends Controller
     public function getNotices(RequestApi $request): JsonResponse
     {
         /** @var User $user */
-        if ($user = $request->user()) {
-            return response()->json($user->notices->toArray());
-        }
-        return response()->json([], 400);
+        $user = $request->user();
+        $items = $user->notices()->orderByDesc('created_at')->paginate(5);
+        return response()->json([
+            'total' => $items->total(),
+            'items' => $items->items(),
+            'page' => $items->currentPage(),
+        ]);
     }
 
     public function getTransactions(RequestApi $request)
@@ -53,7 +56,7 @@ class UserController extends Controller
         /** @var User $user */
         $user = $request->user();
         $event = $request->get('event') ?? null;
-        $query =  $user->balanceTransfers();
+        $query = $user->balanceTransfers();
         if (!empty($event)) {
             $query->where('event', $event);
         }

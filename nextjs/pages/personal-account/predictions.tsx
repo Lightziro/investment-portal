@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
 import { PortalLayout } from "../../layouts/PortalLayout/PortalLayout";
 import { Container } from "@mui/material";
-import { PersonalAccountLayout } from "../../layouts/PersonalAccountLayout";
+import { PersonalAccountLayout } from "../../layouts/PersonalAccountLayout/PersonalAccountLayout";
 import React from "react";
 import { MyStockPage } from "../../modules/personal-account/pages/MyStockPage";
 

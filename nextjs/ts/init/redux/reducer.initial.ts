@@ -25,9 +25,15 @@ export const initialAccountStore: PersonalAccountStore = {
     notices: {
         list: [],
         loading: true,
+        total: null,
+        page: 1,
     },
     transactions: {
         list: [],
+        loading: true,
+    },
+    stats: {
+        data: null,
         loading: true,
     },
 };

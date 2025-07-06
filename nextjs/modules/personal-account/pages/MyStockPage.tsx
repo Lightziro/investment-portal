@@ -2,15 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Avatar, IconButton, Paper, Stack } from "@mui/material";
 import { HeaderPage } from "../components/header-page/HeaderPage";
 import { useDispatch } from "react-redux";
-import {
-    deletePredict,
-    fetchUserPrediction,
-    setVisiblePredict,
-} from "../../../redux/actions/personal-account/userPredictionActions";
+import { fetchUserPrediction } from "../../../redux/actions/personal-account/userPredictionActions";
 import { useRootSelector } from "../../../hooks/useTypeSelector";
 import { List } from "antd";
 import { UserPredict } from "../../../ts/types/entity/user.types";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import classes from "../PersonalAccount.module.scss";
 import {
@@ -20,8 +15,8 @@ import {
 import { useRouter } from "next/router";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { CompanyModel } from "../../../ts/types/entity/other.types";
 import styles from "./MyStockPage.module.scss";
+import { getCurrencyShow } from "../../../utils/other";
 
 export const MyStockPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -48,25 +43,29 @@ export const MyStockPage: React.FC = () => {
     );
 
     return (
-        <Paper sx={{ p: 2 }}>
-            <HeaderPage title="My predictions">
-                In this section you can get acquainted with your stock
-                forecasts. To delete the forecast, click on the cross
-            </HeaderPage>
+        <>
             <List
                 loading={loading}
                 dataSource={list}
+                locale={{
+                    emptyText: "Нет ставок",
+                }}
                 renderItem={(item: UserPredict) => (
                     <List.Item key={item.prediction_id}>
                         <List.Item.Meta
                             avatar={
                                 <Avatar
+                                    // component="img"
                                     onClick={() =>
                                         router.push(
                                             `/company/${item.company_id}`
                                         )
                                     }
-                                    src={`${process.env.API_URL}/storage/${item.company.logo_path}`}
+                                    // onError={(e) =>
+                                    //     (e.currentTarget.src =
+                                    //         "/images/picture/build.svg")
+                                    // }
+                                    src={`/storage/${item.company.logo_path}`}
                                 />
                             }
                             title={item.company.name}
@@ -78,7 +77,11 @@ export const MyStockPage: React.FC = () => {
                                         </span>
                                     </div>
                                     <span className={classes.predictPrices}>
-                                        {`${item.current_price}$ / ${item.price}$`}
+                                        {`${
+                                            item.current_price
+                                        }${getCurrencyShow(item.currency)} / ${
+                                            item.price
+                                        }$`}
                                     </span>
                                     <span>
                                         {`(${getResultPredict(item)}%)`}
@@ -90,28 +93,6 @@ export const MyStockPage: React.FC = () => {
                                 </div>
                             }
                         />
-                        {/*<IconButton*/}
-                        {/*    component="span"*/}
-                        {/*    onClick={*/}
-                        {/*        item.visible*/}
-                        {/*            ? () =>*/}
-                        {/*                  handleVisible(*/}
-                        {/*                      false,*/}
-                        {/*                      item.prediction_id*/}
-                        {/*                  )*/}
-                        {/*            : () =>*/}
-                        {/*                  handleVisible(*/}
-                        {/*                      true,*/}
-                        {/*                      item.prediction_id*/}
-                        {/*                  )*/}
-                        {/*    }*/}
-                        {/*>*/}
-                        {/*    {item.visible ? (*/}
-                        {/*        <VisibilityIcon />*/}
-                        {/*    ) : (*/}
-                        {/*        <VisibilityOffIcon />*/}
-                        {/*    )}*/}
-                        {/*</IconButton>*/}
                         <IconButton component="span">
                             <AttachMoneyOutlinedIcon
                                 onClick={(e) => handleClick(e, item)}
@@ -135,6 +116,6 @@ export const MyStockPage: React.FC = () => {
                 </MenuItem>
                 <MenuItem onClick={handleClose}>Закрыть позицию</MenuItem>
             </Menu>
-        </Paper>
+        </>
     );
 };

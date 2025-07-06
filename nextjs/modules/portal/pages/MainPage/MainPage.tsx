@@ -41,7 +41,7 @@ const MainPage = () => {
                             >
                                 <div className={styles.stockInfo}>
                                     <img
-                                        src="/icons/apple.png"
+                                        src={`/storage/${quote.logoPath}`}
                                         alt="Apple"
                                         className={styles.stockIcon}
                                         onError={(e) =>

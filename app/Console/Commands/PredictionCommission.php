@@ -5,24 +5,11 @@ namespace App\Console\Commands;
 use App\Domain\Portal\Service\QuoteService;
 use App\Enums\BalanceUp;
 use App\Enums\CommissionAmount;
-use App\Exceptions\ConsumerException;
-use App\Http\Classes\QueueRabbit;
-use App\Http\Classes\StockMarket;
-use App\Http\Modules\Admin\Helpers\AnalyticsHelper;
-use App\Models\Investment\AnalyticalQuestion;
-use App\Models\Investment\InvestmentIdea;
-use App\Models\Investment\InvestmentIdeaAnalyze;
-use App\Models\Investment\InvestmentIdeaStatuses;
 use App\Models\User\UserPrediction;
-use App\Services\MoexStockMarket;
-use App\Services\TinkoffAPI;
-use App\Services\TinkoffStockMarket;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use PhpAmqpLib\Message\AMQPMessage;
-use Throwable;
 
 class PredictionCommission extends Command
 {
@@ -57,28 +44,35 @@ class PredictionCommission extends Command
      */
     public function handle(): int
     {
+        Log::channel('commands')->info('Start prediction commission', [now()->toString()]);
         $cutoffDate = today('Europe/Moscow')->subDays(2)->startOfDay();
-        /** @var UserPrediction[] $predictions */
+        /** @var UserPrediction[]|Collection $predictions */
         $predictions = UserPrediction::query()->with(['user', 'company'])
             ->whereNull('end_at')
             ->where(DB::raw('DATE(created_at)'), '<=', $cutoffDate)
             ->get();
+        Log::channel('commands')->info('Query info predictions', [$predictions->count()]);
         foreach ($predictions as $predict) {
             $user = $predict->user;
             if ($user->balance < CommissionAmount::COMMISSION_DEAL_AMOUNT->value) {
+                Log::channel('commands')->info("User{$user->getKey()} balance not enough", [$user->balance]);
                 $predict->end_at = now();
                 $infoQuote = $this->service->getQuoteInfo($predict->company);
                 $changePercent = QuoteService::calculatePercentageChange($predict->price, $infoQuote->getLastPrice());
-                $addBalance = $predict->amount * $changePercent;
-                $user->balanceTransfers()->create([
+                $profit = $predict->amount * $changePercent;
+                $addBalance = $profit + $predict->amount;
+                $closeTransfer = $user->balanceTransfers()->create([
                    'event' => BalanceUp::DEAL_CLOSE,
                    'amount' => $addBalance
                 ]);
+                $predict->close_transfer_id = $closeTransfer->getKey();
+                $predict->profit_amount = $profit;
                 $user->balance += $addBalance;
                 $user->save();
                 $user->notices()->create([
                     'viewed' => false,
-                    'title' => 'Deal force close',
+                    'title' => 'Ваша позиция принудительно',
+                    'description' => 'Не удалось списать средства за удержание позиции, поэтому закрыли сделку принудительно'
                 ]);
                 $user->balance -= CommissionAmount::COMMISSION_DEAL_AMOUNT->value;
                 $user->balanceTransfers()->create([
@@ -89,6 +83,7 @@ class PredictionCommission extends Command
                 $predict->save();
                 continue;
             }
+            Log::channel('commands')->info("User{$user->getKey()} commission transfer", [$predict->getKey()]);
             $user->balance -= CommissionAmount::COMMISSION_DEAL_AMOUNT->value;
             $user->balanceTransfers()->create([
                 'event' => BalanceUp::COMMISSION_RETENTION,
@@ -105,6 +100,7 @@ class PredictionCommission extends Command
         foreach ($notifyPredict as $predict) {
             $user = $predict->user;
             if ($user->balance < CommissionAmount::COMMISSION_DEAL_AMOUNT->value) {
+                Log::channel('commands')->info("User{$user->getKey()} notify", [$user->balance]);
                 $user->notices()->create([
                     'viewed' => false,
                     'title' => 'Tomorrow the transaction holding fee will be charged',
@@ -112,7 +108,7 @@ class PredictionCommission extends Command
                 ]);
             }
         }
-
+        Log::channel('commands')->info('End prediction commission');
         return 1;
     }
 }

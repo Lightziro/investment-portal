@@ -41,6 +41,20 @@ export const setDataAccount = (
     ...state,
     [section]: { list: data, loading: false },
 });
+
+export const setDataAccountPagination = (
+    state: PersonalAccountStore,
+    section: string,
+    data: any
+): PersonalAccountStore => ({
+    ...state,
+    [section]: {
+        list: [...state.notices.list, ...data.items],
+        loading: false,
+        total: data.total,
+        page: data.page + 1,
+    },
+});
 export const setViewNotice = (
     state: PersonalAccountStore,
     noticeId: number

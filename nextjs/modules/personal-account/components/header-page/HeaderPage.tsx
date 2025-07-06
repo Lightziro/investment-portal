@@ -6,8 +6,9 @@ import classes from "../../PersonalAccount.module.scss";
 
 interface HeaderPage {
     title: string;
-    children: string;
+    children?: string;
 }
+
 export const HeaderPage: React.FC<HeaderPage> = ({ title, children }) => {
     const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = useState<SVGElement | null>(null);
@@ -22,33 +23,36 @@ export const HeaderPage: React.FC<HeaderPage> = ({ title, children }) => {
         <Fragment>
             <Stack direction="row" justifyContent="space-between">
                 <h3>{t(title)}</h3>
-                <IconButton
-                    color="primary"
-                    component="span"
-                    size="large"
-                    onClick={(e) => handleOpen(e)}
-                >
-                    <InfoOutlinedIcon />
-                </IconButton>
+                {children && (
+                    <IconButton
+                        color="primary"
+                        component="span"
+                        size="large"
+                        onClick={(e) => handleOpen(e)}
+                    >
+                        <InfoOutlinedIcon />
+                    </IconButton>
+                )}
             </Stack>
-            <Divider />
-            <Popover
-                open={Boolean(anchorEl)}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right",
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                }}
-            >
-                <div className={`p-2 ${classes.headerContent}`}>
-                    {t(children)}
-                </div>
-            </Popover>
+            {children && (
+                <Popover
+                    open={Boolean(anchorEl)}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                    }}
+                    transformOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                    }}
+                >
+                    <div className={`p-2 ${classes.headerContent}`}>
+                        {t(children)}
+                    </div>
+                </Popover>
+            )}
         </Fragment>
     );
 };

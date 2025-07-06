@@ -4,7 +4,7 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { PortalLayout } from "../../layouts/PortalLayout/PortalLayout";
 import { Container } from "@mui/material";
 import { PersonalAccountPage } from "../../modules/personal-account/pages/PersonalAccountPage";
-import { PersonalAccountLayout } from "../../layouts/PersonalAccountLayout";
+import { PersonalAccountLayout } from "../../layouts/PersonalAccountLayout/PersonalAccountLayout";
 
 export const PersonalAccount: NextPage = () => {
     return (

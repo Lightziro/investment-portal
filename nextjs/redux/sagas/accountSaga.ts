@@ -31,10 +31,15 @@ function* deletePredict(action: AnyAction): Generator {
         });
     } catch (e) {}
 }
-function* fetchNotices(action: AnyAction): Generator {
+function* fetchNotices(action): Generator {
     try {
+        console.log(action);
         const data = yield axios
-            .get(`${process.env.API_URL}/api/user/notices`)
+            .get(`${process.env.API_URL}/api/user/notices`, {
+                params: {
+                    page: action.page,
+                },
+            })
             .then((res) => res.data);
         yield put({
             type: "SET_USER_NOTICES",

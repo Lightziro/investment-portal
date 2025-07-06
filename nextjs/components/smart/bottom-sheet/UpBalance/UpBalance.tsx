@@ -75,7 +75,6 @@ const UpBalance = () => {
             </div>
             {tab === "star" && (
                 <>
-                    <div>Пополнить баланс</div>
                     <div className={styles.upRow}>
                         {balanceUp.map((value) => {
                             return (
