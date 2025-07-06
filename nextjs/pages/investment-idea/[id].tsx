@@ -4,7 +4,7 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
 import { InvestmentIdeaPage } from "../../modules/investment-idea/InvestmentIdeaPage";
 import { getViewEntity } from "../../utils/api/get-data";
-import { PortalLayout } from "../../layouts/PortalLayout";
+import { PortalLayout } from "../../layouts/PortalLayout/PortalLayout";
 import { useRouter } from "next/router";
 import { IdeaView } from "../../ts/types/entity/idea.types";
 import { Entity } from "../../ts/enums/other.enums";

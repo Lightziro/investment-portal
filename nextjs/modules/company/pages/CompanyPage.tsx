@@ -28,26 +28,28 @@ export const CompanyPage: React.FC<CompanyPage> = ({ company }) => {
     console.log(company);
 
     useEffect(() => {
-        const script = document.createElement("script");
-        script.src =
-            "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-        script.type = "text/javascript";
-        script.async = true;
-        script.innerHTML = `
-        {
-          "symbol": "NASDAQ:${company.ticker}",
-          "interval": "D",
-          "height": "500",
-          "timezone": "Etc/UTC",
-          "theme": "light",
-          "style": "1",
-          "locale": "ru",
-          "enable_publishing": false,
-          "allow_symbol_change": true,
-          "calendar": false,
-          "support_host": "https://www.tradingview.com"
-        }`;
-        container.current.appendChild(script);
+        if (company.currency === "USD") {
+            const script = document.createElement("script");
+            script.src =
+                "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+            script.type = "text/javascript";
+            script.async = true;
+            script.innerHTML = `
+            {
+              "symbol": "NASDAQ:${company.ticker}",
+              "interval": "D",
+              "height": "500",
+              "timezone": "Etc/UTC",
+              "theme": "light",
+              "style": "1",
+              "locale": "ru",
+              "enable_publishing": false,
+              "allow_symbol_change": true,
+              "calendar": false,
+              "support_host": "https://www.tradingview.com"
+            }`;
+            container.current.appendChild(script);
+        }
     }, []);
 
     return (

@@ -17,6 +17,8 @@ class QuoteListResponse extends JsonResource
             'name' => $this->resource->getCompanyName(),
             'last_price' => $this->resource->getLastPrice(),
             'percent_change_today' => $this->resource->getPercentChangeToday(),
+            'currency' => $this->resource->geCurrency(),
+            'logoPath' => $this->resource->getLogoPath(),
         ];
     }
 }

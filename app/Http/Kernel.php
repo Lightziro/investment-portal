@@ -58,12 +58,12 @@ class Kernel extends HttpKernel
             StartSession::class,
             AuthenticateSession::class,
             ShareErrorsFromSession::class,
-            VerifyCsrfToken::class,
+//            VerifyCsrfToken::class,
             SubstituteBindings::class,
         ],
 
         'api' => [
-            EnsureFrontendRequestsAreStateful::class,
+//            EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             SubstituteBindings::class,
         ],

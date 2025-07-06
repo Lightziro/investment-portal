@@ -5,7 +5,7 @@ import { ArticlePage } from "../../modules/article/pages/ArticlePage";
 import { getListNews, getViewEntity } from "../../utils/api/get-data";
 import { News } from "../../ts/types/entity/stock-market.types";
 import { useRouter } from "next/router";
-import { PortalLayout } from "../../layouts/PortalLayout";
+import { PortalLayout } from "../../layouts/PortalLayout/PortalLayout";
 import { ArticleModel } from "../../ts/types/entity/article.types";
 import { Entity } from "../../ts/enums/other.enums";
 

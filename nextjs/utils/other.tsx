@@ -65,3 +65,9 @@ export const a11yProps = (index) => ({
     id: `full-width-tab-${index}`,
     "aria-controls": `full-width-tabpanel-${index}`,
 });
+export const getCurrencyShow = (currency: "USD" | "RUB") => {
+    return currency === "USD" ? "$" : "₽";
+};
+export function formatNumber(number: number) {
+    return new Intl.NumberFormat("ru-RU").format(number);
+}

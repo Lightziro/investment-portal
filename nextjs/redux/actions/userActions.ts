@@ -1,8 +1,9 @@
 import { FormAuth } from "../../modules/authorization/ts/types/forms.types";
 import { UserPredict } from "../../ts/types/entity/user.types";
 
-export const getUser = () => ({
+export const getUser = (raw) => ({
     type: "FETCH_USER",
+    raw,
 });
 export const login = (userData: FormAuth): any => ({
     type: "LOGIN_USER",

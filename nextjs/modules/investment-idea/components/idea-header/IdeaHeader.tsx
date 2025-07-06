@@ -19,6 +19,7 @@ import { CreatePrediction } from "../../../../components/smart/create-prediction
 import cn from "classnames";
 import styles from "./IdeaHeader.module.scss";
 import { Button } from "react-bootstrap";
+import { getCurrencyShow } from "../../../../utils/other";
 
 interface CompanyIdeaHeader {
     companyInfo: CompanyModel;
@@ -51,7 +52,8 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
                     />
                     <div className={styles.priceWrapper}>
                         <div className={styles.currentPrice}>
-                            ${companyInfo.last_price}
+                            {companyInfo.last_price}
+                            {getCurrencyShow(companyInfo.currency)}
                         </div>
                         <div className={styles.quoteChangeWrapper}>
                             <span

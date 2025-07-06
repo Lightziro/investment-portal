@@ -2,6 +2,7 @@
 
 namespace App\Http\Modules\User\Controllers;
 
+use App\Http\Resources\UserAuthResource;
 use App\Mail\ForgotPassword;
 use App\Models\User\User;
 use App\Models\User\UserNotices;
@@ -66,13 +67,52 @@ class UserActionController extends Controller
         }
     }
 
-    public function authentication(Request $request): JsonResponse
+    public function authentication(Request $request): UserAuthResource|JsonResponse
     {
-        /** @var User $user */
-        if ($user = Auth::user()) {
-            return response()->json($user->getFrontendData());
+        $init = $request->input('initData');
+        if (!$this->validateTelegramAuth($init)) {
+            return response()->json(['error' => 'not valid request'], 401);
         }
-        return response()->json([], 400);
+        parse_str($init, $data);
+        $userData = json_decode($data['user'], true);
+        $userId = $userData['id'];
+        Log::error('debugUserId', [$userId]);
+
+        /** @var User|null $user */
+        $user = User::query()->where([
+            'telegram_id' => $userId,
+        ])->first();
+        if (!$user || !$user->telegram_id) {
+            return response()->json(['error' => 'not found account'], 401);
+        }
+        $user->password = Hash::make(uniqid());
+        $user->save();
+        return new UserAuthResource($user);
+    }
+
+    private function validateTelegramAuth($initData)
+    {
+        $bot_token = env('TELEGRAM_BOT_TOKEN');
+
+        $dataCheckArr = explode('&', rawurldecode($initData));
+        $needle = 'hash=';
+        $checkHash = FALSE;
+        foreach ($dataCheckArr as &$val) {
+            if (str_starts_with($val, $needle)) {
+                $checkHash = substr_replace($val, '', 0, strlen($needle));
+                $val = null;
+            }
+        }
+
+        $dataCheckArr = array_filter($dataCheckArr);
+        sort($dataCheckArr);
+
+        $initData = implode("\n", $dataCheckArr);
+        $secretKey = hash_hmac('sha256', $bot_token, "WebAppData", true);
+        $hash = bin2hex(hash_hmac('sha256', $initData, $secretKey, true));
+        Log::error('debugHash', [$hash, $checkHash, hash_equals($hash, $checkHash)]);
+
+        return hash_equals($hash, $checkHash);
     }
 
     public function viewNotice(Request $request): JsonResponse
@@ -98,7 +138,7 @@ class UserActionController extends Controller
             ->link()
             ->description('Пополнение баланса')
             ->currency('XTR')
-            ->addItem('Пополнение баланса', 1)
+            ->addItem('Пополнение баланса', $amount)
             ->payload($user->user_id)
             ->send();
         return response()->json(['data' => $response->json()]);

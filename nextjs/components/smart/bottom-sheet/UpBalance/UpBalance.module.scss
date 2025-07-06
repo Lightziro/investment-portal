@@ -6,6 +6,30 @@
 .convertText {
     font-size: 18px;
 }
+
+.tabsWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 16px;
+    box-shadow: 0 4px 45px 0 #0000000F;
+    padding: 5px;
+    gap: 10px;
+    .tabItem {
+        flex: 1;
+        border-radius: 12px;
+        display: flex;
+        padding: 5px 0;
+        align-items: center;
+        justify-content: center;
+        &.active {
+            color: white;
+            font-weight: 600;
+            background: #1890ff;
+        }
+    }
+}
 .row {
     display: flex;
     flex-direction: column;
@@ -44,4 +68,18 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+.sbpWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    img {
+        width: 120px;
+        height: 120px;
+    }
+    .text {
+        text-align: center;
+        font-size: 18px;
+    }
 }

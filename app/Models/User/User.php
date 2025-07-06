@@ -34,6 +34,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property CarbonInterface $updated_at
  * @property Country|null $country
  * @property string $sex
+ * @property int|null $telegram_id
  * @property Collection|ArticleComments[] $commentsArticles
  * @property Collection|UserSubscriptions[] $subscriptions
  * @property Collection|UserPredictions[] $predictions
@@ -74,7 +75,6 @@ class User extends Authenticatable
 
         return array_merge($this->only(['user_id', 'first_name', 'last_name']), [
             'full_name' => $this->getFullName(),
-            'role' => $this->role->name,
             'notices' => $notices ?? [],
             'avatar' => $this->avatar_path,
             'balance' => $this->balance,

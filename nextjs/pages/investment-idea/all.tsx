@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import { IdeaModel } from "../../ts/types/entity/idea.types";
 import { MainLayout } from "../../layouts/MainLayout";
-import { PortalLayout } from "../../layouts/PortalLayout";
+import { PortalLayout } from "../../layouts/PortalLayout/PortalLayout";
 import { AllIdeasPage } from "../../modules/portal/pages/AllIdeasPage";
 import { useTranslation } from "react-i18next";
 import { getAll } from "../../utils/api/get-data";

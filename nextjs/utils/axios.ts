@@ -4,6 +4,19 @@ export const axios = Axios.create({
     withCredentials: true,
 });
 
+axios.interceptors.request.use(
+    (config) => {
+        if (typeof window !== "undefined") {
+            const token = localStorage.getItem("tokenAuthHub");
+            if (token) {
+                config.headers["Authorization"] = `Bearer ${token}`;
+            }
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
 export const instanceAxios = (req: Record<any, any>) => {
     let sessionCookieMatches;
 

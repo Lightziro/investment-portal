@@ -1,0 +1,15 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .blockMenu {
+        padding: 5px;
+        &.active {
+            &.active {
+                background: #e5efff;
+                border-radius: 3px;
+            }
+        }
+
+    }
+}

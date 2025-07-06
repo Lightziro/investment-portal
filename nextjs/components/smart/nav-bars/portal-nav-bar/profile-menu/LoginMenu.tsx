@@ -17,11 +17,17 @@ import { setOpenSheet } from "../../../../../redux/actions/sheetActions";
 interface LoginMenu {
     user: UserData;
     handleExit: () => void;
+    handleClose: () => void;
 }
-export const LoginMenu: React.FC<LoginMenu> = ({ user, handleExit }) => {
+export const LoginMenu: React.FC<LoginMenu> = ({
+    user,
+    handleExit,
+    handleClose,
+}) => {
     const dispatch = useDispatch();
 
     const handleUp = () => {
+        handleClose();
         dispatch(setOpenSheet("upBalance", {}));
     };
 

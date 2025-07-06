@@ -41,7 +41,11 @@ export const ProfileMenu: React.FC<ProfileMenu> = ({
                 sx={{ width: 220 }}
             >
                 {data ? (
-                    <LoginMenu user={data} handleExit={handleExit} />
+                    <LoginMenu
+                        handleClose={onClose}
+                        user={data}
+                        handleExit={handleExit}
+                    />
                 ) : (
                     <NoLoginMenu />
                 )}

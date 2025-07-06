@@ -1,5 +1,6 @@
 import { InvestmentIdea } from "../entity/stock-market.types";
 import { ArticleModel } from "../entity/article.types";
+import { UserData } from "../redux/store.types";
 
 export interface ResponseRetrainClassifier {
     message: string;
@@ -21,4 +22,10 @@ export interface DtoQuoteItem {
     name: string;
     last_price: number;
     percent_change_today: number;
+    currency: Currency;
+}
+export type Currency = "USD" | "RUB";
+export interface UserResponse {
+    token: string;
+    data: UserData;
 }

@@ -4,6 +4,7 @@ namespace App\Enums;
 enum BalanceUp: string
 {
     case UP_PAYMENT = 'up-money';
+    case WELCOME_BONUS = 'welcome-bonus';
     case COMMISSION_DEAL = 'commission-deal';
     case COMMISSION_RETENTION = 'commission-retention';
     case DEAL = 'deal';
@@ -16,6 +17,7 @@ enum BalanceUp: string
         return match($this) {
             self::UP_PAYMENT => 'Пополнение баланса',
             self::COMMISSION_DEAL => 'Комиссия за сделку',
+            self::WELCOME_BONUS => 'Приветственный бонус',
             default => '',
         };
     }

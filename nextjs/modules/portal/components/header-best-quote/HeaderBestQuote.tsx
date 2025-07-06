@@ -7,6 +7,7 @@ import classes from "../../Portal.module.scss";
 import { axios } from "../../../../utils/axios";
 import { LinkWrapper } from "../../../../components/simple/link/Link";
 import styles from "./HeaderBestQuote.module.scss";
+import { getCurrencyShow } from "../../../../utils/other";
 
 export const HeaderBestQuote: React.FC = () => {
     const [quotes, setQuotes] = useState<DtoQuoteItem[]>(null);
@@ -42,7 +43,10 @@ export const HeaderBestQuote: React.FC = () => {
                                     quote.percent_change_today,
                                     getClassByChange(quote.percent_change_today)
                                 )}
-                                <span>{quote.last_price}$</span>
+                                <span>
+                                    {quote.last_price}
+                                    {getCurrencyShow(quote.currency)}
+                                </span>
                                 <span
                                     className={classnames(
                                         styles.quoteChangePercent,

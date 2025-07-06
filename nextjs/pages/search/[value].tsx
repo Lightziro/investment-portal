@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { MainLayout } from "../../layouts/MainLayout";
-import { PortalLayout } from "../../layouts/PortalLayout";
+import { PortalLayout } from "../../layouts/PortalLayout/PortalLayout";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { getSearchData } from "../../utils/api/get-data";

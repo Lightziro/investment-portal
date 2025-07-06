@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { MainLayout } from "../../layouts/MainLayout";
-import { PortalLayout } from "../../layouts/PortalLayout";
+import { PortalLayout } from "../../layouts/PortalLayout/PortalLayout";
 import { useTranslation } from "react-i18next";
 import { AllArticlePage } from "../../modules/portal/pages/AllArticlePage";
 import { useState } from "react";

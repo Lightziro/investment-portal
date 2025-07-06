@@ -4,7 +4,14 @@ namespace App\Domain\Portal\DataTransferObject;
 
 class QuoteData
 {
-    public function __construct(private int $companyId, private string $companyName, private float|null $lastPrice, private float|null $percentChangeToday)
+    public function __construct(
+        private int $companyId,
+        private string $companyName,
+        private float|null $lastPrice,
+        private float|null $percentChangeToday,
+        private string|null $currency = 'USD',
+        private string|null $logoPath,
+    )
     {
     }
 
@@ -26,5 +33,15 @@ class QuoteData
     public function getPercentChangeToday(): ?float
     {
         return $this->percentChangeToday;
+    }
+
+    public function geCurrency()
+    {
+        return $this->currency;
+    }
+
+    public function getLogoPath()
+    {
+        return $this->logoPath;
     }
 }

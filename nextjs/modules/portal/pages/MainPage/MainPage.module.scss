@@ -1,0 +1,154 @@
+.wrapper {
+    background: #f6f9fc;
+    padding: 16px;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    margin-bottom: 16px;
+}
+
+.greeting {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.portfolio {
+    font-size: 14px;
+    color: #666;
+}
+
+.section {
+    margin-bottom: 24px;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.stockCard {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stockInfo {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.stockIcon {
+    width: 32px;
+    height: 32px;
+}
+
+.stockName {
+    font-weight: 500;
+    margin: 0;
+}
+
+.stockData {
+    font-size: 14px;
+    color: #444;
+}
+
+.positive {
+    color: green;
+    margin-left: 6px;
+}
+.negative {
+    color: red;
+    margin-left: 6px;
+}
+
+.investBtn {
+    background: #2a85ff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+.activeTab {
+    color: #2a85ff;
+    font-weight: 500;
+}
+
+.howItWorks {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+}
+
+.step {
+    text-align: center;
+    font-size: 13px;
+    color: #333;
+}
+
+.circleIcon {
+    background: #f1f4f9;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 6px auto;
+    font-size: 20px;
+}
+
+.bottomNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+}
+
+.navLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logoIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.balance {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.navRight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}

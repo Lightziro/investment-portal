@@ -1,3 +1,5 @@
+import { Currency } from "../response/response.types";
+
 export interface CountryModel {
     country_id: number;
     code: string;
@@ -9,7 +11,7 @@ export interface CompanyModel {
     ticker: string;
     name: string;
     logo_path: string | null;
-    currency: string;
+    currency: Currency;
     date_ipo: string;
     last_price: number;
     change_percent_today: number;

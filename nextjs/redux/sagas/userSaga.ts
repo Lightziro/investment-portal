@@ -3,16 +3,20 @@ import { put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import { axios } from "../../utils/axios";
 import { ErrorsResponse } from "../../ts/enums/errors.enums";
+import { UserResponse } from "../../ts/types/response/response.types";
 
-function* fetchUser(): Generator {
+function* fetchUser(data): Generator {
     try {
-        const user = yield axios
-            .get(`${process.env.API_URL}/api/user/authentication`)
+        const response: UserResponse = yield axios
+            .post(`${process.env.API_URL}/api/user/auth`, {
+                initData: data.raw,
+            })
             .then((res) => res.data);
         yield put({
             type: "SET_USER",
-            user,
+            user: response.data,
         });
+        localStorage.setItem("tokenAuthHub", response.token);
     } catch (e) {
         yield put({
             type: "SET_FETCH",

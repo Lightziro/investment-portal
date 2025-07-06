@@ -48,7 +48,9 @@ class QuoteService
                         $company->getKey(),
                         $company->getName(),
                         data_get($quoteInfo, 'c'),
-                        data_get($quoteInfo, 'dp')
+                        data_get($quoteInfo, 'dp'),
+                        $company->currency,
+                        $company->logo_path,
                     );
                 case TypeMarketParse::TINKOFF:
                     $quoteLastPrice = $this->tinkoffStockMarket->getStockInfo($company->external_id);
@@ -58,6 +60,8 @@ class QuoteService
                         $company->getName(),
                         data_get($quoteLastPrice, 'current_price'),
                         data_get($quoteLastPrice, 'change_percent'),
+                        $company->currency,
+                        $company->logo_path,
                     );
             }
         });
