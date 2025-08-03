@@ -16,6 +16,7 @@ export interface UserModel {
     role?: RoleModel;
     country?: CountryModel;
 }
+
 export interface RoleModel {
     role_id: number;
     name: string;
@@ -29,16 +30,21 @@ export interface AuthorInfo {
     userId: number;
     avatar: string;
 }
+
 export interface UserPredict {
+    id: number;
     prediction_id: number;
     company: CompanyModel;
     user_id: number;
+    close_price: number;
     current_price?: number | null;
     price: number;
     is_top: boolean;
+    end_at: null | string;
     amount: number;
     company_id: number;
 }
+
 export interface UserNoticeModel {
     notice_id: number;
     created_at: string;

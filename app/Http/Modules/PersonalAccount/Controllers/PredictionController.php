@@ -24,9 +24,8 @@ class PredictionController extends Controller
     {
         /** @var User $user */
         $user = $request->user();
-        $market = new StockMarket();
 
-        $predictions = $user->predictions()->whereNull('end_at')->with('company')->get();
+        $predictions = $user->predictions()->with('company')->get();
         /** @var UserPrediction $predict */
         foreach ($predictions as $predict) {
             $company = $predict->company()->first();
@@ -78,18 +77,6 @@ class PredictionController extends Controller
         }
     }
 
-    public function updatePredict(UserPredictions $predict, Request $request): JsonResponse
-    {
-        /** @var User $user */
-        $user = $request->user();
-        if ($predict->user_id !== $user->getKey()) {
-            return response()->json([], 403);
-        }
-
-        $predict->update($request->post());
-        return response()->json([]);
-    }
-
     public function closePredict(UserPrediction $predict, Request $request)
     {
         try {
@@ -113,7 +100,7 @@ class PredictionController extends Controller
             $predict->end_at = now();
             $predict->save();
 
-            $user->balance -=  CommissionAmount::COMMISSION_DEAL_AMOUNT->value;
+            $user->balance -= CommissionAmount::COMMISSION_DEAL_AMOUNT->value;
             $user->balance += $profit;
             $user->save();
 

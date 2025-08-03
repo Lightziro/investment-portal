@@ -10,6 +10,7 @@ import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import classes from "../PersonalAccount.module.scss";
 import {
     getProfitAmount,
+    getProfitEndPredict,
     getResultPredict,
 } from "../components/utils/get-result-predict";
 import { useRouter } from "next/router";
@@ -17,11 +18,18 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import styles from "./MyStockPage.module.scss";
 import { getCurrencyShow } from "../../../utils/other";
+import SvgStar from "../../../public/images/picture/tg-star.svg";
+import { axios } from "../../../utils/axios";
+import {
+    getBalance,
+    removePrediction,
+} from "../../../redux/actions/userActions";
 
 export const MyStockPage: React.FC = () => {
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState<null | SVGSVGElement>(null);
     const [selectPredict, setSelectedPredict] = useState<UserPredict>(null);
+    const [onLoadClose, setOnLoadClose] = useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (
         event: React.MouseEvent<SVGSVGElement>,
@@ -30,7 +38,19 @@ export const MyStockPage: React.FC = () => {
         setAnchorEl(event.currentTarget);
         setSelectedPredict(company);
     };
-    const handleClose = () => {
+    const handleClose = async () => {
+        setOnLoadClose(true);
+        const profit = getProfitAmount(selectPredict);
+        await axios.post(
+            `${process.env.API_URL}/api/user/predictions/${selectPredict.id}/close`,
+            {
+                profit,
+            }
+        );
+        dispatch(removePrediction(selectPredict));
+        dispatch(getBalance());
+        dispatch(fetchUserPrediction());
+        setOnLoadClose(false);
         setAnchorEl(null);
         setSelectedPredict(null);
     };
@@ -48,23 +68,18 @@ export const MyStockPage: React.FC = () => {
                 loading={loading}
                 dataSource={list}
                 locale={{
-                    emptyText: "Нет ставок",
+                    emptyText: "Нет прогнозов",
                 }}
                 renderItem={(item: UserPredict) => (
                     <List.Item key={item.prediction_id}>
                         <List.Item.Meta
                             avatar={
                                 <Avatar
-                                    // component="img"
                                     onClick={() =>
                                         router.push(
                                             `/company/${item.company_id}`
                                         )
                                     }
-                                    // onError={(e) =>
-                                    //     (e.currentTarget.src =
-                                    //         "/images/picture/build.svg")
-                                    // }
                                     src={`/storage/${item.company.logo_path}`}
                                 />
                             }
@@ -73,31 +88,35 @@ export const MyStockPage: React.FC = () => {
                                 <div className={styles.columns}>
                                     <div className={styles.wrapperPrice}>
                                         <span>
-                                            Текущая цена / Цена позиции:
+                                            Цена прогноза | Текущая цена:
                                         </span>
                                     </div>
                                     <span className={classes.predictPrices}>
-                                        {`${
+                                        {`${item.price}${getCurrencyShow(
+                                            item.currency
+                                        )} | ${
                                             item.current_price
-                                        }${getCurrencyShow(item.currency)} / ${
-                                            item.price
-                                        }$`}
+                                        }${getCurrencyShow(item.currency)}`}
                                     </span>
-                                    <span>
+                                    <span>Сумма прогноза: {item.amount}</span>
+                                    <span className={styles.resultBlock}>
+                                        Результат:{" "}
+                                        {item.end_at
+                                            ? getProfitEndPredict(item)
+                                            : getProfitAmount(item)}
+                                        <SvgStar />
                                         {`(${getResultPredict(item)}%)`}
-                                    </span>
-                                    <span>
-                                        Прибыль: {getProfitAmount(item)}
-                                        <img src="/images/picture/tg-star.svg" />
                                     </span>
                                 </div>
                             }
                         />
-                        <IconButton component="span">
-                            <AttachMoneyOutlinedIcon
-                                onClick={(e) => handleClick(e, item)}
-                            />
-                        </IconButton>
+                        {!item.end_at && (
+                            <IconButton component="span">
+                                <AttachMoneyOutlinedIcon
+                                    onClick={(e) => handleClick(e, item)}
+                                />
+                            </IconButton>
+                        )}
                     </List.Item>
                 )}
             />
@@ -114,7 +133,9 @@ export const MyStockPage: React.FC = () => {
                 >
                     Компания
                 </MenuItem>
-                <MenuItem onClick={handleClose}>Закрыть позицию</MenuItem>
+                <MenuItem disabled={onLoadClose} onClick={handleClose}>
+                    Закрыть позицию
+                </MenuItem>
             </Menu>
         </>
     );

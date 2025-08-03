@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 import {
     Card,
     Grid,
@@ -35,6 +35,16 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
     const getColorQuote = (changeToday: number) => {
         return changeToday > 0 ? "green" : "red";
     };
+
+    const hasPrediction = useMemo(() => {
+        if (!user) {
+            return false;
+        }
+        return !!user.predictions.find(
+            (p) => p.company_id === companyInfo.company_id
+        );
+    }, [user]);
+
     return (
         <Card sx={{ bgcolor: "white", p: 1 }} className="shadow-wrapper">
             <div className={styles.headerWrapper}>
@@ -81,13 +91,15 @@ export const IdeaHeader: React.FC<CompanyIdeaHeader> = ({ companyInfo }) => {
                         </div>
                     </div>
                 </div>
-                <Button
-                    onClick={() => setOpen(true)}
-                    variant="primary"
-                    type="submit"
-                >
-                    {t("Make predict")}
-                </Button>
+                {!hasPrediction && (
+                    <Button
+                        onClick={() => setOpen(true)}
+                        variant="primary"
+                        type="submit"
+                    >
+                        {t("Make predict")}
+                    </Button>
+                )}
                 <CreatePrediction
                     company={companyInfo}
                     open={open}

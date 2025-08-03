@@ -25,6 +25,8 @@ import {
     getBalance,
     removePrediction,
 } from "../../../redux/actions/userActions";
+import cn from "classnames";
+import { getCurrencyShow } from "../../../utils/other";
 
 interface PredictionModal {
     open: boolean;
@@ -57,7 +59,6 @@ export const CreatePrediction: React.FC<PredictionModal> = ({
         );
         dispatch(removePrediction(predict));
         dispatch(getBalance());
-        console.log(result);
     };
 
     const handleSubmit = (form) => {
@@ -107,7 +108,7 @@ export const CreatePrediction: React.FC<PredictionModal> = ({
         validationSchema: CreatePredictionSchema,
         onSubmit: handleSubmit,
     });
-    console.log(formik.values, formik.errors);
+    console.log(company);
 
     return (
         <Dialog
@@ -131,7 +132,7 @@ export const CreatePrediction: React.FC<PredictionModal> = ({
                             <TextField
                                 onChange={formik.handleChange}
                                 sx={{ m: 1 }}
-                                label={t("deal")}
+                                label={t("Сумма прогноза")}
                                 type="number"
                                 disabled={hasPrediction}
                                 name="amount"
@@ -164,25 +165,38 @@ export const CreatePrediction: React.FC<PredictionModal> = ({
 
                     <div className={styles.tariffWrapper}>
                         <div className={styles.infoWrapper}>
-                            <span className={styles.label}>
-                                Прибыль фиксируется на момент закрытия сделки
+                            <span className={cn(styles.label, styles.full)}>
+                                Результат прогноза фиксируется на момент
+                                закрытия сделки
+                            </span>
+                        </div>
+                        <div className={styles.infoWrapper}>
+                            <span className={cn(styles.label, styles.full)}>
+                                Результат прогноза расчитывается по формуле:
+                                <br />
+                                Ставка × ((Текущая цена / Цена на момент ставки)
+                                × 100 - 100)
                             </span>
                         </div>
                         <div className={styles.infoWrapper}>
                             <span className={styles.label}>
-                                Прибыль расчитывается по формуле = Ставка ×
-                                ((Текущая цена / Цена на момент ставки) × 100 -
-                                100)
+                                Комиссия за перенос прогноза на следующий
+                                день(начиная с 3-го дня)
                             </span>
+                            <div className="lineDoter"></div>
+                            <div className={styles.amountBlock}>
+                                15
+                                <img src="/images/picture/tg-star.svg" />
+                            </div>
                         </div>
                     </div>
-
-                    <span className={styles.attention}>Тариф:</span>
-
+                    <span className={styles.attention}>
+                        Информация о прогнозе:
+                    </span>
                     <div className={styles.tariffWrapper}>
                         <div className={styles.infoWrapper}>
                             <span className={styles.label}>
-                                Комиссия за сделку
+                                Комиссия за прогноз
                             </span>
                             <div className="lineDoter"></div>
                             <div className={styles.amountBlock}>
@@ -192,13 +206,24 @@ export const CreatePrediction: React.FC<PredictionModal> = ({
                         </div>
                         <div className={styles.infoWrapper}>
                             <span className={styles.label}>
-                                Комиссия за перенос сделки на следующий
-                                день(начиная с 3-го дня)
+                                Итого к списанию
                             </span>
                             <div className="lineDoter"></div>
                             <div className={styles.amountBlock}>
-                                15
+                                {(formik.values.amount > 0
+                                    ? formik.values.amount
+                                    : 0 || 0) + 15}
                                 <img src="/images/picture/tg-star.svg" />
+                            </div>
+                        </div>
+                        <div className={styles.infoWrapper}>
+                            <span className={styles.label}>
+                                Цена на момент прогноза
+                            </span>
+                            <div className="lineDoter"></div>
+                            <div className={styles.amountBlock}>
+                                {company.last_price}
+                                {getCurrencyShow(company.currency)}
                             </div>
                         </div>
                     </div>

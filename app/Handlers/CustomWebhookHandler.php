@@ -64,10 +64,9 @@ class CustomWebhookHandler extends WebhookHandler
                 'amount' => 100,
                 'event' => BalanceUp::WELCOME_BONUS->value,
             ]);
-
         }
         $keyboard = Keyboard::make()->row([
-            Button::make(__('Зарабатывать в приложении'))->webApp(env('WEB_URL')),
+            Button::make(__('Открыть приложение'))->webApp(env('WEB_URL')),
         ]);
         $this->chat->message(__('telegram.start'))->keyboard($keyboard)->send();
     }

@@ -7,6 +7,7 @@ import { Skeleton } from "@mui/material";
 import { formatNumber, getCurrencyShow } from "../../../../utils/other";
 import cn from "classnames";
 import { useRouter } from "next/router";
+import SvgStarYellow from "../../../../public/images/picture/star-yellow.svg";
 
 const MainPage = () => {
     const user = useRootSelector((state) => state.user.data);
@@ -75,9 +76,7 @@ const MainPage = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <button className={styles.investBtn}>
-                                    Инвестировать
-                                </button>
+                                <SvgStarYellow />
                             </div>
                         ))
                     ) : (
@@ -95,7 +94,7 @@ const MainPage = () => {
                     </div>
                     <div className={styles.step}>
                         <div className={styles.circleIcon}>⭐</div>
-                        <p>Инвестируй Stars</p>
+                        <p>Делай прогноз</p>
                     </div>
                     <div className={styles.step}>
                         <div className={styles.circleIcon}>📈</div>

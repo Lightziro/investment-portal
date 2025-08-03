@@ -6,6 +6,7 @@
 
 .attention {
     font-weight: 600;
+    font-size: 14px;
 }
 
 .dialogContainer {
@@ -19,16 +20,22 @@
     gap: 8px;
 
     .label {
-        max-width: 300px;
+        max-width: 250px;
+        font-size: 12px;
+        &.full {
+            max-width: max-content;
+        }
     }
 
     .infoWrapper {
         display: flex;
         align-items: center;
+        gap: 10px;
     }
 
     .amountBlock {
         display: flex;
+        font-size: 12px;
         align-items: center;
         gap: 3px;
     }

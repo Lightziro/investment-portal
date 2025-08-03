@@ -7,6 +7,7 @@ use DateTime;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Facades\Log;
 
 class TinkoffStockMarket {
     private $token;
@@ -75,7 +76,7 @@ class TinkoffStockMarket {
 
         $data = [
             'figi' => $figi,
-            'from' => Carbon::now()->format('c'),
+            'from' => Carbon::now()->subDays(3)->format('c'),
             'to' => Carbon::now()->format('c'),
             'interval' => 'CANDLE_INTERVAL_DAY'
         ];
@@ -83,7 +84,6 @@ class TinkoffStockMarket {
             RequestOptions::JSON => $data,
         ]);
         $dataResponse = json_decode($response->getBody(), true);
-
         if (empty($dataResponse['candles'])) {
             throw new Exception("Исторические данные не найдены");
         }
@@ -126,7 +126,8 @@ class TinkoffStockMarket {
             ];
 
         } catch (Exception $e) {
-            return ['error' => $e->getMessage()];
+            return [];
+//            return ['error' => $e->getMessage()];
         }
     }
 }
